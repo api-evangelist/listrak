@@ -1,0 +1,29 @@
+name: Listrak Plans and Pricing
+description: Listrak uses custom enterprise pricing tailored to each retail business based on contact volume, channels used, and feature requirements. There are no publicly listed self-service tiers; all plans are negotiated directly with the Listrak sales team.
+specificationVersion: '0.1'
+plans:
+  - name: Custom Enterprise Plan
+    description: Full-platform access to Listrak's email, SMS, cross-channel, push, and data capabilities. Pricing is customized based on contact database size, monthly message volume, channels activated, and add-on features such as AI recommendations and Journey Hub orchestration.
+    url: https://www.listrak.com/
+    pricing:
+      model: custom
+      period: annual
+      notes: >
+        Third-party estimates place annual contracts between $37,000 and $146,000 with a median around $83,000.
+        Entry-level engagements have been reported at approximately $1,500 per month.
+        Pricing is not published on the Listrak website; prospective customers must contact sales for a quote.
+    features:
+      - Email Marketing Automation
+      - SMS / MMS / RCS Messaging
+      - Cross-Channel Journey Orchestration
+      - Mobile App Push Notifications
+      - AI Product Recommendations (Listrak Intelligence)
+      - Listrak Data Platform (unified customer profiles)
+      - Experience Builder (popups, landing pages, web personalization)
+      - Reporting and Cross-Channel Analytics
+      - Data Import REST API
+      - Privacy / Compliance API (CCPA / GDPR)
+      - Dedicated onboarding and support
+contact:
+  url: https://www.listrak.com/
+  notes: Contact Listrak sales for a custom quote.

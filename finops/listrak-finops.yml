@@ -1,0 +1,67 @@
+name: Listrak FinOps
+description: FinOps Framework FOCUS-aligned cost visibility guidance for Listrak retail marketing platform API usage.
+specificationVersion: '1.0'
+provider: Listrak
+website: https://www.listrak.com/
+pricingModel: custom-enterprise
+billingPeriod: annual
+costDrivers:
+  - name: Contact Database Size
+    description: >
+      The number of unique subscriber or contact records across email and SMS lists is typically the primary cost driver in Listrak contracts.
+      Larger databases command higher base fees.
+    unit: contacts
+    notes: Custom pricing; contact sales for volume tiers.
+  - name: Monthly Message Volume
+    description: >
+      Total messages sent per month across email, SMS/MMS/RCS, and push channels influence contract pricing.
+      High-volume transactional or triggered sends may carry incremental per-message fees beyond a contracted threshold.
+    unit: messages
+    channels:
+      - Email
+      - SMS
+      - MMS
+      - RCS
+      - Push Notifications
+  - name: Channels Activated
+    description: >
+      Each channel (Email, SMS, Push, Web Personalization, RCS) may be licensed separately or bundled.
+      Activating additional channels increases contract value.
+    channels:
+      - Email Marketing
+      - SMS / MMS
+      - RCS Messaging
+      - Mobile App Push
+      - Web / On-Site Personalization
+  - name: Add-On Features
+    description: >
+      Premium capabilities such as Listrak Intelligence (AI recommendations), Journey Hub orchestration depth,
+      and advanced analytics may be priced as add-ons or included at higher contract tiers.
+    features:
+      - Listrak Intelligence (AI product recommendations and predictive insights)
+      - Journey Hub cross-channel orchestration
+      - Experience Builder (popups, landing pages)
+      - Cross-channel attribution reporting
+optimization:
+  - recommendation: Audit inactive contacts regularly
+    rationale: >
+      Since contact volume is a core pricing lever, suppressing or removing unengaged contacts
+      reduces list size and may lower renewal costs.
+  - recommendation: Consolidate channel contracts
+    rationale: >
+      Bundling email and SMS under a single Listrak contract often yields better unit economics
+      than separate point solutions.
+  - recommendation: Monitor API usage against transactional send caps
+    rationale: >
+      Transactional API sends that exceed contracted thresholds may trigger overage fees.
+      Instrument API calls to track monthly send volume per channel.
+  - recommendation: Use Data Import API instead of FTP where possible
+    rationale: >
+      The Data Import REST API reduces operational overhead compared to FTP-based ingestion
+      and provides faster feedback on import errors, reducing wasted processing cycles.
+visibility:
+  statusPage: https://status.listrak.com
+  notes: >
+    Listrak does not expose real-time usage dashboards via API.
+    Cost visibility relies on contract review with the Listrak account team and internal send-volume instrumentation.
+  contractReview: Contact your Listrak account manager for usage reports and renewal forecasting.

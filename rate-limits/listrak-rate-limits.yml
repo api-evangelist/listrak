@@ -1,0 +1,47 @@
+name: Listrak Rate Limits
+description: Listrak REST APIs are authenticated via OAuth 2.0 client credentials. Specific numeric rate limits are not publicly documented. Known constraints are noted below based on available documentation and community reports.
+specificationVersion: '0.1'
+authentication:
+  type: OAuth2
+  flow: client_credentials
+  tokenUrl: https://auth.listrak.com/OAuth2/Token
+  notes: >
+    Obtain a Bearer token by POSTing to https://auth.listrak.com/OAuth2/Token with
+    Content-Type: application/x-www-form-urlencoded and the body fields:
+    grant_type=client_credentials, client_id=<your_client_id>, client_secret=<your_client_secret>.
+    Include the token in every request as: Authorization: Bearer <token>.
+limits:
+  - api: All REST APIs
+    scope: account
+    notes: >
+      Listrak does not publish specific rate limit numbers in public documentation.
+      Requests that exceed undisclosed payload size limits receive a 404 Not Found response.
+      Customers should contact Listrak support to confirm any enforced per-second or per-day request thresholds for their account tier.
+  - api: Data Import REST API
+    scope: payload
+    notes: >
+      Bulk data imports (customers, orders, products) may have per-batch size constraints.
+      FTP-based import is provided as an alternative for large-volume ingestion scenarios.
+  - api: Email REST API
+    scope: sending
+    notes: >
+      Transactional email sending volume is governed by the customer's contracted plan.
+      Marketing campaign sends are scheduled and managed within the platform; API-triggered sends are subject to account-level throughput agreements.
+  - api: SMS REST API
+    scope: sending
+    notes: >
+      Transactional SMS sending is subject to carrier throughput and short code limits.
+      Account-level SMS send volume is defined by the contracted plan.
+errorCodes:
+  - code: 400
+    description: Bad Request — malformed request body or missing required fields
+  - code: 401
+    description: Unauthorized — missing or invalid Bearer token
+  - code: 403
+    description: Forbidden — authenticated but insufficient permissions
+  - code: 404
+    description: Not Found — resource does not exist or request exceeds size limits
+  - code: 429
+    description: Too Many Requests — rate limit exceeded (threshold undisclosed)
+  - code: 500
+    description: Internal Server Error — platform-side issue; monitor https://status.listrak.com
