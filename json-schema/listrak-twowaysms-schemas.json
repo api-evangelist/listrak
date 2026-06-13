@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Listrak Twowaysms API Schemas",
+  "definitions": {
+    "TicketOpenRequest": {
+      "type": "object",
+      "properties": {
+        "integrationType": {
+          "$ref": "#/components/schemas/integrationType"
+        },
+        "phoneId": {
+          "type": "integer",
+          "description": "Numeric ID. Phone Id",
+          "format": "int64"
+        },
+        "externalTicketId": {
+          "type": "string",
+          "description": "A unique ticket identifier."
+        }
+      },
+      "description": "A request for opening a ticket"
+    },
+    "SendRequest": {
+      "type": "object",
+      "properties": {
+        "integrationType": {
+          "$ref": "#/components/schemas/integrationType"
+        },
+        "phoneId": {
+          "type": "integer",
+          "description": "Numeric ID. Phone Id",
+          "format": "int64"
+        },
+        "externalTicketId": {
+          "type": "string",
+          "description": "A unique ticket identifier."
+        },
+        "messageBody": {
+          "type": "string",
+          "description": "Body of a message, limited to 1,000 characters."
+        }
+      },
+      "description": "A request for sending a message to a contact"
+    },
+    "integrationType": {
+      "enum": [
+        "gorgias",
+        "custom"
+      ],
+      "type": "string",
+      "description": "Integration Type"
+    },
+    "TicketCloseRequest": {
+      "type": "object",
+      "properties": {
+        "integrationType": {
+          "$ref": "#/components/schemas/integrationType"
+        },
+        "phoneId": {
+          "type": "integer",
+          "description": "Numeric ID. Phone Id",
+          "format": "int64"
+        }
+      },
+      "description": "A request for closing a ticket"
+    }
+  }
+}

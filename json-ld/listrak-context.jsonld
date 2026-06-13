@@ -1,0 +1,164 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "listrak": "https://www.listrak.com/ontology/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Listrak": "listrak:Listrak",
+    "EmailAPI": "listrak:EmailAPI",
+    "SMSAPI": "listrak:SMSAPI",
+    "CrossChannelAPI": "listrak:CrossChannelAPI",
+    "DataImportAPI": "listrak:DataImportAPI",
+    "TwoWaySMSAPI": "listrak:TwoWaySMSAPI",
+    "MobilePushAPI": "listrak:MobilePushAPI",
+    "PrivacyAPI": "listrak:PrivacyAPI",
+
+    "Contact": {
+      "@id": "listrak:Contact",
+      "@type": "@id",
+      "comment": "An email marketing contact in a Listrak email list"
+    },
+    "emailAddress": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "subscribeState": {
+      "@id": "listrak:subscribeState",
+      "@type": "xsd:string"
+    },
+    "listId": {
+      "@id": "listrak:listId",
+      "@type": "xsd:integer"
+    },
+    "segmentationFieldValues": {
+      "@id": "listrak:segmentationFieldValues",
+      "@container": "@list"
+    },
+    "segmentationFieldId": {
+      "@id": "listrak:segmentationFieldId",
+      "@type": "xsd:integer"
+    },
+
+    "SMSSubscriber": {
+      "@id": "listrak:SMSSubscriber",
+      "@type": "@id",
+      "comment": "A mobile subscriber to an SMS marketing list"
+    },
+    "phone": {
+      "@id": "schema:telephone",
+      "@type": "xsd:string"
+    },
+    "shortCode": {
+      "@id": "listrak:shortCode",
+      "@type": "xsd:string"
+    },
+
+    "Campaign": {
+      "@id": "listrak:Campaign",
+      "@type": "@id",
+      "comment": "An email marketing campaign message"
+    },
+    "campaignId": {
+      "@id": "listrak:campaignId",
+      "@type": "xsd:integer"
+    },
+
+    "CustomEvent": {
+      "@id": "listrak:CustomEvent",
+      "@type": "@id",
+      "comment": "A triggering event that initiates a Journey Hub automation"
+    },
+    "eventId": {
+      "@id": "listrak:eventId",
+      "@type": "xsd:integer"
+    },
+    "eventAttributes": {
+      "@id": "listrak:eventAttributes",
+      "@type": "@json"
+    },
+
+    "Journey": {
+      "@id": "listrak:Journey",
+      "@type": "@id",
+      "comment": "An automated cross-channel marketing workflow"
+    },
+
+    "Order": {
+      "@id": "schema:Order",
+      "@type": "@id",
+      "comment": "A retail purchase order imported for behavioral targeting"
+    },
+    "orderId": {
+      "@id": "schema:orderNumber",
+      "@type": "xsd:string"
+    },
+    "orderDate": {
+      "@id": "schema:orderDate",
+      "@type": "xsd:dateTime"
+    },
+    "orderTotal": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "lineItems": {
+      "@id": "schema:orderedItem",
+      "@container": "@list"
+    },
+    "sku": {
+      "@id": "schema:sku",
+      "@type": "xsd:string"
+    },
+    "productName": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "unitPrice": {
+      "@id": "schema:price",
+      "@type": "xsd:decimal"
+    },
+    "quantity": {
+      "@id": "schema:orderQuantity",
+      "@type": "xsd:integer"
+    },
+
+    "PushDevice": {
+      "@id": "listrak:PushDevice",
+      "@type": "@id",
+      "comment": "A mobile device registered for push notifications"
+    },
+    "deviceToken": {
+      "@id": "listrak:deviceToken",
+      "@type": "xsd:string"
+    },
+
+    "Conversation": {
+      "@id": "listrak:Conversation",
+      "@type": "@id",
+      "comment": "A two-way SMS conversation thread with a customer"
+    },
+    "conversationId": {
+      "@id": "listrak:conversationId",
+      "@type": "xsd:string"
+    },
+    "supportTicketId": {
+      "@id": "listrak:supportTicketId",
+      "@type": "xsd:string"
+    },
+
+    "PrivacyRequest": {
+      "@id": "listrak:PrivacyRequest",
+      "@type": "@id",
+      "comment": "A CCPA or GDPR data subject request for contact data removal"
+    },
+
+    "resourceId": {
+      "@id": "listrak:resourceId",
+      "@type": "xsd:string"
+    },
+    "accessToken": {
+      "@id": "listrak:accessToken",
+      "@type": "xsd:string"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "Create Email Contact",
+  "description": "Add a new contact to a Listrak email list",
+  "request": {
+    "method": "POST",
+    "url": "https://api.listrak.com/email/v1/List/{listId}/Contact",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "emailAddress": "customer@example.com",
+      "subscribeState": "subscribed",
+      "overrideUnsubscribe": false,
+      "segmentationFieldValues": [
+        {
+          "segmentationFieldId": 1,
+          "value": "John"
+        },
+        {
+          "segmentationFieldId": 2,
+          "value": "Smith"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "status": 201,
+      "data": {
+        "resourceId": "customer@example.com"
+      }
+    }
+  }
+}

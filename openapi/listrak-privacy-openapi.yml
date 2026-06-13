@@ -1,0 +1,205 @@
+openapi: 3.0.0
+info:
+  version: v1
+  title: Listrak Privacy REST API
+  description: "# Introduction\r\nWelcome to the Listrak Privacy <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST\
+    \ API</a>!\r\n\r\nOur API allows developers to integrate with Listrak's application.\
+    \ It enables the seamless automation of a broad set of functionality, ranging\
+    \ from basic tasks to complex processes.\r\n\r\nWe aim to provide comprehensive\
+    \ documentation coverage of our API's capabilities. Each resource and method is\
+    \ described in detail with implementation notes, descriptions of parameters, headers,\
+    \ return values, and code samples to aid in development.\r\n\n# Versioning\r\n\
+    \r\nThe API version is denoted in the URI. This API's base URI is:\r\n\r\n`https://api.listrak.com/privacy/v1`\r\
+    \n\r\n<br />\r\n\r\nThe API version will be incremented if breaking changes are\
+    \ introduced. Breaking changes may include:\r\n\r\n- Addition of required headers,\
+    \ parameters, or model fields to a current route\r\n- Alterations that would result\
+    \ in currently valid requests failing, or performing unexpectedly\r\n\r\n<br />\r\
+    \n\r\nChanges that are not considered breaking may include:\r\n\r\n- Addition\
+    \ of new model fields\r\n- Addition of new routes\r\n- Addition of new response\
+    \ headers\r\n- Any alteration to a route that is marked as <span class=\"inDev\"\
+    >In Development</span>\r\n# Usage\r\n\r\n## External Libraries\r\n\r\nThe C# code\
+    \ examples featured on this site require the following packages:\r\n\r\n- <a href=\"\
+    https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/\">Microsoft.AspNet.WebApi.Client</a>\r\
+    \n- <a href=\"https://www.nuget.org/packages/Newtonsoft.Json/\">Newtonsoft.Json</a>\r\
+    \n\r\nThe Php code examples require the following package:\r\n- <a href=\"http://docs.guzzlephp.org/en/stable/#\"\
+    >Guzzle 6</a>\n# Rate Limits\r\nThe following rate limits are in effect:\r\n|\
+    \ Limit        | Period     |\r\n| ------------ | ---------- |\r\n| 20 requests\
+    \  | 10 seconds |\r\n| 60 requests  | 1 minute   |\r\n\n# Feedback\r\n\r\nWe are\
+    \ actively seeking feedback in the following areas:\r\n- Code samples\r\n- Response\
+    \ examples\r\n- Resource and field descriptions\r\n\r\n<br />\r\n\r\nPlease provide\
+    \ your feedback to us at restapifeedback@listrak.com.\n# Integration Setup\r\n\
+    To enable API access, **you must create an _Integration_** on the _Integrations_\
+    \ page. In the Listrak application left menu, go to: Integrations &rarr; Integration\
+    \ Management.\r\n\r\nPlease specify integration type `Privacy` for your integration.\r\
+    \n\r\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_.\
+    \ These values will be needed to authenticate with the API. For your security,\
+    \ the _Client Secret_ cannot be retrieved if it is lost.\r\n\n# Status Codes\r\
+    \n\r\n| Status Code | Status | Description |\r\n|-|-|-|\r\n| 200 | OK | The request\
+    \ succeeded. |\r\n| 201 | Created | A new resource has been created. |\r\n| 400\
+    \ | Bad Request | Your request is malformed or invalid. |\r\n| 401 | Unauthorized\
+    \ | Authentication is required. |\r\n| 404 | Not Found | The resource does not\
+    \ exist. |\r\n| 405 | Method Not Allowed | The route does not support the requested\
+    \ method. |\r\n| 415 | Unsupported Media Type | Please use a `Content-Type` of\
+    \ `application/json`. |\r\n| 500 | Internal Server Error | An unexpected error\
+    \ occurred. Our development team has been notified. |\r\n\n# Parameters\r\n##\
+    \ Route Parameters\r\n\r\nResource identifiers are specified in the route. For\
+    \ example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter.\
+    \ In this example, if you wish to interact with Resource #123, its route would\
+    \ be `/Resource/123`.\r\n\r\n## Query Parameters\r\n\r\nSome routes support additional\
+    \ query parameters; for example, some resources support query parameters relating\
+    \ to paging. Supported query parameters are described in their respective documentation\
+    \ areas.\r\n\r\n## Request Body\r\n\r\nRequest bodies are required for most `POST`\
+    \ and `PUT` requests. Please use a `Content-Type` of `application/json` and provide\
+    \ a JSON object in your request body.\n"
+  x-logo:
+    url: /privacy/Resources/Images/Logo.png
+paths:
+  /v1/Forget/{requestId}:
+    get:
+      operationId: Forget_GetForgetRequest
+      summary: Get forget request status
+      description: Gets the status of a previously submitted forget request.
+      tags:
+      - Forget
+      parameters:
+      - name: requestId
+        in: path
+        description: The unique identifier of the forget request.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Resource[ForgetRequest]'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+  /v1/Forget:
+    post:
+      operationId: Forget_PostForgetRequest
+      summary: Submit a forget request
+      description: Queues a forget request based on unique identifiers such as email
+        address, phone number, etc.
+      tags:
+      - Forget
+      responses:
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ResourceCreated'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/ForgetRequestParameters'
+components:
+  schemas:
+    Resource[ForgetRequest]:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/definitions/ForgetRequest'
+          description: Return data.
+    ForgetRequest:
+      description: A Forget Request resource.
+      type: object
+      properties:
+        requestID:
+          description: The unique identifier of the forget request.
+          type: string
+        status:
+          description: The status (PROCESSING or COMPLETE) of the forget request.
+          type: string
+        submittedDate:
+          format: date-time
+          description: The date the forget request was submitted.
+          type: string
+        processedDate:
+          format: date-time
+          description: The date the forget request was processed. This is null if
+            the status is not COMPLETE.
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
+    ForgetRequestParameters:
+      description: A Forget Request Parameters resource.
+      type: object
+      properties:
+        emailAddress:
+          description: The email address of the contact to forget.
+          type: string
+        phoneNumber:
+          description: The phone number of the contact to forget.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.listrak.com/OAuth2/Token
+          scopes: {}
+servers:
+- url: https://api.listrak.com/privacy

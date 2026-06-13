@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Listrak Privacy API Schemas",
+  "definitions": {
+    "Resource[ForgetRequest]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/ForgetRequest",
+          "description": "Return data."
+        }
+      }
+    },
+    "ForgetRequest": {
+      "description": "A Forget Request resource.",
+      "type": "object",
+      "properties": {
+        "requestID": {
+          "description": "The unique identifier of the forget request.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status (PROCESSING or COMPLETE) of the forget request.",
+          "type": "string"
+        },
+        "submittedDate": {
+          "format": "date-time",
+          "description": "The date the forget request was submitted.",
+          "type": "string"
+        },
+        "processedDate": {
+          "format": "date-time",
+          "description": "The date the forget request was processed. This is null if the status is not COMPLETE.",
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "error": {
+          "description": "Error code indicating what error has occured.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Message describing the status and the error that occurred.",
+          "type": "string"
+        }
+      }
+    },
+    "ForgetRequestParameters": {
+      "description": "A Forget Request Parameters resource.",
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "The email address of the contact to forget.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "The phone number of the contact to forget.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceCreated": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "resourceId": {
+          "description": "An identifier used to locate a resource.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

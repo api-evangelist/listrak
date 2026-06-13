@@ -1,0 +1,107 @@
+vocabulary:
+  - term: emailAddress
+    description: The email address uniquely identifying a contact in a Listrak email list
+    type: string
+    format: email
+    context: Email API
+
+  - term: subscribeState
+    description: The subscription status of a contact or subscriber
+    type: string
+    enum:
+      - subscribed
+      - unsubscribed
+      - pending
+    context: Email API, SMS API
+
+  - term: listId
+    description: Unique numeric identifier for a Listrak email or SMS list
+    type: integer
+    context: Email API, SMS API
+
+  - term: segmentationFieldValues
+    description: Custom profile attributes associated with a contact, used for personalization and segmentation
+    type: array
+    items:
+      type: object
+    context: Email API
+
+  - term: campaignId
+    description: Unique identifier for an email campaign message
+    type: integer
+    context: Email API
+
+  - term: phone
+    description: The mobile phone number identifying an SMS subscriber
+    type: string
+    context: SMS API
+
+  - term: shortCode
+    description: The SMS short code number used to send and receive text messages
+    type: string
+    context: SMS API
+
+  - term: eventId
+    description: Unique identifier for a custom Journey Hub event type
+    type: integer
+    context: Cross Channel API
+
+  - term: eventAttributes
+    description: Key-value pairs providing context for a triggered custom event
+    type: object
+    context: Cross Channel API
+
+  - term: journey
+    description: An automated multi-step cross-channel marketing workflow triggered by events or behaviors
+    type: object
+    context: Cross Channel API
+
+  - term: orderId
+    description: The merchant's unique identifier for a customer purchase transaction
+    type: string
+    context: Data Import API
+
+  - term: lineItems
+    description: Individual product entries within an order record
+    type: array
+    context: Data Import API
+
+  - term: sku
+    description: Stock Keeping Unit — the merchant's product identifier
+    type: string
+    context: Data Import API
+
+  - term: deviceToken
+    description: The push notification device registration token from APNs (iOS) or FCM (Android)
+    type: string
+    context: Mobile Push API
+
+  - term: pushMessage
+    description: A mobile push notification payload sent to registered devices
+    type: object
+    context: Mobile Push API
+
+  - term: conversationId
+    description: Unique identifier for a two-way SMS conversation thread
+    type: string
+    context: Two-Way SMS API
+
+  - term: supportTicketId
+    description: Identifier linking an SMS conversation to a customer service platform ticket
+    type: string
+    context: Two-Way SMS API
+
+  - term: privacyRequest
+    description: A data subject request for removal of contact data under CCPA or GDPR
+    type: object
+    context: Privacy API
+
+  - term: resourceId
+    description: The identifier of a newly created or updated resource, returned in API responses
+    type: string
+    context: All APIs
+
+  - term: accessToken
+    description: OAuth 2.0 bearer token obtained from https://auth.listrak.com/OAuth2/Token using client credentials flow
+    type: string
+    context: All APIs

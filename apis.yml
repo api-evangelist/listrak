@@ -33,6 +33,8 @@ apis:
         url: https://api.listrak.com/email
       - type: Authentication
         url: https://auth.listrak.com/OAuth2/Token
+      - type: OpenAPI
+        url: openapi/listrak-email-openapi.yml
   - aid: listrak:sms
     name: Listrak SMS REST API
     description: Handle SMS subscriber and list management, short code management, and send transactional SMS messages to mobile subscribers.
@@ -49,6 +51,8 @@ apis:
         url: https://api.listrak.com/sms
       - type: Authentication
         url: https://auth.listrak.com/OAuth2/Token
+      - type: OpenAPI
+        url: openapi/listrak-sms-openapi.yml
   - aid: listrak:crosschannel
     name: Listrak Cross Channel REST API
     description: Integrate with cross-channel marketing features including management of custom events to trigger Journey Hub automations across email, SMS, push, and web channels.
@@ -65,6 +69,8 @@ apis:
         url: https://api.listrak.com/crosschannel/v1/docs
       - type: Authentication
         url: https://auth.listrak.com/OAuth2/Token
+      - type: OpenAPI
+        url: openapi/listrak-crosschannel-openapi.yml
   - aid: listrak:data
     name: Listrak Data Import REST API
     description: Import retail-specific data including customers, orders, products, and reviews as a programmatic alternative to FTP-based data ingestion.
@@ -82,6 +88,8 @@ apis:
         url: https://api.listrak.com/data
       - type: Authentication
         url: https://auth.listrak.com/OAuth2/Token
+      - type: OpenAPI
+        url: openapi/listrak-data-openapi.yml
   - aid: listrak:twowaysms
     name: Listrak Two-Way SMS Conversation REST API
     description: Enable real-time two-way SMS customer support integrations by exchanging conversation and support ticket information with customer service platforms.
@@ -98,6 +106,8 @@ apis:
         url: https://api.listrak.com/twowaysms/docs
       - type: Authentication
         url: https://auth.listrak.com/OAuth2/Token
+      - type: OpenAPI
+        url: openapi/listrak-twowaysms-openapi.yml
   - aid: listrak:mobileclient
     name: Listrak Mobile App Push API
     description: Send push notifications to mobile devices via native app integration; manage device registration and track app engagement for mobile marketing programs.
@@ -113,6 +123,8 @@ apis:
         url: https://api.listrak.com/mobileclient/docs
       - type: Authentication
         url: https://auth.listrak.com/OAuth2/Token
+      - type: OpenAPI
+        url: openapi/listrak-mobileclient-openapi.yml
   - aid: listrak:privacy
     name: Listrak Privacy REST API
     description: Manage data privacy and compliance requests including contact data removal to support CCPA and GDPR regulatory requirements.
@@ -129,6 +141,8 @@ apis:
         url: https://api.listrak.com/privacy
       - type: Authentication
         url: https://auth.listrak.com/OAuth2/Token
+      - type: OpenAPI
+        url: openapi/listrak-privacy-openapi.yml
 common:
   - type: Website
     url: https://www.listrak.com/
@@ -152,6 +166,10 @@ common:
     url: rate-limits/listrak-rate-limits.yml
   - type: FinOps
     url: finops/listrak-finops.yml
+  - type: Vocabulary
+    url: vocabulary/listrak-vocabulary.yml
+  - type: JsonLdContext
+    url: json-ld/listrak-context.jsonld
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

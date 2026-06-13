@@ -1,0 +1,25 @@
+{
+  "name": "Add SMS Subscriber",
+  "description": "Subscribe a phone number to an SMS list",
+  "request": {
+    "method": "POST",
+    "url": "https://api.listrak.com/sms/v1/List/{listId}/Subscriber",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "phone": "5551234567",
+      "subscribeState": "subscribed"
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "status": 201,
+      "data": {
+        "resourceId": "5551234567"
+      }
+    }
+  }
+}

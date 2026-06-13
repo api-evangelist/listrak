@@ -1,0 +1,27 @@
+{
+  "name": "Trigger Custom Event",
+  "description": "Trigger a custom event to start a Journey Hub automation",
+  "request": {
+    "method": "POST",
+    "url": "https://api.listrak.com/crosschannel/v1/Event/{eventId}",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "emailAddress": "customer@example.com",
+      "eventAttributes": {
+        "productId": "12345",
+        "productName": "Blue Sneakers",
+        "price": 79.99
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "status": 200,
+      "data": {}
+    }
+  }
+}

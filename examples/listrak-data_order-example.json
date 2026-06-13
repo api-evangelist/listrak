@@ -1,0 +1,39 @@
+{
+  "name": "Import Order Data",
+  "description": "Import retail order data into Listrak for behavioral targeting",
+  "request": {
+    "method": "POST",
+    "url": "https://api.listrak.com/data/v1/Order",
+    "headers": {
+      "Authorization": "Bearer {access_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "orders": [
+        {
+          "orderId": "ORD-001",
+          "emailAddress": "customer@example.com",
+          "orderDate": "2026-06-13T12:00:00Z",
+          "orderTotal": 129.99,
+          "lineItems": [
+            {
+              "sku": "SKU-12345",
+              "productName": "Blue Sneakers",
+              "quantity": 1,
+              "unitPrice": 79.99
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "status": 200,
+      "data": {
+        "importId": "abc123"
+      }
+    }
+  }
+}

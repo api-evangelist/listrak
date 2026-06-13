@@ -1,0 +1,2791 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Listrak Email API Schemas",
+  "definitions": {
+    "Campaign": {
+      "description": "A Campaign resource.",
+      "required": [
+        "campaignName"
+      ],
+      "type": "object",
+      "properties": {
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier used to locate the campaign.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "campaignName": {
+          "description": "Name of the campaign.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceCreated": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "resourceId": {
+          "description": "An identifier used to locate a resource.",
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "error": {
+          "description": "Error code indicating what error has occured.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Message describing the status and the error that occurred.",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[Campaign]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Campaign"
+          }
+        }
+      }
+    },
+    "Resource[Campaign]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/Campaign",
+          "description": "Return data."
+        }
+      }
+    },
+    "ResourceUpdated": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "resourceId": {
+          "description": "An identifier used to locate the updated resource.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceDeleted": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        }
+      }
+    },
+    "Contact": {
+      "description": "A Contact resource.",
+      "required": [
+        "emailAddress",
+        "segmentationFieldValues"
+      ],
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "Email address of the contact.",
+          "type": "string"
+        },
+        "emailKey": {
+          "description": "Listrak email key of the contact.",
+          "type": "string",
+          "readOnly": true
+        },
+        "universalEmailKey": {
+          "description": "SHA256 hashed email address.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionState": {
+          "description": "Subscription state of the contact. Allowed values are `Subscribed` and `Unsubscribed`.",
+          "type": "string"
+        },
+        "subscribeDate": {
+          "format": "date-time",
+          "description": "Subscribe date of the contact.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resubscribeDate": {
+          "format": "date-time",
+          "description": "ReSubscribe date of the contact.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscribeMethod": {
+          "description": "Subscribe method of the contact.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unsubscribeDate": {
+          "format": "date-time",
+          "description": "Unsubscribe date of the contact.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unsubscribeMethod": {
+          "description": "Unsubscribe method of the contact.",
+          "type": "string",
+          "readOnly": true
+        },
+        "externalContactID": {
+          "description": "External contact ID provided by the client",
+          "type": "string"
+        },
+        "segmentationFieldValues": {
+          "description": "Profile field values associated with the contact.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SegmentationFieldValue"
+          }
+        }
+      }
+    },
+    "SegmentationFieldValue": {
+      "description": "A Profile Field Value resource.",
+      "required": [
+        "segmentationFieldId",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "segmentationFieldGroupId": {
+          "format": "int32",
+          "description": "Identifier of the profile field group.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "segmentationFieldId": {
+          "format": "int32",
+          "description": "Identifier of the profile field.",
+          "type": "integer"
+        },
+        "value": {
+          "description": "Value of the profile field.",
+          "type": "string"
+        }
+      }
+    },
+    "CollectionPaged[Contact]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "nextPageCursor": {
+          "description": "URI of the next page of data.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Collection of data that exists on this paged view.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
+        }
+      }
+    },
+    "Resource[Contact]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/Contact",
+          "description": "Return data."
+        }
+      }
+    },
+    "ContactSegmentationFieldValues": {
+      "description": "A Contact with profile field values.",
+      "required": [
+        "emailAddress",
+        "segmentationFieldValues"
+      ],
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "Email address of the contact.",
+          "type": "string"
+        },
+        "segmentationFieldValues": {
+          "description": "Profile field values associated with the contact.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContactSegmentationFieldValue"
+          }
+        }
+      }
+    },
+    "ContactSegmentationFieldValue": {
+      "description": "A contact's profile field value.",
+      "required": [
+        "segmentationFieldId",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "segmentationFieldId": {
+          "format": "int32",
+          "description": "Identifier of the profile field.",
+          "type": "integer"
+        },
+        "value": {
+          "description": "Value of the profile field.",
+          "type": "string"
+        }
+      }
+    },
+    "ContentCreate": {
+      "description": "Request model for creating content.",
+      "required": [
+        "contentName"
+      ],
+      "type": "object",
+      "properties": {
+        "contentFolderId": {
+          "format": "int32",
+          "description": "Identifier of the content folder to place the content in.",
+          "type": "integer"
+        },
+        "contentName": {
+          "description": "Name given to the content block.",
+          "type": "string"
+        },
+        "textContent": {
+          "description": "Plain text content of the content block.",
+          "type": "string"
+        },
+        "htmlContent": {
+          "description": "HTML content of the content block.",
+          "type": "string"
+        },
+        "contentType": {
+          "description": "Type of the content block.",
+          "enum": [
+            "DynamicContent",
+            "SavedContent"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "Collection[Content]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content"
+          }
+        }
+      }
+    },
+    "Content": {
+      "description": "A content library resource.",
+      "type": "object",
+      "properties": {
+        "contentId": {
+          "format": "int32",
+          "description": "Identifier used to locate the content.",
+          "type": "integer"
+        },
+        "contentFolderId": {
+          "format": "int32",
+          "description": "Identifier of the content folder.",
+          "type": "integer"
+        },
+        "contentName": {
+          "description": "Name given to the content block.",
+          "type": "string"
+        },
+        "textContent": {
+          "description": "Plain text content of the content block.",
+          "type": "string"
+        },
+        "htmlContent": {
+          "description": "HTML content of the content block.",
+          "type": "string"
+        },
+        "contentType": {
+          "description": "Type of the content block.",
+          "enum": [
+            "DynamicContent",
+            "SavedContent"
+          ],
+          "type": "string"
+        },
+        "contentReadOnly": {
+          "description": "Indicates whether the content is read-only due to use in a live dynamic content block.",
+          "type": "boolean"
+        },
+        "lastModifiedDate": {
+          "format": "date-time",
+          "description": "Date the content was last modified.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource[Content]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/Content",
+          "description": "Return data."
+        }
+      }
+    },
+    "ContentUpdate": {
+      "description": "Request model for updating content.",
+      "type": "object",
+      "properties": {
+        "contentFolderId": {
+          "format": "int32",
+          "description": "Identifier of the content folder to place the content in.",
+          "type": "integer"
+        },
+        "contentName": {
+          "description": "Name given to the content block.",
+          "type": "string"
+        },
+        "textContent": {
+          "description": "Plain text content of the content block.",
+          "type": "string"
+        },
+        "htmlContent": {
+          "description": "HTML content of the content block.",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[ContentFolder]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentFolder"
+          }
+        }
+      }
+    },
+    "ContentFolder": {
+      "description": "A content library folder resource.",
+      "type": "object",
+      "properties": {
+        "contentFolderId": {
+          "format": "int32",
+          "description": "Identifier used to locate the content folder.",
+          "type": "integer"
+        },
+        "listId": {
+          "format": "int32",
+          "description": "Identifier of the list this folder belongs to. Null indicates a company-level folder.",
+          "type": "integer"
+        },
+        "parentFolderId": {
+          "format": "int32",
+          "description": "Identifier of the parent folder. Null indicates the root folder.",
+          "type": "integer"
+        },
+        "folderName": {
+          "description": "Name of the content folder.",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[Conversation]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Conversation"
+          }
+        }
+      }
+    },
+    "Conversation": {
+      "description": "A Conversation resource.",
+      "type": "object",
+      "properties": {
+        "conversationId": {
+          "format": "int32",
+          "description": "Identifier used to locate the conversation.",
+          "type": "integer"
+        },
+        "conversationName": {
+          "description": "Name of the conversation.",
+          "type": "string"
+        },
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier of the campaign associated with the conversation.",
+          "type": "integer"
+        },
+        "expirationDate": {
+          "format": "date-time",
+          "description": "Expiration date of the conversation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Current status of the conversation.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource[Conversation]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/Conversation",
+          "description": "Return data."
+        }
+      }
+    },
+    "CollectionPaged[Message]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "nextPageCursor": {
+          "description": "URI of the next page of data.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Collection of data that exists on this paged view.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        }
+      }
+    },
+    "Message": {
+      "description": "A Message resource.",
+      "required": [
+        "externalCampaignId",
+        "subject"
+      ],
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "format": "int32",
+          "description": "Identifier used to locate the message.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "sendDate": {
+          "format": "date-time",
+          "description": "Send date of the message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "messageStatus": {
+          "description": "Status displaying whether the message is sent or scheduled.",
+          "type": "string",
+          "readOnly": true
+        },
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier of the campaign associated with the message.",
+          "type": "integer"
+        },
+        "externalCampaignId": {
+          "description": "Customer-provided identifier of the campaign associated with the message.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "Subject of the message.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource[MessageExtended]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/MessageExtended",
+          "description": "Return data."
+        }
+      }
+    },
+    "MessageExtended": {
+      "description": "A Message resource.",
+      "required": [
+        "externalCampaignId",
+        "fromEmail",
+        "fromName",
+        "subject"
+      ],
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "format": "int32",
+          "description": "Identifier used to locate the message.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "sendDate": {
+          "format": "date-time",
+          "description": "Send date of the message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "messageStatus": {
+          "description": "Status displaying whether the message is sent or scheduled.",
+          "type": "string",
+          "readOnly": true
+        },
+        "enableUniversalEmailKeySetting": {
+          "description": "Whether to include UniversalEmailKey in URL query string.",
+          "type": "boolean"
+        },
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier of the campaign associated with the message.",
+          "type": "integer"
+        },
+        "bodyHtml": {
+          "description": "HTML body that will be sent in the message.",
+          "type": "string"
+        },
+        "bodyText": {
+          "description": "Text body that will be sent in the message.",
+          "type": "string"
+        },
+        "codePage": {
+          "format": "int32",
+          "description": "Type of CodePage used in the message.",
+          "type": "integer"
+        },
+        "enablePassalong": {
+          "description": "Whether passalong is enabled.",
+          "type": "boolean"
+        },
+        "enableTracking": {
+          "description": "Whether tracking is enabled.",
+          "type": "boolean"
+        },
+        "externalCampaignId": {
+          "description": "Customer-provided identifier of the campaign associated with the message.",
+          "type": "string"
+        },
+        "fromEmail": {
+          "description": "The _from email address_ that will be used for the message.",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "The _from name_ that will be used for the message.",
+          "type": "string"
+        },
+        "googleAnalyticsCampaignName": {
+          "description": "The Google Analytics campaign name to be used for message tracking.",
+          "type": "string"
+        },
+        "googleAnalyticsCampaignContent": {
+          "description": "The Google Analytics campaign content to be used for message tracking.",
+          "type": "string"
+        },
+        "replyEmail": {
+          "description": "The _reply email address_ that will be used for the message.",
+          "type": "string"
+        },
+        "savedAudienceId": {
+          "format": "int32",
+          "description": "Identifier of the SavedAudience to use for recipient filtering.",
+          "type": "integer"
+        },
+        "subject": {
+          "description": "Subject of the message.",
+          "type": "string"
+        },
+        "toName": {
+          "description": "The _to name_ that will be used for the message.",
+          "type": "string"
+        }
+      }
+    },
+    "CollectionPaged[MessageActivity]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "nextPageCursor": {
+          "description": "URI of the next page of data.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Collection of data that exists on this paged view.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageActivity"
+          }
+        }
+      }
+    },
+    "MessageActivity": {
+      "description": "A Message Activity resource.",
+      "type": "object",
+      "properties": {
+        "abuse": {
+          "description": "Whether the message was marked as abuse by the contact.",
+          "type": "boolean"
+        },
+        "activityDate": {
+          "format": "date-time",
+          "description": "Date of first activity by the contact.",
+          "type": "string"
+        },
+        "bounce": {
+          "description": "Whether the message bounced for the contact.",
+          "type": "boolean"
+        },
+        "bounceReason": {
+          "description": "Reason why the message bounced.",
+          "type": "string"
+        },
+        "click": {
+          "description": "Whether the message was clicked by the contact.",
+          "type": "boolean"
+        },
+        "clickCount": {
+          "format": "int32",
+          "description": "Number of clicks made by the contact.",
+          "type": "integer"
+        },
+        "emailAddress": {
+          "description": "Email address of the contact.",
+          "type": "string"
+        },
+        "open": {
+          "description": "Whether the message was opened by the contact.",
+          "type": "boolean"
+        },
+        "orderTotal": {
+          "format": "double",
+          "description": "Order total associated with the message for the contact.",
+          "type": "number"
+        },
+        "read": {
+          "description": "Whether the message was read by the contact.",
+          "type": "boolean"
+        },
+        "sendDate": {
+          "format": "date-time",
+          "description": "Send date of the message.",
+          "type": "string"
+        },
+        "unsubscribe": {
+          "description": "Whether the message caused an unsubscribe by the contact.",
+          "type": "boolean"
+        },
+        "visitDate": {
+          "format": "date-time",
+          "description": "DEPRECATED as of June 2020",
+          "type": "string"
+        },
+        "externalContactID": {
+          "description": "The external contact ID provided by a 3rd party",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[MessageLink]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageLink"
+          }
+        }
+      }
+    },
+    "MessageLink": {
+      "description": "A Message Link resource.",
+      "type": "object",
+      "properties": {
+        "linkId": {
+          "format": "int32",
+          "description": "Identifier used to locate the Link.",
+          "type": "integer"
+        },
+        "linkDescription": {
+          "description": "Description of the Link.",
+          "type": "string"
+        },
+        "linkUrl": {
+          "description": "URL of the Link.",
+          "type": "string"
+        },
+        "clickCount": {
+          "format": "int32",
+          "description": "The number of clicks for the Link.",
+          "type": "integer"
+        }
+      }
+    },
+    "CollectionPaged[MessageLink]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "nextPageCursor": {
+          "description": "URI of the next page of data.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Collection of data that exists on this paged view.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageLink"
+          }
+        }
+      }
+    },
+    "Resource[MessageLink]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/MessageLink",
+          "description": "Return data."
+        }
+      }
+    },
+    "Resource[MessageLinkClicker]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/MessageLinkClicker",
+          "description": "Return data."
+        }
+      }
+    },
+    "MessageLinkClicker": {
+      "description": "A Message Link Clicker resource.",
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "Email address of the contact.",
+          "type": "string"
+        },
+        "clickDate": {
+          "format": "date-time",
+          "description": "Date on which the click occurred.",
+          "type": "string"
+        }
+      }
+    },
+    "CollectionPaged[MessageLinkClicker]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "nextPageCursor": {
+          "description": "URI of the next page of data.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Collection of data that exists on this paged view.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageLinkClicker"
+          }
+        }
+      }
+    },
+    "Resource[MessageSummary]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/MessageSummary",
+          "description": "Return data."
+        }
+      }
+    },
+    "MessageSummary": {
+      "description": "A Message Summary resource.",
+      "type": "object",
+      "properties": {
+        "averageOrderValue": {
+          "format": "double",
+          "description": "Average order value associated with the message.",
+          "type": "number"
+        },
+        "bounceCount": {
+          "format": "int32",
+          "description": "The number of bounces for the message.",
+          "type": "integer"
+        },
+        "clickCount": {
+          "format": "int32",
+          "description": "The number of clicks for the message.",
+          "type": "integer"
+        },
+        "conversionCount": {
+          "format": "int32",
+          "description": "The number of conversions for the message.",
+          "type": "integer"
+        },
+        "openCount": {
+          "format": "int32",
+          "description": "The number of opens for the message.",
+          "type": "integer"
+        },
+        "passAlongCount": {
+          "format": "int32",
+          "description": "The number of passalongs for the message.",
+          "type": "integer"
+        },
+        "readCount": {
+          "format": "int32",
+          "description": "The number of reads for the message.",
+          "type": "integer"
+        },
+        "revenue": {
+          "format": "double",
+          "description": "Total revenue associated with the message.",
+          "type": "number"
+        },
+        "sentCount": {
+          "format": "int32",
+          "description": "The number of times the message was sent.",
+          "type": "integer"
+        },
+        "unsubscribeCount": {
+          "format": "int32",
+          "description": "The number of unsubscribes for the message.",
+          "type": "integer"
+        },
+        "visitCount": {
+          "format": "int32",
+          "description": "The number of site visits as a result of the message.",
+          "type": "integer"
+        }
+      }
+    },
+    "Resource[ConversationSummary]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/ConversationSummary",
+          "description": "Return data."
+        }
+      }
+    },
+    "ConversationSummary": {
+      "description": "A Conversation Summary resource",
+      "type": "object",
+      "properties": {
+        "averageOrderValue": {
+          "format": "double",
+          "description": "Average order value associated with the conversation.",
+          "type": "number"
+        },
+        "bounceCount": {
+          "format": "int32",
+          "description": "The number of bounces for the conversation.",
+          "type": "integer"
+        },
+        "clickCount": {
+          "format": "int32",
+          "description": "The number of clicks for the conversation.",
+          "type": "integer"
+        },
+        "conversionCount": {
+          "format": "int32",
+          "description": "The number of conversions for the conversation.",
+          "type": "integer"
+        },
+        "deliveredCount": {
+          "format": "int32",
+          "description": "The number of messages delivered for the conversation.",
+          "type": "integer"
+        },
+        "openCount": {
+          "format": "int32",
+          "description": "The number of opens for the conversation.",
+          "type": "integer"
+        },
+        "readCount": {
+          "format": "int32",
+          "description": "The number of reads for the conversation.",
+          "type": "integer"
+        },
+        "revenue": {
+          "format": "double",
+          "description": "Total revenue associated with the conversation.",
+          "type": "number"
+        },
+        "sentCount": {
+          "format": "int32",
+          "description": "The number of messages sent during the conversation.",
+          "type": "integer"
+        },
+        "unsubscribeCount": {
+          "format": "int32",
+          "description": "The number of unsubscribes for the conversation.",
+          "type": "integer"
+        },
+        "visitCount": {
+          "format": "int32",
+          "description": "The number of site visits as a result of the conversation.",
+          "type": "integer"
+        }
+      }
+    },
+    "Event": {
+      "description": "An Event resource.",
+      "required": [
+        "eventName",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "format": "int32",
+          "description": "Identifier used to locate the event.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "eventName": {
+          "description": "Name given to the event.",
+          "type": "string"
+        },
+        "eventGroupId": {
+          "format": "int32",
+          "description": "Identifier of the event group associated with the event.",
+          "type": "integer"
+        },
+        "status": {
+          "description": "Status of the event. Allowed values are `Active` and `Blocked`.",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[Event]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Event"
+          }
+        }
+      }
+    },
+    "Resource[Event]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/Event",
+          "description": "Return data."
+        }
+      }
+    },
+    "EventGroup": {
+      "description": "An Event Group resource.",
+      "required": [
+        "eventGroupName"
+      ],
+      "type": "object",
+      "properties": {
+        "eventGroupId": {
+          "format": "int32",
+          "description": "Identifier used to locate the event group.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "eventGroupName": {
+          "description": "Name of the event group.",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[EventGroup]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventGroup"
+          }
+        }
+      }
+    },
+    "Resource[EventGroup]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/EventGroup",
+          "description": "Return data."
+        }
+      }
+    },
+    "Folder": {
+      "description": "A Folder resource.",
+      "required": [
+        "folderName"
+      ],
+      "type": "object",
+      "properties": {
+        "folderId": {
+          "format": "int32",
+          "description": "Identifier used to locate the folder.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "folderName": {
+          "description": "Name of the folder.",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[Folder]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Folder"
+          }
+        }
+      }
+    },
+    "Resource[Folder]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/Folder",
+          "description": "Return data."
+        }
+      }
+    },
+    "Collection[IpPool]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpPool"
+          }
+        }
+      }
+    },
+    "IpPool": {
+      "description": "An IpPool resource.",
+      "type": "object",
+      "properties": {
+        "ipPoolId": {
+          "format": "int32",
+          "description": "Identifier used to locate the IP pool.",
+          "type": "integer"
+        },
+        "ipPoolDescription": {
+          "description": "Description of the IP pool.",
+          "type": "string"
+        }
+      }
+    },
+    "List": {
+      "description": "A List resource.",
+      "required": [
+        "listName",
+        "bounceHandling",
+        "bounceUnsubscribeCount"
+      ],
+      "type": "object",
+      "properties": {
+        "listId": {
+          "format": "int32",
+          "description": "Identifier used to locate the list.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "listName": {
+          "description": "Name of the list.",
+          "type": "string"
+        },
+        "folderId": {
+          "format": "int32",
+          "description": "Identifier of the folder associated with the list.",
+          "type": "integer"
+        },
+        "ipPoolId": {
+          "format": "int32",
+          "description": "Identifier of the IP pool associated with the list.",
+          "type": "integer"
+        },
+        "bounceDomainAlias": {
+          "description": "Alias domain for email bounces.",
+          "type": "string"
+        },
+        "bounceHandling": {
+          "description": "Bounce handling method for the list. Allowed values are `None`, `Standard`, and `Aggressive`.",
+          "type": "string"
+        },
+        "bounceUnsubscribeCount": {
+          "format": "int32",
+          "description": "The number of bounces that are allowed before being automatically unsubscribed.",
+          "type": "integer"
+        },
+        "createDate": {
+          "format": "date-time",
+          "description": "The creation date of the list.",
+          "type": "string"
+        },
+        "enableBrowserLink": {
+          "description": "Whether browser link is enabled.",
+          "type": "boolean"
+        },
+        "enableDoubleOptIn": {
+          "description": "Whether double opt-in is enabled.",
+          "type": "boolean"
+        },
+        "enableDynamicContent": {
+          "description": "Whether dynamic content is enabled.",
+          "type": "boolean"
+        },
+        "enableGoogleAnalytics": {
+          "description": "Whether Google Analytics is enabled.",
+          "type": "boolean"
+        },
+        "enableInternationalization": {
+          "description": "Whether internationalization is enabled.",
+          "type": "boolean"
+        },
+        "enableListHygiene": {
+          "description": "Whether list hygiene is enabled.",
+          "type": "boolean"
+        },
+        "enableListRemovalHeader": {
+          "description": "Whether unsubscribe information is automatically included in message headers.",
+          "type": "boolean"
+        },
+        "enableListRemovalLink": {
+          "description": "Whether the list removal link is automatically included.",
+          "type": "boolean"
+        },
+        "enableListrakAnalytics": {
+          "description": "Whether Listrak Analytics is enabled.",
+          "type": "boolean"
+        },
+        "enableSpamScorePersonalization": {
+          "description": "Whether personalization is available in Spam Score.",
+          "type": "boolean"
+        },
+        "enableToNamePersonalization": {
+          "description": "Whether personalization is enabled for a recipient's _To_ name.",
+          "type": "boolean"
+        },
+        "enableUniversalEmailKeySetting": {
+          "description": "Whether to include UniversalEmailKey in URL query string.",
+          "type": "boolean"
+        },
+        "fromEmail": {
+          "description": "The _From_ email address used by default when sending messages.",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "The _From_ name used by default when sending messages.",
+          "type": "string"
+        },
+        "googleTrackingDomains": {
+          "description": "Google tracking domains of the list.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "linkDomainAlias": {
+          "description": "Alias domain for links in the list's messages.",
+          "type": "string"
+        },
+        "mediaDomainAlias": {
+          "description": "DEPRECATED as of January 2020",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[List]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/List"
+          }
+        }
+      }
+    },
+    "Resource[List]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/List",
+          "description": "Return data."
+        }
+      }
+    },
+    "ImportFile": {
+      "description": "An Import File resource.",
+      "required": [
+        "fileDelimiter",
+        "fileMappings",
+        "fileName",
+        "fileStream",
+        "importType",
+        "segmentationImportType"
+      ],
+      "type": "object",
+      "properties": {
+        "fileDelimiter": {
+          "description": "Delimiter used to separate columns within the file.",
+          "type": "string"
+        },
+        "fileMappings": {
+          "description": "Representation of import file mappings; these map file columns to import fields.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImportFileMapping"
+          }
+        },
+        "fileName": {
+          "description": "Filename of the import file.",
+          "type": "string"
+        },
+        "fileStream": {
+          "format": "byte",
+          "description": "Base64-encoded byte array representation of the import file.",
+          "type": "string"
+        },
+        "hasColumnNames": {
+          "description": "Whether the first line of the import file contains column names.",
+          "type": "boolean"
+        },
+        "importType": {
+          "description": "The type of import to conduct. Allowed values are `AddSubscribers`, `AddSubscribersAndSegmentationData`, `RemoveSubscribers`, and `UpdateSubscribers`.",
+          "type": "string"
+        },
+        "segmentationImportType": {
+          "description": "Strategy to take if imported data already exists. Allowed values are `Update`, `Append`, and `Overwrite`.",
+          "type": "string"
+        },
+        "suppressEmailNotifications": {
+          "description": "Whether to suppress email notifications.",
+          "type": "boolean"
+        },
+        "textQualifier": {
+          "description": "The text qualifier used for the import file.",
+          "type": "string"
+        },
+        "triggerJourney": {
+          "description": "Whether to enter subscribers into all List Subscription journeys associated with this list.",
+          "type": "boolean"
+        },
+        "includeUnsubscribed": {
+          "description": "Whether to update both subscribed and unsubscribed contacts when `ImportType` is `UpdateSubscribers`.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ImportFileMapping": {
+      "description": "An Import File Mapping resource.",
+      "required": [
+        "fileColumn",
+        "fileColumnType"
+      ],
+      "type": "object",
+      "properties": {
+        "segmentationFieldId": {
+          "format": "int32",
+          "description": "Identifier of the associated profile field.",
+          "type": "integer"
+        },
+        "defaultValue": {
+          "description": "Default value to be used if a value is not provided during the import.",
+          "type": "string"
+        },
+        "fileColumn": {
+          "format": "int32",
+          "description": "Number identifying the column's ordinal position in the file, starting from `0`.",
+          "type": "integer"
+        },
+        "fileColumnType": {
+          "description": "Type of value in the column of the import file. Allowed values are `Email`, `SegmentationField`, `Event`, and `ExternalContactID`.",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[ListImport]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListImport"
+          }
+        }
+      }
+    },
+    "ListImport": {
+      "description": "A List Import resource.",
+      "type": "object",
+      "properties": {
+        "importFileId": {
+          "format": "int32",
+          "description": "Identifier used to locate the list import.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "importFileName": {
+          "description": "Filename of an import file.",
+          "type": "string"
+        },
+        "importDate": {
+          "format": "date-time",
+          "description": "Date of an import.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource[ListImport]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/ListImport",
+          "description": "Return data."
+        }
+      }
+    },
+    "CollectionPaged[ListImportContact]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "nextPageCursor": {
+          "description": "URI of the next page of data.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Collection of data that exists on this paged view.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListImportContact"
+          }
+        }
+      }
+    },
+    "ListImportContact": {
+      "description": "A List Import Contact resource.",
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "Email address of the contact.",
+          "type": "string"
+        },
+        "importResult": {
+          "description": "Result of the list import for the contact.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource[ListImportStatus]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/ListImportStatus",
+          "description": "Return data."
+        }
+      }
+    },
+    "ListImportStatus": {
+      "description": "A List Import Status resource.",
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "format": "date-time",
+          "description": "Start date of the list import.",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "description": "End date of the list import.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the list import.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource[ListImportSummary]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/ListImportSummary",
+          "description": "Return data."
+        }
+      }
+    },
+    "ListImportSummary": {
+      "description": "A List Import Summary resource.",
+      "type": "object",
+      "properties": {
+        "alreadySubscribedCount": {
+          "format": "int32",
+          "description": "Number of contacts that are already subscribed to the list.",
+          "type": "integer"
+        },
+        "alreadyUnsubscribedCount": {
+          "format": "int32",
+          "description": "Number of contacts that have already been unsubscribed from the list. Only applies when removing subscribers.",
+          "type": "integer"
+        },
+        "bannedCount": {
+          "format": "int32",
+          "description": "Number of contacts that have been banned from the list.",
+          "type": "integer"
+        },
+        "invalidEmailCount": {
+          "format": "int32",
+          "description": "Number of contacts that have an invalid email address.",
+          "type": "integer"
+        },
+        "previouslyUnsubscribedCount": {
+          "format": "int32",
+          "description": "Number of contacts that have already been unsubscribed from the list. Only applies when updating and appending subscribers.",
+          "type": "integer"
+        },
+        "processedCount": {
+          "format": "int32",
+          "description": "Number of contacts that were processed in total.",
+          "type": "integer"
+        },
+        "skippedCount": {
+          "format": "int32",
+          "description": "Number of contacts that were skipped.",
+          "type": "integer"
+        },
+        "subscribedCount": {
+          "format": "int32",
+          "description": "Number of contacts that were subscribed to the list.",
+          "type": "integer"
+        },
+        "suppressedCount": {
+          "format": "int32",
+          "description": "Number of contacts that are on a suppression list bound to the list.",
+          "type": "integer"
+        },
+        "unsubscribedCount": {
+          "format": "int32",
+          "description": "Number of contacts that were unsubscribed from the list.",
+          "type": "integer"
+        }
+      }
+    },
+    "MessageExtendedFilter": {
+      "required": [
+        "externalCampaignId",
+        "fromEmail",
+        "fromName",
+        "subject"
+      ],
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "format": "int32",
+          "description": "Identifier used to locate the message.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "sendDate": {
+          "format": "date-time",
+          "description": "Send date of the message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "messageStatus": {
+          "description": "Status displaying whether the message is sent or scheduled.",
+          "type": "string",
+          "readOnly": true
+        },
+        "enableUniversalEmailKeySetting": {
+          "description": "Whether to include UniversalEmailKey in URL query string.",
+          "type": "boolean"
+        },
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier of the campaign associated with the message.",
+          "type": "integer"
+        },
+        "bodyHtml": {
+          "description": "HTML body that will be sent in the message.",
+          "type": "string"
+        },
+        "bodyText": {
+          "description": "Text body that will be sent in the message.",
+          "type": "string"
+        },
+        "codePage": {
+          "format": "int32",
+          "description": "Type of CodePage used in the message.",
+          "type": "integer"
+        },
+        "enablePassalong": {
+          "description": "Whether passalong is enabled.",
+          "type": "boolean"
+        },
+        "enableTracking": {
+          "description": "Whether tracking is enabled.",
+          "type": "boolean"
+        },
+        "externalCampaignId": {
+          "description": "Customer-provided identifier of the campaign associated with the message.",
+          "type": "string"
+        },
+        "fromEmail": {
+          "description": "The _from email address_ that will be used for the message.",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "The _from name_ that will be used for the message.",
+          "type": "string"
+        },
+        "googleAnalyticsCampaignName": {
+          "description": "The Google Analytics campaign name to be used for message tracking.",
+          "type": "string"
+        },
+        "googleAnalyticsCampaignContent": {
+          "description": "The Google Analytics campaign content to be used for message tracking.",
+          "type": "string"
+        },
+        "replyEmail": {
+          "description": "The _reply email address_ that will be used for the message.",
+          "type": "string"
+        },
+        "savedAudienceId": {
+          "format": "int32",
+          "description": "Identifier of the SavedAudience to use for recipient filtering.",
+          "type": "integer"
+        },
+        "subject": {
+          "description": "Subject of the message.",
+          "type": "string"
+        },
+        "toName": {
+          "description": "The _to name_ that will be used for the message.",
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/definitions/Filter",
+          "description": "Filter to be used for recipient filtering."
+        }
+      }
+    },
+    "Filter": {
+      "type": "object",
+      "properties": {
+        "segmentationFieldGroup": {
+          "description": "The name of the profile field group to use for filtering.",
+          "type": "string"
+        },
+        "segmentationField": {
+          "description": "The name of the profile field to use for filtering.",
+          "type": "string"
+        },
+        "joinType": {
+          "description": "The mechanism by which this filter should be joined to the immediately preceding filter. Optional if it is the first filter (ignored if provided anyway).",
+          "enum": [
+            "And",
+            "AndNot",
+            "Or",
+            "OrNot"
+          ],
+          "type": "string"
+        },
+        "compareType": {
+          "description": "The type of comparison to use filtering values with.",
+          "enum": [
+            "Contains",
+            "NotContains",
+            "Equals",
+            "NotEquals",
+            "GreaterThan",
+            "GreaterThanOrEqualTo",
+            "LessThan",
+            "LessThanOrEqualTo",
+            "Between",
+            "NotBetween",
+            "Checked",
+            "NotChecked",
+            "RadioOn",
+            "RadioOff",
+            "InCommaList",
+            "NotInCommaList",
+            "IsEmpty",
+            "IsNotEmpty"
+          ],
+          "type": "string"
+        },
+        "values": {
+          "description": "Values to be used for filtering.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilterValue"
+          }
+        },
+        "filters": {
+          "description": "One or more sub-filters to apply. Cannot be specified in conjunction with the `CompareType` or `Values` fields: filters must define their own filtering behavior, or must define inner filters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Filter"
+          }
+        }
+      }
+    },
+    "FilterValue": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Value to be used for filtering.",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[MessageExtended]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MessageExtended"
+          }
+        }
+      }
+    },
+    "Resource[MessageExtendedSegmentsApplied]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/MessageExtendedSegmentsApplied",
+          "description": "Return data."
+        }
+      }
+    },
+    "MessageExtendedSegmentsApplied": {
+      "required": [
+        "externalCampaignId",
+        "fromEmail",
+        "fromName",
+        "subject"
+      ],
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "format": "int32",
+          "description": "Identifier used to locate the message.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "sendDate": {
+          "format": "date-time",
+          "description": "Send date of the message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "messageStatus": {
+          "description": "Status displaying whether the message is sent or scheduled.",
+          "type": "string",
+          "readOnly": true
+        },
+        "enableUniversalEmailKeySetting": {
+          "description": "Whether to include UniversalEmailKey in URL query string.",
+          "type": "boolean"
+        },
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier of the campaign associated with the message.",
+          "type": "integer"
+        },
+        "bodyHtml": {
+          "description": "HTML body that will be sent in the message.",
+          "type": "string"
+        },
+        "bodyText": {
+          "description": "Text body that will be sent in the message.",
+          "type": "string"
+        },
+        "codePage": {
+          "format": "int32",
+          "description": "Type of CodePage used in the message.",
+          "type": "integer"
+        },
+        "enablePassalong": {
+          "description": "Whether passalong is enabled.",
+          "type": "boolean"
+        },
+        "enableTracking": {
+          "description": "Whether tracking is enabled.",
+          "type": "boolean"
+        },
+        "externalCampaignId": {
+          "description": "Customer-provided identifier of the campaign associated with the message.",
+          "type": "string"
+        },
+        "fromEmail": {
+          "description": "The _from email address_ that will be used for the message.",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "The _from name_ that will be used for the message.",
+          "type": "string"
+        },
+        "googleAnalyticsCampaignName": {
+          "description": "The Google Analytics campaign name to be used for message tracking.",
+          "type": "string"
+        },
+        "googleAnalyticsCampaignContent": {
+          "description": "The Google Analytics campaign content to be used for message tracking.",
+          "type": "string"
+        },
+        "replyEmail": {
+          "description": "The _reply email address_ that will be used for the message.",
+          "type": "string"
+        },
+        "savedAudienceId": {
+          "format": "int32",
+          "description": "Identifier of the SavedAudience to use for recipient filtering.",
+          "type": "integer"
+        },
+        "segmentsApplied": {
+          "$ref": "#/definitions/SegmentsApplied",
+          "description": "Segments applied to the message."
+        },
+        "subject": {
+          "description": "Subject of the message.",
+          "type": "string"
+        },
+        "toName": {
+          "description": "The _to name_ that will be used for the message.",
+          "type": "string"
+        }
+      }
+    },
+    "SegmentsApplied": {
+      "description": "Segments applied to the message.",
+      "type": "object",
+      "properties": {
+        "includedSegments": {
+          "description": "List of segments included in the recipient audience.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludedSegments": {
+          "description": "List of segments excluded from the recipient audience.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Resource[MessageStatus]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/MessageStatus",
+          "description": "Return data."
+        }
+      }
+    },
+    "MessageStatus": {
+      "description": "A Message Status resource.",
+      "type": "object",
+      "properties": {
+        "sendCount": {
+          "format": "int32",
+          "description": "Number of sends associated with the message.",
+          "type": "integer"
+        },
+        "startDate": {
+          "format": "date-time",
+          "description": "Start date of the message send.",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "description": "End date of the message send.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the message send.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of message send.",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[SavedAudience]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavedAudience"
+          }
+        }
+      }
+    },
+    "SavedAudience": {
+      "description": "A Saved Audience resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the saved audience.",
+          "type": "string"
+        },
+        "lastModified": {
+          "format": "date-time",
+          "description": "Last date the saved audience was modified.",
+          "type": "string"
+        },
+        "savedAudienceId": {
+          "format": "int64",
+          "description": "Identifier used to locate the saved audience.",
+          "type": "integer"
+        }
+      }
+    },
+    "CollectionPaged[SavedAudience]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "nextPageCursor": {
+          "description": "URI of the next page of data.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Collection of data that exists on this paged view.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavedAudience"
+          }
+        }
+      }
+    },
+    "SavedMessageCreate": {
+      "description": "Request model for creating a Saved Message.",
+      "required": [
+        "savedMessageName",
+        "subject",
+        "fromName",
+        "fromEmail"
+      ],
+      "type": "object",
+      "properties": {
+        "savedMessageName": {
+          "description": "Name given to the saved message.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "Subject of the message.",
+          "type": "string"
+        },
+        "preheader": {
+          "description": "Pre-header text of the message.",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "The from name that will be used for the message.",
+          "type": "string"
+        },
+        "fromEmail": {
+          "description": "The from email address that will be used for the message.",
+          "type": "string"
+        },
+        "replyEmail": {
+          "description": "The reply email address that will be used for the message.",
+          "type": "string"
+        },
+        "bodyHtml": {
+          "description": "HTML body of the message.",
+          "type": "string"
+        },
+        "bodyText": {
+          "description": "Plain text body of the message.",
+          "type": "string"
+        },
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier of the campaign associated with the message.",
+          "type": "integer"
+        },
+        "externalCampaignId": {
+          "description": "Customer-provided identifier of the campaign associated with the message.",
+          "type": "string"
+        }
+      }
+    },
+    "Collection[SavedMessage]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SavedMessage"
+          }
+        }
+      }
+    },
+    "SavedMessage": {
+      "description": "A Saved Message resource.",
+      "required": [
+        "externalCampaignId",
+        "subject"
+      ],
+      "type": "object",
+      "properties": {
+        "savedMessageId": {
+          "format": "int32",
+          "description": "Identifier used to locate the saved message.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "savedMessageName": {
+          "description": "Name given to the saved message.",
+          "type": "string"
+        },
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier of the campaign associated with the message.",
+          "type": "integer"
+        },
+        "createDate": {
+          "format": "date-time",
+          "description": "Creation date of the saved message.",
+          "type": "string"
+        },
+        "lastModifiedDate": {
+          "format": "date-time",
+          "description": "Last date the saved message was modified.",
+          "type": "string"
+        },
+        "externalCampaignId": {
+          "description": "Customer-provided identifier of the campaign associated with the message.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "Subject of the message.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource[SavedMessageExtended]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/SavedMessageExtended",
+          "description": "Return data."
+        }
+      }
+    },
+    "SavedMessageExtended": {
+      "description": "A Saved Message resource.",
+      "required": [
+        "externalCampaignId",
+        "fromEmail",
+        "fromName",
+        "subject"
+      ],
+      "type": "object",
+      "properties": {
+        "enableUniversalEmailKeySetting": {
+          "description": "Whether to include UniversalEmailKey in URL query string.",
+          "type": "boolean"
+        },
+        "savedMessageId": {
+          "format": "int32",
+          "description": "Identifier used to locate the saved message.",
+          "type": "integer"
+        },
+        "savedMessageName": {
+          "description": "Name given to the saved message.",
+          "type": "string"
+        },
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier of the campaign associated with the message.",
+          "type": "integer"
+        },
+        "bodyHtml": {
+          "description": "HTML body that will be sent in the message.",
+          "type": "string"
+        },
+        "bodyText": {
+          "description": "Text body that will be sent in the message.",
+          "type": "string"
+        },
+        "codePage": {
+          "format": "int32",
+          "description": "Type of CodePage used in the message.",
+          "type": "integer"
+        },
+        "createDate": {
+          "format": "date-time",
+          "description": "Creation date of the saved message.",
+          "type": "string"
+        },
+        "lastModifiedDate": {
+          "format": "date-time",
+          "description": "Last date the saved message was modified.",
+          "type": "string"
+        },
+        "enablePassalong": {
+          "description": "Whether passalong is enabled.",
+          "type": "boolean"
+        },
+        "enableTracking": {
+          "description": "Whether tracking is enabled.",
+          "type": "boolean"
+        },
+        "externalCampaignId": {
+          "description": "Customer-provided identifier of the campaign associated with the message.",
+          "type": "string"
+        },
+        "fromEmail": {
+          "description": "The _from email address_ that will be used for the message.",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "The _from name_ that will be used for the message.",
+          "type": "string"
+        },
+        "googleAnalyticsCampaignName": {
+          "description": "The Google Analytics campaign name to be used for message tracking.",
+          "type": "string"
+        },
+        "googleAnalyticsCampaignContent": {
+          "description": "The Google Analytics campaign content to be used for message tracking.",
+          "type": "string"
+        },
+        "replyEmail": {
+          "description": "The _reply email address_ that will be used for the message.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "Subject of the message.",
+          "type": "string"
+        },
+        "toName": {
+          "description": "The _to name_ that will be used for the message.",
+          "type": "string"
+        }
+      }
+    },
+    "SavedMessageUpdate": {
+      "description": "Request model for updating a Saved Message.",
+      "required": [
+        "savedMessageName",
+        "subject",
+        "fromName",
+        "fromEmail"
+      ],
+      "type": "object",
+      "properties": {
+        "savedMessageName": {
+          "description": "Name given to the saved message.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "Subject of the message.",
+          "type": "string"
+        },
+        "preheader": {
+          "description": "Pre-header text of the message.",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "The from name that will be used for the message.",
+          "type": "string"
+        },
+        "fromEmail": {
+          "description": "The from email address that will be used for the message.",
+          "type": "string"
+        },
+        "replyEmail": {
+          "description": "The reply email address that will be used for the message.",
+          "type": "string"
+        },
+        "bodyHtml": {
+          "description": "HTML body of the message.",
+          "type": "string"
+        },
+        "bodyText": {
+          "description": "Plain text body of the message.",
+          "type": "string"
+        },
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier of the campaign associated with the message.",
+          "type": "integer"
+        },
+        "externalCampaignId": {
+          "description": "Customer-provided identifier of the campaign associated with the message.",
+          "type": "string"
+        }
+      }
+    },
+    "SegmentationField": {
+      "description": "A Profile Field resource.",
+      "required": [
+        "segmentationFieldName",
+        "dataType",
+        "maxLength",
+        "position"
+      ],
+      "type": "object",
+      "properties": {
+        "segmentationFieldId": {
+          "format": "int32",
+          "description": "Identifier of the profile field.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "segmentationFieldName": {
+          "description": "Name of the profile field.",
+          "type": "string"
+        },
+        "segmentationFieldGroupId": {
+          "format": "int32",
+          "description": "Identifier of the profile field group associated with the profile field.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "dataType": {
+          "description": "Data type of the profile field. Allowed values are `Text`, `Numeric`, `RadioButton`, `CheckBox`, `CommentArea`, `Date`, and `ContentBlock`.",
+          "type": "string"
+        },
+        "maxLength": {
+          "format": "int32",
+          "description": "The maximum character count of the data that can be stored in the profile field.",
+          "type": "integer"
+        },
+        "position": {
+          "format": "int32",
+          "description": "The ordinal position of the profile field.",
+          "type": "integer"
+        }
+      }
+    },
+    "Collection[SegmentationField]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SegmentationField"
+          }
+        }
+      }
+    },
+    "Resource[SegmentationField]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/SegmentationField",
+          "description": "Return data."
+        }
+      }
+    },
+    "SegmentationFieldGroup": {
+      "description": "A Profile Field Group resource.",
+      "required": [
+        "segmentationFieldGroupName",
+        "position"
+      ],
+      "type": "object",
+      "properties": {
+        "segmentationFieldGroupId": {
+          "format": "int32",
+          "description": "Identifier of the profile field group.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "segmentationFieldGroupName": {
+          "description": "Name of the profile field group.",
+          "type": "string"
+        },
+        "position": {
+          "format": "int32",
+          "description": "Ordinal position of the profile field group.",
+          "type": "integer"
+        }
+      }
+    },
+    "Collection[SegmentationFieldGroup]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SegmentationFieldGroup"
+          }
+        }
+      }
+    },
+    "Resource[SegmentationFieldGroup]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/SegmentationFieldGroup",
+          "description": "Return data."
+        }
+      }
+    },
+    "CollectionPaged[SplitTest]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "nextPageCursor": {
+          "description": "URI of the next page of data.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Collection of data that exists on this paged view.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SplitTest"
+          }
+        }
+      }
+    },
+    "SplitTest": {
+      "description": "A Split Test resource.",
+      "type": "object",
+      "properties": {
+        "splitTestId": {
+          "format": "int32",
+          "description": "Identifier used to locate the split test.",
+          "type": "integer"
+        },
+        "splitTestName": {
+          "description": "Name of the split test.",
+          "type": "string"
+        },
+        "startDate": {
+          "format": "date-time",
+          "description": "Start date of the split test.",
+          "type": "string"
+        },
+        "endDate": {
+          "format": "date-time",
+          "description": "End date of the split test.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the split test.",
+          "type": "string"
+        },
+        "testCriteria": {
+          "description": "Criteria that is being tested by the split test.",
+          "type": "string"
+        },
+        "testType": {
+          "description": "Determines if the winning message is sent to a remainder group or not.",
+          "type": "string"
+        },
+        "winnerMetric": {
+          "description": "Metric that is being used to evaluate a winner of the split test.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource[SplitTest]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/SplitTest",
+          "description": "Return data."
+        }
+      }
+    },
+    "Collection[SplitTestMessage]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SplitTestMessage"
+          }
+        }
+      }
+    },
+    "SplitTestMessage": {
+      "description": "A Split Test Message resource.",
+      "type": "object",
+      "properties": {
+        "messageId": {
+          "format": "int32",
+          "description": "Identifier used to locate the message.",
+          "type": "integer"
+        },
+        "messageStatus": {
+          "description": "Status displaying whether the message is scheduled, sending, sent, or not ready.",
+          "type": "string"
+        },
+        "messageType": {
+          "description": "Type displaying whether the message is a split test group message or a remainder message.",
+          "type": "string"
+        },
+        "groupName": {
+          "description": "The name of the split test group to which the message belongs.",
+          "type": "string"
+        },
+        "segmentSize": {
+          "format": "int32",
+          "description": "The percentage of recipients the message will be sent to. Will be null for remainder messages.",
+          "type": "integer"
+        }
+      }
+    },
+    "TransactionalMessageContact": {
+      "description": "A Transactional Message Contact resource.",
+      "required": [
+        "emailAddress"
+      ],
+      "type": "object",
+      "properties": {
+        "emailAddress": {
+          "description": "Email address of the contact.",
+          "type": "string"
+        },
+        "segmentationFieldValues": {
+          "description": "Profile field values associated with the contact. An empty set must be provided if there are none.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SegmentationFieldValue"
+          }
+        }
+      }
+    },
+    "Collection[TransactionalMessage]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "description": "Collection of return data from the given call.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransactionalMessage"
+          }
+        }
+      }
+    },
+    "TransactionalMessage": {
+      "description": "A Transactional Message resource.",
+      "required": [
+        "externalCampaignId",
+        "subject"
+      ],
+      "type": "object",
+      "properties": {
+        "transactionalMessageId": {
+          "format": "int32",
+          "description": "Identifier used to locate the transactional message.",
+          "type": "integer"
+        },
+        "transactionalMessageName": {
+          "description": "Name given to the transactional message.",
+          "type": "string"
+        },
+        "campaignId": {
+          "format": "int32",
+          "description": "Identifier of the campaign associated with the message.",
+          "type": "integer"
+        },
+        "externalCampaignId": {
+          "description": "Customer-provided identifier of the campaign associated with the message.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "Subject of the message.",
+          "type": "string"
+        }
+      }
+    },
+    "Resource[TransactionalMessage]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/TransactionalMessage",
+          "description": "Return data."
+        }
+      }
+    },
+    "CollectionPaged[TransactionalMessageActivity]": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "nextPageCursor": {
+          "description": "URI of the next page of data.",
+          "type": "string"
+        },
+        "data": {
+          "description": "Collection of data that exists on this paged view.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransactionalMessageActivity"
+          }
+        }
+      }
+    },
+    "TransactionalMessageActivity": {
+      "description": "A Message Activity resource.",
+      "type": "object",
+      "properties": {
+        "abuse": {
+          "description": "Whether the message was marked as abuse by the contact.",
+          "type": "boolean"
+        },
+        "activityDate": {
+          "format": "date-time",
+          "description": "Date of first activity by the contact.",
+          "type": "string"
+        },
+        "bounce": {
+          "description": "Whether the message bounced for the contact.",
+          "type": "boolean"
+        },
+        "bounceReason": {
+          "description": "Reason why the message bounced.",
+          "type": "string"
+        },
+        "click": {
+          "description": "Whether the message was clicked by the contact.",
+          "type": "boolean"
+        },
+        "clickCount": {
+          "format": "int32",
+          "description": "Number of clicks made by the contact.",
+          "type": "integer"
+        },
+        "emailAddress": {
+          "description": "Email address of the contact.",
+          "type": "string"
+        },
+        "open": {
+          "description": "Whether the message was opened by the contact.",
+          "type": "boolean"
+        },
+        "orderTotal": {
+          "format": "double",
+          "description": "Order total associated with the message for the contact.",
+          "type": "number"
+        },
+        "read": {
+          "description": "Whether the message was read by the contact.",
+          "type": "boolean"
+        },
+        "sendDate": {
+          "format": "date-time",
+          "description": "Send date of the message.",
+          "type": "string"
+        },
+        "unsubscribe": {
+          "description": "Whether the message caused an unsubscribe by the contact.",
+          "type": "boolean"
+        },
+        "visitDate": {
+          "format": "date-time",
+          "description": "DEPRECATED as of June 2020",
+          "type": "string"
+        },
+        "externalContactID": {
+          "description": "The external contact ID provided by a 3rd party",
+          "type": "string"
+        },
+        "resendKey": {
+          "description": "Key used to resend messages",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

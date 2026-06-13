@@ -1,0 +1,848 @@
+openapi: 3.0.1
+info:
+  title: App Push Mobile Client API
+  description: '# Introduction
+
+
+    Welcome to the Listrak Mobile Client <a href=''https://en.wikipedia.org/wiki/Representational_state_transfer''>REST
+    API!</a>
+
+
+    Our API allows developers to integrate their mobile application with Listrak.
+
+
+    We aim to provide comprehensive documentation coverage of our API''s capabilities.
+    Each resource and method is described in detail with implementation notes, descriptions
+    of parameters, headers, return values, and code samples to aid in development.
+
+
+    # Versioning
+
+
+    The API version will be incremented if breaking changes are introduced. Breaking
+    changes may include:
+
+
+    - Addition of required headers, parameters, or model fields to a current route
+
+    - Alterations that would result in currently valid requests failing, or performing
+    unexpectedly
+
+
+    Changes that are not considered breaking may include:
+
+
+    - Addition of new model fields
+
+    - Addition of new routes
+
+    - Addition of new response headers
+
+    - Any alteration to a route that is marked as <span class="inDev">In Development</span>
+
+
+    # Status Codes
+
+
+    | Status Code | Status | Description |
+
+    | --- | --- | --- |
+
+    | 201 | Created | A new resource has been created. |
+
+    | 202 | Accepted | The request has been accepted for further processing. |
+
+    | 204 | No Content | The request was processed successfully but there is no content
+    to send in the response. |
+
+    | 400 | Bad Request | Your request is malformed or invalid. |
+
+    | 403 | Forbidden | The request is not authorized. |
+
+    | 404 | Not Found | The resource does not exist. |
+
+    | 405 | Method Not Allowed | The route does not support the requested method.
+    |
+
+    | 409 | Conflict | The request cannot be processed because doing so would result
+    in conflicting resources. |
+
+    | 429 | Too Many Requests | The request rate limit has been exceeded. |
+
+    | 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`.
+    |
+
+    | 500 | Internal Server Error | An unexpected error occurred. Our development
+    team has been notified. |
+
+
+    # Parameters
+
+
+    ## Route Parameters
+
+
+    Resource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`,
+    `resourceId` is a route parameter. In this example, if you wish to interact with
+    Resource #123, its route would be `/Resource/123`.
+
+
+    ## Request Body
+
+
+    Please use a `Content-Type` of `application/json` and provide a JSON object in
+    your request body.
+
+
+    # Authentication
+
+
+    Authentication is accomplished using a Listrak provided API key, your API key
+    should be included in the ''x-api-key'' header in every request.'
+  termsOfService: http://integrations.listrak.com/api/customers/v1/terms
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: v1
+  x-logo:
+    url: https://api.listrak.com/Email/Resources/Images/Logo.png
+    altText: Listrak
+    href: https://www.listrak.com
+    backgroundColor: '#fafafa'
+servers:
+- url: https://api.listrak.com/mobileclient
+paths:
+  /device:
+    post:
+      tags:
+      - app-push-mobile-client-device
+      summary: Registers a device to receive push notifications
+      operationId: createAppPushDevice
+      requestBody:
+        description: App push device registration request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+        required: true
+      responses:
+        '404':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '201':
+          description: Returns one Device
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '429':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '400':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '500':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '403':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+  /device/{deviceUid}:
+    get:
+      tags:
+      - app-push-mobile-client-device
+      summary: Gets device information
+      operationId: getAppPushDevice
+      parameters:
+      - name: deviceUid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '404':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '200':
+          description: Returns one Device
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '429':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '400':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '500':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '403':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+    put:
+      tags:
+      - app-push-mobile-client-device
+      summary: Updates a device
+      operationId: updateAppPushDevice
+      parameters:
+      - name: deviceUid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: App push device request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+        required: true
+      responses:
+        '404':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '200':
+          description: Returns one Device
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '429':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '400':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '500':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '403':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+    patch:
+      tags:
+      - app-push-mobile-client-device
+      summary: Patches a device
+      operationId: patchAppPushDevice
+      parameters:
+      - name: deviceUid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: App push device patch request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DevicePatch'
+        required: true
+      responses:
+        '404':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '200':
+          description: Returns one Device
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '429':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '400':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '500':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '403':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+  /device/{deviceUid}/engagement:
+    post:
+      tags:
+      - app-push-mobile-client-engagements
+      summary: Creates a mobile device engagement event
+      operationId: createMobileDeviceEngagementEvent
+      parameters:
+      - name: deviceUid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Triggered mobile device engagement event
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EngagementEvent'
+        required: true
+      responses:
+        '404':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '429':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '202':
+          description: 202 response
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Accepted'
+        '400':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '500':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+        '403':
+          description: An error returned by the App Push APIs
+          headers:
+            X-Frame-Options:
+              schema:
+                type: string
+            Strict-Transport-Security:
+              schema:
+                type: string
+            X-Content-Type-Options:
+              schema:
+                type: string
+            Content-Security-Policy:
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MobileClientError'
+components:
+  schemas:
+    MobileClientError:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+    DevicePlatformType:
+      enum:
+      - Firebase
+      - APNs
+      type: string
+      description: The push notification platform used by the device
+    DevicePatch:
+      required:
+      - deviceUid
+      type: object
+      properties:
+        deviceUid:
+          type: string
+          format: uuid
+        deviceToken:
+          type: string
+          description: Identifying token for a mobile device
+        identifiers:
+          $ref: '#/components/schemas/Identifiers'
+        subscribed:
+          type: boolean
+          description: Identifying whether a mobile device is subscribed or unsubscribed
+        deviceOS:
+          $ref: '#/components/schemas/DeviceOS'
+        deviceOSVersion:
+          type: string
+          description: Identifies the version of the mobile device's OS
+        deviceType:
+          type: string
+          description: Identifies the physical device model
+        mobileAppVersion:
+          type: string
+          description: Identifies the version of the Mobile App
+      description: A Patch for a Mobile App Push Device
+    Device:
+      required:
+      - devicePlatformType
+      - deviceToken
+      - subscribed
+      type: object
+      properties:
+        deviceUid:
+          type: string
+          format: uuid
+        deviceToken:
+          type: string
+          description: Identifying token for a mobile device
+        devicePlatformType:
+          $ref: '#/components/schemas/DevicePlatformType'
+        identifiers:
+          $ref: '#/components/schemas/Identifiers'
+        subscribed:
+          type: boolean
+          description: Identifies whether a mobile device is subscribed or unsubscribed
+        deviceOS:
+          $ref: '#/components/schemas/DeviceOS'
+        deviceOSVersion:
+          type: string
+          description: Identifies the version of the mobile device's OS
+        deviceType:
+          type: string
+          description: Identifies the physical device model
+        mobileAppVersion:
+          type: string
+          description: Identifies the version of the Mobile App
+      description: A Mobile App Push Device
+    EngagementEvent:
+      required:
+      - sendUid
+      - type
+      type: object
+      properties:
+        sendUid:
+          type: string
+          format: uuid
+        type:
+          $ref: '#/components/schemas/EngagementEventType'
+      description: An engagement event that has happened on a mobile device
+    EngagementEventType:
+      enum:
+      - Tapped
+      - Dismissed
+      type: string
+      description: The type of engagement that occurred
+    Identifiers:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Identifying email for a device
+        phone:
+          type: string
+          description: Identifying phone number for a device
+      description: Identifiers that can associate a device with a contact
+    DeviceOS:
+      enum:
+      - Android
+      - iOS
+      - Other
+      type: string
+      description: The operating system used by the device
+    Accepted:
+      type: object
+      properties:
+        statusCode:
+          type: string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: x-api-key
+      in: header
+tags:
+- name: app-push-mobile-client-device
+  description: Endpoints to manage app push devices.
+- name: app-push-mobile-client-engagements
+  description: Endpoints to manage app push mobile client engagements.
+x-amazon-apigateway-security-policy: TLS_1_0
+x-amazon-apigateway-policy:
+  Version: '2012-10-17T00:00:00.0000000+00:00'
+  Statement:
+  - Effect: Allow
+    Principal: '*'
+    Action: execute-api:Invoke
+    Resource: arn:aws:execute-api:us-east-1:925048818831:evlm7h2qhg/*

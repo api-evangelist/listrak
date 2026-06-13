@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Listrak Mobileclient API Schemas",
+  "definitions": {
+    "MobileClientError": {
+      "type": "object",
+      "properties": {
+        "errorMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "DevicePlatformType": {
+      "enum": [
+        "Firebase",
+        "APNs"
+      ],
+      "type": "string",
+      "description": "The push notification platform used by the device"
+    },
+    "DevicePatch": {
+      "required": [
+        "deviceUid"
+      ],
+      "type": "object",
+      "properties": {
+        "deviceUid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "deviceToken": {
+          "type": "string",
+          "description": "Identifying token for a mobile device"
+        },
+        "identifiers": {
+          "$ref": "#/components/schemas/Identifiers"
+        },
+        "subscribed": {
+          "type": "boolean",
+          "description": "Identifying whether a mobile device is subscribed or unsubscribed"
+        },
+        "deviceOS": {
+          "$ref": "#/components/schemas/DeviceOS"
+        },
+        "deviceOSVersion": {
+          "type": "string",
+          "description": "Identifies the version of the mobile device's OS"
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "Identifies the physical device model"
+        },
+        "mobileAppVersion": {
+          "type": "string",
+          "description": "Identifies the version of the Mobile App"
+        }
+      },
+      "description": "A Patch for a Mobile App Push Device"
+    },
+    "Device": {
+      "required": [
+        "devicePlatformType",
+        "deviceToken",
+        "subscribed"
+      ],
+      "type": "object",
+      "properties": {
+        "deviceUid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "deviceToken": {
+          "type": "string",
+          "description": "Identifying token for a mobile device"
+        },
+        "devicePlatformType": {
+          "$ref": "#/components/schemas/DevicePlatformType"
+        },
+        "identifiers": {
+          "$ref": "#/components/schemas/Identifiers"
+        },
+        "subscribed": {
+          "type": "boolean",
+          "description": "Identifies whether a mobile device is subscribed or unsubscribed"
+        },
+        "deviceOS": {
+          "$ref": "#/components/schemas/DeviceOS"
+        },
+        "deviceOSVersion": {
+          "type": "string",
+          "description": "Identifies the version of the mobile device's OS"
+        },
+        "deviceType": {
+          "type": "string",
+          "description": "Identifies the physical device model"
+        },
+        "mobileAppVersion": {
+          "type": "string",
+          "description": "Identifies the version of the Mobile App"
+        }
+      },
+      "description": "A Mobile App Push Device"
+    },
+    "EngagementEvent": {
+      "required": [
+        "sendUid",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "sendUid": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "$ref": "#/components/schemas/EngagementEventType"
+        }
+      },
+      "description": "An engagement event that has happened on a mobile device"
+    },
+    "EngagementEventType": {
+      "enum": [
+        "Tapped",
+        "Dismissed"
+      ],
+      "type": "string",
+      "description": "The type of engagement that occurred"
+    },
+    "Identifiers": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Identifying email for a device"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Identifying phone number for a device"
+        }
+      },
+      "description": "Identifiers that can associate a device with a contact"
+    },
+    "DeviceOS": {
+      "enum": [
+        "Android",
+        "iOS",
+        "Other"
+      ],
+      "type": "string",
+      "description": "The operating system used by the device"
+    },
+    "Accepted": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

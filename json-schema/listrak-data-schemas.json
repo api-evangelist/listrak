@@ -1,0 +1,1356 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Listrak Data API Schemas",
+  "definitions": {
+    "Customer": {
+      "description": "Customer for the order - DEPRECATED - Please use the BillingAddress and/or ShippingAddress fields instead.",
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/Address",
+          "description": "Address of customer"
+        },
+        "birthday": {
+          "format": "date-time",
+          "description": "Customer birthdate",
+          "type": "string"
+        },
+        "customerNumber": {
+          "description": "Internal customer number",
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string"
+        },
+        "email": {
+          "description": "Email address of customer. This property is required for accounts that are not CRM enabled.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "firstName": {
+          "description": "First name",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "gender": {
+          "description": "Gender of customer (M/F, Male/Female)",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "homePhone": {
+          "description": "Landline phone number",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "loyalty": {
+          "$ref": "#/definitions/Loyalty",
+          "description": "Loyalty data"
+        },
+        "meta1": {
+          "description": "Additional meta information",
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta2": {
+          "description": "Additional meta information",
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta3": {
+          "description": "Additional meta information",
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta4": {
+          "description": "Additional meta information",
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta5": {
+          "description": "Additional meta information",
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "mobilePhone": {
+          "description": "Mobile phone number",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "preferredStoreNumber": {
+          "description": "Preferred brick and mortar store location",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "registered": {
+          "description": "Indicates the customer registration state",
+          "type": "boolean"
+        },
+        "social": {
+          "$ref": "#/definitions/Social",
+          "description": "Social data"
+        },
+        "workPhone": {
+          "description": "Work phone number",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "zipCode": {
+          "description": "Customer ZIP Code",
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "Address": {
+      "description": "Address of customer",
+      "type": "object",
+      "properties": {
+        "address1": {
+          "description": "Home address line 1",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "address2": {
+          "description": "Home address line 2",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "address3": {
+          "description": "Home address line 3",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "city": {
+          "description": "Home address city",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "country": {
+          "description": "Home address country",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "state": {
+          "description": "Home address state",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "Loyalty": {
+      "description": "Loyalty data for a Customer (This data will only be imported into Listrak if there is an active loyalty integration setup for your account.)",
+      "type": "object",
+      "properties": {
+        "activeLoyaltyMember": {
+          "description": "Whether customer is an active loyalty member",
+          "type": "boolean"
+        },
+        "availablePoints": {
+          "format": "int32",
+          "description": "Available points",
+          "type": "integer"
+        },
+        "currentTierLevel": {
+          "description": "Current tier level",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "enrollDate": {
+          "format": "date-time",
+          "description": "Enrollment date/time",
+          "type": "string"
+        },
+        "expiringPoints": {
+          "format": "int32",
+          "description": "Expiring points",
+          "type": "integer"
+        },
+        "lastActivityDate": {
+          "format": "date-time",
+          "description": "Last activity date",
+          "type": "string"
+        },
+        "lastPointEarnedDate": {
+          "format": "date-time",
+          "description": "Last date points were earned",
+          "type": "string"
+        },
+        "lastPointRedemptionDate": {
+          "format": "date-time",
+          "description": "Last date points were redeemed",
+          "type": "string"
+        },
+        "lifetimePoints": {
+          "format": "int32",
+          "description": "Lifetime points",
+          "type": "integer"
+        },
+        "loyaltySignUpSource": {
+          "description": "Sign-up source",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "monthlyPoints": {
+          "format": "int32",
+          "description": "Monthly points",
+          "type": "integer"
+        },
+        "nextTierLevel": {
+          "description": "Next tier level",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "numberOfReferrals": {
+          "format": "int32",
+          "description": "Number of referrals",
+          "type": "integer"
+        },
+        "pendingPoints": {
+          "format": "int32",
+          "description": "Pending points",
+          "type": "integer"
+        },
+        "personOfReferred": {
+          "description": "Referrer of this customer",
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "pointExpirationDate": {
+          "format": "date-time",
+          "description": "Points expiration date",
+          "type": "string"
+        },
+        "pointsToNext": {
+          "format": "int32",
+          "description": "Points to next milestone",
+          "type": "integer"
+        },
+        "referralCode": {
+          "description": "Referral code",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "referralUrl": {
+          "description": "Referral URL",
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "rewardsAvailable": {
+          "description": "Rewards available",
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "rewardsClaimed": {
+          "description": "Rewards claimed",
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "rewardsID": {
+          "description": "Rewards ID",
+          "maxLength": 250,
+          "minLength": 0,
+          "type": "string"
+        },
+        "spentPoints": {
+          "format": "int32",
+          "description": "Spent points",
+          "type": "integer"
+        },
+        "tierID": {
+          "description": "Tier ID",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "weeklyPoints": {
+          "format": "int32",
+          "description": "Weekly points",
+          "type": "integer"
+        }
+      }
+    },
+    "Social": {
+      "description": "Social data for a Customer",
+      "type": "object",
+      "properties": {
+        "facebookID": {
+          "description": "Facebook ID",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "facebookNumberOfFriends": {
+          "format": "int32",
+          "description": "Number of Facebook friends",
+          "type": "integer"
+        },
+        "instagramID": {
+          "description": "Instagram ID",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "instagramNumberOfFollowers": {
+          "format": "int32",
+          "description": "Number of Instagram followers",
+          "type": "integer"
+        },
+        "twitterID": {
+          "description": "Twitter ID",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "twitterNumberOfFollowers": {
+          "format": "int32",
+          "description": "Number of Twitter followers",
+          "type": "integer"
+        }
+      }
+    },
+    "ResourceCreated": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "resourceId": {
+          "description": "An identifier used to locate a resource.",
+          "type": "string"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "format": "int32",
+          "description": "HTTP status code.",
+          "type": "integer"
+        },
+        "error": {
+          "description": "Error code indicating what error has occured.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Message describing the status and the error that occurred.",
+          "type": "string"
+        }
+      }
+    },
+    "Order": {
+      "description": "An order resource",
+      "required": [
+        "orderNumber"
+      ],
+      "type": "object",
+      "properties": {
+        "associateID": {
+          "description": "Associate ID of order",
+          "type": "string"
+        },
+        "billingAddress": {
+          "$ref": "#/definitions/BillingAddress",
+          "description": "Billing address of order"
+        },
+        "couponCode": {
+          "description": "Coupon code used with order",
+          "maxLength": 32,
+          "minLength": 0,
+          "type": "string"
+        },
+        "customer": {
+          "$ref": "#/definitions/Customer",
+          "description": "Customer of order"
+        },
+        "customerNumber": {
+          "description": "Internal customer number",
+          "maxLength": 20,
+          "minLength": 0,
+          "type": "string"
+        },
+        "dateEntered": {
+          "format": "date-time",
+          "description": "Timestamp of order date (ET)",
+          "type": "string"
+        },
+        "discountTotal": {
+          "format": "double",
+          "description": "DEPRECATED as of March 2022",
+          "type": "number"
+        },
+        "email": {
+          "description": "Email address of customer. This property is required for accounts that are not CRM enabled.",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "handlingTotal": {
+          "format": "double",
+          "description": "Total handling costs",
+          "type": "number"
+        },
+        "items": {
+          "description": "Order items",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OrderItem"
+          }
+        },
+        "itemTotal": {
+          "format": "double",
+          "description": "Total cost of items ordered (subtotal)",
+          "type": "number"
+        },
+        "merchandiseDiscount": {
+          "format": "double",
+          "description": "Discount applied to the merchandise of the order",
+          "type": "number"
+        },
+        "merchandiseDiscountDescription": {
+          "description": "Description of the discount applied to the merchandise of the order",
+          "type": "string"
+        },
+        "merchandiseDiscountType": {
+          "description": "Type of discount applied to the merchandise of the order",
+          "enum": [
+            "NotSet",
+            "PriceOverride",
+            "PriceRule",
+            "Promotion",
+            "SeniorCitizen",
+            "Markdown",
+            "Coupon",
+            "QuantityDiscount",
+            "Rebate",
+            "CashDiscount",
+            "TradeDiscount",
+            "TradeInKind",
+            "PromptPaymentDiscount",
+            "GeneralDiscount",
+            "GiftVoucher",
+            "FlexibleDiscount",
+            "RewardProgram",
+            "ManufacturerReward",
+            "CreditCardReward"
+          ],
+          "type": "string"
+        },
+        "meta1": {
+          "description": "Additional meta information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta2": {
+          "description": "Additional meta information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta3": {
+          "description": "Additional meta information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta4": {
+          "description": "Additional meta information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta5": {
+          "description": "Additional meta information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "nonMerchandiseDiscount": {
+          "format": "double",
+          "description": "Discounts applied to the order that is not related to the merchandise",
+          "type": "number"
+        },
+        "nonMerchandiseDiscountDescription": {
+          "description": "Description of the discount applied to the order not related to the merchandise",
+          "type": "string"
+        },
+        "nonMerchandiseDiscountType": {
+          "description": "Type of discount applied to the order not related to the merchandise",
+          "enum": [
+            "NotSet",
+            "PriceOverride",
+            "PriceRule",
+            "Promotion",
+            "SeniorCitizen",
+            "Markdown",
+            "Coupon",
+            "QuantityDiscount",
+            "Rebate",
+            "CashDiscount",
+            "TradeDiscount",
+            "TradeInKind",
+            "PromptPaymentDiscount",
+            "GeneralDiscount",
+            "GiftVoucher",
+            "FlexibleDiscount",
+            "RewardProgram",
+            "ManufacturerReward",
+            "CreditCardReward"
+          ],
+          "type": "string"
+        },
+        "orderNumber": {
+          "description": "Unique order number",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "orderTotal": {
+          "format": "double",
+          "description": "Total value of order",
+          "type": "number"
+        },
+        "shipDate": {
+          "format": "date-time",
+          "description": "Timestamp when entire order shipped (ET)",
+          "type": "string"
+        },
+        "shippingAddress": {
+          "$ref": "#/definitions/ShippingAddress",
+          "description": "Shipping address of order"
+        },
+        "shippingMethod": {
+          "description": "Shipping method (e.g. UPS Ground)",
+          "maxLength": 32,
+          "minLength": 0,
+          "type": "string"
+        },
+        "shippingTotal": {
+          "format": "double",
+          "description": "Total shipping costs",
+          "type": "number"
+        },
+        "source": {
+          "description": "Describes the source at which the order was placed (online, POS, etc.)",
+          "maxLength": 25,
+          "minLength": 0,
+          "type": "string"
+        },
+        "status": {
+          "description": "Status indicator",
+          "enum": [
+            "NotSet",
+            "Misc",
+            "PreOrder",
+            "BackOrder",
+            "Pending",
+            "Hold",
+            "Processing",
+            "Shipped",
+            "Completed",
+            "Returned",
+            "Canceled",
+            "Unknown",
+            "Closed"
+          ],
+          "type": "string"
+        },
+        "storeNumber": {
+          "description": "Brick and mortar store location",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "taxTotal": {
+          "format": "double",
+          "description": "Total sales tax charged",
+          "type": "number"
+        },
+        "trackingNumber": {
+          "description": "Shipment tracking number",
+          "maxLength": 32,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "BillingAddress": {
+      "description": "Billing address of order",
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "description": "First name",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name",
+          "type": "string"
+        },
+        "mobilePhone": {
+          "description": "Mobile phone number",
+          "type": "string"
+        },
+        "phone": {
+          "description": "Phone number",
+          "type": "string"
+        },
+        "zipCode": {
+          "description": "Home address ZIP Code",
+          "type": "string"
+        },
+        "address1": {
+          "description": "Home address line 1",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "address2": {
+          "description": "Home address line 2",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "address3": {
+          "description": "Home address line 3",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "city": {
+          "description": "Home address city",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "country": {
+          "description": "Home address country",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "state": {
+          "description": "Home address state",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "OrderItem": {
+      "description": "An order resource",
+      "required": [
+        "orderNumber",
+        "sku"
+      ],
+      "type": "object",
+      "properties": {
+        "discountDescription": {
+          "description": "Description of the discount for the line item",
+          "type": "string"
+        },
+        "discountType": {
+          "description": "Type of discount for the line item",
+          "enum": [
+            "NotSet",
+            "PriceOverride",
+            "PriceRule",
+            "Promotion",
+            "SeniorCitizen",
+            "Markdown",
+            "Coupon",
+            "QuantityDiscount",
+            "Rebate",
+            "CashDiscount",
+            "TradeDiscount",
+            "TradeInKind",
+            "PromptPaymentDiscount",
+            "GeneralDiscount",
+            "GiftVoucher",
+            "FlexibleDiscount",
+            "RewardProgram",
+            "ManufacturerReward",
+            "CreditCardReward"
+          ],
+          "type": "string"
+        },
+        "discountedPrice": {
+          "format": "double",
+          "description": "Total discounted cost of product",
+          "type": "number"
+        },
+        "itemTotal": {
+          "format": "double",
+          "description": "Total line item cost (quantity times price)",
+          "type": "number"
+        },
+        "itemDiscountTotal": {
+          "format": "double",
+          "description": "Total amount of the discount for the line item",
+          "type": "number"
+        },
+        "meta1": {
+          "description": "Additional Optional Information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta2": {
+          "description": "Additional Optional Information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta3": {
+          "description": "Additional Optional Information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta4": {
+          "description": "Additional Optional Information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta5": {
+          "description": "Additional Optional Information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "orderNumber": {
+          "description": "Order number",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "price": {
+          "format": "double",
+          "description": "Price of one unit purchased",
+          "type": "number"
+        },
+        "quantity": {
+          "format": "int32",
+          "description": "Total number of units purchased",
+          "type": "integer"
+        },
+        "shipDate": {
+          "format": "date-time",
+          "description": "Timestamp when item shipped (ET)",
+          "type": "string"
+        },
+        "shippingMethod": {
+          "description": "Shipping method (e.g. UPS Ground)",
+          "maxLength": 32,
+          "minLength": 0,
+          "type": "string"
+        },
+        "sku": {
+          "description": "Unique stock number of product",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "status": {
+          "description": "Status indicator",
+          "enum": [
+            "NotSet",
+            "Misc",
+            "PreOrder",
+            "BackOrder",
+            "Pending",
+            "Hold",
+            "Processing",
+            "Shipped",
+            "Completed",
+            "Returned",
+            "Canceled",
+            "Unknown",
+            "Closed"
+          ],
+          "type": "string"
+        },
+        "trackingNumber": {
+          "description": "Shipment tracking number",
+          "maxLength": 32,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "ShippingAddress": {
+      "description": "Shipping address of order",
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "description": "First name",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "phone": {
+          "description": "Phone number",
+          "type": "string"
+        },
+        "zipCode": {
+          "description": "Home address ZIP Code",
+          "type": "string"
+        },
+        "address1": {
+          "description": "Home address line 1",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "address2": {
+          "description": "Home address line 2",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "address3": {
+          "description": "Home address line 3",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "city": {
+          "description": "Home address city",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "country": {
+          "description": "Home address country",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "state": {
+          "description": "Home address state",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "Product": {
+      "description": "A product resource",
+      "required": [
+        "sku"
+      ],
+      "type": "object",
+      "properties": {
+        "alternateImagesType1": {
+          "description": "Alternate product images",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlternateImage"
+          }
+        },
+        "alternateImagesType2": {
+          "description": "Alternate product images",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlternateImage"
+          }
+        },
+        "alternateImagesType3": {
+          "description": "Alternate product images",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlternateImage"
+          }
+        },
+        "brand": {
+          "description": "Brand name of product",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "category": {
+          "description": "Category or department",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "color": {
+          "description": "Color of product (e.g. green, paisley, etc.)",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of product",
+          "maxLength": 4000,
+          "minLength": 0,
+          "type": "string"
+        },
+        "discontinued": {
+          "description": "Explicit indicator that the item has been discontinued",
+          "type": "boolean"
+        },
+        "gender": {
+          "description": "Gender of product (if applicable)",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "imageUrl": {
+          "description": "URL for product image",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "inStock": {
+          "description": "Explicit indicator that the item is in stock",
+          "type": "boolean"
+        },
+        "isClearance": {
+          "description": "Explicit indicator that the item is a clearance item",
+          "type": "boolean"
+        },
+        "isOutlet": {
+          "description": "Explicit indicator that the item is an outlet item",
+          "type": "boolean"
+        },
+        "isPurchasable": {
+          "description": "Explicit indicator that the item can be included in recommendations",
+          "type": "boolean"
+        },
+        "isViewable": {
+          "description": "Flag used in some systems to determine if the item should be included in recommendations",
+          "type": "boolean"
+        },
+        "linkUrl": {
+          "description": "URL for product webpage",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "masterSku": {
+          "description": "Unique stock number of the master product",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta1": {
+          "description": "Additional meta information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta2": {
+          "description": "Additional meta information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta3": {
+          "description": "Additional meta information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta4": {
+          "description": "Additional meta information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "meta5": {
+          "description": "Additional meta information",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "msrp": {
+          "format": "double",
+          "description": "Retail price of the product",
+          "type": "number"
+        },
+        "onSale": {
+          "description": "Explicit indicator that the item is on sale",
+          "type": "boolean"
+        },
+        "price": {
+          "format": "double",
+          "description": "List price of product",
+          "type": "number"
+        },
+        "qoh": {
+          "format": "int32",
+          "description": "Quantity on hand",
+          "type": "integer"
+        },
+        "relatedProducts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelatedProduct"
+          }
+        },
+        "reviewProductID": {
+          "description": "Unique identifier used by 3rd-party reviews provider",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "reviewURL": {
+          "description": "URL for review webpage",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "saleEndDate": {
+          "format": "date-time",
+          "description": "End date time of sale",
+          "type": "string"
+        },
+        "salePrice": {
+          "format": "double",
+          "description": "Sale price of product",
+          "type": "number"
+        },
+        "saleStartDate": {
+          "format": "date-time",
+          "description": "Start date time of sale",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size of product (e.g. small, M, 6 7/8\u201d)",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "sku": {
+          "description": "Unique stock number of product",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "style": {
+          "description": "Style of product",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "subCategory": {
+          "description": "Sub-category or sub-department",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "title": {
+          "description": "Product name",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "unitCost": {
+          "format": "double",
+          "description": "Price per individual item",
+          "type": "number"
+        },
+        "tags": {
+          "description": "Comma separated list of tags",
+          "type": "string"
+        }
+      }
+    },
+    "AlternateImage": {
+      "description": "Alternate product image",
+      "type": "object",
+      "properties": {
+        "rank": {
+          "format": "int32",
+          "description": "Rank for alternate product image",
+          "type": "integer"
+        },
+        "url": {
+          "description": "URL for alternate product image",
+          "type": "string"
+        }
+      }
+    },
+    "RelatedProduct": {
+      "description": "Related products",
+      "type": "object",
+      "properties": {
+        "rank": {
+          "format": "int32",
+          "description": "Rank of related product",
+          "type": "integer"
+        },
+        "sku": {
+          "description": "Unique stock number of related product",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of related product",
+          "type": "string"
+        }
+      }
+    },
+    "RatingSummary": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Provider name",
+          "type": "string"
+        },
+        "providerProductID": {
+          "description": "Unique identifier used to identify the product being rated",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "ratingSummaries": {
+          "description": "Collection of rating summaries",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RatingSummaryField"
+          }
+        }
+      }
+    },
+    "RatingSummaryField": {
+      "required": [
+        "providerRatingSummaryID",
+        "rating"
+      ],
+      "type": "object",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "description": "Rating summary count",
+          "type": "integer"
+        },
+        "deleted": {
+          "description": "Indicates if the rating summary has been deleted",
+          "type": "boolean"
+        },
+        "displayType": {
+          "description": "Rating summary display type",
+          "type": "string"
+        },
+        "providerRatingSummaryID": {
+          "description": "Rating summary identifier used by review provider",
+          "type": "string"
+        },
+        "rating": {
+          "format": "double",
+          "description": "Rating summary value",
+          "type": "number"
+        },
+        "ratingMax": {
+          "format": "double",
+          "description": "Maximum value for rating summary",
+          "type": "number"
+        },
+        "ratingMin": {
+          "format": "double",
+          "description": "Minimum value for rating summary",
+          "type": "number"
+        },
+        "type": {
+          "description": "Rating summary type",
+          "type": "string"
+        }
+      }
+    },
+    "Review": {
+      "required": [
+        "featured",
+        "provider",
+        "providerProductID",
+        "providerReviewID",
+        "recommended",
+        "title"
+      ],
+      "type": "object",
+      "properties": {
+        "deleted": {
+          "description": "Indicates if the review has been deleted",
+          "type": "boolean"
+        },
+        "featured": {
+          "description": "Indicates if the review is featured",
+          "type": "boolean"
+        },
+        "feedbackCount": {
+          "format": "int32",
+          "description": "Number of feedback entries",
+          "type": "integer"
+        },
+        "feedbackNegativeCount": {
+          "format": "int32",
+          "description": "Number of negative feedback entries",
+          "type": "integer"
+        },
+        "feedbackPositiveCount": {
+          "format": "int32",
+          "description": "Number of positive feedback entries",
+          "type": "integer"
+        },
+        "provider": {
+          "description": "Review provider",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "providerProductID": {
+          "description": "Product identifier used by review provider",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "providerReviewID": {
+          "description": "Review identifier used by review",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "ratings": {
+          "description": "Review ratings",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rating"
+          }
+        },
+        "recommended": {
+          "description": "Indicates if the review is recommended",
+          "type": "boolean"
+        },
+        "reviewerEmail": {
+          "description": "Email address of reviewer",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "reviewerLocation": {
+          "description": "Location of reviewer",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "reviewerName": {
+          "description": "Name of reviewer",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "reviewSubmitted": {
+          "format": "date-time",
+          "description": "When review was submitted",
+          "type": "string"
+        },
+        "reviewUpdated": {
+          "format": "date-time",
+          "description": "When review was last updated",
+          "type": "string"
+        },
+        "text": {
+          "description": "Content of review",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of review",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "Rating": {
+      "required": [
+        "displayType",
+        "providerRatingID",
+        "ratingMax",
+        "ratingMin",
+        "ratingValue",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "deleted": {
+          "description": "Indicates if the review has been deleted",
+          "type": "boolean"
+        },
+        "displayType": {
+          "description": "Rating display type",
+          "maxLength": 50,
+          "minLength": 0,
+          "type": "string"
+        },
+        "providerRatingID": {
+          "description": "Rating identifier used by review provider",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        },
+        "ratingMax": {
+          "format": "double",
+          "description": "Maximum value for ratings",
+          "type": "number"
+        },
+        "ratingMin": {
+          "format": "double",
+          "description": "Minimum value for ratings",
+          "type": "number"
+        },
+        "ratingValue": {
+          "format": "double",
+          "description": "Rating value",
+          "type": "number"
+        },
+        "type": {
+          "description": "Rating type",
+          "maxLength": 100,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    }
+  }
+}

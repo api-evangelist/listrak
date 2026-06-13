@@ -1,0 +1,223 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Listrak Crosschannel API Schemas",
+  "definitions": {
+    "ResponseMetaData": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "description": "Response Status Code",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string",
+          "description": "Explanation for the code"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Error"
+          }
+        }
+      }
+    },
+    "CustomEventConfigurationListResponse": {
+      "title": "CustomEventConfigurationListResponse",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CustomEventConfiguration"
+          }
+        },
+        "meta": {
+          "$ref": "#/components/schemas/ResponseMetaData"
+        }
+      }
+    },
+    "Identifier": {
+      "type": "object",
+      "properties": {
+        "identifierValue": {
+          "type": "string",
+          "description": "The value for the identifier."
+        },
+        "identifierType": {
+          "enum": [
+            "EmailAddress",
+            "PhoneNumber",
+            "MobileContactUid"
+          ],
+          "type": "string",
+          "description": "The type of identifier, e.g. an email address."
+        }
+      },
+      "description": "The identifier information that can be used to contact the person associated with this event."
+    },
+    "CustomEventDetailResponse": {
+      "title": "CustomEventDetailResponse",
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/components/schemas/CustomEventDetail"
+        },
+        "meta": {
+          "$ref": "#/components/schemas/ResponseMetaData"
+        }
+      }
+    },
+    "EventList": {
+      "type": "object",
+      "properties": {
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Event"
+          },
+          "description": "The list of events."
+        }
+      }
+    },
+    "RecipientDetailResponse": {
+      "type": "object",
+      "properties": {
+        "identifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "description": "All recipient identifiers that received this included status code"
+        },
+        "statusCode": {
+          "type": "integer",
+          "description": "Response Status Code for the recipients in this JSON object",
+          "format": "int32"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/RecipientDetailResponseError"
+          },
+          "description": "Errors, if any, that occured to cause a non-200 series status code"
+        }
+      }
+    },
+    "CustomEventPostResponse": {
+      "title": "CustomEventPostResponse",
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/RecipientDetailResponse"
+          }
+        },
+        "meta": {
+          "$ref": "#/components/schemas/ResponseMetaData"
+        }
+      }
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "identifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/Identifier"
+          },
+          "description": "A list of identifiers for the person associated with this event. One or more must be included. Please note that consuming services may not be able to act on all identifiers of the same type on an event (e.g. multiple email addresses on a single event) - please consider this when creating events."
+        },
+        "dataFields": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "An object containing keys and values for user-defined data. This data should match the fields defined when creating the Custom Event Schema defined through your Cross Channel Integration. While the values may be passed as strings, it should be possible to parse these values into their defined types. Omitted values will not cause errors, but will lead to gaps in the available data for personalization. Additional fields beyond those defined in the schema will be discarded."
+        }
+      },
+      "description": "Custom Events Configuration"
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "userMessage": {
+          "type": "string"
+        },
+        "internalMessage": {
+          "type": "string",
+          "description": "Internal Message"
+        }
+      }
+    },
+    "CustomEventConfiguration": {
+      "type": "object",
+      "properties": {
+        "eventUID": {
+          "type": "string",
+          "description": "Event UID",
+          "format": "uuid"
+        },
+        "eventName": {
+          "type": "string",
+          "description": "Event Name"
+        }
+      },
+      "description": "Custom Events Configuration"
+    },
+    "RecipientDetailResponseError": {
+      "type": "object",
+      "properties": {
+        "errorType": {
+          "type": "string",
+          "description": "The type of error",
+          "format": "string"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message",
+          "format": "string"
+        }
+      }
+    },
+    "CustomEventDetail": {
+      "type": "object",
+      "properties": {
+        "eventUID": {
+          "type": "string",
+          "description": "Event UID",
+          "format": "uuid"
+        },
+        "eventName": {
+          "type": "string",
+          "description": "Event Name"
+        },
+        "eventSchemaAttrs": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "String",
+              "Int",
+              "Double",
+              "Date"
+            ],
+            "type": "string"
+          },
+          "description": "Key value pairs with the key as the name of the schema property and the value as its type (String, Int, Double, Date)."
+        },
+        "featureAccess": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "Workflow"
+            ],
+            "type": "string"
+          },
+          "description": "Array of values to determine which features have access to this event."
+        }
+      },
+      "description": "Custom Events Schema"
+    }
+  }
+}
