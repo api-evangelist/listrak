@@ -2,7 +2,7 @@ aid: listrak
 name: Listrak
 description: Retail digital marketing platform with a REST API for managing email and SMS campaigns, subscriber data, behavioral triggers, and cross-channel marketing automation
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/listrak/refs/heads/main/apis.yml
 created: 2026-06-13
 modified: 2026-06-13
@@ -20,7 +20,7 @@ apis:
   - aid: listrak:email
     name: Listrak Email REST API
     description: Manage contacts, opt-in status, and contact profiles; execute email campaigns including marketing and transactional messages; and retrieve performance metrics for email programs.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://api.listrak.com/email
     baseURL: https://api.listrak.com
     tags:
@@ -38,7 +38,7 @@ apis:
   - aid: listrak:sms
     name: Listrak SMS REST API
     description: Handle SMS subscriber and list management, short code management, and send transactional SMS messages to mobile subscribers.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://api.listrak.com/sms
     baseURL: https://api.listrak.com
     tags:
@@ -56,7 +56,7 @@ apis:
   - aid: listrak:crosschannel
     name: Listrak Cross Channel REST API
     description: Integrate with cross-channel marketing features including management of custom events to trigger Journey Hub automations across email, SMS, push, and web channels.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://api.listrak.com/crosschannel/v1/docs
     baseURL: https://api.listrak.com/crosschannel/v1
     tags:
@@ -74,7 +74,7 @@ apis:
   - aid: listrak:data
     name: Listrak Data Import REST API
     description: Import retail-specific data including customers, orders, products, and reviews as a programmatic alternative to FTP-based data ingestion.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://api.listrak.com/data
     baseURL: https://api.listrak.com
     tags:
@@ -93,7 +93,7 @@ apis:
   - aid: listrak:twowaysms
     name: Listrak Two-Way SMS Conversation REST API
     description: Enable real-time two-way SMS customer support integrations by exchanging conversation and support ticket information with customer service platforms.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://api.listrak.com/twowaysms/docs
     baseURL: https://api.listrak.com
     tags:
@@ -111,7 +111,7 @@ apis:
   - aid: listrak:mobileclient
     name: Listrak Mobile App Push API
     description: Send push notifications to mobile devices via native app integration; manage device registration and track app engagement for mobile marketing programs.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://api.listrak.com/mobileclient/docs
     baseURL: https://api.listrak.com
     tags:
@@ -128,7 +128,7 @@ apis:
   - aid: listrak:privacy
     name: Listrak Privacy REST API
     description: Manage data privacy and compliance requests including contact data removal to support CCPA and GDPR regulatory requirements.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://api.listrak.com/privacy
     baseURL: https://api.listrak.com
     tags:
