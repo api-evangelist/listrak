@@ -168,7 +168,7 @@ common:
     url: finops/listrak-finops.yml
   - type: Vocabulary
     url: vocabulary/listrak-vocabulary.yml
-  - type: JsonLdContext
+  - type: JSONLDContext
     url: json-ld/listrak-context.jsonld
 maintainers:
   - FN: Kin Lane
