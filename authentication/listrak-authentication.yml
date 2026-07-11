@@ -1,0 +1,38 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/listrak-crosschannel-openapi.yml, openapi/listrak-data-openapi.yml, openapi/listrak-email-openapi.yml,
+  openapi/listrak-mobileclient-openapi.yml, openapi/listrak-privacy-openapi.yml, openapi/listrak-sms-openapi.yml,
+  openapi/listrak-twowaysms-openapi.yml
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: Authorizer
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/listrak-crosschannel-openapi.yml
+  - openapi/listrak-twowaysms-openapi.yml
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.listrak.com/OAuth2/Token
+    scopes: 0
+  sources:
+  - openapi/listrak-data-openapi.yml
+  - openapi/listrak-email-openapi.yml
+  - openapi/listrak-privacy-openapi.yml
+  - openapi/listrak-sms-openapi.yml
+- name: api_key
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  sources:
+  - openapi/listrak-mobileclient-openapi.yml
