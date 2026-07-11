@@ -144,6 +144,8 @@ apis:
       - type: OpenAPI
         url: openapi/listrak-privacy-openapi.yml
 common:
+  - type: OAuthScopes
+    url: scopes/listrak-scopes.yml
   - type: Website
     url: https://www.listrak.com/
   - type: Documentation

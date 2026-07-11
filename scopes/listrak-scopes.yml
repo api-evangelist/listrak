@@ -1,0 +1,62 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/listrak-data-openapi.yml, openapi/listrak-email-openapi.yml, openapi/listrak-privacy-openapi.yml,
+  openapi/listrak-sms-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/listrak-data-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.listrak.com/OAuth2/Token
+- name: OAuth2
+  source: openapi/listrak-email-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.listrak.com/OAuth2/Token
+- name: OAuth2
+  source: openapi/listrak-privacy-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.listrak.com/OAuth2/Token
+- name: OAuth2
+  source: openapi/listrak-sms-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://auth.listrak.com/OAuth2/Token
+scopes:
+- scope: Contact
+  description: Contact access
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/listrak-email-openapi.yml
+- scope: Event
+  description: Event access
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/listrak-email-openapi.yml
+- scope: List
+  description: List access
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/listrak-email-openapi.yml
+- scope: Message
+  description: Message access
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/listrak-email-openapi.yml
+- scope: Report
+  description: Report access
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/listrak-email-openapi.yml
+- scope: Segmentation
+  description: Segmentation access
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/listrak-email-openapi.yml
