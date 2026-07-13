@@ -2,13 +2,14 @@
   "repo": "listrak",
   "feeds": [
     {
-      "source": "https://www.listrak.com/learn/blog",
-      "feed_url": "",
+      "source": "https://www.linkedin.com/company/listrak/",
+      "feed_url": "https://www.linkedin.com/company/listrak/",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape"
+      "method": "none"
     }
   ],
-  "fetched": "2026-06-27T12:51:50Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 1,
   "agent_pulled": "2026-06-27"
 }
