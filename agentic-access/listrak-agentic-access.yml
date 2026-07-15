@@ -1,0 +1,1800 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/listrak-crosschannel-openapi.yml, openapi/listrak-data-openapi.yml, openapi/listrak-email-openapi.yml,
+  openapi/listrak-mobileclient-openapi.yml, openapi/listrak-privacy-openapi.yml, openapi/listrak-sms-openapi.yml,
+  openapi/listrak-twowaysms-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 121
+  by_action_class:
+    acting: 51
+    connected: 70
+  by_consequence:
+    write: 38
+    read: 70
+    physical: 13
+  human_in_the_loop_required: 0
+operations:
+- path: /eventConfigurations/{eventUID}/events
+  method: post
+  operationId: postEvents
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /eventConfigurations
+  method: get
+  operationId: getEventConfigurations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /eventConfigurations/{eventUID}
+  method: get
+  operationId: getSchemaByEventUid
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/Customer
+  method: post
+  operationId: Customer_PostCustomerCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Customer
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Order
+  method: post
+  operationId: Order_PostOrderCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - Order
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Product
+  method: post
+  operationId: Product_PostProductCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Product
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/RatingSummary
+  method: post
+  operationId: RatingSummary_PostRatingSummaryCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Review
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Review
+  method: post
+  operationId: Review_PostReviewCollection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Review
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/Campaign
+  method: get
+  operationId: Campaign_GetCampaignCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Campaign
+  method: post
+  operationId: Campaign_PostCampaignResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Message
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/Campaign/{campaignId}
+  method: get
+  operationId: Campaign_GetCampaignResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Campaign/{campaignId}
+  method: put
+  operationId: Campaign_PutCampaignResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Message
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/Campaign/{campaignId}
+  method: delete
+  operationId: Campaign_DeleteCampaignResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Message
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/Contact
+  method: get
+  operationId: Contact_GetContactCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Contact
+  method: post
+  operationId: Contact_PostContactResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/Contact/{contactIdentifier}
+  method: get
+  operationId: Contact_GetContactResourceByIdentifier
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Contact/SegmentationField
+  method: post
+  operationId: ContactSegmentationField_PostContactSegmentationFieldValuesResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Content
+  method: get
+  operationId: Content_GetContentCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/Content
+  method: post
+  operationId: Content_PostCreateContent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Message
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Content/{contentId}
+  method: get
+  operationId: Content_GetContentResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/Content/{contentId}
+  method: put
+  operationId: Content_PutUpdateContent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Message
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ContentFolder
+  method: get
+  operationId: ContentFolder_GetContentFolderCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Conversation
+  method: get
+  operationId: Conversation_GetConversationCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Conversation/{conversationId}
+  method: get
+  operationId: Conversation_GetConversationResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Conversation/{conversationId}/Message
+  method: get
+  operationId: ConversationMessage_GetConversationMessageCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Conversation/{conversationId}/Message/{conversationMessageId}
+  method: get
+  operationId: ConversationMessage_GetConversationMessageResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Conversation/{conversationId}/Message/{conversationMessageId}/Activity
+  method: get
+  operationId: ConversationMessageActivity_GetConversationMessageActivityCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Conversation/{conversationId}/Message/{conversationMessageId}/Link
+  method: get
+  operationId: ConversationMessageLink_GetConversationMessageLinkCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Conversation/{conversationId}/Message/{conversationMessageId}/Link/{conversationMessageLinkId}
+  method: get
+  operationId: ConversationMessageLink_GetConversationMessageLinkResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Conversation/{conversationId}/Message/{conversationMessageId}/Link/{conversationMessageLinkId}/Clicker
+  method: get
+  operationId: ConversationMessageLinkClicker_GetMessageLinkClickerCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Conversation/{conversationId}/Message/{conversationMessageId}/Summary
+  method: get
+  operationId: ConversationMessageSummary_GetMessageSummaryResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Conversation/{conversationId}/Summary
+  method: get
+  operationId: ConversationSummary_GetConversationSummaryResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Event
+  method: get
+  operationId: Event_GetEventCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Event
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Event
+  method: post
+  operationId: Event_PostEventResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Event
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/Event/{eventId}
+  method: get
+  operationId: Event_GetEventResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Event
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Event/{eventId}
+  method: put
+  operationId: Event_PutEventResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Event
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/EventGroup
+  method: get
+  operationId: EventGroup_GetEventGroupCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Event
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/EventGroup
+  method: post
+  operationId: EventGroup_PostEventGroupResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Event
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/EventGroup/{eventGroupId}
+  method: get
+  operationId: EventGroup_GetEventGroupResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Event
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/EventGroup/{eventGroupId}
+  method: put
+  operationId: EventGroup_PutEventGroupResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Event
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/EventGroup/{eventGroupId}
+  method: delete
+  operationId: EventGroup_DeleteEventGroupResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Event
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Folder
+  method: get
+  operationId: Folder_GetFolderCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/Folder
+  method: post
+  operationId: Folder_PostFolderResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Folder/{folderId}
+  method: get
+  operationId: Folder_GetFolderResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/Folder/{folderId}
+  method: put
+  operationId: Folder_PutFolderResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/IpPool
+  method: get
+  operationId: IpPool_GetIpPoolCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List
+  method: get
+  operationId: List_GetListCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List
+  method: post
+  operationId: List_PostListResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}
+  method: get
+  operationId: List_GetListResourceById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}
+  method: put
+  operationId: List_PutListResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}
+  method: delete
+  operationId: List_DeleteListResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/ListImport
+  method: get
+  operationId: ListImport_GetListImportCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Contact
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/ListImport
+  method: post
+  operationId: ListImport_PostImportFileResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - Contact
+    - List
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/ListImport/{importFileId}
+  method: get
+  operationId: ListImport_GetListImportResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Contact
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/ListImport/{importFileId}/Contact
+  method: get
+  operationId: ListImportContact_GetListImportContactCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Contact
+    - List
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/ListImport/{importFileId}/Status
+  method: get
+  operationId: ListImportStatus_GetListImportStatusResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Contact
+    - List
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/ListImport/{importFileId}/Summary
+  method: get
+  operationId: ListImportSummary_GetListImportSummaryResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - Contact
+    - List
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Message
+  method: get
+  operationId: Message_GetMessageCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Message
+  method: post
+  operationId: Message_PostMessageResource
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - List
+    - Message
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/Message/{messageId}
+  method: get
+  operationId: Message_GetMessageResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Message/{messageId}/Activity
+  method: get
+  operationId: MessageActivity_GetMessageActivityCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Message/{messageId}/Link
+  method: get
+  operationId: MessageLink_GetMessageLinkCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Message/{messageId}/Link/{messageLinkId}
+  method: get
+  operationId: MessageLink_GetMessageLinkResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Message/{messageId}/Link/{messageLinkId}/Clicker
+  method: get
+  operationId: MessageLinkClicker_GetMessageLinkClickerCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Message/{messageId}/Status
+  method: get
+  operationId: MessageStatus_GetMessageStatusResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/Message/{messageId}/Summary
+  method: get
+  operationId: MessageSummary_GetMessageSummaryResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/SavedAudience
+  method: get
+  operationId: SavedAudience_GetSavedAudienceResourceCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/SavedMessage
+  method: get
+  operationId: SavedMessage_GetSavedMessageCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/SavedMessage
+  method: post
+  operationId: SavedMessage_PostCreateSavedMessage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Message
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/SavedMessage/{savedMessageId}/Message
+  method: post
+  operationId: SavedMessage_PostSavedMessageSend
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - List
+    - Message
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/SavedMessage/{savedMessageId}
+  method: get
+  operationId: SavedMessage_GetSavedMessageResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/SavedMessage/{savedMessageId}
+  method: put
+  operationId: SavedMessage_PutUpdateSavedMessage
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Message
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}/SegmentationField
+  method: get
+  operationId: SegmentationField_GetSegmentationFieldCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Segmentation
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}/SegmentationField
+  method: post
+  operationId: SegmentationField_PostSegmentationFieldResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Segmentation
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}/SegmentationField/{segmentationFieldId}
+  method: get
+  operationId: SegmentationField_GetSegmentationFieldResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Segmentation
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}/SegmentationField/{segmentationFieldId}
+  method: put
+  operationId: SegmentationField_PutSegmentationFieldResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Segmentation
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}/SegmentationField/{segmentationFieldId}
+  method: delete
+  operationId: SegmentationField_DeleteSegmentationFieldResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Segmentation
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/SegmentationFieldGroup
+  method: get
+  operationId: SegmentationFieldGroup_GetSegmentationFieldGroupCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Segmentation
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/SegmentationFieldGroup
+  method: post
+  operationId: SegmentationFieldGroup_PostSegmentationFieldGroupResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Segmentation
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}
+  method: get
+  operationId: SegmentationFieldGroup_GetSegmentationFieldGroupResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Segmentation
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}
+  method: put
+  operationId: SegmentationFieldGroup_PutSegmentationFieldGroupResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Segmentation
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}
+  method: delete
+  operationId: SegmentationFieldGroup_DeleteSegmentationFieldGroupResource
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - List
+    - Segmentation
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/SplitTest
+  method: get
+  operationId: SplitTest_GetSplitTestCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/SplitTest/{splitTestId}
+  method: get
+  operationId: SplitTest_GetSplitTestResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/SplitTest/{splitTestId}/Message
+  method: get
+  operationId: SplitTest_GetSplitTestMessageResources
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/TransactionalMessage/{transactionalMessageId}/Message
+  method: post
+  operationId: TransactionalMessage_PostTransactionalMessageSend
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - List
+    - Message
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/List/{listId}/TransactionalMessage
+  method: get
+  operationId: TransactionalMessage_GetTransactionalMessageCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/TransactionalMessage/{transactionalMessageId}
+  method: get
+  operationId: TransactionalMessage_GetTransactionalMessageResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/TransactionalMessage/{transactionalMessageId}/Activity
+  method: get
+  operationId: TransactionalMessageActivity_GetTransactionalMessageActivityCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - List
+    - Message
+    - Report
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/List/{listId}/TransactionalMessage/{transactionalMessageId}/Resend/{resendKey}
+  method: post
+  operationId: TransactionalMessageResend_PostTransactionalMessageResend
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    scope:
+    - List
+    - Message
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /device
+  method: post
+  operationId: createAppPushDevice
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /device/{deviceUid}
+  method: get
+  operationId: getAppPushDevice
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /device/{deviceUid}
+  method: put
+  operationId: updateAppPushDevice
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /device/{deviceUid}
+  method: patch
+  operationId: patchAppPushDevice
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /device/{deviceUid}/engagement
+  method: post
+  operationId: createMobileDeviceEngagementEvent
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/Forget/{requestId}
+  method: get
+  operationId: Forget_GetForgetRequest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/Forget
+  method: post
+  operationId: Forget_PostForgetRequest
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ShortCode/{senderCodeId}/Broadcast/Immediate
+  method: post
+  operationId: BroadcastMessage_PostImmediateBroadcast
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ShortCode/{senderCodeId}/PhoneList/{phoneListId}/Contact
+  method: get
+  operationId: Contact_GetContactCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}/PhoneList/{phoneListId}/Contact
+  method: post
+  operationId: Contact_PostContactListResource
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ShortCode/{senderCodeId}/Contact/{phoneNumber}
+  method: get
+  operationId: Contact_GetContactResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}/Contact
+  method: put
+  operationId: Contact_PutContactResource
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ShortCode/{senderCodeId}/OptOut
+  method: get
+  operationId: Contact_GetOptOuts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}/ContactImport
+  method: post
+  operationId: Contact_PostImportFileResource
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ShortCode/{senderCodeId}/ContactImport/{importFileId}
+  method: get
+  operationId: Contact_GetImportFileResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}/Contact/{phoneNumber}/PhoneList
+  method: get
+  operationId: ContactListSubscription_GetContactListCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}/Contact/{phoneNumber}/PhoneList/{phoneListId}
+  method: post
+  operationId: ContactListSubscription_PostContactListSubscription
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ShortCode/{senderCodeId}/ContactUnsubscribe/{phoneNumber}/PhoneList/{phoneListId}
+  method: delete
+  operationId: ContactListSubscription_DeleteUnsubscribeContactListSubscription
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/ShortCode/{senderCodeId}/PhoneList
+  method: get
+  operationId: PhoneList_GetListCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}/PhoneList/{phoneListId}
+  method: get
+  operationId: PhoneList_GetListResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}/SegmentationField/{segmentationFieldId}
+  method: get
+  operationId: Segmentation_GetPhoneAttribute
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}/SegmentationField
+  method: get
+  operationId: Segmentation_GetPhoneAttributeCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode
+  method: get
+  operationId: SenderCode_GetShortCodeCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}
+  method: get
+  operationId: SenderCode_GetShortCodeResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}/PhoneList/{phoneListId}/TransactionalMessage
+  method: get
+  operationId: TransactionalMessage_GetTransactionalMessageCollection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{senderCodeId}/PhoneList/{phoneListId}/TransactionalMessage/{transactionalMessageId}
+  method: get
+  operationId: TransactionalMessage_GetTransactionalMessageResource
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/ShortCode/{SenderCodeId}/PhoneList/{phoneListId}/TransactionalMessage/{transactionalMessageId}/Message
+  method: post
+  operationId: TransactionalMessage_PostTransactionalMessageSend
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tickets
+  method: post
+  operationId: openTicket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /tickets
+  method: delete
+  operationId: closeTicket
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /messagestream/{phoneId}
+  method: get
+  operationId: getMessageStream
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /send
+  method: post
+  operationId: send
+  x-agentic-access:
+    action-class: acting
+    consequence: physical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 300
+      exchange: true
+      purpose-required: true
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

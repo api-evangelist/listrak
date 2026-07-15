@@ -144,6 +144,8 @@ apis:
       - type: OpenAPI
         url: openapi/listrak-privacy-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/listrak-agentic-access.yml
   - type: DomainSecurity
     url: security/listrak-domain-security.yml
   - type: Authentication
