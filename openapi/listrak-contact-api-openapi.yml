@@ -1,0 +1,660 @@
+openapi: 3.0.4
+info:
+  title: Listrak Cross Channel REST app-push-mobile-client-device Contact API
+  description: "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n"
+  version: v1
+  x-logo:
+    url: https://api.listrak.com/Email/Resources/Images/Logo.png
+    altText: Listrak
+    href: https://www.listrak.com
+    backgroundColor: '#fafafa'
+servers:
+- url: https://api.listrak.com/crosschannel/v1
+tags:
+- name: Contact
+paths:
+  /v1/List/{listId}/Contact:
+    get:
+      operationId: Contact_GetContactCollection
+      summary: Get all Contacts
+      description: Returns the collection of contacts associated with the specified list.
+      tags:
+      - Contact
+      parameters:
+      - name: listId
+        in: path
+        description: Identifier used to locate the list.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      - name: subscriptionState
+        in: query
+        description: Identifier used to specify subscription state of the contacts to retrieve. Allowed values are `Subscribed` and `Unsubscribed`. The default value is `Subscribed`.
+        required: false
+        schema:
+          type: string
+      - name: externalContactId
+        in: query
+        description: External contact ID provided by the client. If provided, only returns contacts with a matching external contact ID.
+        required: false
+        schema:
+          type: string
+      - name: segmentationFieldIds
+        in: query
+        description: Comma-separated list of profile field IDs to retrieve. Up to 30 fields may be included.
+        required: false
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Value indicating the page of data that's being retrieved. The default value is `Start`.
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: Number of data members to be displayed per page. The default value is `1000` and the maximum value is `5000`.
+        required: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: Inclusive start date that's being used to filter the data members. This applies to subscribe date when retrieving subscribed contacts. Applies to unsubscribe date when retrieving unsubscribed contacts.
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: Inclusive (exclusive when `useOriginalSubscribeDate` is `false`) end date that's being used to filter the data members. This applies to subscribe date when retrieving subscribed contacts. Applies to unsubscribe date when retrieving unsubscribed contacts.
+        required: false
+        schema:
+          type: string
+      - name: useOriginalSubscribeDate
+        in: query
+        description: Whether the `startDate` and `endDate` use the contact's original subscribe date or the contact's most recent subscribe date. Only applies when `subscriptionState` is `Subscribed`. The default value is `true`.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/CollectionPaged[Contact]'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+    post:
+      operationId: Contact_PostContactResource
+      summary: Create or update a Contact
+      description: Creates or updates a contact on the specified list.
+      tags:
+      - Contact
+      parameters:
+      - name: listId
+        in: path
+        description: Identifier used to locate the list.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      - name: eventIds
+        in: query
+        description: Comma-separated list of event identifiers that should be raised after the contact is created or updated.
+        required: false
+        schema:
+          type: string
+      - name: overrideUnsubscribe
+        in: query
+        description: Whether a contact in an unsubscribed state should be forced to a subscribed state. The default value is `false`.
+        required: false
+        schema:
+          type: boolean
+      - name: subscribedByContact
+        in: query
+        description: Whether the subscribe was initiated by the contact. The default value is `false`.
+        required: false
+        schema:
+          type: boolean
+      - name: sendDoubleOptIn
+        in: query
+        description: Whether a double opt-in email should be sent if a new contact is being created. The default value is `false`.
+        required: false
+        schema:
+          type: boolean
+      - name: updateType
+        in: query
+        description: If updating an existing contact, the type of update that will be performed on any submitted profile fields. Allowed values are `Update`, `Append`, and `Overwrite`. The default value is `Update`.
+        required: false
+        schema:
+          type: string
+      - name: newEmailAddress
+        in: query
+        description: If updating an existing contact, the contact's email address will be changed to this value. Provide the original email address in the `emailAddress` body field to select the existing contact.
+        required: false
+        schema:
+          type: string
+      responses:
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ResourceCreated'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/Contact'
+  /v1/List/{listId}/Contact/{contactIdentifier}:
+    get:
+      operationId: Contact_GetContactResourceByIdentifier
+      summary: Get a Contact
+      description: Returns a contact by email address or by Listrak email key.
+      tags:
+      - Contact
+      parameters:
+      - name: listId
+        in: path
+        description: Identifier used to locate the list.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      - name: contactIdentifier
+        in: path
+        description: Identifier used to locate the contact. You may specify either an email address or a Listrak email key.
+        required: true
+        schema:
+          type: string
+      - name: segmentationFieldIds
+        in: query
+        description: Comma-separated list of profile field IDs to retrieve. Up to 30 fields may be included.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Resource[Contact]'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+  /v1/ShortCode/{senderCodeId}/PhoneList/{phoneListId}/Contact:
+    get:
+      operationId: Contact_GetContactCollection
+      summary: Get Contact Collection
+      description: Returns all contacts that exist on a specific SMS list by optout status.
+      tags:
+      - Contact
+      parameters:
+      - name: senderCodeId
+        in: path
+        description: Identifier used to specify the Sender Code.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      - name: phoneListId
+        in: path
+        description: Identifier used to locate the SMS List.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      - name: optedOut
+        in: query
+        description: Determines the status of contacts on the resulting data. The default value is `false`.
+        required: false
+        schema:
+          type: boolean
+      - name: cursor
+        in: query
+        description: Value indicating the page of data that's being retrieved. The default value is `Start`.
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: Number of data members to be displayed per page. The default value is `1000` and the maximum value is `5000`.
+        required: false
+        schema:
+          type: string
+      - name: startSubscribeDate
+        in: query
+        description: Start date that's being used to filter the data members. This applies to subscribe date.
+        required: false
+        schema:
+          type: string
+      - name: endSubscribeDate
+        in: query
+        description: End date that's being used to filter the data members. This applies to subscribe date.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/CollectionPaged[SMSContact]'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+    post:
+      operationId: Contact_PostContactListResource
+      summary: Create Contact
+      description: "Creates and subscribes a new contact for a phone number if the contact does not already exist on the sender code.\r\nThis call will create a record of the contact as well as subscribe the contact to the list that was passed in the route.\r\nChanges to segmentation fields apply to the contact across all sender codes."
+      tags:
+      - Contact
+      parameters:
+      - name: senderCodeId
+        in: path
+        description: Identifier used to specify the Sender Code.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      - name: phoneListId
+        in: path
+        description: Identifier for the SMS List that the contact will be created on.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ResourceCreated'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/SMSContact'
+  /v1/ShortCode/{senderCodeId}/Contact/{phoneNumber}:
+    get:
+      operationId: Contact_GetContactResource
+      summary: Get Contact
+      description: Returns a contact for a phone number. The response does not include a list id. This call will only return the system and custom profile fields for a contact along with the opted out status.
+      tags:
+      - Contact
+      parameters:
+      - name: senderCodeId
+        in: path
+        description: Identifier used to specify the Sender Code.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      - name: phoneNumber
+        in: path
+        description: Phone number for contact.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Resource[SMSContactSubscriptionDetails]'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+  /v1/ShortCode/{senderCodeId}/Contact:
+    put:
+      operationId: Contact_PutContactResource
+      summary: Update Contact
+      description: "Updates a contact's information for a phone number. \r\nThis call will update the system fields, custom profile fields, and the opt-out status of a contact.\r\nIt is only possible to opt out a contact using this call; not opting them in to the sender code. \r\nIf a contact is opted out, it is still possible to update the contacts system and custom profile fields.\r\nChanges to segmentation fields apply to the contact across all sender codes."
+      tags:
+      - Contact
+      parameters:
+      - name: senderCodeId
+        in: path
+        description: Identifier used to specify the Sender Code.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ResourceUpdated'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/SMSContact'
+  /v1/ShortCode/{senderCodeId}/OptOut:
+    get:
+      operationId: Contact_GetOptOuts
+      summary: Get Sender Code Opt-Outs
+      description: Returns all contacts that have been opted-out for a specific SMS Sender Code
+      tags:
+      - Contact
+      parameters:
+      - name: senderCodeId
+        in: path
+        description: Identifier used to specify the Sender Code.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      - name: cursor
+        in: query
+        description: Value indicating the page of data that's being retrieved. The default value is `Start`.
+        required: false
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: Number of data members to be displayed per page. The default value is `1000` and the maximum value is `5000`.
+        required: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: Start date that's being used to filter the data members. This applies to opt-out date.
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: End date that's being used to filter the data members. This applies to opt-out date.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Collection[OptOutContact]'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+  /v1/ShortCode/{senderCodeId}/ContactImport:
+    post:
+      operationId: Contact_PostImportFileResource
+      summary: Start a Contact Update Import
+      description: Creates and starts a new update import for the specified sender code. HTTP request body lengths of up to 250 MB are permitted. Because the `fileStream` field must be encoded in Base64, and because the remainder of the JSON payload is counted against the 250 MB limit, the effective maximum import file size is approximately 185 MB (195,000,000 bytes); therefore, only attempt to import files up to 185 MB (195,000,000 bytes) in size.
+      tags:
+      - Contact
+      parameters:
+      - name: senderCodeId
+        in: path
+        description: Identifier used to locate the sender code.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/ResourceCreated'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/definitions/ImportContactFile'
+  /v1/ShortCode/{senderCodeId}/ContactImport/{importFileId}:
+    get:
+      operationId: Contact_GetImportFileResource
+      summary: Get a Contact Import
+      description: Retrieves the specified Contact import.
+      tags:
+      - Contact
+      parameters:
+      - name: senderCodeId
+        in: path
+        description: Identifier used to locate the sender code.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      - name: importFileId
+        in: path
+        description: Identifier used to locate the import file.
+        required: true
+        format: int32
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Resource[ImportContactFileStatus]'
+        '400':
+          description: BadRequest
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '404':
+          description: NotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Error'
+      security:
+      - OAuth 2: []
+components:
+  securitySchemes:
+    Authorizer:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: custom
+x-amazon-apigateway-security-policy: TLS_1_0
+x-tagGroups:
+- name: API Reference
+  tags:
+  - Events
+  - EventConfigurations
