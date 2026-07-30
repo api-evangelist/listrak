@@ -2,7 +2,20 @@ aid: listrak
 name: Listrak
 description: Retail digital marketing platform with a REST API for managing email and SMS campaigns, subscriber data, behavioral triggers, and cross-channel marketing automation
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/listrak.png
 url: https://raw.githubusercontent.com/api-evangelist/listrak/refs/heads/main/apis.yml
 created: 2026-06-13
 modified: 2026-06-13
@@ -17,132 +30,1392 @@ tags:
   - Data Import
   - Privacy
 apis:
-  - aid: listrak:email
-    name: Listrak Email REST API
-    description: Manage contacts, opt-in status, and contact profiles; execute email campaigns including marketing and transactional messages; and retrieve performance metrics for email programs.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://api.listrak.com/email
-    baseURL: https://api.listrak.com
-    tags:
-      - Email
-      - Contacts
-      - Campaigns
-      - Analytics
-    properties:
-      - type: Documentation
-        url: https://api.listrak.com/email
-      - type: Authentication
-        url: https://auth.listrak.com/OAuth2/Token
-      - type: OpenAPI
-        url: openapi/listrak-email-openapi.yml
-  - aid: listrak:sms
-    name: Listrak SMS REST API
-    description: Handle SMS subscriber and list management, short code management, and send transactional SMS messages to mobile subscribers.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://api.listrak.com/sms
-    baseURL: https://api.listrak.com
-    tags:
-      - SMS
-      - Mobile
-      - Subscribers
-      - Transactional
-    properties:
-      - type: Documentation
-        url: https://api.listrak.com/sms
-      - type: Authentication
-        url: https://auth.listrak.com/OAuth2/Token
-      - type: OpenAPI
-        url: openapi/listrak-sms-openapi.yml
-  - aid: listrak:crosschannel
-    name: Listrak Cross Channel REST API
-    description: Integrate with cross-channel marketing features including management of custom events to trigger Journey Hub automations across email, SMS, push, and web channels.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://api.listrak.com/crosschannel/v1/docs
-    baseURL: https://api.listrak.com/crosschannel/v1
-    tags:
-      - Cross-Channel
-      - Journey
-      - Automation
-      - Events
-    properties:
-      - type: Documentation
-        url: https://api.listrak.com/crosschannel/v1/docs
-      - type: Authentication
-        url: https://auth.listrak.com/OAuth2/Token
-      - type: OpenAPI
-        url: openapi/listrak-crosschannel-openapi.yml
-  - aid: listrak:data
-    name: Listrak Data Import REST API
-    description: Import retail-specific data including customers, orders, products, and reviews as a programmatic alternative to FTP-based data ingestion.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://api.listrak.com/data
-    baseURL: https://api.listrak.com
-    tags:
-      - Data Import
-      - Customers
-      - Orders
-      - Products
-      - Retail
-    properties:
-      - type: Documentation
-        url: https://api.listrak.com/data
-      - type: Authentication
-        url: https://auth.listrak.com/OAuth2/Token
-      - type: OpenAPI
-        url: openapi/listrak-data-openapi.yml
-  - aid: listrak:twowaysms
-    name: Listrak Two-Way SMS Conversation REST API
-    description: Enable real-time two-way SMS customer support integrations by exchanging conversation and support ticket information with customer service platforms.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://api.listrak.com/twowaysms/docs
-    baseURL: https://api.listrak.com
-    tags:
-      - SMS
-      - Two-Way
-      - Conversations
-      - Customer Support
-    properties:
-      - type: Documentation
-        url: https://api.listrak.com/twowaysms/docs
-      - type: Authentication
-        url: https://auth.listrak.com/OAuth2/Token
-      - type: OpenAPI
-        url: openapi/listrak-twowaysms-openapi.yml
-  - aid: listrak:mobileclient
-    name: Listrak Mobile App Push API
-    description: Send push notifications to mobile devices via native app integration; manage device registration and track app engagement for mobile marketing programs.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://api.listrak.com/mobileclient/docs
-    baseURL: https://api.listrak.com
-    tags:
-      - Mobile
-      - Push Notifications
-      - Mobile App
-    properties:
-      - type: Documentation
-        url: https://api.listrak.com/mobileclient/docs
-      - type: Authentication
-        url: https://auth.listrak.com/OAuth2/Token
-      - type: OpenAPI
-        url: openapi/listrak-mobileclient-openapi.yml
-  - aid: listrak:privacy
-    name: Listrak Privacy REST API
-    description: Manage data privacy and compliance requests including contact data removal to support CCPA and GDPR regulatory requirements.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://api.listrak.com/privacy
-    baseURL: https://api.listrak.com
-    tags:
-      - Privacy
-      - CCPA
-      - GDPR
-      - Compliance
-    properties:
-      - type: Documentation
-        url: https://api.listrak.com/privacy
-      - type: Authentication
-        url: https://auth.listrak.com/OAuth2/Token
-      - type: OpenAPI
-        url: openapi/listrak-privacy-openapi.yml
+- aid: listrak:listrak-app-push-mobile-client-device-api
+  name: Listrak app-push-mobile-client-device API
+  description: Endpoints to manage app push devices.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - app-push-mobile-client-device
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-app-push-mobile-client-device-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-app-push-mobile-client-engagements-api
+  name: Listrak app-push-mobile-client-engagements API
+  description: Endpoints to manage app push mobile client engagements.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - app-push-mobile-client-engagements
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-app-push-mobile-client-engagements-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-broadcastmessage-api
+  name: Listrak BroadcastMessage API
+  description: The BroadcastMessage API from Listrak — 1 operation(s) for broadcastmessage.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - BroadcastMessage
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-broadcastmessage-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-campaign-api
+  name: Listrak Campaign API
+  description: The Campaign API from Listrak — 2 operation(s) for campaign.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Campaign
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-campaign-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-contact-api
+  name: Listrak Contact API
+  description: The Contact API from Listrak — 8 operation(s) for contact.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Contact
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-contact-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-contactlistsubscription-api
+  name: Listrak ContactListSubscription API
+  description: >-
+    The ContactListSubscription API from Listrak — 3 operation(s) for contactlistsubscription.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ContactListSubscription
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-contactlistsubscription-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-contactsegmentationfield-api
+  name: Listrak ContactSegmentationField API
+  description: >-
+    The ContactSegmentationField API from Listrak — 1 operation(s) for contactsegmentationfield.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ContactSegmentationField
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-contactsegmentationfield-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-content-api
+  name: Listrak Content API
+  description: The Content API from Listrak — 2 operation(s) for content.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-content-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-contentfolder-api
+  name: Listrak ContentFolder API
+  description: The ContentFolder API from Listrak — 1 operation(s) for contentfolder.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ContentFolder
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-contentfolder-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-conversation-api
+  name: Listrak Conversation API
+  description: The Conversation API from Listrak — 2 operation(s) for conversation.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Conversation
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-conversation-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-conversationmessage-api
+  name: Listrak ConversationMessage API
+  description: The ConversationMessage API from Listrak — 2 operation(s) for conversationmessage.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ConversationMessage
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-conversationmessage-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-conversationmessageactivity-api
+  name: Listrak ConversationMessageActivity API
+  description: >-
+    The ConversationMessageActivity API from Listrak — 1 operation(s) for conversationmessageactivity.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ConversationMessageActivity
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-conversationmessageactivity-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-conversationmessagelink-api
+  name: Listrak ConversationMessageLink API
+  description: >-
+    The ConversationMessageLink API from Listrak — 2 operation(s) for conversationmessagelink.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ConversationMessageLink
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-conversationmessagelink-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-conversationmessagelinkclicker-api
+  name: Listrak ConversationMessageLinkClicker API
+  description: >-
+    The ConversationMessageLinkClicker API from Listrak — 1 operation(s) for conversationmessagelinkclicker.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ConversationMessageLinkClicker
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-conversationmessagelinkclicker-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-conversationmessagesummary-api
+  name: Listrak ConversationMessageSummary API
+  description: >-
+    The ConversationMessageSummary API from Listrak — 1 operation(s) for conversationmessagesummary.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ConversationMessageSummary
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-conversationmessagesummary-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-conversationsummary-api
+  name: Listrak ConversationSummary API
+  description: The ConversationSummary API from Listrak — 1 operation(s) for conversationsummary.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ConversationSummary
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-conversationsummary-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-customer-api
+  name: Listrak Customer API
+  description: The Customer API from Listrak — 1 operation(s) for customer.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Customer
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-customer-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-event-api
+  name: Listrak Event API
+  description: The Event API from Listrak — 2 operation(s) for event.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Event
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-event-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-eventconfigurations-api
+  name: Listrak EventConfigurations API
+  description: REST endpoints to manage Custom Event Configurations.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - EventConfigurations
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-eventconfigurations-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-eventgroup-api
+  name: Listrak EventGroup API
+  description: The EventGroup API from Listrak — 2 operation(s) for eventgroup.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - EventGroup
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-eventgroup-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-events-api
+  name: Listrak Events API
+  description: REST endpoints to manage Custom Events.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-events-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-folder-api
+  name: Listrak Folder API
+  description: The Folder API from Listrak — 2 operation(s) for folder.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Folder
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-folder-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-forget-api
+  name: Listrak Forget API
+  description: The Forget API from Listrak — 2 operation(s) for forget.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Forget
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-forget-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-ippool-api
+  name: Listrak IpPool API
+  description: The IpPool API from Listrak — 1 operation(s) for ippool.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - IpPool
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-ippool-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-list-api
+  name: Listrak List API
+  description: The List API from Listrak — 2 operation(s) for list.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - List
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-list-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-listimport-api
+  name: Listrak ListImport API
+  description: The ListImport API from Listrak — 2 operation(s) for listimport.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ListImport
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-listimport-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-listimportcontact-api
+  name: Listrak ListImportContact API
+  description: The ListImportContact API from Listrak — 1 operation(s) for listimportcontact.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ListImportContact
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-listimportcontact-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-listimportstatus-api
+  name: Listrak ListImportStatus API
+  description: The ListImportStatus API from Listrak — 1 operation(s) for listimportstatus.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ListImportStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-listimportstatus-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-listimportsummary-api
+  name: Listrak ListImportSummary API
+  description: The ListImportSummary API from Listrak — 1 operation(s) for listimportsummary.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - ListImportSummary
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-listimportsummary-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-message-api
+  name: Listrak Message API
+  description: The Message API from Listrak — 2 operation(s) for message.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Message
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-message-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-messageactivity-api
+  name: Listrak MessageActivity API
+  description: The MessageActivity API from Listrak — 1 operation(s) for messageactivity.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - MessageActivity
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-messageactivity-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-messagelink-api
+  name: Listrak MessageLink API
+  description: The MessageLink API from Listrak — 2 operation(s) for messagelink.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - MessageLink
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-messagelink-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-messagelinkclicker-api
+  name: Listrak MessageLinkClicker API
+  description: The MessageLinkClicker API from Listrak — 1 operation(s) for messagelinkclicker.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - MessageLinkClicker
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-messagelinkclicker-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-messagestatus-api
+  name: Listrak MessageStatus API
+  description: The MessageStatus API from Listrak — 1 operation(s) for messagestatus.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - MessageStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-messagestatus-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-messagestream-api
+  name: Listrak Messagestream API
+  description: The Messagestream API from Listrak — 1 operation(s) for messagestream.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Messagestream
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-messagestream-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-messagesummary-api
+  name: Listrak MessageSummary API
+  description: The MessageSummary API from Listrak — 1 operation(s) for messagesummary.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - MessageSummary
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-messagesummary-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-order-api
+  name: Listrak Order API
+  description: The Order API from Listrak — 1 operation(s) for order.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Order
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-order-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-phonelist-api
+  name: Listrak PhoneList API
+  description: The PhoneList API from Listrak — 2 operation(s) for phonelist.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - PhoneList
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-phonelist-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-product-api
+  name: Listrak Product API
+  description: The Product API from Listrak — 1 operation(s) for product.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Product
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-product-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-ratingsummary-api
+  name: Listrak RatingSummary API
+  description: The RatingSummary API from Listrak — 1 operation(s) for ratingsummary.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - RatingSummary
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-ratingsummary-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-review-api
+  name: Listrak Review API
+  description: The Review API from Listrak — 1 operation(s) for review.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Review
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-review-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-savedaudience-api
+  name: Listrak SavedAudience API
+  description: The SavedAudience API from Listrak — 1 operation(s) for savedaudience.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - SavedAudience
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-savedaudience-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-savedmessage-api
+  name: Listrak SavedMessage API
+  description: The SavedMessage API from Listrak — 3 operation(s) for savedmessage.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - SavedMessage
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-savedmessage-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-segmentation-api
+  name: Listrak Segmentation API
+  description: The Segmentation API from Listrak — 2 operation(s) for segmentation.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Segmentation
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-segmentation-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-segmentationfield-api
+  name: Listrak SegmentationField API
+  description: The SegmentationField API from Listrak — 2 operation(s) for segmentationfield.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - SegmentationField
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-segmentationfield-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-segmentationfieldgroup-api
+  name: Listrak SegmentationFieldGroup API
+  description: The SegmentationFieldGroup API from Listrak — 2 operation(s) for segmentationfieldgroup.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - SegmentationFieldGroup
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-segmentationfieldgroup-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-send-api
+  name: Listrak Send API
+  description: The Send API from Listrak — 1 operation(s) for send.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Send
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-send-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-sendercode-api
+  name: Listrak SenderCode API
+  description: The SenderCode API from Listrak — 2 operation(s) for sendercode.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - SenderCode
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-sendercode-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-splittest-api
+  name: Listrak SplitTest API
+  description: The SplitTest API from Listrak — 3 operation(s) for splittest.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - SplitTest
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-splittest-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-tickets-api
+  name: Listrak Tickets API
+  description: The Tickets API from Listrak — 1 operation(s) for tickets.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Tickets
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-tickets-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-transactionalmessage-api
+  name: Listrak TransactionalMessage API
+  description: The TransactionalMessage API from Listrak — 6 operation(s) for transactionalmessage.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - TransactionalMessage
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-transactionalmessage-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-transactionalmessageactivity-api
+  name: Listrak TransactionalMessageActivity API
+  description: >-
+    The TransactionalMessageActivity API from Listrak — 1 operation(s) for transactionalmessageactivity.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - TransactionalMessageActivity
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-transactionalmessageactivity-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-transactionalmessageresend-api
+  name: Listrak TransactionalMessageResend API
+  description: >-
+    The TransactionalMessageResend API from Listrak — 1 operation(s) for transactionalmessageresend.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - TransactionalMessageResend
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-transactionalmessageresend-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
 common:
   - type: AgenticAccess
     url: agentic-access/listrak-agentic-access.yml
