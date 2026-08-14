@@ -1,6 +1,16 @@
 aid: listrak
 name: Listrak
-description: Retail digital marketing platform with a REST API for managing email and SMS campaigns, subscriber data, behavioral triggers, and cross-channel marketing automation
+description: >-
+  Listrak is a retail customer-engagement platform whose public API surface is eight separate REST
+  APIs served from api.listrak.com: Email (83 operations), SMS (20), Data Import (5), Media (9),
+  Mobile App Push (5), Two-Way SMS (4), Cross Channel custom events (3) and Privacy (2). Together
+  they cover contacts and lists, message authoring and transactional sends, profile-field
+  segmentation, behavioral events that drive Journey Hub automations, bulk upsert of retail
+  customers, orders, products and reviews, media library management, mobile device registration,
+  two-way SMS support conversations, and GDPR/CCPA forget requests. Every server-side API
+  authenticates with OAuth 2.0 client_credentials against a single token endpoint at
+  auth.listrak.com, returns a consistent {status, error, message} envelope drawn from a published
+  68-code error registry, and pages with cursor plus count.
 type: Index
 accessModel:
   pricing: enterprise
@@ -18,7 +28,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/listrak.png
 url: https://raw.githubusercontent.com/api-evangelist/listrak/refs/heads/main/apis.yml
 created: 2026-06-13
-modified: 2026-06-13
+modified: 2026-08-13
 specificationVersion: '0.19'
 tags:
   - Email Marketing
@@ -29,6 +39,14 @@ tags:
   - Push Notifications
   - Data Import
   - Privacy
+  - Ecommerce
+  - Customer Data
+  - Transactional Messaging
+  - Segmentation
+  - Product Reviews
+  - Media Management
+  - Two-Way SMS
+  - RCS
 apis:
 - aid: listrak:listrak-app-push-mobile-client-device-api
   name: Listrak app-push-mobile-client-device API
@@ -1416,6 +1434,58 @@ apis:
     url: https://api.listrak.com/mobileclient/docs
   - type: Documentation
     url: https://api.listrak.com/privacy
+- aid: listrak:listrak-media-directories-api
+  name: Listrak Media Directories API
+  description: >-
+    Directory management for the Listrak media library - list top-level directories, list a
+    directory's contents, and create, rename or delete a directory. Part of the Listrak Media REST
+    API (OpenAPI 3.1.1), the newest of Listrak's eight public APIs.
+  humanURL: https://api.listrak.com/media
+  baseURL: https://api.listrak.com/media
+  tags:
+  - Directories
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-media-directories-api-openapi.yml
+  - type: APIReference
+    url: https://api.listrak.com/media
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+- aid: listrak:listrak-media-files-api
+  name: Listrak Media Files API
+  description: >-
+    Image file management for the Listrak media library - upload a file into a directory, update its
+    metadata, and delete it. Part of the Listrak Media REST API (OpenAPI 3.1.1).
+  humanURL: https://api.listrak.com/media
+  baseURL: https://api.listrak.com/media
+  tags:
+  - Files
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-media-files-api-openapi.yml
+  - type: APIReference
+    url: https://api.listrak.com/media
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+- aid: listrak:listrak-media-fonts-api
+  name: Listrak Media Fonts API
+  description: >-
+    Read the fonts available to the account for use alongside media library assets. Part of the
+    Listrak Media REST API (OpenAPI 3.1.1).
+  humanURL: https://api.listrak.com/media
+  baseURL: https://api.listrak.com/media
+  tags:
+  - Fonts
+  - Media
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-media-fonts-api-openapi.yml
+  - type: APIReference
+    url: https://api.listrak.com/media
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
 common:
   - type: AgenticAccess
     url: agentic-access/listrak-agentic-access.yml
@@ -1429,8 +1499,8 @@ common:
     url: https://www.listrak.com/
   - type: Documentation
     url: https://www.listrak.com/learn/developers
-  - type: GitHubOrg
-    url: https://github.com/InfernoRed/listrak-mobile-ios
+  - type: GitHubOrganization
+    url: https://github.com/listrak
   - type: LinkedIn
     url: https://www.linkedin.com/company/listrak/
   - type: Blog
@@ -1451,6 +1521,59 @@ common:
     url: vocabulary/listrak-vocabulary.yml
   - type: JSONLDContext
     url: json-ld/listrak-context.jsonld
+  - type: Packages
+    url: packages/listrak-packages.yml
+  - type: SDKs
+    url: packages/listrak-packages.yml
+  - type: Conventions
+    url: conventions/listrak-conventions.yml
+  - type: ErrorCatalog
+    url: errors/listrak-error-codes.yml
+  - type: Lifecycle
+    url: lifecycle/listrak-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/listrak-changelog.yml
+  - type: DataModel
+    url: data-model/listrak-data-model.yml
+  - type: Conformance
+    url: conformance/listrak-conformance.yml
+  - type: Webhooks
+    url: asyncapi/listrak-webhooks.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/listrak-llms.txt
+  - type: Overlay
+    url: overlays/listrak-security-and-semantics-overlay.yaml
+  - type: VulnerabilityDisclosure
+    url: security/listrak-vulnerability-disclosure.yml
+  - type: Security
+    url: https://www.listrak.com/privacy-and-terms/responsible-disclosure
+  - type: TrustCenter
+    url: security/listrak-trust-center.yml
+  - type: Compliance
+    url: https://www.listrak.com/privacy-and-terms/privacy-policy
+  - type: DeveloperPortal
+    url: https://www.listrak.com/learn/developers
+  - type: APIReference
+    url: https://api.listrak.com/email
+  - type: GettingStarted
+    url: https://help.listrak.com/en/articles/9406951-rest-api-integrations-at-listrak
+  - type: Support
+    url: https://help.listrak.com/en/
+  - type: SignUp
+    url: https://www.listrak.com/get-started
+  - type: Login
+    url: https://admin.listrak.com/Account/Login.aspx
+  - type: TermsOfService
+    url: https://www.listrak.com/privacy-and-terms/acceptable-use-policy
+  - type: PrivacyPolicy
+    url: https://www.listrak.com/privacy-and-terms/privacy-policy
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 32
+  pass: local-v1
