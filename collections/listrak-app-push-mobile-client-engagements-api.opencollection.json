@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device app-push-mobile-client-engagements API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "app-push-mobile-client-engagements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a mobile device engagement event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.listrak.com/crosschannel/v1/device/:deviceUid/engagement",
+            "params": [
+              {
+                "name": "deviceUid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a mobile device engagement event"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

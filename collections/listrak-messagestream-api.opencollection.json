@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device Messagestream API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messagestream",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "getMessageStream",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/messagestream/:phoneId",
+            "params": [
+              {
+                "name": "batchSize",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "earliestDateTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "phoneId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

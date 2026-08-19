@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device SavedAudience API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SavedAudience",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all Saved Audiences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/List/:listId/SavedAudience",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the list."
+              }
+            ]
+          },
+          "docs": "Returns a collection of saved audiences for the specified list."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

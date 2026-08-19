@@ -1,0 +1,544 @@
+{
+  "item": [
+    {
+      "id": "22c6d65a-0fea-476c-97ef-202ffe7eb21c",
+      "name": "EventConfigurations",
+      "description": {
+        "content": "REST endpoints to manage Custom Event Configurations.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fa2e5f2d-4bc6-46c4-bd2f-355b9a35aa0c",
+          "name": "Get all event configurations.",
+          "request": {
+            "name": "Get all event configurations.",
+            "description": {
+              "content": "Get a list of all event configurations with names and unique identifiers. These can be used to determine which event configuration should be used to post your custom events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "eventConfigurations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6f21a2b-1ba1-47df-8a13-7e6b25b366b8",
+              "name": "Returns Custom Event List as a JSON document, along with the metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"eventUID\": \"f42dd175-3696-421e-9b20-58af4838b9ac\",\n      \"eventName\": \"string\"\n    },\n    {\n      \"eventUID\": \"b908276b-7e2f-00f3-3c91-f1805f6f6845\",\n      \"eventName\": \"string\"\n    }\n  ],\n  \"meta\": {\n    \"statusCode\": 4843,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"userMessage\": \"string\",\n        \"internalMessage\": \"string\"\n      },\n      {\n        \"userMessage\": \"string\",\n        \"internalMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd091dc4-8c62-4de8-a7ae-d883aae884a9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7f6fb96e-a961-48c4-adf9-d664329a095a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f887854e-c197-4605-bf9d-0656d3dca170",
+          "name": "Get a Custom Event Configuration.",
+          "request": {
+            "name": "Get a Custom Event Configuration.",
+            "description": {
+              "content": "Get the details for a specific Custom Event Configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "eventConfigurations",
+                ":eventUID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "055f26b6-779e-4ea2-927e-b11fd353c2d0",
+              "name": "The details for a specific Custom Event Configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations",
+                    ":eventUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"eventUID\": \"a443d347-1b80-8f47-6e7c-33329544981b\",\n    \"eventName\": \"string\",\n    \"eventSchemaAttrs\": {\n      \"key_0\": \"Double\",\n      \"key_1\": \"Date\",\n      \"key_2\": \"Date\"\n    },\n    \"featureAccess\": [\n      \"Workflow\",\n      \"Workflow\"\n    ]\n  },\n  \"meta\": {\n    \"statusCode\": 8982,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"userMessage\": \"string\",\n        \"internalMessage\": \"string\"\n      },\n      {\n        \"userMessage\": \"string\",\n        \"internalMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb430e6d-31b5-41ec-b459-77e273d29947",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations",
+                    ":eventUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "75c8cb38-dcab-4b2e-8c58-15ada3d24df7",
+              "name": "Request Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations",
+                    ":eventUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "90dedbd5-fe5e-4b06-9da6-da99afbe0abf",
+              "name": "Entity Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations",
+                    ":eventUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4609bc75-d2d1-48a0-82b4-1ce0c7703b21",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations",
+                    ":eventUID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.listrak.com/crosschannel/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dae9e63e-3b5b-49f0-a1a9-df3fdc916c14",
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device EventConfigurations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n",
+      "type": "text/plain"
+    }
+  }
+}

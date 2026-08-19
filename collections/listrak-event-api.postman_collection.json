@@ -1,0 +1,1118 @@
+{
+  "item": [
+    {
+      "id": "4a5136a1-0e87-41ed-9517-79980d909eab",
+      "name": "Event",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5bb53548-1bf1-41b9-af06-56d73119260a",
+          "name": "Get all Events",
+          "request": {
+            "name": "Get all Events",
+            "description": {
+              "content": "Returns the collection of events associated with the specified list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "List",
+                ":listId",
+                "Event"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "listId",
+                  "description": "(Required) Identifier used to locate the list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "70259c73-d757-4b46-976b-9515081a0ba8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd654856-e142-4d82-8080-b7f78e67c246",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81712faa-af43-493b-b851-8b21cb1b7d76",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac14ddc4-9436-40e9-bc60-b0810ba7b64e",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0f4f78a-6ff2-4c77-ac4f-a78488a48f81",
+          "name": "Create an Event",
+          "request": {
+            "name": "Create an Event",
+            "description": {
+              "content": "Creates a new event on the specified list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "List",
+                ":listId",
+                "Event"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "listId",
+                  "description": "(Required) Identifier used to locate the list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f4c72ba-5ac8-48c0-9499-9912d1511b7a",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32a85422-7ec2-4d95-bb5b-6061f105472e",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7625f66a-8420-4255-8de7-9bd2c3259e0a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75776086-61fc-4307-92d1-d481dc3cb90f",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5b84da8-9998-4f14-9b8a-2e96a54e4d63",
+          "name": "Get an Event",
+          "request": {
+            "name": "Get an Event",
+            "description": {
+              "content": "Returns the specified event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "List",
+                ":listId",
+                "Event",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "listId",
+                  "description": "(Required) Identifier used to locate the list."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "eventId",
+                  "description": "(Required) Identifier used to locate the event."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ddc62eb6-e210-4790-b5f3-ec69ab87a94e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventId",
+                      "description": "(Required) Identifier used to locate the event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5dee7e7-dbfa-42a8-a528-0e1758ca5375",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventId",
+                      "description": "(Required) Identifier used to locate the event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5370dfab-e38f-4938-aaa2-ad4531abaf78",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventId",
+                      "description": "(Required) Identifier used to locate the event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb043892-0187-45d9-9b0a-6f4b4c799eb6",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventId",
+                      "description": "(Required) Identifier used to locate the event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4bb0f48-234c-4af9-90a0-b60dcbe73b02",
+          "name": "Update an Event",
+          "request": {
+            "name": "Update an Event",
+            "description": {
+              "content": "Updates an existing event.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "List",
+                ":listId",
+                "Event",
+                ":eventId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "listId",
+                  "description": "(Required) Identifier used to locate the list."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "eventId",
+                  "description": "(Required) Identifier used to locate the event."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e18431f3-6389-447a-aba1-9b82b23e57e8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventId",
+                      "description": "(Required) Identifier used to locate the event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbb3b5d3-c74e-4957-805b-724598f79514",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventId",
+                      "description": "(Required) Identifier used to locate the event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "597e016e-faff-4273-8a51-b363b78a5691",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventId",
+                      "description": "(Required) Identifier used to locate the event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e30ec605-a832-4dfc-9212-c890c0765f51",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "Event",
+                    ":eventId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "eventId",
+                      "description": "(Required) Identifier used to locate the event."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.listrak.com/crosschannel/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "53e3073a-6596-4efe-b216-340b60254c42",
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device Event API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n",
+      "type": "text/plain"
+    }
+  }
+}

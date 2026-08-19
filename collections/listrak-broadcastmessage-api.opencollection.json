@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device BroadcastMessage API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BroadcastMessage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Immediate Broadcast",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/ShortCode/:senderCodeId/Broadcast/Immediate",
+            "params": [
+              {
+                "name": "senderCodeId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to specify the Sender Code."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Immediately send an SMS broadcast message to all subscribed contacts on an SMS List. \r\nIf a segmentation field id is included, the message will only be sent to the contacts that have the custom checkbox field checked.\r\nThe provided title will be used for reporting purposes to identify a particular SMS broadcast message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

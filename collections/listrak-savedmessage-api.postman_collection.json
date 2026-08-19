@@ -1,0 +1,1485 @@
+{
+  "item": [
+    {
+      "id": "6366751e-057c-4701-9226-e3fda5e51355",
+      "name": "SavedMessage",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2c259d9-16c4-4463-a2fa-1a714024ed16",
+          "name": "Get all SavedMessages",
+          "request": {
+            "name": "Get all SavedMessages",
+            "description": {
+              "content": "Returns the collection of saved messages associated with the specified list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "List",
+                ":listId",
+                "SavedMessage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "listId",
+                  "description": "(Required) Identifier used to locate the list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "8ead9218-e45f-4dc6-bf6e-9e1f1c015af7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05ac4f66-23e1-45f2-b25e-09f70c8bee60",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd8e4de9-2289-43bc-9ea6-9dcdcbaae2de",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "497aff4f-de59-4d57-854f-a848013a46e5",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34f06622-5054-4e99-9515-23fa98b01f13",
+          "name": "Create a SavedMessage",
+          "request": {
+            "name": "Create a SavedMessage",
+            "description": {
+              "content": "Creates a new saved message with the specified content and metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "List",
+                ":listId",
+                "SavedMessage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "listId",
+                  "description": "(Required) Identifier used to locate the list."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12c63b43-30db-4fd9-98c0-c8b978a4b1f9",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ef11979-5cde-446e-a0a6-0bac91ccbfec",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cde8c027-771f-4746-925f-cb81b72089a3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "050ad737-cc6d-44b0-bd0c-003e77bfcdc4",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18548d2d-df08-47a1-a50e-abcf211977aa",
+          "name": "Send a SavedMessage",
+          "request": {
+            "name": "Send a SavedMessage",
+            "description": {
+              "content": "Sends a previously-created saved message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "List",
+                ":listId",
+                "SavedMessage",
+                ":savedMessageId",
+                "Message"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "sendDate",
+                  "value": "<dateTime>",
+                  "description": "The send date for the message."
+                },
+                {
+                  "disabled": false,
+                  "key": "sendTestMessage",
+                  "value": "<boolean>",
+                  "description": "Whether a test message should be sent. The default is `false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "sendReviewMessage",
+                  "value": "<boolean>",
+                  "description": "Whether a review message should be sent. The default is `false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "testEmailAddress",
+                  "value": "<string>",
+                  "description": "Test email address that will be used to preview the scheduled message."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "listId",
+                  "description": "(Required) Identifier used to locate the list."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "savedMessageId",
+                  "description": "(Required) Identifier used to locate the saved message."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "430c0339-5732-442e-bf5f-c84c3971525a",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId",
+                    "Message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sendDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sendTestMessage",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sendReviewMessage",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "testEmailAddress",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97000a09-0e94-4e0c-a83f-14e118cc4514",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId",
+                    "Message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sendDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sendTestMessage",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sendReviewMessage",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "testEmailAddress",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ce247ca-bd21-458a-a43e-c13f1167fad8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId",
+                    "Message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sendDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sendTestMessage",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sendReviewMessage",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "testEmailAddress",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70e598b8-6681-4fdb-a0e6-a4159fed6c64",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId",
+                    "Message"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "sendDate",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "sendTestMessage",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "sendReviewMessage",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "testEmailAddress",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e38ee94-a19e-41cd-adc6-ab77d40a97e6",
+          "name": "Get a SavedMessage",
+          "request": {
+            "name": "Get a SavedMessage",
+            "description": {
+              "content": "Returns the specified saved message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "List",
+                ":listId",
+                "SavedMessage",
+                ":savedMessageId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "listId",
+                  "description": "(Required) Identifier used to locate the list resource."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "savedMessageId",
+                  "description": "(Required) Identifier used to locate the saved message."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "93086136-7415-49f2-8e99-bb3421b29ac2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80f0db89-0faf-42d2-a957-3f53348cfa40",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66674f54-47b8-4f7a-8d40-6db95c51a3e1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ab2d940-fbaf-496f-8566-4b705b193481",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list resource."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8f6269c-67ee-4cfc-8f25-c2e847d5547e",
+          "name": "Update a SavedMessage",
+          "request": {
+            "name": "Update a SavedMessage",
+            "description": {
+              "content": "Updates the specified saved message with the provided content and metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "List",
+                ":listId",
+                "SavedMessage",
+                ":savedMessageId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "listId",
+                  "description": "(Required) Identifier used to locate the list."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "savedMessageId",
+                  "description": "(Required) Identifier used to locate the saved message."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "096f8294-2f39-4139-a8c6-a47807388a1a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a882241f-9f39-4d81-bbc4-77e8901672ae",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3180c79c-907c-40a2-8c5c-99944ca64287",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb4f9873-a300-472e-a822-bdd595e94f4a",
+              "name": "NotFound",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "List",
+                    ":listId",
+                    "SavedMessage",
+                    ":savedMessageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "listId",
+                      "description": "(Required) Identifier used to locate the list."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "savedMessageId",
+                      "description": "(Required) Identifier used to locate the saved message."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.listrak.com/crosschannel/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e73107b5-daab-4713-acf5-a2b1b5429da8",
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device SavedMessage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n",
+      "type": "text/plain"
+    }
+  }
+}

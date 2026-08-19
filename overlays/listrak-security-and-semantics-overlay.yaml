@@ -1,0 +1,108 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Listrak
+  version: 1.0.0
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Derived from Listrak's own published documentation (the prose embedded in each spec's
+  info.description) and from openapi/_original/*.json. Nothing here invents behaviour - every value
+  restates something Listrak publishes, in a machine-readable place.
+x-extends-note: >-
+  This overlay applies to the refined per-resource specs in openapi/. It exists because the tag-split
+  refinement of Listrak's Email/SMS/Data/Privacy Swagger 2.0 documents kept only the AWS API Gateway
+  `Authorizer` apiKey declaration and dropped the real OAuth 2.0 clientCredentials scheme, its token
+  URL and its scope map. Applying this overlay restores the auth contract Listrak actually documents
+  and adds the rate-limit, error-envelope and idempotency facts that live only in prose. The
+  harvested originals in openapi/_original/ are never mutated.
+extends: openapi/listrak-contact-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-profile: https://apis.io/provider/listrak
+    x-apievangelist-reviewed: '2026-08-13'
+- target: $.components.securitySchemes
+  update:
+    OAuth2:
+      type: oauth2
+      description: >-
+        OAuth 2.0 client_credentials. POST grant_type=client_credentials, client_id and
+        client_secret as application/x-www-form-urlencoded to the token endpoint, then send the
+        result as `Authorization: Bearer <token>`. Credentials are issued per Integration in the
+        Listrak application and the client secret cannot be recovered once lost.
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.listrak.com/OAuth2/Token
+          scopes:
+            Contact: Read, create, update, subscribe and unsubscribe contacts on a list.
+            Event: Contact events used to drive triggered and behavioral sends.
+            List: Lists, folders, IP pools, imports and resources nested under a list.
+            Message: Messages, saved messages, content, campaigns, split tests and sends.
+            Report: Message activity, link clickers and summary reporting reads.
+            Segmentation: Profile (segmentation) fields, field groups and field values.
+            Customer: Import retail customer records (Data Import API).
+            Order: Import retail order records (Data Import API).
+            Product: Import retail product catalog records (Data Import API).
+            Review: Import product reviews and rating summaries (Data Import API).
+- target: $.info
+  update:
+    x-error-envelope:
+      media_type: application/json
+      rfc9457: false
+      fields: [status, error, message]
+      code_field: error
+      registry: errors/listrak-error-codes.yml
+      example: '{"status":401,"error":"ERROR_UNAUTHORIZED","message":"Authorization was denied for this request."}'
+- target: $.info
+  update:
+    x-idempotency:
+      supported: false
+      header: null
+      note: >-
+        Listrak documents no idempotency key and no retry-dedup contract on any of its eight REST
+        APIs. A retried send is a second message. The Data Import collection POSTs are re-runnable
+        only because they upsert on merchant-owned natural keys.
+- target: $.info
+  update:
+    x-pagination:
+      style: cursor
+      request:
+        cursor: {default: Start}
+        count: {default: 1000, maximum: 5000}
+      response:
+        next: nextPageCursor
+      note: The Media REST API instead uses page-number pagination with pageNumber/pageSize/totalCount.
+- target: $.info
+  update:
+    x-rate-limits:
+      published_for: [Privacy REST API]
+      privacy:
+      - {limit: 20, window: 10 seconds}
+      - {limit: 60, window: 1 minute}
+      status_on_exhaustion: 429
+      response_headers: []
+      retry_after: false
+      note: >-
+        Only the Privacy REST API publishes numbers. Mobile App Push and Two-Way SMS declare 429
+        without a threshold. No Listrak API emits a rate-limit response header, so clients must use
+        blind exponential backoff.
+- target: $.info
+  update:
+    x-versioning:
+      scheme: uri-path
+      current: v1
+      breaking_change_policy_published: true
+      deprecation_policy_published: false
+      sunset_header: false
+- target: $.info
+  update:
+    x-agent-surface:
+      mcp_server: false
+      agent_card: false
+      asyncapi: false
+      webhooks: 1
+      webhook_signature_verification: false
+      engagement_events: poll-only
+      note: >-
+        Email and SMS engagement (opens, clicks, bounces, unsubscribes) has no webhook and must be
+        polled from the reporting operations. This is the largest agent-readiness gap in the surface.

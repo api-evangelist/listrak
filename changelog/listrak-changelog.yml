@@ -1,0 +1,81 @@
+generated: '2026-08-13'
+method: searched
+source: https://help.listrak.com/en/collections/3229482-product-updates
+docs: https://help.listrak.com/en/articles/13455860-2026-product-updates
+notes: >-
+  Listrak has no developer changelog. There is no release-notes feed on the developer page, no dated
+  API changelog in any of the eight specs, and no /changelog route on api.listrak.com. What exists is
+  a PRODUCT updates collection in the Intercom-hosted help center: one article per year since 2021,
+  each grouped by quarter, mixing platform/UI releases with the occasional API change. Entries carry
+  no version numbers and no exact dates - the quarter is the finest granularity Listrak publishes -
+  so `date` below is the quarter, honestly. An API consumer cannot subscribe to this and cannot diff
+  it; the API-affecting items have to be read out of a marketing-shaped list. Recent window only.
+scheme:
+  versioned: false
+  granularity: quarter
+  format: help-center-article-per-year
+  feed: null
+  api_specific: false
+current_version: v1
+collection_url: https://help.listrak.com/en/collections/3229482-product-updates
+archive:
+- year: 2026
+  url: https://help.listrak.com/en/articles/13455860-2026-product-updates
+- year: 2025
+  url: https://help.listrak.com/en/articles/10658501-2025-product-updates
+- year: 2024
+  url: https://help.listrak.com/en/articles/9278882-2024-product-updates
+- year: 2024
+  url: https://help.listrak.com/en/articles/9020239-2024-bug-fixes-and-minor-updates-log
+  kind: bug-fix-log
+- year: 2023
+  url: https://help.listrak.com/en/articles/6817165-2023-product-updates
+- year: 2023
+  url: https://help.listrak.com/en/articles/6891650-2023-bug-fixes-and-minor-updates-log
+  kind: bug-fix-log
+- year: 2022
+  url: https://help.listrak.com/en/articles/5756541-2022-product-updates
+- year: 2022
+  url: https://help.listrak.com/en/articles/6019868-2022-bug-fixes-and-minor-updates-log
+  kind: bug-fix-log
+- year: 2021
+  url: https://help.listrak.com/en/articles/5753957-2021-product-updates
+entries:
+- date: 2026-Q2
+  version: null
+  breaking: false
+  api_affecting: true
+  source: https://help.listrak.com/en/articles/13455860-2026-product-updates
+  additions:
+  - NextGen Contact API supports External Contact IDs as a primary reference for cross-system consistency
+  - Webhook-based real-time integrations that capture third-party events for immediate segmentation
+  - RCS messaging alongside SMS/MMS with verified branding and expanded formatting
+  - App Push personalization in Journey Hub using journey and event data
+  - Configurable cross-channel attribution windows (1, 3, 5, 7, 14, 30 days)
+  - AI-powered segments (BETA) generated from natural-language input
+  - Recharge subscription-event integration
+  - Shopify checkout-abandonment journeys
+- date: 2026-Q1
+  version: null
+  breaking: false
+  api_affecting: false
+  source: https://help.listrak.com/en/articles/13455860-2026-product-updates
+  additions:
+  - Media Library refresh - sorting, image optimization, enhanced previews
+  - NextGen analytics dashboards (Program Performance, Revenue, Contacts, Campaigns)
+  - Advanced Shopify tag criteria and Shopify Flows integration
+  - Left-segment entry triggers in Journey Hub
+  - Segment export/re-import of contact IDs
+  - Enhanced popup targeting rules (cart value, experience history, IP, geo, step activity)
+  - Dropdown fields in Experience Builder, up to 150 options
+  - Static image support for App Push in broadcasts and Journey Hub
+  - Apple MPP filtering in open-rate reporting
+  - In-app product roadmap access under Help & Support
+observed_but_unlogged:
+  - change: The Media REST API (https://api.listrak.com/media, OpenAPI 3.1.1, 9 operations) is live
+      and linked from the developer page, and the Q1 2026 "Media Library Refresh" note is the closest
+      the changelog comes to announcing it - but the API itself is never named in any product update.
+    found: '2026-08-13'
+    note: Recorded here because it is the clearest example of API changes not reaching this changelog.
+cross_links:
+  lifecycle: lifecycle/listrak-lifecycle.yml

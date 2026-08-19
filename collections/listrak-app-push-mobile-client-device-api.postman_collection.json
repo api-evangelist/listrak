@@ -1,0 +1,1852 @@
+{
+  "item": [
+    {
+      "id": "41cc44a8-0410-4050-95fe-48d671059ae9",
+      "name": "app-push-mobile-client-device",
+      "description": {
+        "content": "Endpoints to manage app push devices.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cde98d4a-ea9b-4cf0-9e70-68f53f415dcd",
+          "name": "Registers a device to receive push notifications",
+          "request": {
+            "name": "Registers a device to receive push notifications",
+            "description": {},
+            "url": {
+              "path": [
+                "device"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "263df4b2-8e68-4192-af0a-5dc85b91c9dc",
+              "name": "Returns one Device",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5ed99ee-7734-46d4-a04a-0248b7b905d1",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8bf7d54-b6dd-472a-8001-db3a74339e8c",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "061ec47a-083e-45de-8a13-401996f7b31c",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "336c6182-6602-42df-9911-a1361dc49583",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40eabc88-26a2-4bf9-8175-862aaddc19c8",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c66a987-389e-41a9-a552-90abd4cd6acb",
+          "name": "Gets device information",
+          "request": {
+            "name": "Gets device information",
+            "description": {},
+            "url": {
+              "path": [
+                "device",
+                ":deviceUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deviceUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c575b380-647f-43ba-8979-a9ebb4042427",
+              "name": "Returns one Device",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c56c9aaa-4e04-4703-8066-89e8bdd5c8c3",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88e075a4-71e6-45f9-b0c6-0d0221c0dfdc",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec0f6a4c-ac9d-46ef-a8e6-cde298c417ce",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd9646b9-cb69-4f19-b828-f316d356893f",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a72cbb84-6bc3-4da8-b7ff-97d36cea2156",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64aa8f60-1e24-4a4c-af36-9d52c75f592f",
+          "name": "Updates a device",
+          "request": {
+            "name": "Updates a device",
+            "description": {},
+            "url": {
+              "path": [
+                "device",
+                ":deviceUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deviceUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ebc6aed3-3b03-4e1a-a1cf-a01e1ad0a29d",
+              "name": "Returns one Device",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "017833db-8ed8-4741-911b-dfb8d28d626e",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2d25b0d-2770-480b-894d-dceb17cee754",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df6a6cca-ea95-4a80-adcd-4f3b869ce654",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20700b73-b972-49dd-8bc1-134edd2eabab",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7e3bd54-4fd0-4f59-a980-583501e7adf5",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b546947d-9c1a-4d24-b0f3-160ba5eaee76",
+          "name": "Patches a device",
+          "request": {
+            "name": "Patches a device",
+            "description": {},
+            "url": {
+              "path": [
+                "device",
+                ":deviceUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deviceUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deviceUid\": \"<uuid>\",\n  \"deviceToken\": \"<string>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"subscribed\": \"<boolean>\",\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "801b9cc7-ecdc-4c16-95c1-1ccb795342eb",
+              "name": "Returns one Device",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deviceUid\": \"<uuid>\",\n  \"deviceToken\": \"<string>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"subscribed\": \"<boolean>\",\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"devicePlatformType\": \"<string>\",\n  \"deviceToken\": \"<string>\",\n  \"subscribed\": \"<boolean>\",\n  \"deviceUid\": \"<uuid>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc4113a5-5e43-4a17-aa0d-12e371068eb0",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deviceUid\": \"<uuid>\",\n  \"deviceToken\": \"<string>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"subscribed\": \"<boolean>\",\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "543fe640-2fc6-40d6-8596-ec8b078090d5",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deviceUid\": \"<uuid>\",\n  \"deviceToken\": \"<string>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"subscribed\": \"<boolean>\",\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2eb1de33-f30b-4f80-a95d-3cdda9e1851b",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deviceUid\": \"<uuid>\",\n  \"deviceToken\": \"<string>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"subscribed\": \"<boolean>\",\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebd9102f-38fb-4fd3-a5a4-35be6ad6f810",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deviceUid\": \"<uuid>\",\n  \"deviceToken\": \"<string>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"subscribed\": \"<boolean>\",\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "577e8cf2-14b1-4f76-bec9-8fdb3a7387f3",
+              "name": "An error returned by the App Push APIs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "device",
+                    ":deviceUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deviceUid\": \"<uuid>\",\n  \"deviceToken\": \"<string>\",\n  \"identifiers\": {\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"subscribed\": \"<boolean>\",\n  \"deviceOS\": \"<string>\",\n  \"deviceOSVersion\": \"<string>\",\n  \"deviceType\": \"<string>\",\n  \"mobileAppVersion\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.listrak.com/crosschannel/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e52372df-6e06-4b97-99c8-2f527d465780",
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n",
+      "type": "text/plain"
+    }
+  }
+}

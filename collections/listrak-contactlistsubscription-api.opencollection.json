@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device ContactListSubscription API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ContactListSubscription",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Contact List Collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/ShortCode/:senderCodeId/Contact/:phoneNumber/PhoneList",
+            "params": [
+              {
+                "name": "senderCodeId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to specify the Sender Code."
+              },
+              {
+                "name": "phoneNumber",
+                "value": "",
+                "type": "path",
+                "description": "Phone number to idenify contact to retrieve data."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Value indicating the page of data that's being retrieved. The default value is `Start`."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of data members to be displayed per page. The default value is `1000` and the maximum value is `5000`."
+              }
+            ]
+          },
+          "docs": "Retrieve a collection of SMS Lists that a contact belongs to along with subscription status."
+        },
+        {
+          "info": {
+            "name": "Subscribe Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/ShortCode/:senderCodeId/Contact/:phoneNumber/PhoneList/:phoneListId",
+            "params": [
+              {
+                "name": "senderCodeId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to specify the sender Code."
+              },
+              {
+                "name": "phoneNumber",
+                "value": "",
+                "type": "path",
+                "description": "Phone number to identify contact to subscribe."
+              },
+              {
+                "name": "phoneListId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier to determine which SMS List to subscribe contact."
+              }
+            ]
+          },
+          "docs": "Subscribes a contact to an SMS list. This will only subscribe contacts that already exist on the sender code. If the contact does not already exist on the sender code, please use the Create Contact call to create and subscribe the contact."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/ShortCode/:senderCodeId/ContactUnsubscribe/:phoneNumber/PhoneList/:phoneListId",
+            "params": [
+              {
+                "name": "senderCodeId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to specify the Sender Code."
+              },
+              {
+                "name": "phoneNumber",
+                "value": "",
+                "type": "path",
+                "description": "Phone number to identify contact to unsubscribe."
+              },
+              {
+                "name": "phoneListId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier to determine which SMS List to unsubscribe contact."
+              }
+            ]
+          },
+          "docs": "Unsubscribes a contact from an SMS List. This will only unsubscribe contacts that already exist on the Sender Code, and exist on the SMS List."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

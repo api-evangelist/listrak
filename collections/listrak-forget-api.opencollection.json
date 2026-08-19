@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device Forget API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Forget",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get forget request status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/Forget/:requestId",
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the forget request."
+              }
+            ]
+          },
+          "docs": "Gets the status of a previously submitted forget request."
+        },
+        {
+          "info": {
+            "name": "Submit a forget request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/Forget",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queues a forget request based on unique identifiers such as email address, phone number, etc."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

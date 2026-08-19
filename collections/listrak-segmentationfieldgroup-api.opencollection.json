@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device SegmentationFieldGroup API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SegmentationFieldGroup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all Profile Field Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/List/:listId/SegmentationFieldGroup",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the list."
+              }
+            ]
+          },
+          "docs": "Returns a collection of profile field groups for the specified list."
+        },
+        {
+          "info": {
+            "name": "Create a Profile Field Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/List/:listId/SegmentationFieldGroup",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the list."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new profile field group for the specified list."
+        },
+        {
+          "info": {
+            "name": "Get a Profile Field Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/List/:listId/SegmentationFieldGroup/:segmentationFieldGroupId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the list."
+              },
+              {
+                "name": "segmentationFieldGroupId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the profile field group."
+              }
+            ]
+          },
+          "docs": "Returns the specified profile field group."
+        },
+        {
+          "info": {
+            "name": "Update a Profile Field Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/List/:listId/SegmentationFieldGroup/:segmentationFieldGroupId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the list."
+              },
+              {
+                "name": "segmentationFieldGroupId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the profile field group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified profile field group."
+        },
+        {
+          "info": {
+            "name": "Delete a Profile Field Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/List/:listId/SegmentationFieldGroup/:segmentationFieldGroupId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the list."
+              },
+              {
+                "name": "segmentationFieldGroupId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the profile field group."
+              }
+            ]
+          },
+          "docs": "Deletes the specified profile field group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

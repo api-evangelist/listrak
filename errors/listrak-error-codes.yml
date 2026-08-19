@@ -1,0 +1,366 @@
+generated: '2026-08-13'
+method: searched
+source: https://api.listrak.com/email/swagger/docs/v1
+docs:
+- https://api.listrak.com/email
+- https://api.listrak.com/sms
+- https://api.listrak.com/media
+format: vendor-error-codes
+notes: >-
+  Listrak does NOT use RFC 9457 problem+json. It returns a flat vendor envelope on
+  `application/json` with three required members - `status`, `error`, `message` - where `error` is a
+  stable SCREAMING_SNAKE error code drawn from the registry below. The registry is published inside
+  the `info.description` of the Email, SMS and Media specs (an "# Error Codes" section), which is
+  why it does not appear in any response schema and is invisible to a spec-only derivation. Captured
+  verbatim by SEARCH of the live specs. The `error` code is the value to branch on; `message` is
+  human prose and is not a contract.
+envelope:
+  media_type: application/json
+  shape:
+    status: integer or numeric string - the HTTP status, repeated in the body
+    error: string - the stable error code
+    message: string - human-readable explanation
+  example: '{"status":401,"error":"ERROR_UNAUTHORIZED","message":"Authorization was denied for this request."}'
+  observed:
+    url: https://api.listrak.com/email/swagger.json
+    http_status: 401
+    fetched: '2026-08-13'
+    note: The envelope above was observed live on an unauthenticated request, not only read from docs.
+  schema_refs:
+  - openapi/_original/listrak-media-openapi.json#/components/schemas/ErrorResponse
+  - openapi/_original/listrak-email-openapi.json#/definitions/Error
+http_statuses:
+- status: 200
+  title: OK
+  meaning: The request succeeded.
+- status: 201
+  title: Created
+  meaning: A new resource has been created.
+- status: 202
+  title: Accepted
+  meaning: The request was accepted for asynchronous processing.
+- status: 204
+  title: No Content
+  meaning: The request was processed successfully but there is no content to return.
+- status: 400
+  title: Bad Request
+  meaning: The request is malformed or invalid.
+- status: 401
+  title: Unauthorized
+  meaning: Authentication is required, or the bearer token is invalid/expired.
+- status: 403
+  title: Forbidden
+  meaning: Authenticated but not permitted - insufficient access level, missing role, or unauthorized IP.
+- status: 404
+  title: Not Found
+  meaning: The resource does not exist. Also returned when an undisclosed payload size limit is exceeded.
+- status: 405
+  title: Method Not Allowed
+  meaning: The route does not support the requested HTTP method.
+- status: 409
+  title: Conflict
+  meaning: The request would result in conflicting resources.
+- status: 415
+  title: Unsupported Media Type
+  meaning: Use a Content-Type of application/json.
+- status: 429
+  title: Too Many Requests
+  meaning: The request rate limit has been exceeded. See rate-limits/listrak-rate-limits.yml.
+- status: 500
+  title: Internal Server Error
+  meaning: An unexpected error occurred; Listrak's development team is notified automatically.
+error_codes:
+- code: ERROR_INVALID_CREDENTIALS
+  group: general
+  apis: [Email, SMS]
+  cause: Invalid client credentials, inactive integration, or unauthorized IP address.
+  remediation: Re-check the client_id/client_secret pair, confirm the Integration is active and not paused, and confirm the calling IP is allowed on the Integration.
+- code: ERROR_UNAUTHORIZED
+  group: general
+  apis: [Email, SMS, Media]
+  http: 401
+  cause: Invalid access token, inactive integration, insufficient access level, or unauthorized IP address.
+  remediation: Request a fresh token from https://auth.listrak.com/OAuth2/Token and confirm the Integration grants the scope the route requires.
+- code: ERROR_FORBIDDEN
+  group: general
+  apis: [Media]
+  http: 403
+  cause: Token lacks the Media role or the CompanyID / MasterAdminID claims.
+  remediation: Grant the Integration Media access and re-issue the token.
+- code: ERROR_NOT_FOUND
+  group: general
+  apis: [Media]
+  http: 404
+  cause: Target resource does not exist.
+- code: ERROR_CONFLICT
+  group: general
+  apis: [Media]
+  http: 409
+  cause: The resource conflicts with an existing resource.
+- code: ERROR_INTERNAL
+  group: general
+  apis: [Media]
+  http: 500
+  cause: Unhandled server error.
+- code: ERROR_INVALID_PARAMETER
+  group: general
+  apis: [Email, SMS, Media]
+  http: 400
+  cause: Null or invalid value for a parameter, or a non-unique value where the property must be unique across the collection.
+- code: ERROR_MALFORMED_REQUEST_BODY
+  group: general
+  apis: [Email, SMS]
+  http: 400
+  cause: Invalid JSON body was supplied.
+- code: ERROR_RESOURCE_DEPENDENCY
+  group: general
+  apis: [Email, SMS]
+  cause: Attempting to delete a resource that is still in use.
+- code: ERROR_UNABLE_TO_LOCATE_RESOURCE
+  group: general
+  apis: [Email, SMS]
+  http: 404
+  cause: A valid route was supplied with invalid resource IDs.
+- code: ERROR_UNHANDLED_EXCEPTION
+  group: general
+  apis: [Email, SMS]
+  http: 500
+  cause: Unexpected error during execution of the request.
+- code: ERROR_UNKNOWN_ROUTE
+  group: general
+  apis: [Email, SMS]
+  http: 404
+  cause: An invalid route was supplied.
+- code: ERROR_UNSAFE_ROUTE
+  group: general
+  apis: [Email, SMS]
+  cause: An invalid character was supplied in the route ('&' outside of a query string, '<', '>', etc.).
+- code: ERROR_UNSUPPORTED_CONTENT_TYPE
+  group: general
+  apis: [Email, SMS]
+  http: 415
+  cause: Invalid or missing Content-Type header; must be application/json.
+- code: ERROR_UNSUPPORTED_METHOD
+  group: general
+  apis: [Email, SMS]
+  http: 405
+  cause: Valid route supplied with an invalid HTTP method.
+- code: ERROR_UNSUPPORTED_PROTOCOL
+  group: general
+  apis: [Email, SMS]
+  cause: The request was not made over HTTPS.
+- code: ERROR_INTEGRATION_CANNOT_ACCESS_BETA_ROUTE
+  group: general
+  apis: [Email]
+  cause: The route is in Beta and not yet generally available for all integrations.
+- code: ERROR_BANNED_EMAIL_ADDRESS
+  group: contact
+  apis: [Email]
+  cause: Subscribing a contact whose email address has been banned.
+- code: ERROR_BANNED_NEW_EMAIL_ADDRESS
+  group: contact
+  apis: [Email]
+  cause: Changing emailAddress to one that has been banned.
+- code: ERROR_CHANGE_ADDRESS_CONTACT_UNSUBSCRIBED
+  group: contact
+  apis: [Email]
+  cause: Changing emailAddress to one that has unsubscribed from the list.
+- code: ERROR_CHANGE_ADDRESS_WITH_EVENTS
+  group: contact
+  apis: [Email]
+  cause: Changing emailAddress in the same request as a list of events.
+- code: ERROR_CHANGE_ADDRESS_WITH_SEGMENTATION_DATA
+  group: contact
+  apis: [Email]
+  cause: Changing emailAddress in the same request as profile data.
+- code: ERROR_CONVERSION_ANALYTICS_NOT_ENABLED
+  group: contact
+  apis: [Email]
+  cause: Conversion analytics is not enabled on the account.
+- code: ERROR_NOT_SUBSCRIBED_EMAIL_ADDRESS
+  group: contact
+  apis: [Email]
+  cause: Unsubscribing a contact that is not a subscriber of the list.
+- code: ERROR_PENDING_EMAIL_ADDRESS
+  group: contact
+  apis: [Email]
+  cause: The address is already pending subscription through double opt-in.
+- code: ERROR_PENDING_NEW_EMAIL_ADDRESS
+  group: contact
+  apis: [Email]
+  cause: Changing emailAddress to one already pending subscription through double opt-in.
+- code: ERROR_SUBSCRIBED_EMAIL_ADDRESS
+  group: contact
+  apis: [Email]
+  cause: Subscribing a contact already subscribed to the list.
+- code: ERROR_SUBSCRIBED_NEW_EMAIL_ADDRESS
+  group: contact
+  apis: [Email]
+  cause: Changing emailAddress to one already subscribed to the list.
+- code: ERROR_SUPPRESSED_EMAIL
+  group: contact
+  apis: [Email]
+  cause: Subscribing an emailAddress that has already been suppressed.
+- code: ERROR_SUPPRESSED_NEW_EMAIL
+  group: contact
+  apis: [Email]
+  cause: Changing emailAddress to one that has already been suppressed.
+- code: ERROR_TOO_MANY_SEGMENTATION_FIELDS
+  group: contact
+  apis: [Email]
+  cause: The number of requested profile fields exceeds the limit (up to 30 field IDs per request).
+- code: ERROR_UNSUBSCRIBE_WITH_EVENTS
+  group: contact
+  apis: [Email]
+  cause: Unsubscribing a contact in the same request as a list of events.
+- code: ERROR_UNSUBSCRIBE_WITH_SEGMENTATION_DATA
+  group: contact
+  apis: [Email]
+  cause: Unsubscribing a contact in the same request as profile data.
+- code: ERROR_UNSUBSCRIBED_EMAIL_ADDRESS
+  group: contact
+  apis: [Email]
+  cause: Unsubscribing a contact already unsubscribed from the list.
+- code: ERROR_UNSUBSCRIBED_NEW_EMAIL_ADDRESS
+  group: contact
+  apis: [Email]
+  cause: Changing emailAddress to one already unsubscribed from the list.
+- code: ERROR_UPDATE_UNSUBSCRIBE_WITH_EVENTS
+  group: contact
+  apis: [Email]
+  cause: Updating an unsubscribed contact in the same request as a list of events.
+- code: ERROR_GOOGLE_TRACKING_DOMAIN_LIMIT_MET
+  group: list
+  apis: [Email]
+  cause: The maximum number of Google tracking domains is already set for the list.
+- code: ERROR_DOMAIN_ALIAS_INVALID
+  group: list
+  apis: [Email]
+  cause: The provided domain alias is not a valid domain.
+- code: ERROR_DOMAIN_ALIAS_MISCONFIGURED_DNS
+  group: list
+  apis: [Email]
+  cause: The DNS record for the provided domain alias does not point to the correct endpoint.
+- code: ERROR_DOMAIN_ALIAS_INVALID_HSTS
+  group: list
+  apis: [Email]
+  cause: The domain alias has HSTS enabled for all sub-domains, or is an alias type Listrak cannot secure.
+- code: ERROR_DOMAIN_ALIAS_PROXY_CERTIFICATE_GENEREATION_FAILED
+  group: list
+  apis: [Email]
+  cause: Listrak was unable to secure the specified domain alias.
+  note: Code is spelled GENEREATION in the published registry; reproduced verbatim.
+- code: ERROR_REVIEW_FLAG_AND_SEND_DATE_SET
+  group: message
+  apis: [Email]
+  cause: sendReviewMessage is true while sendDate is also set.
+- code: ERROR_TEST_FLAG_AND_REVIEW_FLAG_SET
+  group: message
+  apis: [Email]
+  cause: sendReviewMessage and sendTestMessage are both true.
+- code: ERROR_TEST_FLAG_AND_SEND_DATE_SET
+  group: message
+  apis: [Email]
+  cause: sendTestMessage is true while sendDate is also set.
+- code: ERROR_SEGMENTATION_FIELD_GROUP_LIMIT_MET
+  group: segmentation-field-group
+  apis: [Email]
+  cause: The maximum number of profile field groups already exists for the list.
+- code: ERROR_SEGMENTATION_FIELD_DEFINED_TWICE
+  group: transactional-message
+  apis: [Email]
+  cause: Two or more values were supplied for the same segmentationFieldId.
+- code: ERROR_TRANSACTIONAL_MESSAGE_EXTERNAL_CONTENT
+  group: transactional-message
+  apis: [Email]
+  cause: The message contains external content tags.
+- code: ERROR_TRANSACTIONAL_MESSAGE_SYSTEM_LINK
+  group: transactional-message
+  apis: [Email]
+  cause: The message contains system link tags.
+- code: ERROR_INVALID_LIST_ID
+  group: general
+  apis: [SMS]
+  cause: listId does not exist, or does not exist on the supplied senderCodeId.
+- code: ERROR_INVALID_PHONE_NUMBER
+  group: general
+  apis: [SMS]
+  cause: phoneNumber is in an invalid format.
+- code: ERROR_LIST_INACTIVE
+  group: general
+  apis: [SMS]
+  cause: The list identified by listId is inactive.
+- code: ERROR_SENDER_CODE_DISABLED
+  group: general
+  apis: [SMS]
+  cause: The sender code identified by senderCodeId is disabled.
+- code: ERROR_BANNED_PHONE_NUMBER
+  group: contact
+  apis: [SMS]
+  cause: phoneNumber is banned from the sender code on update, subscription or send.
+- code: ERROR_BIRTHDAY_FIELD_NULL
+  group: contact
+  apis: [SMS]
+  cause: The birthday field does not have the correct null value provided.
+- code: ERROR_INVALID_EMAIL_ADDRESS
+  group: contact
+  apis: [SMS]
+  cause: emailAddress is in an invalid format.
+- code: ERROR_INVALID_SEGMENTATION_FIELD_ID
+  group: contact
+  apis: [SMS]
+  cause: segmentationFieldID does not exist on the sender code.
+- code: ERROR_PENDING_PHONE_NUMBER
+  group: contact
+  apis: [SMS]
+  cause: phoneNumber is in a pending double opt-in state on the supplied listID.
+- code: ERROR_PHONE_NUMBER_FOUND
+  group: contact
+  apis: [SMS]
+  cause: phoneNumber already exists on create.
+- code: ERROR_PHONE_NUMBER_NOT_FOUND
+  group: contact
+  apis: [SMS]
+  cause: phoneNumber was not created before updating.
+- code: ERROR_PHONE_NUMBER_NOT_SUBSCRIBED
+  group: contact
+  apis: [SMS]
+  cause: phoneNumber is not subscribed to the supplied listID.
+- code: ERROR_PHONE_NUMBER_SUSPENDED
+  group: contact
+  apis: [SMS]
+  cause: The phone number's service is temporarily suspended and cannot be sent messages.
+- code: ERROR_SEGMENTATION_FIELD_DISABLED
+  group: contact
+  apis: [SMS]
+  cause: The profile field is disabled or purged.
+- code: ERROR_SEGMENTATION_MAX_LENGTH
+  group: contact
+  apis: [SMS]
+  cause: The profile field value is too long for the field.
+- code: ERROR_SUBSCRIBED_PHONE_NUMBER
+  group: contact
+  apis: [SMS]
+  cause: phoneNumber is already subscribed to the supplied listID.
+- code: ERROR_TRANSACTIONAL_MESSAGE_CONTENT_COUPON_CODE
+  group: transactional-message
+  apis: [SMS]
+  cause: Transactional message content may not contain coupon code tags.
+- code: ERROR_TRANSACTIONAL_MESSAGE_EMPTY_MESSAGE
+  group: transactional-message
+  apis: [SMS]
+  cause: Transactional message content is empty after profile tags are filled in.
+- code: ERROR_TRANSACTIONAL_MESSAGE_NOT_FOUND
+  group: transactional-message
+  apis: [SMS]
+  cause: transactionalMessageID does not exist on the supplied listID.
+summary:
+  error_code_count: 68
+  http_status_count: 13
+  rfc9457: false
+  stable_machine_code: true
+  code_field: error
+cross_links:
+  conventions: conventions/listrak-conventions.yml
+  rate_limits: rate-limits/listrak-rate-limits.yml
+  authentication: authentication/listrak-authentication.yml

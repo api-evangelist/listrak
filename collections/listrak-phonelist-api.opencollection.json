@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device PhoneList API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PhoneList",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get collection of SMS Lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/ShortCode/:senderCodeId/PhoneList",
+            "params": [
+              {
+                "name": "senderCodeId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to specify the Sender Code."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status of list types to retrieve.  The default value is `active`.  Options are `active` or `inactive`"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Value indicating the page of data that's being retrieved. The default value is `Start`."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of data members to be displayed per page. The default value is `1000` and the maximum value is `5000`."
+              }
+            ]
+          },
+          "docs": "Retrieve a collection of SMS Lists for a sender code by list status."
+        },
+        {
+          "info": {
+            "name": "Get SMS List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/ShortCode/:senderCodeId/PhoneList/:phoneListId",
+            "params": [
+              {
+                "name": "senderCodeId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to specify the Sender Code."
+              },
+              {
+                "name": "phoneListId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to specify SMS List."
+              }
+            ]
+          },
+          "docs": "Retrieve a single SMS List by List Id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,136 @@
+generated: '2026-08-13'
+method: searched
+source: https://github.com/listrak + npm/PyPI/Maven Central/CocoaPods registry metadata endpoints
+notes: >-
+  Listrak ships NO server-side REST client library in any language. Its API docs teach the APIs with
+  raw HTTP plus generic third-party helpers (Newtonsoft.Json for C#, Guzzle 6 for PHP) rather than a
+  Listrak SDK. The only first-party client code Listrak publishes is the pair of mobile App Push
+  SDKs on its GitHub org - and neither is in a package registry: the Android SDK is a bare Maven
+  repository layout committed into the GitHub repo, the iOS SDK is a zipped framework referenced by
+  a hand-maintained JSON version manifest. Both sit at 1.0.0 and neither repo has been pushed to
+  since February 2021, while the App Push Mobile Client API they wrap is still live and documented.
+  That five-year gap is the decay signal worth recording. CocoaPods has no `Listrak` pod and Maven
+  Central returns zero results for `listrak`, so there is no registry-published version for either.
+packages:
+- language: swift
+  platform: ios
+  registry: github
+  name: Listrak-iOS-SDK
+  url: https://github.com/listrak/Listrak-iOS-SDK
+  install: >-
+    Download ListrakSDK-iOS-1.0.0.zip from the repo and add the framework manually - see
+    https://help.listrak.com/en/articles/4860159-add-the-listrak-ios-sdk-to-your-ios-application
+  version: 1.0.0
+  published: '2021-02-10'
+  official: true
+  wraps: openapi/_original/listrak-mobileclient-openapi.json
+  note: >-
+    Version read from ListrakSDK-iOS.json, the repo's own version manifest, which maps "1.0.0" to a
+    zip in the repo. Date is the repo's last push (2021-02-10) - there are no tags and no GitHub
+    releases, so no per-version publish date exists. Not on CocoaPods (cocoapods.org/pods/Listrak
+    404s) and not on Swift Package Index; there is no registry metadata endpoint to query.
+- language: java
+  platform: android
+  registry: github
+  name: com.listrak:ListrakSDK.Android
+  url: https://github.com/listrak/Listrak-Android-SDK
+  install: >-
+    Add the GitHub repo as a Maven repository and depend on com.listrak:ListrakSDK.Android:1.0.0 -
+    see https://help.listrak.com/en/articles/4825967-add-the-listrak-android-sdk-as-a-dependency-to-your-android-app
+  version: 1.0.0
+  published: '2021-02-03'
+  official: true
+  wraps: openapi/_original/listrak-mobileclient-openapi.json
+  note: >-
+    Version read from the repo tree - the repo IS a Maven layout, holding exactly
+    com/listrak/ListrakSDK.Android/1.0.0/ListrakSDK.Android-1.0.0.aar and its .pom, plus a git tag
+    "1.0.0". Date is the repo's last push (2021-02-03). NOT published to Maven Central: a
+    search.maven.org query for "listrak" returns numFound 0, so there is no registry metadata
+    endpoint to query.
+- language: javascript
+  registry: npm
+  name: listrak
+  url: https://www.npmjs.com/package/listrak
+  install: npm install listrak
+  version: 1.0.1
+  published: '2019-08-07'
+  official: true
+  note: >-
+    Published by npm user dgomez-ltk with the maintainer email dgomez@listrak.com, which is why this
+    is recorded as first-party. It is NOT a general-purpose Listrak API client - the package
+    describes itself as "Listrak SegmentIO Integration" and its repository field points at
+    github.com/dgomez-listrak/segment, an individual employee account rather than the listrak GitHub
+    org. Two versions have ever been published (1.0.0, 1.0.1) and the latest is from August 2019.
+    Version and date read from registry.npmjs.org/listrak.
+third_party_packages:
+- language: javascript
+  registry: npm
+  name: "@mediocre/listrak"
+  url: https://github.com/mediocre/listrak
+  official: false
+  version: null
+  published: null
+  note: >-
+    Community Node.js client for the OAuth 2.0 REST APIs, maintained by the Mediocre agency. The
+    scoped npm name @mediocre/listrak returns an error from registry.npmjs.org (no such scoped
+    package), so the library is consumable only from its GitHub repo - version and publish date
+    recorded as null because there is no registry record to read.
+- language: python
+  registry: pypi
+  name: tap-listrak
+  url: https://pypi.org/project/tap-listrak/
+  install: pip install tap-listrak
+  official: false
+  version: 2.0.8
+  published: '2019-04-03'
+  note: >-
+    Singer.io tap by Stitch (now Talend/Qlik) that extracts data from the Listrak API for ELT
+    pipelines. Not a client library and not Listrak-authored. Version and date read from
+    pypi.org/pypi/tap-listrak/json.
+- language: python
+  registry: github
+  name: python-listrak
+  url: https://github.com/joepetrini/python-listrak
+  official: false
+  version: null
+  published: null
+  note: >-
+    Individual's wrapper for the LEGACY Listrak v31 SOAP API, which the current REST surface
+    replaced. Not on PyPI, so no registry version or date exists. Listed only so it is not mistaken
+    for a current client.
+- language: ruby
+  registry: rubygems
+  name: workarea-listrak
+  url: https://github.com/workarea-commerce/workarea-listrak
+  official: false
+  version: null
+  published: null
+  note: >-
+    Workarea Commerce platform integration plugin, not a Listrak client library. The
+    rubygems.org API did not return a record for this name during the probe, so version and date
+    are null.
+registries_checked:
+- registry: npm
+  result: one first-party package (listrak), one community package unresolvable
+- registry: pypi
+  result: no first-party package; tap-listrak is third-party
+- registry: maven-central
+  result: numFound 0 for "listrak"
+- registry: cocoapods
+  result: 404 for pod "Listrak"
+- registry: nuget
+  result: no Listrak-authored package found
+- registry: rubygems
+  result: no first-party package
+- registry: packagist
+  result: no first-party package
+- registry: crates.io
+  result: no first-party package
+- registry: pkg.go.dev
+  result: no first-party package
+summary:
+  official_count: 3
+  official_server_side_sdk_count: 0
+  third_party_count: 4
+  oldest_official_release: '2019-08-07'
+  newest_official_release: '2021-02-10'

@@ -1,0 +1,82 @@
+generated: '2026-08-13'
+method: searched
+source: https://api.listrak.com/email/swagger/docs/v1
+docs: https://api.listrak.com/email
+versioning:
+  scheme: uri-path
+  current: v1
+  all_apis_at_v1: true
+  docs: https://api.listrak.com/email
+  policy: >-
+    Listrak publishes an explicit breaking-change contract in the "# Versioning" section of every
+    spec: the API version is denoted in the URI and is incremented if breaking changes are
+    introduced. Breaking = adding required headers, parameters or model fields to a current route,
+    or any alteration that would make currently valid requests fail or behave unexpectedly.
+    Non-breaking = new model fields, new routes, new response headers, and ANY alteration to a route
+    marked "In Development".
+  breaking_changes:
+  - Addition of required headers, parameters, or model fields to a current route
+  - Alterations that would result in currently valid requests failing, or performing unexpectedly
+  non_breaking_changes:
+  - Addition of new model fields
+  - Addition of new routes
+  - Addition of new response headers
+  - Any alteration to a route marked "In Development"
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  notes: >-
+    Listrak publishes a VERSIONING policy but not a DEPRECATION policy. Nothing states how long a
+    version is supported after a successor ships, no notice period is committed to, and neither the
+    RFC 8594 `Sunset` header nor the `Deprecation` header appears in any of the eight specs. No
+    operation in any spec carries `deprecated: true`. Because there is no deprecation policy to
+    point at, NO `Deprecation` pointer is emitted in apis.yml - an honest absence rather than a
+    Lifecycle pointer dressed up as one.
+  in_development_marker: >-
+    Routes can be marked "In Development" in the rendered reference. Those routes are explicitly
+    outside the breaking-change guarantee and may be restricted to enrolled integrations
+    (ERROR_INTEGRATION_CANNOT_ACCESS_BETA_ROUTE). This is Listrak's pre-GA marker, not a
+    post-GA sunset marker.
+deprecated_operations: []
+legacy_surface:
+  name: Listrak v31 SOAP API
+  status: superseded by the REST APIs
+  evidence: >-
+    Third-party wrappers for a "Listrak v31 SOAP API" exist (github.com/joepetrini/python-listrak)
+    but Listrak publishes no SOAP endpoint, WSDL, or migration note on its current developer page.
+    The retirement of that surface was never documented publicly.
+status_page:
+  url: https://status.listrak.com
+  provider: Atlassian Statuspage
+  machine_readable: https://status.listrak.com/api/v2/summary.json
+  history: https://status.listrak.com/history
+  verified:
+    http_status: 200
+    fetched: '2026-08-13'
+sla:
+  url: null
+  uptime_target: null
+  notes: >-
+    No public SLA or uptime commitment. Listrak sells enterprise contracts only, so any uptime target
+    lives in the negotiated MSA rather than on the website.
+support:
+  developer_feedback: restapifeedback@listrak.com
+  help_center: https://help.listrak.com/en/
+  client_support: https://support.listrak.com
+  notes: >-
+    restapifeedback@listrak.com is published inside every spec's "# Feedback" section, which
+    explicitly solicits feedback on code samples, response examples, and field descriptions.
+changelog:
+  see: changelog/listrak-changelog.yml
+  url: https://help.listrak.com/en/collections/3229482-product-updates
+roadmap:
+  public: false
+  notes: >-
+    Listrak added "Product Roadmap Access" in Q1 2026, but it is exposed inside the application under
+    the Help & Support menu - it is not a public URL, so no `Roadmap` pointer is emitted.
+cross_links:
+  conventions: conventions/listrak-conventions.yml
+  changelog: changelog/listrak-changelog.yml

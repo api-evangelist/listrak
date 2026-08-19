@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device ContentFolder API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ContentFolder",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all Content Folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/ContentFolder"
+          },
+          "docs": "Returns the collection of content library folders associated with the account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,356 @@
+{
+  "item": [
+    {
+      "id": "15c75521-73bc-4f33-9fbf-4e922648d31b",
+      "name": "Events",
+      "description": {
+        "content": "REST endpoints to manage Custom Events.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8ec25b9b-9e81-4cd9-9e3f-aee2f38a1c57",
+          "name": "Route to post new Custom Events.",
+          "request": {
+            "name": "Route to post new Custom Events.",
+            "description": {
+              "content": "A route to post new Custom Events associated with the given Custom Event Configuration. The data payload for these events should match the schema defined through your Custom Events Integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "eventConfigurations",
+                ":eventUID",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "eventUID",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"dataFields\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"dataFields\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f35c47f7-781a-46d8-9e00-f5d337832172",
+              "name": "Contains the response information for each submitted identifier, as well as metadata associated with the overall response status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations",
+                    ":eventUID",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"dataFields\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"dataFields\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"statusCode\": 2031,\n      \"errors\": [\n        {\n          \"errorType\": \"string\",\n          \"errorMessage\": \"string\"\n        },\n        {\n          \"errorType\": \"string\",\n          \"errorMessage\": \"string\"\n        }\n      ]\n    },\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"statusCode\": 4063,\n      \"errors\": [\n        {\n          \"errorType\": \"string\",\n          \"errorMessage\": \"string\"\n        },\n        {\n          \"errorType\": \"string\",\n          \"errorMessage\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"meta\": {\n    \"statusCode\": 589,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"userMessage\": \"string\",\n        \"internalMessage\": \"string\"\n      },\n      {\n        \"userMessage\": \"string\",\n        \"internalMessage\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31bfefc0-2692-46d6-a91f-1cb5146ad1ca",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations",
+                    ":eventUID",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"dataFields\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"dataFields\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2290b294-3de9-40ca-b14f-e0c22b944f1d",
+              "name": "Entity Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations",
+                    ":eventUID",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"dataFields\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"dataFields\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d54e52bf-88cd-4b09-9a31-f7119f43349c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventConfigurations",
+                    ":eventUID",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "eventUID",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"dataFields\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    },\n    {\n      \"identifiers\": [\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        },\n        {\n          \"identifierValue\": \"<string>\",\n          \"identifierType\": \"<string>\"\n        }\n      ],\n      \"dataFields\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "disabled": false,
+                  "key": "X-Frame-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Strict-Transport-Security",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "X-Content-Type-Options",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "Content-Security-Policy",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.listrak.com/crosschannel/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "60810812-b33a-41c1-95b2-85d8ec31c74f",
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n",
+      "type": "text/plain"
+    }
+  }
+}

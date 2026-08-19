@@ -1,0 +1,74 @@
+generated: '2026-08-13'
+method: generated
+source: openapi/_original/*.json
+notes: >-
+  Packaged Agent Skills for Listrak's public REST surface, one per marquee flow. Every step names a
+  real operationId verified against the provider's live specifications; nothing here is invented.
+  The recurring theme across all six is that Listrak publishes NO idempotency contract, so each
+  skill states explicitly what a retry does on that flow rather than leaving an agent to assume
+  retry safety. Searched first for provider-published skills or an AGENTS.md - Listrak publishes
+  none.
+skills:
+- file: listrak-subscribe-and-profile-a-contact.md
+  name: Subscribe and profile a Listrak email contact
+  api: openapi/listrak-contact-api-openapi.yml
+  base_url: https://api.listrak.com/email
+  scopes: [List, Segmentation]
+  operations:
+  - List_GetListCollection
+  - SegmentationField_GetSegmentationFieldCollection
+  - Contact_PostContactResource
+  - ContactSegmentationField_PostContactSegmentationFieldValuesResource
+  - Contact_GetContactResourceByIdentifier
+- file: listrak-send-a-transactional-email.md
+  name: Send a Listrak transactional email
+  api: openapi/listrak-transactionalmessage-api-openapi.yml
+  base_url: https://api.listrak.com/email
+  scopes: [Message]
+  operations:
+  - TransactionalMessage_GetTransactionalMessageCollection
+  - TransactionalMessage_GetTransactionalMessageResource
+  - TransactionalMessage_PostTransactionalMessageSend
+  - TransactionalMessageActivity_GetTransactionalMessageActivityCollection
+  - TransactionalMessageResend_PostTransactionalMessageResend
+- file: listrak-sync-retail-data.md
+  name: Sync retail data into Listrak
+  api: openapi/listrak-customer-api-openapi.yml
+  base_url: https://api.listrak.com/data
+  scopes: [Customer, Order, Product, Review]
+  operations:
+  - Customer_PostCustomerCollection
+  - Order_PostOrderCollection
+  - Product_PostProductCollection
+  - Review_PostReviewCollection
+  - RatingSummary_PostRatingSummaryCollection
+- file: listrak-manage-sms-subscriptions.md
+  name: Manage Listrak SMS subscriptions
+  api: openapi/listrak-contactlistsubscription-api-openapi.yml
+  base_url: https://api.listrak.com/sms
+  operations:
+  - SenderCode_GetShortCodeCollection
+  - PhoneList_GetListCollection
+  - Contact_GetContactCollection
+  - ContactListSubscription_PostContactListSubscription
+  - ContactListSubscription_DeleteUnsubscribeContactListSubscription
+  - TransactionalMessage_PostTransactionalMessageSend
+- file: listrak-honor-a-privacy-forget-request.md
+  name: Honor a GDPR/CCPA forget request in Listrak
+  api: openapi/listrak-forget-api-openapi.yml
+  base_url: https://api.listrak.com/privacy
+  operations:
+  - Forget_PostForgetRequest
+  - Forget_GetForgetRequest
+- file: listrak-post-cross-channel-events.md
+  name: Post Listrak cross-channel custom events
+  api: openapi/listrak-events-api-openapi.yml
+  base_url: https://api.listrak.com/crosschannel/v1
+  operations:
+  - getEventConfigurations
+  - getSchemaByEventUid
+  - postEvents
+summary:
+  skill_count: 6
+  apis_covered: [Email, SMS, Data Import, Privacy, Cross Channel]
+  apis_not_covered: [Two-Way SMS, Mobile App Push, Media]

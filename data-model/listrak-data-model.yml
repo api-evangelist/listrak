@@ -1,0 +1,402 @@
+generated: '2026-08-13'
+method: derived
+source: openapi/_original/listrak-email-openapi.json, openapi/_original/listrak-sms-openapi.json, openapi/_original/listrak-data-openapi.json, openapi/_original/listrak-media-openapi.json, openapi/_original/listrak-crosschannel-openapi.json
+notes: >-
+  Entity-relationship graph derived from the schema definitions and the route hierarchy of Listrak's
+  own specs. Listrak's identity model is worth stating up front because it explains most of the
+  graph: there is no single global "customer" object. The Email API keys contacts by
+  emailAddress/emailKey per LIST, the SMS API keys subscribers by phoneNumber per SENDER CODE, and
+  the Data Import API keys retail records by the merchant's own customerNumber/orderNumber/sku. The
+  Listrak Data Platform is what stitches those together internally; the public APIs do not expose a
+  join key across them, and `universalEmailKey` (Email) plus `externalContactID` are the closest
+  things to a cross-list identifier. Nearly every email-side route is nested under
+  /List/{listId}/..., so listId is the dominant foreign key on the marketing side.
+domains:
+- name: email
+  api: Email REST API
+  root_entity: List
+  route_prefix: /email/v1/List/{listId}
+- name: sms
+  api: SMS REST API
+  root_entity: SenderCode
+  route_prefix: /sms/v1
+- name: retail-data
+  api: Data Import REST API
+  root_entity: Customer / Order / Product / Review
+  route_prefix: /data/v1
+- name: cross-channel
+  api: Cross Channel REST API
+  root_entity: CustomEventConfiguration
+  route_prefix: /crosschannel/v1
+- name: media
+  api: Media REST API
+  root_entity: Directory
+  route_prefix: /media/v1
+entities:
+- name: List
+  domain: email
+  id: listId
+  description: An email list. The container for contacts, messages, profile fields, imports and events.
+- name: Contact
+  domain: email
+  id: emailKey
+  alt_ids: [emailAddress, universalEmailKey, externalContactID]
+  description: A subscriber on a list, carrying subscription state, subscribe/unsubscribe dates and methods, and profile field values.
+- name: SegmentationFieldGroup
+  domain: email
+  id: segmentationFieldGroupId
+  description: A named group of profile fields on a list.
+- name: SegmentationField
+  domain: email
+  id: segmentationFieldId
+  description: A user-defined profile field (dataType, maxLength, position) belonging to a field group.
+- name: SegmentationFieldValue
+  domain: email
+  id: null
+  description: The value of one profile field for one contact. Listrak's metadata mechanism.
+- name: Message
+  domain: email
+  id: messageId
+  description: A sent or scheduled email message, with a status, send date and subject.
+- name: SavedMessage
+  domain: email
+  id: savedMessageId
+  description: A reusable message definition that can be sent or scheduled.
+- name: Campaign
+  domain: email
+  id: campaignId
+  alt_ids: [externalCampaignId]
+  description: A grouping of messages for reporting.
+- name: Content
+  domain: email
+  id: contentId
+  description: Reusable content blocks, organized into content folders.
+- name: ContentFolder
+  domain: email
+  id: contentFolderId
+- name: Folder
+  domain: email
+  id: folderId
+  description: Organizational folder for lists.
+- name: IpPool
+  domain: email
+  id: ipPoolId
+  description: Sending IP pool assigned to a list.
+- name: MessageActivity
+  domain: email
+  id: null
+  description: Per-contact engagement events (opens, clicks, bounces) for a message. Read-only, poll-based.
+- name: MessageLink
+  domain: email
+  id: linkId
+- name: MessageLinkClicker
+  domain: email
+  id: null
+- name: MessageSummary
+  domain: email
+  id: null
+  description: Aggregate performance metrics for a message.
+- name: MessageStatus
+  domain: email
+  id: null
+- name: Conversation
+  domain: email
+  id: conversationId
+  description: A Journey Hub conversation, with its own messages, activity, links and summaries.
+- name: Event
+  domain: email
+  id: eventId
+  description: A behavioral event definition belonging to an event group; drives triggered sends.
+- name: EventGroup
+  domain: email
+  id: eventGroupId
+- name: ListImport
+  domain: email
+  id: importFileId
+  description: A bulk contact import job, with a status, summary and per-contact rows.
+- name: SplitTest
+  domain: email
+  id: splitTestId
+- name: SavedAudience
+  domain: email
+  id: savedAudienceId
+- name: TransactionalMessage
+  domain: email
+  id: transactionalMessageId
+- name: SenderCode
+  domain: sms
+  id: shortCodeId
+  description: A short or long code. Owns phone lists and profile-field mappings, and links back to an email list via emailListId.
+- name: PhoneList
+  domain: sms
+  id: phoneListId
+  description: An SMS list, with double opt-in, age gate and message-limit settings.
+- name: SMSContact
+  domain: sms
+  id: phoneNumber
+  description: An SMS subscriber, carrying optedOut plus profile field values.
+- name: ContactListSubscription
+  domain: sms
+  id: null
+  description: The join between an SMS contact and a phone list, holding subscription state and pending double opt-in / age gate flags.
+- name: PhoneAttribute
+  domain: sms
+  id: segmentationFieldId
+  description: SMS-side profile field definition.
+- name: Customer
+  domain: retail-data
+  id: customerNumber
+  alt_ids: [email]
+  description: Retail customer record with address, loyalty and social sub-objects and five meta slots.
+- name: Order
+  domain: retail-data
+  id: orderNumber
+  description: Retail order with billing/shipping addresses, line items, discount and tax totals, and five meta slots.
+- name: OrderItem
+  domain: retail-data
+  id: null
+  key: sku
+  description: A line on an order, carrying its own orderNumber, sku, quantity, price, discount and shipping fields.
+- name: Product
+  domain: retail-data
+  id: sku
+  alt_ids: [masterSku, reviewProductID]
+  description: Catalog product with pricing, availability, imagery, categorization, related products and five meta slots.
+- name: Review
+  domain: retail-data
+  id: providerReviewID
+  description: A product review from a named provider, with ratings, reviewer details and feedback counts.
+- name: RatingSummary
+  domain: retail-data
+  id: providerProductID
+  description: Aggregate rating figures for a product from a review provider.
+- name: CustomEventConfiguration
+  domain: cross-channel
+  id: eventUID
+  description: A declared custom event type with a retrievable JSON schema; events are posted against its UID.
+- name: Directory
+  domain: media
+  id: directoryId
+  description: A media library directory containing files and sub-directories.
+- name: File
+  domain: media
+  id: fileId
+  description: An image file inside a media directory.
+- name: Font
+  domain: media
+  id: null
+  description: A font available to the account. Read-only.
+- name: AppPushDevice
+  domain: mobile
+  id: deviceUid
+  description: A registered mobile device for App Push, and the target of engagement events.
+relationships:
+- from: Folder
+  to: List
+  type: has_many
+  via: folderId
+- from: List
+  to: Contact
+  type: has_many
+  via: listId
+  note: Route-nested - /List/{listId}/Contact.
+- from: List
+  to: IpPool
+  type: has_one
+  via: ipPoolId
+- from: List
+  to: SegmentationFieldGroup
+  type: has_many
+  via: listId
+- from: SegmentationFieldGroup
+  to: SegmentationField
+  type: has_many
+  via: segmentationFieldGroupId
+- from: Contact
+  to: SegmentationFieldValue
+  type: has_many
+  via: emailKey
+- from: SegmentationFieldValue
+  to: SegmentationField
+  type: belongs_to
+  via: segmentationFieldId
+- from: List
+  to: Message
+  type: has_many
+  via: listId
+- from: Message
+  to: Campaign
+  type: belongs_to
+  via: campaignId
+- from: SavedMessage
+  to: Campaign
+  type: belongs_to
+  via: campaignId
+- from: Message
+  to: MessageActivity
+  type: has_many
+  via: messageId
+- from: Message
+  to: MessageLink
+  type: has_many
+  via: messageId
+- from: MessageLink
+  to: MessageLinkClicker
+  type: has_many
+  via: linkId
+- from: Message
+  to: MessageSummary
+  type: has_one
+  via: messageId
+- from: Message
+  to: MessageStatus
+  type: has_one
+  via: messageId
+- from: List
+  to: Conversation
+  type: has_many
+  via: listId
+- from: Conversation
+  to: ConversationMessage
+  type: has_many
+  via: conversationId
+- from: EventGroup
+  to: Event
+  type: has_many
+  via: eventGroupId
+- from: List
+  to: EventGroup
+  type: has_many
+  via: listId
+- from: Contact
+  to: Event
+  type: has_many
+  via: emailKey
+  note: Events are posted with a contact to trigger journeys; they cannot be combined with a subscribe/unsubscribe or profile-data change in the same request (ERROR_CHANGE_ADDRESS_WITH_EVENTS, ERROR_UNSUBSCRIBE_WITH_EVENTS).
+- from: List
+  to: ListImport
+  type: has_many
+  via: listId
+- from: ListImport
+  to: ListImportContact
+  type: has_many
+  via: importFileId
+- from: ListImport
+  to: ListImportStatus
+  type: has_one
+  via: importFileId
+- from: ListImport
+  to: ListImportSummary
+  type: has_one
+  via: importFileId
+- from: List
+  to: SplitTest
+  type: has_many
+  via: listId
+- from: SplitTest
+  to: SplitTestMessage
+  type: has_many
+  via: splitTestId
+- from: List
+  to: TransactionalMessage
+  type: has_many
+  via: listId
+- from: ContentFolder
+  to: Content
+  type: has_many
+  via: contentFolderId
+- from: SenderCode
+  to: PhoneList
+  type: has_many
+  via: shortCodeId
+- from: SenderCode
+  to: List
+  type: has_one
+  via: emailListId
+  note: >-
+    The one explicit cross-domain link Listrak publishes - a sender code names the email list it is
+    paired with, which is how SMS and email identities get associated on the platform.
+- from: SenderCode
+  to: PhoneAttribute
+  type: has_many
+  via: phoneNumberSegmentationFieldGroupId
+- from: PhoneList
+  to: ContactListSubscription
+  type: has_many
+  via: phoneListId
+- from: SMSContact
+  to: ContactListSubscription
+  type: has_many
+  via: phoneNumber
+- from: SMSContact
+  to: PhoneAttribute
+  type: has_many
+  via: segmentationFieldId
+- from: Customer
+  to: Order
+  type: has_many
+  via: customerNumber
+- from: Order
+  to: OrderItem
+  type: has_many
+  via: orderNumber
+- from: OrderItem
+  to: Product
+  type: belongs_to
+  via: sku
+- from: Product
+  to: Review
+  type: has_many
+  via: reviewProductID
+  note: Reviews reference the product by providerProductID, which the product exposes as reviewProductID.
+- from: Product
+  to: RatingSummary
+  type: has_one
+  via: reviewProductID
+- from: Product
+  to: RelatedProduct
+  type: has_many
+  via: sku
+- from: Customer
+  to: Contact
+  type: soft_link
+  via: email
+  note: >-
+    NOT a modeled foreign key. The Data Import Customer carries an `email`, and the Email Contact is
+    keyed by emailAddress/universalEmailKey, so the join happens inside the Listrak Data Platform.
+    No public operation resolves one to the other.
+- from: Directory
+  to: File
+  type: has_many
+  via: directoryId
+- from: Directory
+  to: Directory
+  type: has_many
+  via: directoryId
+  note: Directories nest.
+- from: AppPushDevice
+  to: MobileDeviceEngagementEvent
+  type: has_many
+  via: deviceUid
+id_conventions:
+- pattern: numeric surrogate ids
+  applies_to: [listId, messageId, campaignId, segmentationFieldId, eventId, folderId, phoneListId, shortCodeId, directoryId, fileId]
+  note: Listrak uses plain integer identifiers. There are no prefixed/typed ids (no `cus_`-style prefixes), so an id carries no type information on its own.
+- pattern: opaque contact key
+  applies_to: [emailKey, universalEmailKey]
+  note: emailKey identifies a contact within a list; universalEmailKey identifies the same email across lists when the list has enableUniversalEmailKeySetting on.
+- pattern: merchant-owned natural keys
+  applies_to: [customerNumber, orderNumber, sku, providerReviewID, providerProductID, externalContactID, externalCampaignId]
+  note: The Data Import API is upsert-by-merchant-key; the merchant's own identifiers are the primary keys, which is why those imports are naturally idempotent even though no idempotency contract is published.
+- pattern: meta slots
+  applies_to: [Customer, Order, OrderItem, Product]
+  note: Exactly five untyped meta1..meta5 string slots per entity. This is the only extensibility on the retail-data side - there is no arbitrary metadata map.
+summary:
+  entities: 38
+  relationships: 38
+  domains: 5
+  cross_domain_foreign_keys: 1
+render: null
+cross_links:
+  conventions: conventions/listrak-conventions.yml
+  errors: errors/listrak-error-codes.yml

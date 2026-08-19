@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device SenderCode API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SenderCode",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get SMS Sender Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/ShortCode"
+          },
+          "docs": "Retrieve a collection of Sender Code objects for a Company."
+        },
+        {
+          "info": {
+            "name": "Get SMS Sender Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/ShortCode/:senderCodeId",
+            "params": [
+              {
+                "name": "senderCodeId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to specify the Sender Code."
+              }
+            ]
+          },
+          "docs": "Retrieve a single SMS Sender Code by Sender Code Id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

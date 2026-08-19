@@ -1,47 +1,160 @@
 name: Listrak Rate Limits
-description: Listrak REST APIs are authenticated via OAuth 2.0 client credentials. Specific numeric rate limits are not publicly documented. Known constraints are noted below based on available documentation and community reports.
+description: >-
+  Listrak publishes a numeric rate limit for exactly one of its eight REST APIs. The Privacy REST API
+  states 20 requests per 10 seconds and 60 requests per minute in its own spec description. The
+  Mobile App Push and Two-Way SMS APIs declare 429 Too Many Requests as a real response on nine
+  operations and list it in their status-code tables, but publish no number. The Email, SMS, Data
+  Import, Cross Channel and Media APIs publish neither a number nor a 429. NO Listrak API documents
+  a rate-limit response header of any kind - no RateLimit-*, no X-RateLimit-*, no Retry-After - so a
+  client that hits a limit gets a status code and no runtime signal to pace against.
 specificationVersion: '0.1'
+generated: '2026-08-13'
+method: searched
+source: https://api.listrak.com/privacy/swagger/docs/v1
+docs:
+- https://api.listrak.com/privacy
+- https://api.listrak.com/mobileclient/docs
+- https://api.listrak.com/twowaysms/docs
 authentication:
   type: OAuth2
   flow: client_credentials
   tokenUrl: https://auth.listrak.com/OAuth2/Token
-  notes: >
+  notes: >-
     Obtain a Bearer token by POSTing to https://auth.listrak.com/OAuth2/Token with
-    Content-Type: application/x-www-form-urlencoded and the body fields:
-    grant_type=client_credentials, client_id=<your_client_id>, client_secret=<your_client_secret>.
-    Include the token in every request as: Authorization: Bearer <token>.
+    Content-Type: application/x-www-form-urlencoded and grant_type=client_credentials,
+    client_id and client_secret. Send it as Authorization: Bearer <token>.
+    Token issuance itself is rejected while an Integration's API access is paused.
 limits:
-  - api: All REST APIs
-    scope: account
-    notes: >
-      Listrak does not publish specific rate limit numbers in public documentation.
-      Requests that exceed undisclosed payload size limits receive a 404 Not Found response.
-      Customers should contact Listrak support to confirm any enforced per-second or per-day request thresholds for their account tier.
-  - api: Data Import REST API
-    scope: payload
-    notes: >
-      Bulk data imports (customers, orders, products) may have per-batch size constraints.
-      FTP-based import is provided as an alternative for large-volume ingestion scenarios.
-  - api: Email REST API
-    scope: sending
-    notes: >
-      Transactional email sending volume is governed by the customer's contracted plan.
-      Marketing campaign sends are scheduled and managed within the platform; API-triggered sends are subject to account-level throughput agreements.
-  - api: SMS REST API
-    scope: sending
-    notes: >
-      Transactional SMS sending is subject to carrier throughput and short code limits.
-      Account-level SMS send volume is defined by the contracted plan.
+- api: Privacy REST API
+  base: https://api.listrak.com/privacy
+  scope: per-integration
+  window: 10 seconds
+  limit: 20
+  burst: null
+  status_on_exhaustion: 429
+  documented: true
+  source: https://api.listrak.com/privacy/swagger/docs/v1
+- api: Privacy REST API
+  base: https://api.listrak.com/privacy
+  scope: per-integration
+  window: 1 minute
+  limit: 60
+  burst: null
+  status_on_exhaustion: 429
+  documented: true
+  source: https://api.listrak.com/privacy/swagger/docs/v1
+  note: >-
+    The two windows run together - 20/10s is the burst ceiling and 60/min is the sustained ceiling,
+    so a client cannot spend the 10-second allowance six times in a minute.
+- api: Mobile App Push API
+  base: https://api.listrak.com/mobileclient
+  scope: unspecified
+  window: null
+  limit: null
+  status_on_exhaustion: 429
+  documented: false
+  note: >-
+    429 "Too Many Requests - The request rate limit has been exceeded" is in the status-code table
+    and is a declared response on all five operations (createAppPushDevice, getAppPushDevice,
+    updateAppPushDevice, patchAppPushDevice, createMobileDeviceEngagementEvent). The threshold is
+    not published.
+  source: https://api.listrak.com/mobileclient/openapi.json
+- api: Two-Way SMS Conversation API
+  base: https://api.listrak.com/twowaysms
+  scope: unspecified
+  window: null
+  limit: null
+  status_on_exhaustion: 429
+  documented: false
+  note: >-
+    429 is in the status-code table and is a declared response on all four operations (openTicket,
+    closeTicket, getMessageStream, send). The threshold is not published.
+  source: https://api.listrak.com/twowaysms/openapi.json
+- api: Email REST API
+  base: https://api.listrak.com/email
+  scope: unspecified
+  window: null
+  limit: null
+  status_on_exhaustion: null
+  documented: false
+  note: >-
+    No published limit and no 429 declared on any of the 83 operations. Payload size limits exist but
+    are undisclosed, and exceeding them returns 404 Not Found rather than 413 - a genuine trap worth
+    knowing about. Bulk contact loading is better done through ListImport_PostImportFileResource
+    than by looping Contact_PostContactResource.
+- api: SMS REST API
+  base: https://api.listrak.com/sms
+  scope: unspecified
+  window: null
+  limit: null
+  status_on_exhaustion: null
+  documented: false
+  note: >-
+    No published API limit. Separately, SMS/MMS delivery throughput is bounded by carrier and sender
+    code (short code) capacity and by the account's contracted send volume - a delivery constraint,
+    not an API rate limit.
+- api: Data Import REST API
+  base: https://api.listrak.com/data
+  scope: unspecified
+  window: null
+  limit: null
+  status_on_exhaustion: null
+  documented: false
+  note: >-
+    No published limit. All five operations are bulk collection POSTs (customers, orders, products,
+    reviews, rating summaries); per-batch size caps are not published, and FTP import is offered as
+    the alternative for large-volume ingestion.
+- api: Cross Channel REST API
+  base: https://api.listrak.com/crosschannel/v1
+  scope: unspecified
+  window: null
+  limit: null
+  status_on_exhaustion: null
+  documented: false
+- api: Media REST API
+  base: https://api.listrak.com/media
+  scope: unspecified
+  window: null
+  limit: null
+  status_on_exhaustion: null
+  documented: false
+response_headers:
+  documented: []
+  notes: >-
+    Listrak documents NO rate-limit response headers on any API. There is no RateLimit-Limit /
+    RateLimit-Remaining / RateLimit-Reset, no X-RateLimit-* family, and no Retry-After on the 429.
+    Clients must implement blind exponential backoff. This is the single most useful thing Listrak
+    could add for agent consumers.
+pagination_ceilings:
+  note: Not rate limits, but the per-request ceilings an agent must respect.
+  ceilings:
+  - param: count
+    default: 1000
+    maximum: 5000
+    applies_to: paged collection reads
+  - param: segmentationFieldIds
+    maximum: 30
+    applies_to: contact reads
+    error_code: ERROR_TOO_MANY_SEGMENTATION_FIELDS
 errorCodes:
-  - code: 400
-    description: Bad Request — malformed request body or missing required fields
-  - code: 401
-    description: Unauthorized — missing or invalid Bearer token
-  - code: 403
-    description: Forbidden — authenticated but insufficient permissions
-  - code: 404
-    description: Not Found — resource does not exist or request exceeds size limits
-  - code: 429
-    description: Too Many Requests — rate limit exceeded (threshold undisclosed)
-  - code: 500
-    description: Internal Server Error — platform-side issue; monitor https://status.listrak.com
+- code: 400
+  description: Bad Request - malformed request body or missing required fields (ERROR_INVALID_PARAMETER, ERROR_MALFORMED_REQUEST_BODY)
+- code: 401
+  description: Unauthorized - missing or invalid Bearer token (ERROR_UNAUTHORIZED, ERROR_INVALID_CREDENTIALS)
+- code: 403
+  description: Forbidden - authenticated but insufficient permissions (ERROR_FORBIDDEN)
+- code: 404
+  description: Not Found - resource does not exist, or the request exceeded an undisclosed payload size limit
+- code: 429
+  description: Too Many Requests - rate limit exceeded; documented for Privacy, Mobile App Push and Two-Way SMS. No Retry-After is returned.
+- code: 500
+  description: Internal Server Error - platform-side issue; monitor https://status.listrak.com
+summary:
+  limit_count: 2
+  apis_with_published_limits: 1
+  apis_with_429_declared: 3
+  apis_total: 8
+  rate_limit_headers: 0
+cross_links:
+  conventions: conventions/listrak-conventions.yml
+  errors: errors/listrak-error-codes.yml

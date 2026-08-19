@@ -1,17 +1,39 @@
 name: Listrak Plans and Pricing
 description: Listrak uses custom enterprise pricing tailored to each retail business based on contact volume, channels used, and feature requirements. There are no publicly listed self-service tiers; all plans are negotiated directly with the Listrak sales team.
 specificationVersion: '0.1'
+generated: '2026-08-13'
+method: searched
+source: https://www.listrak.com/get-started
+plan_count: 0
+published_plans: false
+notes: >-
+  Listrak publishes NO pricing page and NO plan tiers. There is no /pricing route on listrak.com; the
+  commercial path is a "Talk to an Expert" / "Get Demo" form at https://www.listrak.com/get-started
+  and every engagement is a negotiated annual contract. plan_count is 0 on purpose - that is the
+  measurement, not a gap in the harvest. The single entry below is a description of the one
+  commercial shape Listrak sells, not a published tier, and the dollar figures in it are THIRD-PARTY
+  estimates (software marketplaces and buyer-review sites), explicitly not Listrak-published numbers.
+  There is also no separate API price - API access is included with the platform contract and is
+  enabled per Integration inside the application, so there is no usage-priced developer plan to
+  capture.
 plans:
   - name: Custom Enterprise Plan
     description: Full-platform access to Listrak's email, SMS, cross-channel, push, and data capabilities. Pricing is customized based on contact database size, monthly message volume, channels activated, and add-on features such as AI recommendations and Journey Hub orchestration.
-    url: https://www.listrak.com/
+    url: https://www.listrak.com/get-started
+    published: false
     pricing:
       model: custom
       period: annual
+      price: null
+      currency: USD
+      quota: null
+      overage: null
       notes: >
-        Third-party estimates place annual contracts between $37,000 and $146,000 with a median around $83,000.
-        Entry-level engagements have been reported at approximately $1,500 per month.
-        Pricing is not published on the Listrak website; prospective customers must contact sales for a quote.
+        NOT A PUBLISHED TIER. Listrak lists no price anywhere on its site. The figures that follow are
+        third-party marketplace and buyer-review estimates, recorded as context only and not
+        attributable to Listrak: annual contracts commonly estimated between $37,000 and $146,000
+        with a median around $83,000, and entry-level engagements reported near $1,500 per month.
+        Prospective customers must contact sales for a quote.
     features:
       - Email Marketing Automation
       - SMS / MMS / RCS Messaging

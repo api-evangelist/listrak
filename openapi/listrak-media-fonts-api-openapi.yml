@@ -1,0 +1,636 @@
+openapi: 3.1.1
+info:
+  title: Listrak Media REST Fonts API
+  description: '# Introduction
+
+    The Listrak Media REST API lets you manage a company''s media library: the directories and
+
+    image files used across Listrak products, plus the fonts available for use alongside them.
+
+
+    # Versioning
+
+    The API version is denoted in the URI. This API''s base URI is:
+
+
+    `https://api.listrak.com/media/v1`
+
+
+    <br />
+
+
+    The API version will be incremented if breaking changes are introduced. Breaking changes may
+
+    include:
+
+    - Addition of required headers, parameters, or model fields to a current route
+
+    - Alterations that would result in currently valid requests failing, or performing unexpectedly
+
+
+    <br />
+
+
+    Changes that are not considered breaking may include:
+
+    - Addition of new model fields
+
+    - Addition of new routes
+
+    - Addition of new response headers
+
+    - Any alteration to a route that is marked as <span class="inDev">In Development</span>
+
+
+    # Usage
+
+    ## External Libraries
+
+    The C# code examples featured on this site require the following packages:
+
+    - <a href="https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/">Microsoft.AspNet.WebApi.Client</a>
+
+    - <a href="https://www.nuget.org/packages/Newtonsoft.Json/">Newtonsoft.Json</a>
+
+
+    The Php code examples require the following package:
+
+    - <a href="http://docs.guzzlephp.org/en/stable/#">Guzzle 6</a>
+
+
+    # Feedback
+
+    We are actively seeking feedback in the following areas:
+
+    - Code samples
+
+    - Response examples
+
+    - Resource and field descriptions
+
+
+    <br />
+
+
+    Please provide your feedback to us at restapifeedback@listrak.com.
+
+
+    # Integration Setup
+
+    To enable API access, **you must create an _Integration_** on the _Integrations_ page. In the
+
+    Listrak application left menu, go to: Integrations &rarr; Integration Management.
+
+
+    Please specify integration type `Media` for your integration.
+
+
+    Make sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will
+
+    be needed to authenticate with the API. For your security, the _Client Secret_ cannot be
+
+    retrieved if it is lost.
+
+
+    # Status Codes
+
+    | Status Code | Status | Description |
+
+    |-|-|-|
+
+    | 200 | OK | The request succeeded. |
+
+    | 201 | Created | A new resource has been created. |
+
+    | 400 | Bad Request | Your request is malformed or invalid. |
+
+    | 401 | Unauthorized | Authentication is required. |
+
+    | 403 | Forbidden | You do not have permission to access this resource. |
+
+    | 404 | Not Found | The resource does not exist. |
+
+    | 405 | Method Not Allowed | The route does not support the requested method. |
+
+    | 409 | Conflict | The resource conflicts with an existing resource. |
+
+    | 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |
+
+    | 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |
+
+
+    # Error Codes
+
+    Error responses use a shared shape:
+
+
+    ```json
+
+    { "status": 401, "error": "ERROR_UNAUTHORIZED", "message": "Authorization was denied for this request." }
+
+    ```
+
+
+    | Status | Error Code | When |
+
+    |-|-|-|
+
+    | 400 | `ERROR_INVALID_PARAMETER` | Request validation failed (e.g. missing file, bad input). |
+
+    | 401 | `ERROR_UNAUTHORIZED` | Missing or invalid bearer token. |
+
+    | 403 | `ERROR_FORBIDDEN` | Token lacks the `Media` role or the `CompanyID`/`MasterAdminID` claims. |
+
+    | 404 | `ERROR_NOT_FOUND` | Target resource does not exist. |
+
+    | 409 | `ERROR_CONFLICT` | The resource conflicts with an existing resource. |
+
+    | 500 | `ERROR_INTERNAL` | Unhandled server error. |
+
+
+    # Parameters
+
+    ## Route Parameters
+
+    Resource identifiers are specified in the route. For example, in the route
+
+    `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to
+
+    interact with Resource #123, its route would be `/Resource/123`.
+
+
+    ## Query Parameters
+
+    Some routes support additional query parameters; for example, some resources support query
+
+    parameters relating to paging. Supported query parameters are described in their respective
+
+    documentation areas.
+
+
+    ## Request Body
+
+    Request bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of
+
+    `application/json` and provide a JSON object in your request body.
+
+
+    # Authentication
+
+    Authentication is accomplished using OAuth 2.0. After successful authentication, your token
+
+    should be included with every request using the _Bearer_ scheme; specifically, you should set
+
+    your `Authorization` header value to `Bearer (Your token value)` in each request.
+
+
+    You may request a token by making a `POST` request to our token endpoint at
+
+    `https://auth.listrak.com/OAuth2/Token`. The request should have a `Content-Type` of
+
+    `x-www-form-urlencoded`, and the request body should include a `grant_type` of
+
+    `client_credentials`, your `client_id`, and your `client_secret`. Here is an example of a
+
+    valid request:
+
+
+    ```
+
+    POST /OAuth2/Token
+
+    Content-Type: application/x-www-form-urlencoded
+
+
+    grant_type: client_credentials
+
+    client_id: (Your client ID)
+
+    client_secret: (Your client secret)
+
+    ```
+
+
+    For your security and convenience, you may pause and unpause your API access on our
+
+    _Integration Manager_ page. All requests will be rejected while your API access is paused,
+
+    including requests to issue tokens.'
+  version: 1.0.0
+  x-logo:
+    url: images/logo.png
+servers:
+- url: https://api.listrak.com/media
+paths:
+  /v1/fonts:
+    get:
+      tags:
+      - Fonts
+      summary: List fonts
+      description: Returns all available fonts.
+      operationId: getFonts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FontResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: 403
+                error: ERROR_FORBIDDEN
+                message: You do not have permission to access this resource.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: 500
+                error: ERROR_INTERNAL
+                message: An unexpected error occurred.
+      x-codeSamples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/media/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/fonts");'
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n    'base_uri' => 'https://api.listrak.com/media/'\n]);\n\n$res = $client->request('GET', 'v1/fonts', [\n    'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);"
+components:
+  schemas:
+    CreateDirectoryRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: Product Photos
+    Directory:
+      required:
+      - id
+      - parentId
+      - name
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        parentId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int32
+        name:
+          type: string
+      example:
+        id: 42
+        parentId: 7
+        name: Product Photos
+    DirectoryContents:
+      required:
+      - subdirectories
+      - files
+      - subdirectoriesPage
+      - filesPage
+      type: object
+      properties:
+        subdirectories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Directory'
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        subdirectoriesPage:
+          $ref: '#/components/schemas/Page'
+        filesPage:
+          $ref: '#/components/schemas/Page'
+    DirectoryContentsResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DirectoryContents'
+    DirectoryResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Directory'
+    DirectorySummary:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type: string
+      example:
+        id: 1
+        name: My Company
+    DirectorySummaryResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/DirectorySummary'
+    ErrorResponse:
+      required:
+      - status
+      - error
+      - message
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        error:
+          type: string
+        message:
+          type: string
+    File:
+      required:
+      - id
+      - directoryId
+      - name
+      - publicUrl
+      - size
+      - uploadDate
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        directoryId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type: string
+        publicUrl:
+          type: string
+        size:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int64
+        uploadDate:
+          type: string
+          format: date-time
+      example:
+        id: 501
+        directoryId: 42
+        name: banner.png
+        publicUrl: https://mediacdn.listrak.com/12345/banner.png
+        size: 204800
+        uploadDate: '2026-06-01T14:32:00Z'
+    FileResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/File'
+    Font:
+      required:
+      - name
+      - value
+      - url
+      - source
+      - projectID
+      - regularWeight
+      - boldWeight
+      - isItalic
+      - isSystemFont
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        url:
+          type: string
+        source:
+          type: string
+        projectID:
+          type:
+          - 'null'
+          - string
+        regularWeight:
+          type: string
+        boldWeight:
+          type: string
+        isItalic:
+          type: boolean
+        isSystemFont:
+          type: boolean
+      example:
+        name: Arial
+        value: arial, sans-serif
+        url: https://fonts.listrak.com/arial.woff2
+        source: System
+        projectID: null
+        regularWeight: '400'
+        boldWeight: '700'
+        isItalic: false
+        isSystemFont: true
+    FontResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Font'
+    IFormFile:
+      type: string
+      format: binary
+    Page:
+      required:
+      - pageNumber
+      - pageSize
+      - totalCount
+      type: object
+      properties:
+        pageNumber:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        pageSize:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+      example:
+        pageNumber: 1
+        pageSize: 100
+        totalCount: 12
+    SuccessResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data: {}
+    UpdateDirectoryRequest:
+      required:
+      - name
+      - newParentId
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        newParentId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int32
+      example:
+        name: Updated Name
+        newParentId: 7
+    UpdateFileRequest:
+      required:
+      - name
+      - newDirectoryId
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        newDirectoryId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int32
+      example:
+        name: new-name.png
+        newDirectoryId: 7
+  securitySchemes:
+    Bearer:
+      type: http
+      description: Pass the Listrak auth token in the Authorization header.
+      scheme: bearer
+      bearerFormat: Listrak encrypted token
+security:
+- Bearer: []
+tags:
+- name: Fonts

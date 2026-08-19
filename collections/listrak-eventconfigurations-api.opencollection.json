@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device EventConfigurations API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EventConfigurations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all event configurations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/eventConfigurations"
+          },
+          "docs": "Get a list of all event configurations with names and unique identifiers. These can be used to determine which event configuration should be used to post your custom events."
+        },
+        {
+          "info": {
+            "name": "Get a Custom Event Configuration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/eventConfigurations/:eventUID",
+            "params": [
+              {
+                "name": "eventUID",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the details for a specific Custom Event Configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

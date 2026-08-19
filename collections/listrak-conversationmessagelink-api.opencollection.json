@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device ConversationMessageLink API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ConversationMessageLink",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all Conversation Message Links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/List/:listId/Conversation/:conversationId/Message/:conversationMessageId/Link",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the list."
+              },
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the conversation."
+              },
+              {
+                "name": "conversationMessageId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the message."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Value indicating the page of data that's being retrieved. The default value is `Start`."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "Number of data members to be displayed per page. The default value is `1000` and the maximum value is `5000`."
+              }
+            ]
+          },
+          "docs": "Returns the collection of links for the specified conversation message."
+        },
+        {
+          "info": {
+            "name": "Get a Conversation Message Link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/List/:listId/Conversation/:conversationId/Message/:conversationMessageId/Link/:conversationMessageLinkId",
+            "params": [
+              {
+                "name": "listId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the list."
+              },
+              {
+                "name": "conversationId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the conversation."
+              },
+              {
+                "name": "conversationMessageId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the message."
+              },
+              {
+                "name": "conversationMessageLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Identifier used to locate the link."
+              }
+            ]
+          },
+          "docs": "Returns the specified conversation message link."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

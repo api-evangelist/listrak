@@ -1,0 +1,99 @@
+generated: '2026-08-13'
+method: searched
+source: https://api.listrak.com/twowaysms/openapi.json
+docs:
+- https://api.listrak.com/twowaysms/docs
+- https://api.listrak.com/crosschannel/v1/docs
+spec_type: none
+notes: >-
+  Listrak publishes NO AsyncAPI document. Probed /asyncapi.yaml and /asyncapi.json on api.listrak.com
+  and www.listrak.com, searched the listrak GitHub org, the developer page and the help center -
+  nothing. There is no event catalog, no message-schema registry, and no subscription API.
+  What Listrak DOES have is one real outbound webhook, documented in prose inside the Two-Way SMS
+  spec's info.description, plus an INBOUND custom-event surface (Cross Channel) that is frequently
+  mistaken for an event stream but runs the other direction. Both are captured below. `type:
+  Webhooks` is wired in apis.yml; `type: AsyncAPI` is NOT, because there is no AsyncAPI to point at.
+  Nothing here is fabricated - the payload example is copied verbatim from Listrak's own docs.
+webhooks:
+- name: two-way-sms-inbound-message
+  direction: outbound
+  api: Two-Way SMS Conversation API
+  transport: HTTP POST
+  content_type: application/json
+  endpoint_owner: consumer
+  configuration: >-
+    The endpoint is registered when the Two-Way SMS integration is created in the Listrak
+    application. It must be a publicly accessible HTTP endpoint. There is no API to register,
+    rotate or list webhook endpoints - configuration is UI-only.
+  triggers:
+  - An invalid MO (mobile-originated message) is received from a contact
+  - An MO is received for an open support ticket
+  payload_example: |
+    {
+      "SenderCode": 12345,
+      "CountryCode": "US",
+      "PhoneId": 15558675309,
+      "Text": "This is an invalid MO"
+    }
+  payload_fields:
+  - name: SenderCode
+    type: integer
+    description: The Listrak sender code (short/long code) the message arrived on.
+  - name: CountryCode
+    type: string
+    description: ISO country code for the originating number.
+  - name: PhoneId
+    type: integer
+    description: The Listrak identifier for the originating phone number.
+  - name: Text
+    type: string
+    description: The body of the inbound message.
+  signature_verification: not-documented
+  retry_policy: not-documented
+  ordering_guarantee: not-documented
+  related_operations:
+  - openapi/listrak-tickets-api-openapi.yml#openTicket
+  - openapi/listrak-tickets-api-openapi.yml#closeTicket
+  - openapi/listrak-messagestream-api-openapi.yml#getMessageStream
+  - openapi/listrak-tickets-api-openapi.yml#send
+  source: https://api.listrak.com/twowaysms/openapi.json
+gaps:
+  - No signing secret, HMAC header, or replay-window is documented for the webhook. A consumer cannot
+    verify that a delivery came from Listrak.
+  - No retry/backoff behaviour, no delivery-log endpoint, and no dead-letter surface are documented.
+  - There is no webhook management API - endpoints are configured in the Listrak UI only.
+  - There is no webhook for the email/SMS engagement events (opens, clicks, bounces, unsubscribes).
+    Those are only readable by POLLING the reporting operations
+    (MessageActivity_GetMessageActivityCollection, MessageLinkClicker_GetMessageLinkClickerCollection,
+    ConversationMessageActivity_GetConversationMessageActivityCollection), which is the single
+    biggest event-surface gap for an agent or a real-time integration.
+inbound_event_surface:
+  note: >-
+    Recorded separately because it is NOT a webhook - it flows INTO Listrak. Listed here so the
+    distinction is on the record rather than being conflated with an event stream.
+  api: Cross Channel REST API
+  base: https://api.listrak.com/crosschannel/v1
+  mechanism: >-
+    Custom Events are declared as Event Configurations in the Listrak application, each with a UID
+    and a JSON schema. Callers POST event payloads against the configuration's UID and Journey Hub
+    reacts. The schema for a configuration is retrievable at runtime, which is unusually good - an
+    agent can fetch the contract before posting.
+  operations:
+  - openapi/listrak-events-api-openapi.yml#postEvents
+  - openapi/listrak-eventconfigurations-api-openapi.yml#getEventConfigurations
+  - openapi/listrak-eventconfigurations-api-openapi.yml#getSchemaByEventUid
+  related:
+  - openapi/listrak-event-api-openapi.yml#Event_PostEventResource
+probes:
+- url: https://api.listrak.com/asyncapi.yaml
+  status: 404
+- url: https://api.listrak.com/asyncapi.json
+  status: 404
+- url: https://www.listrak.com/asyncapi.yaml
+  status: 404
+summary:
+  asyncapi_documents: 0
+  webhooks_documented: 1
+  webhook_management_api: false
+  signature_verification: false
+  engagement_event_webhooks: false

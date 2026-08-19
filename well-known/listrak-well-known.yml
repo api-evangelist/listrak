@@ -1,0 +1,62 @@
+generated: '2026-08-13'
+method: probed
+source: live GET probes, 2026-08-13
+notes: >-
+  Every /.well-known/ path was probed on both the API host (api.listrak.com), the auth host
+  (auth.listrak.com) and the marketing/docs host (www.listrak.com). Every path returned 404. Note
+  that the two hosts return DIFFERENT 404 bodies - api.listrak.com/auth.listrak.com return an
+  IIS-style XHTML error page, www.listrak.com (Webflow) returns a small HTML page reading
+  "Invalid .well-known request" - so neither host is serving an SPA catch-all that would fake a 200.
+  This is a recorded ABSENCE, not a failure to look: Listrak publishes no security.txt, no OIDC or
+  OAuth authorization-server metadata (its OAuth 2.0 token endpoint at
+  https://auth.listrak.com/OAuth2/Token is documented in prose only, with no RFC 8414 discovery
+  document), no api-catalog, and no ai-plugin. NO WellKnown or SecurityTxt pointer is emitted in
+  apis.yml, because there is no document to point at.
+  Listrak DOES run a vulnerability disclosure program - it is published as an HTML page at
+  https://www.listrak.com/privacy-and-terms/responsible-disclosure rather than as a
+  /.well-known/security.txt. See security/listrak-vulnerability-disclosure.yml.
+hosts:
+- host: https://api.listrak.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://auth.listrak.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+- host: https://www.listrak.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+summary:
+  paths_probed: 17
+  documents_found: 0
+  pointer_emitted: false

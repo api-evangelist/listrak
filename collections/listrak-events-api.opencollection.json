@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device Events API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Route to post new Custom Events.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.listrak.com/crosschannel/v1/eventConfigurations/:eventUID/events",
+            "params": [
+              {
+                "name": "eventUID",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "A route to post new Custom Events associated with the given Custom Event Configuration. The data payload for these events should match the schema defined through your Custom Events Integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

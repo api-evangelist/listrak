@@ -1,0 +1,181 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: openapi/_original/*.json
+notes: >-
+  Listrak publishes NO MCP server. Searched the Listrak developer page, the help center, the eight
+  live API specs, the listrak GitHub org (four public repos: two 2021 mobile SDKs and two Segment
+  forks), npm and the public MCP registries - nothing. The tool list below is DERIVED from Listrak's
+  own OpenAPI/Swagger operations as a candidate design; it is not something Listrak ships and no
+  endpoint exists to call. Every tool names the real operationId it would wrap, so the candidate
+  inherits a real input contract from the spec rather than a guessed one.
+deployment:
+  mode: none
+  endpoint:
+  install:
+  package:
+  auth: oauth
+  verified: searched
+  note: >-
+    auth is recorded as oauth because that is what any Listrak MCP server would have to use - the
+    whole REST surface is OAuth 2.0 client_credentials against
+    https://auth.listrak.com/OAuth2/Token. mode is `none` because nobody, first-party or community,
+    ships a server; there is no remote endpoint and no stdio package.
+server:
+  name: listrak
+  transport:
+  url:
+tools:
+- name: list_contacts
+  description: List the contacts on an email list, filtered by subscription state and date range.
+  source_operation: openapi/listrak-contact-api-openapi.yml#Contact_GetContactCollection
+  api: Email REST API
+  scope: List
+- name: upsert_contact
+  description: Create or update a contact on an email list, including profile field values.
+  source_operation: openapi/listrak-contact-api-openapi.yml#Contact_PostContactResource
+  api: Email REST API
+  scope: List
+- name: get_contact
+  description: Retrieve a single contact on a list by email address or contact identifier.
+  source_operation: openapi/listrak-contact-api-openapi.yml#Contact_GetContactResourceByIdentifier
+  api: Email REST API
+  scope: List
+- name: set_contact_profile_fields
+  description: Write profile (segmentation) field values for a contact.
+  source_operation: openapi/listrak-contactsegmentationfield-api-openapi.yml#ContactSegmentationField_PostContactSegmentationFieldValuesResource
+  api: Email REST API
+  scope: Segmentation
+- name: list_lists
+  description: List the email lists configured on the account.
+  source_operation: openapi/listrak-list-api-openapi.yml#List_GetListCollection
+  api: Email REST API
+  scope: List
+- name: send_transactional_email
+  description: Send a transactional email message to a contact.
+  source_operation: openapi/listrak-transactionalmessage-api-openapi.yml#TransactionalMessage_PostTransactionalMessageSend
+  api: Email REST API
+  scope: Message
+- name: resend_transactional_email
+  description: Resend a previously sent transactional email message.
+  source_operation: openapi/listrak-transactionalmessageresend-api-openapi.yml#TransactionalMessageResend_PostTransactionalMessageResend
+  api: Email REST API
+  scope: Message
+- name: send_saved_message
+  description: Send a saved (broadcast) email message.
+  source_operation: openapi/listrak-savedmessage-api-openapi.yml#SavedMessage_PostSavedMessageSend
+  api: Email REST API
+  scope: Message
+- name: get_message_summary
+  description: Retrieve aggregate performance metrics for a sent message.
+  source_operation: openapi/listrak-messagesummary-api-openapi.yml#MessageSummary_GetMessageSummaryResource
+  api: Email REST API
+  scope: Report
+- name: list_message_activity
+  description: Page through per-contact activity (opens, clicks, bounces) for a message.
+  source_operation: openapi/listrak-messageactivity-api-openapi.yml#MessageActivity_GetMessageActivityCollection
+  api: Email REST API
+  scope: Report
+- name: record_contact_event
+  description: Record a behavioral event against a contact to drive triggered journeys.
+  source_operation: openapi/listrak-event-api-openapi.yml#Event_PostEventResource
+  api: Email REST API
+  scope: Event
+- name: list_sms_contacts
+  description: List SMS subscribers on a phone list.
+  source_operation: openapi/listrak-contact-api-openapi.yml#Contact_GetContactCollection
+  api: SMS REST API
+  scope:
+  note: The SMS API reuses the Contact_* operationId namespace; disambiguate by base path /sms.
+- name: subscribe_sms_contact
+  description: Subscribe a phone number to an SMS list.
+  source_operation: openapi/listrak-contactlistsubscription-api-openapi.yml#ContactListSubscription_PostContactListSubscription
+  api: SMS REST API
+  scope:
+- name: unsubscribe_sms_contact
+  description: Unsubscribe a phone number from an SMS list.
+  source_operation: openapi/listrak-contactlistsubscription-api-openapi.yml#ContactListSubscription_DeleteUnsubscribeContactListSubscription
+  api: SMS REST API
+  scope:
+- name: send_transactional_sms
+  description: Send a transactional SMS message to a subscriber.
+  source_operation: openapi/listrak-transactionalmessage-api-openapi.yml#TransactionalMessage_PostTransactionalMessageSend
+  api: SMS REST API
+  scope:
+- name: send_sms_broadcast
+  description: Send an immediate SMS broadcast to a list.
+  source_operation: openapi/listrak-broadcastmessage-api-openapi.yml#BroadcastMessage_PostImmediateBroadcast
+  api: SMS REST API
+  scope:
+- name: import_customers
+  description: Bulk import retail customer records.
+  source_operation: openapi/listrak-customer-api-openapi.yml#Customer_PostCustomerCollection
+  api: Data Import REST API
+  scope: Customer
+- name: import_orders
+  description: Bulk import retail order records.
+  source_operation: openapi/listrak-order-api-openapi.yml#Order_PostOrderCollection
+  api: Data Import REST API
+  scope: Order
+- name: import_products
+  description: Bulk import product catalog records.
+  source_operation: openapi/listrak-product-api-openapi.yml#Product_PostProductCollection
+  api: Data Import REST API
+  scope: Product
+- name: import_reviews
+  description: Bulk import product reviews.
+  source_operation: openapi/listrak-review-api-openapi.yml#Review_PostReviewCollection
+  api: Data Import REST API
+  scope: Review
+- name: post_cross_channel_events
+  description: Post custom cross-channel events that drive Journey Hub automations.
+  source_operation: openapi/listrak-events-api-openapi.yml#postEvents
+  api: Cross Channel REST API
+  scope:
+- name: get_event_configurations
+  description: List the configured cross-channel event types and their schemas.
+  source_operation: openapi/listrak-eventconfigurations-api-openapi.yml#getEventConfigurations
+  api: Cross Channel REST API
+  scope:
+- name: open_sms_ticket
+  description: Open a two-way SMS support ticket for a conversation.
+  source_operation: openapi/listrak-tickets-api-openapi.yml#openTicket
+  api: Two-Way SMS Conversation API
+  scope:
+- name: close_sms_ticket
+  description: Close an open two-way SMS support ticket.
+  source_operation: openapi/listrak-tickets-api-openapi.yml#closeTicket
+  api: Two-Way SMS Conversation API
+  scope:
+- name: get_sms_message_stream
+  description: Read the message stream for a two-way SMS conversation.
+  source_operation: openapi/listrak-messagestream-api-openapi.yml#getMessageStream
+  api: Two-Way SMS Conversation API
+  scope:
+- name: submit_forget_request
+  description: Submit a GDPR/CCPA forget (data deletion) request for a contact.
+  source_operation: openapi/listrak-forget-api-openapi.yml#Forget_PostForgetRequest
+  api: Privacy REST API
+  scope:
+- name: get_forget_request
+  description: Check the status of a previously submitted forget request.
+  source_operation: openapi/listrak-forget-api-openapi.yml#Forget_GetForgetRequest
+  api: Privacy REST API
+  scope:
+- name: list_media_directory
+  description: List the contents of a media library directory.
+  source_operation: openapi/listrak-media-directories-api-openapi.yml#listDirectoryContents
+  api: Media REST API
+  scope: Media
+- name: upload_media_file
+  description: Upload an image file into a media library directory.
+  source_operation: openapi/listrak-media-files-api-openapi.yml#createFile
+  api: Media REST API
+  scope: Media
+coverage:
+  candidate_tools: 30
+  rest_operations_total: 130
+  note: >-
+    130 = 121 operations across the 53 refined email/sms/data/crosschannel/twowaysms/mobileclient/
+    privacy specs plus 9 in the Media REST API. The candidate tool set deliberately covers the
+    marquee flows rather than one tool per operation.

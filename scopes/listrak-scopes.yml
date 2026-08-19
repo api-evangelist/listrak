@@ -1,62 +1,108 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/listrak-data-openapi.yml, openapi/listrak-email-openapi.yml, openapi/listrak-privacy-openapi.yml,
-  openapi/listrak-sms-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: https://api.listrak.com/email/swagger/docs/v1
+docs: https://api.listrak.com/email
+notes: >-
+  Listrak declares one OAuth 2.0 client_credentials scheme per API, all issuing from
+  https://auth.listrak.com/OAuth2/Token. Only the Email REST API publishes a populated `scopes` map
+  in its securityDefinitions; the Data Import API declares an empty scopes map but its operations
+  still carry per-operation scope requirements, so the Data scopes below were read from the
+  operation-level `security` requirements rather than the flow map. The SMS and Privacy APIs declare
+  the same OAuth2 scheme with an empty scopes map and their operations request no named scope - for
+  those APIs access is governed by the Integration's configured access level rather than by a scope
+  string. The Media API's 403 condition names a `Media` role on the token, which is the same
+  permission concept expressed as a role claim rather than an OAuth scope.
+  In Listrak's model a "scope" maps to the permission checkboxes on the Integration in the Listrak
+  application; a token can only carry scopes the Integration was granted.
 schemes:
 - name: OAuth2
-  source: openapi/listrak-data-openapi.yml
+  type: oauth2
   flows:
   - flow: clientCredentials
     tokenUrl: https://auth.listrak.com/OAuth2/Token
-- name: OAuth2
-  source: openapi/listrak-email-openapi.yml
-  flows:
-  - flow: clientCredentials
-    tokenUrl: https://auth.listrak.com/OAuth2/Token
-- name: OAuth2
-  source: openapi/listrak-privacy-openapi.yml
-  flows:
-  - flow: clientCredentials
-    tokenUrl: https://auth.listrak.com/OAuth2/Token
-- name: OAuth2
-  source: openapi/listrak-sms-openapi.yml
-  flows:
-  - flow: clientCredentials
-    tokenUrl: https://auth.listrak.com/OAuth2/Token
+  sources:
+  - openapi/_original/listrak-email-openapi.json
+  - openapi/_original/listrak-sms-openapi.json
+  - openapi/_original/listrak-data-openapi.json
+  - openapi/_original/listrak-privacy-openapi.json
 scopes:
 - scope: Contact
-  description: Contact access
-  flows:
-  - clientCredentials
-  sources:
-  - openapi/listrak-email-openapi.yml
+  description: Contact access - read, create, update, subscribe and unsubscribe contacts on a list.
+  api: Email REST API
+  flows: [clientCredentials]
+  operation_count: 6
+  sources: [openapi/_original/listrak-email-openapi.json]
 - scope: Event
-  description: Event access
-  flows:
-  - clientCredentials
-  sources:
-  - openapi/listrak-email-openapi.yml
+  description: Event access - contact events used to drive triggered/behavioral sends.
+  api: Email REST API
+  flows: [clientCredentials]
+  operation_count: 9
+  sources: [openapi/_original/listrak-email-openapi.json]
 - scope: List
-  description: List access
-  flows:
-  - clientCredentials
-  sources:
-  - openapi/listrak-email-openapi.yml
+  description: List access - lists, folders, IP pools, imports and the resources scoped under a list.
+  api: Email REST API
+  flows: [clientCredentials]
+  operation_count: 73
+  sources: [openapi/_original/listrak-email-openapi.json]
 - scope: Message
-  description: Message access
-  flows:
-  - clientCredentials
-  sources:
-  - openapi/listrak-email-openapi.yml
+  description: Message access - messages, saved messages, content, campaigns, split tests and sends.
+  api: Email REST API
+  flows: [clientCredentials]
+  operation_count: 39
+  sources: [openapi/_original/listrak-email-openapi.json]
 - scope: Report
-  description: Report access
-  flows:
-  - clientCredentials
-  sources:
-  - openapi/listrak-email-openapi.yml
+  description: Report access - message activity, link clickers, summaries and other reporting reads.
+  api: Email REST API
+  flows: [clientCredentials]
+  operation_count: 16
+  sources: [openapi/_original/listrak-email-openapi.json]
 - scope: Segmentation
-  description: Segmentation access
-  flows:
-  - clientCredentials
-  sources:
-  - openapi/listrak-email-openapi.yml
+  description: Segmentation access - profile (segmentation) fields, field groups and field values.
+  api: Email REST API
+  flows: [clientCredentials]
+  operation_count: 11
+  sources: [openapi/_original/listrak-email-openapi.json]
+- scope: Customer
+  description: Customer access - import retail customer records.
+  api: Data Import REST API
+  flows: [clientCredentials]
+  operation_count: 1
+  sources: [openapi/_original/listrak-data-openapi.json]
+- scope: Order
+  description: Order access - import retail order records.
+  api: Data Import REST API
+  flows: [clientCredentials]
+  operation_count: 1
+  sources: [openapi/_original/listrak-data-openapi.json]
+- scope: Product
+  description: Product access - import retail product catalog records.
+  api: Data Import REST API
+  flows: [clientCredentials]
+  operation_count: 1
+  sources: [openapi/_original/listrak-data-openapi.json]
+- scope: Review
+  description: Review access - import product reviews and rating summaries.
+  api: Data Import REST API
+  flows: [clientCredentials]
+  operation_count: 2
+  sources: [openapi/_original/listrak-data-openapi.json]
+role_claims:
+- name: Media
+  description: >-
+    Not an OAuth scope. The Media REST API checks for a `Media` role on the bearer token plus
+    `CompanyID` / `MasterAdminID` claims; a token without them fails 403 ERROR_FORBIDDEN.
+  api: Media REST API
+  sources: [openapi/_original/listrak-media-openapi.json]
+unscoped_apis:
+- api: SMS REST API
+  note: OAuth2 declared with an empty scopes map; no operation requests a named scope.
+- api: Privacy REST API
+  note: OAuth2 declared with an empty scopes map; no operation requests a named scope.
+- api: Cross Channel REST API
+  note: Fronted by an AWS API Gateway custom authorizer; no scopes published.
+- api: Two-Way SMS Conversation API
+  note: Fronted by an AWS API Gateway custom authorizer; no scopes published.
+- api: Mobile App Push API
+  note: Uses an `x-api-key` device key, not OAuth; no scopes.
+cross_links:
+  authentication: authentication/listrak-authentication.yml

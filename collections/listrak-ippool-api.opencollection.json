@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device IpPool API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IpPool",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all IpPools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/IpPool"
+          },
+          "docs": "Returns your account's collection of IP pools."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

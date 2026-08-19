@@ -1,0 +1,151 @@
+generated: '2026-08-13'
+method: searched
+source: https://api.listrak.com/email/swagger/docs/v1
+docs:
+- https://api.listrak.com/email
+- https://api.listrak.com/sms
+- https://api.listrak.com/media
+- https://api.listrak.com/crosschannel/v1/docs
+summary: >-
+  Cross-cutting request/response semantics shared by Listrak's eight REST APIs, read from the
+  "Versioning / Status Codes / Error Codes / Parameters / Authentication" prose Listrak embeds in
+  each spec's info.description, plus the response envelopes in the specs themselves. Listrak is
+  unusually consistent across products: one token endpoint, one response envelope family, one error
+  registry, one cursor pagination model. IDEMPOTENCY IS NOT SUPPORTED - there is no idempotency key
+  header, no request-id header, and no request replay contract anywhere in the eight specs or the
+  docs. Do not assume retry safety on any POST.
+authentication:
+  style: oauth2_client_credentials_bearer
+  token_url: https://auth.listrak.com/OAuth2/Token
+  header: 'Authorization: Bearer <token>'
+  exception:
+    api: Mobile App Push API
+    style: api_key_header
+    header: x-api-key
+  https_required: true
+  see: authentication/listrak-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  documented: false
+  notes: >-
+    No Idempotency-Key (or equivalent) header, parameter, or retry-dedup guarantee appears in any of
+    the eight Listrak specs or in the published docs. Several write operations are naturally
+    idempotent by resource semantics - Contact_PostContactResource is documented as "create or
+    update" and the Data Import POSTs upsert by external identifier - but that is resource behavior,
+    not an idempotency contract, and it does not protect a duplicated
+    TransactionalMessage_PostTransactionalMessageSend or BroadcastMessage_PostImmediateBroadcast.
+    NO `Idempotency` pointer is emitted in apis.yml for this provider, deliberately.
+pagination:
+  style: cursor
+  request_params:
+  - name: cursor
+    in: query
+    default: Start
+    description: Opaque page marker. Omit or pass `Start` for the first page.
+  - name: count
+    in: query
+    default: 1000
+    maximum: 5000
+    description: Number of data members per page.
+  response_fields:
+  - name: nextPageCursor
+    description: URI of the next page of data. Absent/empty when the last page has been returned.
+  envelope: CollectionPaged[T]
+  media_api_variant:
+    style: page-number
+    response_object: Page
+    fields: [pageNumber, pageSize, totalCount]
+    note: >-
+      The Media REST API, which is newer and OpenAPI 3.1.1, uses page-number pagination with a
+      totalCount rather than the cursor model the older Swagger 2.0 APIs use. This is a real
+      divergence inside Listrak's own surface.
+response_envelopes:
+- name: Collection[T]
+  fields: [status, data]
+  use: unpaged list responses
+- name: CollectionPaged[T]
+  fields: [status, nextPageCursor, data]
+  use: paged list responses
+- name: Resource[T]
+  fields: [status, data]
+  use: single-resource reads
+- name: ResourceCreated
+  fields: [status, resourceId]
+  use: 201 responses - the new identifier is returned as resourceId, not in a Location header
+- name: ResourceUpdated
+  fields: [status, resourceId]
+  use: successful updates
+- name: ResourceDeleted
+  fields: [status]
+  use: successful deletes
+- name: Error
+  fields: [status, error, message]
+  use: every 4xx/5xx
+  see: errors/listrak-error-codes.yml
+envelope_note: >-
+  Every envelope repeats the HTTP status inside the body as `status`. Payloads are always wrapped -
+  a collection read never returns a bare JSON array.
+field_selection:
+  supported: partial
+  mechanism: segmentationFieldIds
+  notes: >-
+    Contact reads accept a comma-separated `segmentationFieldIds` query parameter selecting which
+    profile fields to hydrate, capped at 30 field IDs per request (exceeding it returns
+    ERROR_TOO_MANY_SEGMENTATION_FIELDS). There is no general sparse-fieldset or expand mechanism.
+metadata:
+  mechanism: segmentation (profile) fields
+  notes: >-
+    Listrak's extensibility model is profile fields - user-defined fields grouped into
+    SegmentationFieldGroups and attached to contacts - not a free-form metadata map.
+request_tracing:
+  request_id_header: null
+  supported: false
+  notes: No correlation/request-id header is documented on requests or responses.
+versioning:
+  scheme: uri-path
+  current: v1
+  location: base path (e.g. /email/v1, /crosschannel/v1, /media/v1)
+  policy_published: true
+  breaking_changes:
+  - Addition of required headers, parameters, or model fields to a current route
+  - Alterations that would cause currently valid requests to fail or behave unexpectedly
+  non_breaking_changes:
+  - Addition of new model fields
+  - Addition of new routes
+  - Addition of new response headers
+  - Any alteration to a route marked "In Development"
+  see: lifecycle/listrak-lifecycle.yml
+content_negotiation:
+  request_content_type: application/json
+  enforced: true
+  error_on_mismatch: ERROR_UNSUPPORTED_CONTENT_TYPE
+  note: The OAuth token endpoint is the exception - it takes application/x-www-form-urlencoded.
+rate_limit_signaling:
+  status_on_exhaustion: 429
+  response_headers_documented: []
+  notes: >-
+    429 Too Many Requests is documented in the status-code table of the SMS, Two-Way SMS and Mobile
+    App Push specs and appears as a declared response on 9 operations, but Listrak documents NO
+    rate-limit response headers (no RateLimit-*, no X-RateLimit-*, no Retry-After) and no backoff
+    guidance. An agent gets the status code and nothing else to pace against.
+  see: rate-limits/listrak-rate-limits.yml
+beta_routes:
+  marker: '"In Development" badge in the rendered reference'
+  error_code: ERROR_INTEGRATION_CANNOT_ACCESS_BETA_ROUTE
+  notes: >-
+    Routes can be gated to specific integrations while in Beta; a non-enrolled integration calling
+    one gets ERROR_INTEGRATION_CANNOT_ACCESS_BETA_ROUTE. Beta routes are also exempt from the
+    breaking-change policy.
+access_control_runtime:
+  pause_resume: >-
+    An Integration's API access can be paused from the Listrak application. While paused ALL requests
+    fail, including token issuance - so a client will see auth failures, not 503s.
+  ip_allowlist: Integrations may be restricted by source IP.
+cross_links:
+  authentication: authentication/listrak-authentication.yml
+  scopes: scopes/listrak-scopes.yml
+  errors: errors/listrak-error-codes.yml
+  lifecycle: lifecycle/listrak-lifecycle.yml
+  rate_limits: rate-limits/listrak-rate-limits.yml
+  data_model: data-model/listrak-data-model.yml

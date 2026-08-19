@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Listrak Cross Channel REST app-push-mobile-client-device RatingSummary API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RatingSummary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Start a Rating Summary Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.listrak.com/crosschannel/v1/v1/RatingSummary",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a new import using the supplied rating summary collection."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
