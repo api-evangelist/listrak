@@ -39,6 +39,23 @@ tags:
   - Push Notifications
   - Data Import
   - Privacy
+  - E-Commerce
+  - Customer Data
+  - Transactional Messaging
+  - Segmentation
+  - Product Reviews
+  - Media Management
+  - Two-Way SMS
+  - RCS
+tags_raw:
+  - Email Marketing
+  - SMS Marketing
+  - Marketing Automation
+  - Cross-Channel
+  - Retail
+  - Push Notifications
+  - Data Import
+  - Privacy
   - Ecommerce
   - Customer Data
   - Transactional Messaging
@@ -476,6 +493,8 @@ apis:
   humanURL: https://api.listrak.com/email
   baseURL: https://api.listrak.com
   tags:
+  - Customers
+  tags_raw:
   - Customer
   properties:
   - type: OpenAPI
@@ -528,6 +547,8 @@ apis:
   humanURL: https://api.listrak.com/email
   baseURL: https://api.listrak.com
   tags:
+  - Event Configurations
+  tags_raw:
   - EventConfigurations
   properties:
   - type: OpenAPI
@@ -580,6 +601,8 @@ apis:
   humanURL: https://api.listrak.com/email
   baseURL: https://api.listrak.com
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -658,6 +681,8 @@ apis:
   humanURL: https://api.listrak.com/email
   baseURL: https://api.listrak.com
   tags:
+  - IP Pool
+  tags_raw:
   - IpPool
   properties:
   - type: OpenAPI
@@ -1460,6 +1485,9 @@ apis:
   humanURL: https://api.listrak.com/media
   baseURL: https://api.listrak.com/media
   tags:
+  - File
+  - Media
+  tags_raw:
   - Files
   - Media
   properties:
