@@ -1459,57 +1459,44 @@ apis:
     url: https://api.listrak.com/mobileclient/docs
   - type: Documentation
     url: https://api.listrak.com/privacy
-- aid: listrak:listrak-media-directories-api
-  name: Listrak Media Directories API
-  description: >-
-    Directory management for the Listrak media library - list top-level directories, list a
-    directory's contents, and create, rename or delete a directory. Part of the Listrak Media REST
-    API (OpenAPI 3.1.1), the newest of Listrak's eight public APIs.
-  humanURL: https://api.listrak.com/media
-  baseURL: https://api.listrak.com/media
+- aid: listrak:listrak-directories-api
+  name: Listrak Directories API
+  description: The Directories API from Listrak — 2 operation(s) for directories.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
   tags:
   - Directories
-  - Media
   properties:
   - type: OpenAPI
-    url: openapi/listrak-media-directories-api-openapi.yml
+    url: openapi/listrak-directories-api-openapi.yml
   - type: APIReference
     url: https://api.listrak.com/media
   - type: Authentication
     url: https://auth.listrak.com/OAuth2/Token
-- aid: listrak:listrak-media-files-api
-  name: Listrak Media Files API
-  description: >-
-    Image file management for the Listrak media library - upload a file into a directory, update its
-    metadata, and delete it. Part of the Listrak Media REST API (OpenAPI 3.1.1).
-  humanURL: https://api.listrak.com/media
-  baseURL: https://api.listrak.com/media
+- aid: listrak:listrak-files-api
+  name: Listrak Files API
+  description: The Files API from Listrak — 2 operation(s) for files.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
   tags:
-  - File
-  - Media
-  tags_raw:
   - Files
-  - Media
   properties:
   - type: OpenAPI
-    url: openapi/listrak-media-files-api-openapi.yml
+    url: openapi/listrak-files-api-openapi.yml
   - type: APIReference
     url: https://api.listrak.com/media
   - type: Authentication
     url: https://auth.listrak.com/OAuth2/Token
-- aid: listrak:listrak-media-fonts-api
-  name: Listrak Media Fonts API
-  description: >-
-    Read the fonts available to the account for use alongside media library assets. Part of the
-    Listrak Media REST API (OpenAPI 3.1.1).
-  humanURL: https://api.listrak.com/media
-  baseURL: https://api.listrak.com/media
+- aid: listrak:listrak-fonts-api
+  name: Listrak Fonts API
+  description: The Fonts API from Listrak — 1 operation(s) for fonts.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
   tags:
   - Fonts
-  - Media
   properties:
   - type: OpenAPI
-    url: openapi/listrak-media-fonts-api-openapi.yml
+    url: openapi/listrak-fonts-api-openapi.yml
   - type: APIReference
     url: https://api.listrak.com/media
   - type: Authentication
