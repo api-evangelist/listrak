@@ -12,6 +12,18 @@ description: >-
   auth.listrak.com, returns a consistent {status, error, message} envelope drawn from a published
   68-code error registry, and pages with cursor plus count.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
@@ -1502,6 +1514,9 @@ apis:
   - type: Authentication
     url: https://auth.listrak.com/OAuth2/Token
 common:
+  - type: CapabilityMap
+    url: capabilities/listrak-capability-edges.yml
+    name: Listrak Business Capability Map
   - type: AgenticAccess
     url: agentic-access/listrak-agentic-access.yml
   - type: DomainSecurity
