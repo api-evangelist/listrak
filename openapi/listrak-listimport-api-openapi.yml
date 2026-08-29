@@ -1,31 +1,28 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: Listrak Cross Channel REST app-push-mobile-client-device ListImport API
-  description: "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n"
+  title: Listrak List Import API
   version: v1
   x-logo:
-    url: https://api.listrak.com/Email/Resources/Images/Logo.png
-    altText: Listrak
-    href: https://www.listrak.com
-    backgroundColor: '#fafafa'
+    url: /Email/Resources/Images/Logo.png
+  description: 'Operations tagged ListImport across 2 of this provider''s published API definitions: listrak-email-openapi.json, listrak-email-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.listrak.com/crosschannel/v1
+- url: https://api.listrak.com/email
 tags:
 - name: ListImport
+  description: The List Import resource is used to supply an import file in order to import data to a list.
 paths:
   /v1/List/{listId}/ListImport:
     get:
-      operationId: ListImport_GetListImportCollection
-      summary: Get all List Imports
-      description: Retrieves the collection of list imports associated with the specified list.
       tags:
       - ListImport
+      summary: Get all List Imports
+      description: Retrieves the collection of list imports associated with the specified list.
+      operationId: ListImport_GetListImportCollection
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -59,41 +56,73 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Collection[ListImport]'
+                $ref: '#/components/schemas/Collection_ListImport'
+              example:
+                status: 200
+                data:
+                - importFileId: 0
+                  importFileName: null
+                  importDate: '0001-01-01T00:00:00'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Contact
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/List/{listId}/ListImport");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/ListImport',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
     post:
-      operationId: ListImport_PostImportFileResource
-      summary: Start a List Import
-      description: Creates and starts a new import for the specified list. HTTP request body lengths of up to 250 MB are permitted. Because the `fileStream` field must be encoded in Base64, and because the remainder of the JSON payload is counted against the 250 MB limit, the effective maximum import file size is approximately 185 MB (195,000,000 bytes); therefore, only attempt to import files up to 185 MB (195,000,000 bytes) in size.
       tags:
       - ListImport
+      summary: Start a List Import
+      description: Creates and starts a new import for the specified list. HTTP request body lengths of up to 250 MB are permitted. Because the `fileStream` field must be encoded in Base64, and because the remainder of the JSON payload is counted against the 250 MB limit, the effective maximum import file size is approximately 185 MB (195,000,000 bytes); therefore, only attempt to import files up to 185 MB (195,000,000 bytes) in size.
+      operationId: ListImport_PostImportFileResource
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -103,48 +132,70 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/definitions/ResourceCreated'
+                $ref: '#/components/schemas/ResourceCreated'
+              example:
+                status: 201
+                resourceId: '{ResourceId}'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId supplied.
       security:
       - OAuth 2:
         - List
         - Contact
+      x-code-samples:
+      - lang: C#
+        source: "var client = new HttpClient();\n\nclient.BaseAddress = new Uri(\"https://api.listrak.com/email/\");\nclient.DefaultRequestHeaders.Add(\"Authorization\", \"Bearer \" + token);\n\nvar response = await client.PostAsJsonAsync(\"v1/List/{listId}/ListImport\", new\n{\n   FileDelimiter = null,\n   FileMappings = null,\n   FileName = null,\n   FileStream = null,\n   HasColumnNames = false,\n   ImportType = null,\n   SegmentationImportType = null,\n   SuppressEmailNotifications = false,\n   TextQualifier = null,\n   TriggerJourney = false,\n   IncludeUnsubscribed = false\n});\n"
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('POST', 'v1/List/{listId}/ListImport',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken],\n\t'json' => $jsonBody\n]);\n"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/definitions/ImportFile'
+              $ref: '#/components/schemas/ImportFile'
+        description: Representation of the import file to utilize.
+        required: true
+    servers:
+    - url: https://api.listrak.com/email
   /v1/List/{listId}/ListImport/{importFileId}:
     get:
-      operationId: ListImport_GetListImportResource
-      summary: Get a List Import
-      description: Retrieves the specified list import.
       tags:
       - ListImport
+      summary: Get a List Import
+      description: Retrieves the specified list import.
+      operationId: ListImport_GetListImportResource
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -152,7 +203,6 @@ paths:
         in: path
         description: Identifier used to locate the import file.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -162,36 +212,211 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Resource[ListImport]'
+                $ref: '#/components/schemas/Resource_ListImport'
+              example:
+                status: 200
+                data:
+                  importFileId: 0
+                  importFileName: null
+                  importDate: '0001-01-01T00:00:00'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId and importFileId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Contact
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/List/{listId}/ListImport/{importFileId}");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/ListImport/{importFileId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
+    servers:
+    - url: https://api.listrak.com/email
 components:
+  schemas:
+    ImportFileMapping:
+      description: An Import File Mapping resource.
+      required:
+      - fileColumn
+      - fileColumnType
+      type: object
+      properties:
+        segmentationFieldId:
+          format: int32
+          description: Identifier of the associated profile field.
+          type: integer
+        defaultValue:
+          description: Default value to be used if a value is not provided during the import.
+          type: string
+        fileColumn:
+          format: int32
+          description: Number identifying the column's ordinal position in the file, starting from `0`.
+          type: integer
+        fileColumnType:
+          description: Type of value in the column of the import file. Allowed values are `Email`, `SegmentationField`, `Event`, and `ExternalContactID`.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    Collection_ListImport:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/ListImport'
+    ListImport:
+      description: A List Import resource.
+      type: object
+      properties:
+        importFileId:
+          format: int32
+          description: Identifier used to locate the list import.
+          type: integer
+          readOnly: true
+        importFileName:
+          description: Filename of an import file.
+          type: string
+        importDate:
+          format: date-time
+          description: Date of an import.
+          type: string
+    Resource_ListImport:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/ListImport'
+          description: Return data.
+    ImportFile:
+      description: An Import File resource.
+      required:
+      - fileDelimiter
+      - fileMappings
+      - fileName
+      - fileStream
+      - importType
+      - segmentationImportType
+      type: object
+      properties:
+        fileDelimiter:
+          description: Delimiter used to separate columns within the file.
+          type: string
+        fileMappings:
+          description: Representation of import file mappings; these map file columns to import fields.
+          type: array
+          items:
+            $ref: '#/components/schemas/ImportFileMapping'
+        fileName:
+          description: Filename of the import file.
+          type: string
+        fileStream:
+          format: byte
+          description: Base64-encoded byte array representation of the import file.
+          type: string
+        hasColumnNames:
+          description: Whether the first line of the import file contains column names.
+          type: boolean
+        importType:
+          description: The type of import to conduct. Allowed values are `AddSubscribers`, `AddSubscribersAndSegmentationData`, `RemoveSubscribers`, and `UpdateSubscribers`.
+          type: string
+        segmentationImportType:
+          description: Strategy to take if imported data already exists. Allowed values are `Update`, `Append`, and `Overwrite`.
+          type: string
+        suppressEmailNotifications:
+          description: Whether to suppress email notifications.
+          type: boolean
+        textQualifier:
+          description: The text qualifier used for the import file.
+          type: string
+        triggerJourney:
+          description: Whether to enter subscribers into all List Subscription journeys associated with this list.
+          type: boolean
+        includeUnsubscribed:
+          description: Whether to update both subscribed and unsubscribed contacts when `ImportType` is `UpdateSubscribers`.
+          type: boolean
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
   securitySchemes:
-    Authorizer:
-      type: apiKey
-      name: Authorization
-      in: header
-      x-amazon-apigateway-authtype: custom
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.listrak.com/OAuth2/Token
+          scopes:
+            Contact: Contact access
+            Event: Event access
+            List: List access
+            Message: Message access
+            Report: Report access
+            Segmentation: Segmentation access
+x-refined-from:
+- listrak-email-openapi.json
+- listrak-email-openapi.yml
 x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference

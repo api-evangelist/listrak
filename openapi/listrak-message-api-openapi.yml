@@ -1,31 +1,28 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: Listrak Cross Channel REST app-push-mobile-client-device Message API
-  description: "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n"
+  title: Listrak Message API
   version: v1
   x-logo:
-    url: https://api.listrak.com/Email/Resources/Images/Logo.png
-    altText: Listrak
-    href: https://www.listrak.com
-    backgroundColor: '#fafafa'
+    url: /Email/Resources/Images/Logo.png
+  description: 'Operations tagged Message across 2 of this provider''s published API definitions: listrak-email-openapi.json, listrak-email-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.listrak.com/crosschannel/v1
+- url: https://api.listrak.com/email
 tags:
 - name: Message
+  description: "The Message resource provides a way to send and retrieve messages for a list.\n\n## Filters\n\nFilters can be used to select contacts based on their profile data. They may be supplied when sending a message via the `Filter` field.\n\nFilters may be combined and nested in nearly limitless combinations. A filter is considered valid if it either defines profile data to filter on, or if it defines one or more inner filters. It is not valid to do neither or both. If a filter is defining inner filters, its `Filters` field should be set to an array of one or more filters. Otherwise, it should specify a `CompareType`, a `SegmentationFieldGroup`, a `SegmentationField`, and if applicable, one or more `Values` to apply to filtering logic.\n\nWhen defining multiple filters in a set, the second and subsequent filters must define how they should be joined to the preceding filter. This is specified using the `JoinType` field. Valid values are `And`, `AndNot`, `Or`, and `OrNot`. It is not necessary to specify a `JoinType` for the first (or only) filter in a set, because there is no other filter to join with.\n\nFiltering logic is determined by the `CompareType` field. Below is a table of supported values, a brief description of each, and the number of values required for operation:\n\n| CompareType | Description | Number of values required |\n|-|-|-|\n| `Between` | The field is between the range of the two specified values (inclusive). | 2 |\n| `NotBetween` | The field is not between the range of the two specified values (inclusive). | 2 |\n| `Contains` | The field contains the specified value. | 1 |\n| `NotContains` | The field does not contain the specified value. | 1 |\n| `Equals` | The field equals the specified value (case insensitive). | 1 |\n| `NotEquals` | The field does not equal the specified value (case insensitive). | 1 |\n| `GreaterThan` | The field is greater the specified value. | 1 |\n| `GreaterThanOrEqualTo` | The field is greater than or equal to the specified value. | 1 |\n| `LessThan` | The field is less than the specified value. | 1 |\n| `LessThanOrEqualTo` | The field is less than or equal to the specified value. | 1 |\n| `InCommaList` | The field is one of the specified values in a comma-separated list. | 1 |\n| `NotInCommaList` | The field is not one of the specified values in a comma-separated list. | 1 |\n| `Checked` | The checkbox field is checked. | 0 |\n| `NotChecked` | The checkbox field is not checked. | 0 |\n| `RadioOn` | The radio button is selected. | 0 |\n| `RadioOff` | The radio button is not selected. | 0 |\n| `IsEmpty` | The field is null or empty. | 0 |\n| `IsNotEmpty` | The field is not null or empty. | 0 |\n\nCommon use cases are documented below. The examples assume the following profile configuration:\n\n| Profile field group | Profile field | Value type |\n|-|-|-|\n| Favorites | Color | _Text_ |\n| Favorites | Number | _Numeric_ |\n| Favorites | Movie | _Text_ |\n\nTo select contacts whose favorite color is green:\n\n```\n\"filter\": {\n  \"segmentationFieldGroup\": \"Favorites\",\n  \"segmentationField\": \"Color\",\n  \"compareType\": \"Equals\",\n  \"values\": [\n    {\n      \"value\": \"Green\"\n    }\n  ]\n}\n```\n\nTo select contacts whose favorite color is green _and_ whose favorite number is between 10 and 20:\n\n```\n\"filter\": {\n  filters: [\n    {\n      \"compareType\": \"Equals\",\n      \"segmentationFieldGroup\": \"Favorites\",\n      \"segmentationField\": \"Color\",\n      \"values\": [\n        {\n          \"value\": \"Green\"\n        }\n      ]\n    },\n    {\n      \"compareType\": \"Between\",\n      \"joinType\": \"And\",\n      \"segmentationFieldGroup\": \"Favorites\",\n      \"segmentationField\": \"Number\",\n      \"values\": [\n        {\n          \"value\": \"10\"\n        },\n        {\n          \"value\": \"20\"\n        }\n      ]\n    }\n  ]\n}\n```\n\nTo select contacts whose favorite color is red _or_ whose favorite number is 13:\n\n```\n\"filter\": {\n  filters: [\n    {\n      \"compareType\": \"Equals\",\n      \"segmentationFieldGroup\": \"Favorites\",\n      \"segmentationField\": \"Color\",\n      \"values\": [\n        {\n          \"value\": \"Red\"\n        }\n      ]\n    },\n    {\n      \"compareType\": \"Equals\",\n      \"joinType\": \"Or\",\n      \"segmentationFieldGroup\": \"Favorites\",\n      \"segmentationField\": \"Number\",\n      \"values\": [\n        {\n          \"value\": \"13\"\n        }\n      ]\n    }\n  ]\n}\n```\n\nTo select contacts whose favorite color is green, and additionally either has a favorite number of 13, or otherwise has a favorite movie containing the term `adventures`:\n\n```\n\"filter\": {\n  filters: [\n    {\n      \"compareType\": \"Equals\",\n      \"segmentationFieldGroup\": \"Favorites\",\n      \"segmentationField\": \"Color\",\n      \"values\": [\n        {\n          \"value\": \"Green\"\n        }\n      ]\n    },\n    {\n      \"joinType\": \"And\"\n      \"filters\": [\n        {\n          \"compareType\": \"Equals\",\n          \"segmentationFieldGroup\": \"Favorites\",\n          \"segmentationField\": \"Number\",\n          \"values\": [\n            {\n              \"value\": \"13\"\n            }\n          ]\n        },\n        {\n          \"compareType\": \"Contains\",\n          \"joinType\": \"Or\"\n          \"segmentationFieldGroup\": \"Favorites\",\n          \"segmentationField\": \"Movie\",\n          \"values\": [\n            {\n              \"value\": \"adventures\"\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}\n```\n\nTo select contacts whose favorite color is either black, white, or gold:\n\n```\n\"filter\": {\n  filters: [\n    {\n      \"compareType\": \"InCommaList\",\n      \"segmentationFieldGroup\": \"Favorites\",\n      \"segmentationField\": \"Color\",\n      \"values\": [\n        {\n          \"value\": \"Black,White,Gold\"\n        }\n      ]\n    }\n  ]\n}\n```\n\nTo select contacts who do not have a favorite color:\n\n```\n\"filter\": {\n  filters: [\n    {\n      \"compareType\": \"Empty\",\n      \"segmentationFieldGroup\": \"Favorites\",\n      \"segmentationField\": \"Color\"\n    }\n  ]\n}\n```\n"
 paths:
   /v1/List/{listId}/Message:
     get:
-      operationId: Message_GetMessageCollection
-      summary: Get all Messages
-      description: Returns a collection of messages for the specified list.
       tags:
       - Message
+      summary: Get all Messages
+      description: Returns a collection of messages for the specified list.
+      operationId: Message_GetMessageCollection
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -65,41 +62,77 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/CollectionPaged[Message]'
+                $ref: '#/components/schemas/CollectionPaged_Message'
+              example:
+                status: 200
+                nextPageCursor: null
+                data:
+                - messageId: 0
+                  sendDate: null
+                  messageStatus: null
+                  campaignId: 0
+                  externalCampaignId: null
+                  subject: null
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/List/{listId}/Message");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/Message',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
     post:
-      operationId: Message_PostMessageResource
-      summary: Send a Message
-      description: Sends a new message on the specified list.
       tags:
       - Message
+      summary: Send a Message
+      description: Sends a new message on the specified list.
+      operationId: Message_PostMessageResource
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -107,7 +140,6 @@ paths:
         in: query
         description: The send date for the message.
         required: false
-        format: date-time
         schema:
           type: string
           format: date-time
@@ -135,48 +167,70 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/definitions/ResourceCreated'
+                $ref: '#/components/schemas/ResourceCreated'
+              example:
+                status: 201
+                resourceId: '{ResourceId}'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId supplied.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: "var client = new HttpClient();\n\nclient.BaseAddress = new Uri(\"https://api.listrak.com/email/\");\nclient.DefaultRequestHeaders.Add(\"Authorization\", \"Bearer \" + token);\n\nvar response = await client.PostAsJsonAsync(\"v1/List/{listId}/Message?sendDate={sendDate}&sendTestMessage={sendTestMessage}&sendReviewMessage={sendReviewMessage}&testEmailAddress={testEmailAddress}\", new\n{\n   Filter = null,\n   BodyHtml = null,\n   BodyText = null,\n   CodePage = 0,\n   EnablePassalong = false,\n   EnableTracking = false,\n   FromEmail = null,\n   FromName = null,\n   GoogleAnalyticsCampaignName = null,\n   GoogleAnalyticsCampaignContent = null,\n   ReplyEmail = null,\n   ToName = null,\n   EnableUniversalEmailKeySetting = false,\n   CampaignId = 0,\n   ExternalCampaignId = null,\n   Subject = null\n});\n"
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('POST', 'v1/List/{listId}/Message',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken],\n\t'json' => $jsonBody\n]);\n"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/definitions/MessageExtendedFilter'
+              $ref: '#/components/schemas/MessageExtendedFilter'
+        description: Representation of the message to be sent.
+        required: true
+    servers:
+    - url: https://api.listrak.com/email
   /v1/List/{listId}/Message/{messageId}:
     get:
-      operationId: Message_GetMessageResource
-      summary: Get a Message
-      description: Returns the specified message.
       tags:
       - Message
+      summary: Get a Message
+      description: Returns the specified message.
+      operationId: Message_GetMessageResource
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -184,7 +238,6 @@ paths:
         in: path
         description: Identifier used to locate the message.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -194,36 +247,399 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Resource[MessageExtendedSegmentsApplied]'
+                $ref: '#/components/schemas/Resource_MessageExtendedSegmentsApplied'
+              example:
+                status: 200
+                data:
+                  messageId: 0
+                  sendDate: null
+                  messageStatus: null
+                  enableUniversalEmailKeySetting: false
+                  campaignId: 0
+                  bodyHtml: null
+                  bodyText: null
+                  codePage: 0
+                  enablePassalong: false
+                  enableTracking: false
+                  externalCampaignId: null
+                  fromEmail: null
+                  fromName: null
+                  googleAnalyticsCampaignName: null
+                  googleAnalyticsCampaignContent: null
+                  replyEmail: null
+                  savedAudienceId: 0
+                  segmentsApplied: null
+                  subject: null
+                  toName: null
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId and messageId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/List/{listId}/Message/{messageId}");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/Message/{messageId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
+    servers:
+    - url: https://api.listrak.com/email
 components:
+  schemas:
+    Message:
+      description: A Message resource.
+      required:
+      - externalCampaignId
+      - subject
+      type: object
+      properties:
+        messageId:
+          format: int32
+          description: Identifier used to locate the message.
+          type: integer
+          readOnly: true
+        sendDate:
+          format: date-time
+          description: Send date of the message.
+          type: string
+          readOnly: true
+        messageStatus:
+          description: Status displaying whether the message is sent or scheduled.
+          type: string
+          readOnly: true
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+        subject:
+          description: Subject of the message.
+          type: string
+    SegmentsApplied:
+      description: Segments applied to the message.
+      type: object
+      properties:
+        includedSegments:
+          description: List of segments included in the recipient audience.
+          type: array
+          items:
+            type: string
+        excludedSegments:
+          description: List of segments excluded from the recipient audience.
+          type: array
+          items:
+            type: string
+    MessageExtendedSegmentsApplied:
+      required:
+      - externalCampaignId
+      - fromEmail
+      - fromName
+      - subject
+      type: object
+      properties:
+        messageId:
+          format: int32
+          description: Identifier used to locate the message.
+          type: integer
+          readOnly: true
+        sendDate:
+          format: date-time
+          description: Send date of the message.
+          type: string
+          readOnly: true
+        messageStatus:
+          description: Status displaying whether the message is sent or scheduled.
+          type: string
+          readOnly: true
+        enableUniversalEmailKeySetting:
+          description: Whether to include UniversalEmailKey in URL query string.
+          type: boolean
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        bodyHtml:
+          description: HTML body that will be sent in the message.
+          type: string
+        bodyText:
+          description: Text body that will be sent in the message.
+          type: string
+        codePage:
+          format: int32
+          description: Type of CodePage used in the message.
+          type: integer
+        enablePassalong:
+          description: Whether passalong is enabled.
+          type: boolean
+        enableTracking:
+          description: Whether tracking is enabled.
+          type: boolean
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+        fromEmail:
+          description: The _from email address_ that will be used for the message.
+          type: string
+        fromName:
+          description: The _from name_ that will be used for the message.
+          type: string
+        googleAnalyticsCampaignName:
+          description: The Google Analytics campaign name to be used for message tracking.
+          type: string
+        googleAnalyticsCampaignContent:
+          description: The Google Analytics campaign content to be used for message tracking.
+          type: string
+        replyEmail:
+          description: The _reply email address_ that will be used for the message.
+          type: string
+        savedAudienceId:
+          format: int32
+          description: Identifier of the SavedAudience to use for recipient filtering.
+          type: integer
+        segmentsApplied:
+          $ref: '#/components/schemas/SegmentsApplied'
+          description: Segments applied to the message.
+        subject:
+          description: Subject of the message.
+          type: string
+        toName:
+          description: The _to name_ that will be used for the message.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    Resource_MessageExtendedSegmentsApplied:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/MessageExtendedSegmentsApplied'
+          description: Return data.
+    FilterValue:
+      type: object
+      properties:
+        value:
+          description: Value to be used for filtering.
+          type: string
+    Filter:
+      type: object
+      properties:
+        segmentationFieldGroup:
+          description: The name of the profile field group to use for filtering.
+          type: string
+        segmentationField:
+          description: The name of the profile field to use for filtering.
+          type: string
+        joinType:
+          description: The mechanism by which this filter should be joined to the immediately preceding filter. Optional if it is the first filter (ignored if provided anyway).
+          enum:
+          - And
+          - AndNot
+          - Or
+          - OrNot
+          type: string
+        compareType:
+          description: The type of comparison to use filtering values with.
+          enum:
+          - Contains
+          - NotContains
+          - Equals
+          - NotEquals
+          - GreaterThan
+          - GreaterThanOrEqualTo
+          - LessThan
+          - LessThanOrEqualTo
+          - Between
+          - NotBetween
+          - Checked
+          - NotChecked
+          - RadioOn
+          - RadioOff
+          - InCommaList
+          - NotInCommaList
+          - IsEmpty
+          - IsNotEmpty
+          type: string
+        values:
+          description: Values to be used for filtering.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterValue'
+        filters:
+          description: 'One or more sub-filters to apply. Cannot be specified in conjunction with the `CompareType` or `Values` fields: filters must define their own filtering behavior, or must define inner filters.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+    MessageExtendedFilter:
+      required:
+      - externalCampaignId
+      - fromEmail
+      - fromName
+      - subject
+      type: object
+      properties:
+        messageId:
+          format: int32
+          description: Identifier used to locate the message.
+          type: integer
+          readOnly: true
+        sendDate:
+          format: date-time
+          description: Send date of the message.
+          type: string
+          readOnly: true
+        messageStatus:
+          description: Status displaying whether the message is sent or scheduled.
+          type: string
+          readOnly: true
+        enableUniversalEmailKeySetting:
+          description: Whether to include UniversalEmailKey in URL query string.
+          type: boolean
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        bodyHtml:
+          description: HTML body that will be sent in the message.
+          type: string
+        bodyText:
+          description: Text body that will be sent in the message.
+          type: string
+        codePage:
+          format: int32
+          description: Type of CodePage used in the message.
+          type: integer
+        enablePassalong:
+          description: Whether passalong is enabled.
+          type: boolean
+        enableTracking:
+          description: Whether tracking is enabled.
+          type: boolean
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+        fromEmail:
+          description: The _from email address_ that will be used for the message.
+          type: string
+        fromName:
+          description: The _from name_ that will be used for the message.
+          type: string
+        googleAnalyticsCampaignName:
+          description: The Google Analytics campaign name to be used for message tracking.
+          type: string
+        googleAnalyticsCampaignContent:
+          description: The Google Analytics campaign content to be used for message tracking.
+          type: string
+        replyEmail:
+          description: The _reply email address_ that will be used for the message.
+          type: string
+        savedAudienceId:
+          format: int32
+          description: Identifier of the SavedAudience to use for recipient filtering.
+          type: integer
+        subject:
+          description: Subject of the message.
+          type: string
+        toName:
+          description: The _to name_ that will be used for the message.
+          type: string
+        filter:
+          $ref: '#/components/schemas/Filter'
+          description: Filter to be used for recipient filtering.
+    CollectionPaged_Message:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        nextPageCursor:
+          description: URI of the next page of data.
+          type: string
+        data:
+          description: Collection of data that exists on this paged view.
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
   securitySchemes:
-    Authorizer:
-      type: apiKey
-      name: Authorization
-      in: header
-      x-amazon-apigateway-authtype: custom
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.listrak.com/OAuth2/Token
+          scopes:
+            Contact: Contact access
+            Event: Event access
+            List: List access
+            Message: Message access
+            Report: Report access
+            Segmentation: Segmentation access
+x-refined-from:
+- listrak-email-openapi.json
+- listrak-email-openapi.yml
 x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference

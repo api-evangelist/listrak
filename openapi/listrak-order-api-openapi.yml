@@ -1,62 +1,809 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: Listrak Cross Channel REST app-push-mobile-client-device Order API
-  description: "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n"
+  title: Listrak Order API
   version: v1
   x-logo:
-    url: https://api.listrak.com/Email/Resources/Images/Logo.png
-    altText: Listrak
-    href: https://www.listrak.com
-    backgroundColor: '#fafafa'
+    url: /Data/Documentation/Images/Logo.png
+  description: 'Operations tagged Order across 2 of this provider''s published API definitions: listrak-data-openapi.json, listrak-data-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.listrak.com/crosschannel/v1
+- url: https://api.listrak.com/data
 tags:
 - name: Order
+  description: 'The Order resource is used to import order data.
+
+    '
 paths:
   /v1/Order:
     post:
-      operationId: Order_PostOrderCollection
-      summary: Start an Order Import
-      description: Starts a new import using the supplied order collection.
       tags:
       - Order
+      summary: Start an Order Import
+      description: Starts a new import using the supplied order collection.
+      operationId: Order_PostOrderCollection
       responses:
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/definitions/ResourceCreated'
+                $ref: '#/components/schemas/ResourceCreated'
+              example:
+                status: 201
+                resourceId: '{ResourceId}'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - Order
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/data/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.PostAsJsonAsync("v1/Order", new
+
+          []);
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/data/'\n]);\n\n$res = $client->request('POST', 'v1/Order',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken],\n\t'body' => $jsonBody\n]);\n"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               type: array
               items:
-                $ref: '#/definitions/Order'
+                $ref: '#/components/schemas/Order'
+        description: An array of one or more orders to create.
+        required: true
+    servers:
+    - url: https://api.listrak.com/data
 components:
+  schemas:
+    OrderItem:
+      description: An order resource
+      required:
+      - orderNumber
+      - sku
+      type: object
+      properties:
+        discountDescription:
+          description: Description of the discount for the line item
+          type: string
+        discountType:
+          description: Type of discount for the line item
+          enum:
+          - NotSet
+          - PriceOverride
+          - PriceRule
+          - Promotion
+          - SeniorCitizen
+          - Markdown
+          - Coupon
+          - QuantityDiscount
+          - Rebate
+          - CashDiscount
+          - TradeDiscount
+          - TradeInKind
+          - PromptPaymentDiscount
+          - GeneralDiscount
+          - GiftVoucher
+          - FlexibleDiscount
+          - RewardProgram
+          - ManufacturerReward
+          - CreditCardReward
+          type: string
+        discountedPrice:
+          format: double
+          description: Total discounted cost of product
+          type: number
+        itemTotal:
+          format: double
+          description: Total line item cost (quantity times price)
+          type: number
+        itemDiscountTotal:
+          format: double
+          description: Total amount of the discount for the line item
+          type: number
+        meta1:
+          description: Additional Optional Information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta2:
+          description: Additional Optional Information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta3:
+          description: Additional Optional Information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta4:
+          description: Additional Optional Information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta5:
+          description: Additional Optional Information
+          maxLength: 500
+          minLength: 0
+          type: string
+        orderNumber:
+          description: Order number
+          maxLength: 50
+          minLength: 0
+          type: string
+        price:
+          format: double
+          description: Price of one unit purchased
+          type: number
+        quantity:
+          format: int32
+          description: Total number of units purchased
+          type: integer
+        shipDate:
+          format: date-time
+          description: Timestamp when item shipped (ET)
+          type: string
+        shippingMethod:
+          description: Shipping method (e.g. UPS Ground)
+          maxLength: 32
+          minLength: 0
+          type: string
+        sku:
+          description: Unique stock number of product
+          maxLength: 100
+          minLength: 0
+          type: string
+        status:
+          description: Status indicator
+          enum:
+          - NotSet
+          - Misc
+          - PreOrder
+          - BackOrder
+          - Pending
+          - Hold
+          - Processing
+          - Shipped
+          - Completed
+          - Returned
+          - Canceled
+          - Unknown
+          - Closed
+          type: string
+        trackingNumber:
+          description: Shipment tracking number
+          maxLength: 32
+          minLength: 0
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    Address:
+      description: Address of customer
+      type: object
+      properties:
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
+    Order:
+      description: An order resource
+      required:
+      - orderNumber
+      type: object
+      properties:
+        associateID:
+          description: Associate ID of order
+          type: string
+        billingAddress:
+          $ref: '#/components/schemas/BillingAddress'
+          description: Billing address of order
+        couponCode:
+          description: Coupon code used with order
+          maxLength: 32
+          minLength: 0
+          type: string
+        customer:
+          $ref: '#/components/schemas/Customer'
+          description: Customer of order
+        customerNumber:
+          description: Internal customer number
+          maxLength: 20
+          minLength: 0
+          type: string
+        dateEntered:
+          format: date-time
+          description: Timestamp of order date (ET)
+          type: string
+        discountTotal:
+          format: double
+          description: DEPRECATED as of March 2022
+          type: number
+        email:
+          description: Email address of customer. This property is required for accounts that are not CRM enabled.
+          maxLength: 100
+          minLength: 0
+          type: string
+        handlingTotal:
+          format: double
+          description: Total handling costs
+          type: number
+        items:
+          description: Order items
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        itemTotal:
+          format: double
+          description: Total cost of items ordered (subtotal)
+          type: number
+        merchandiseDiscount:
+          format: double
+          description: Discount applied to the merchandise of the order
+          type: number
+        merchandiseDiscountDescription:
+          description: Description of the discount applied to the merchandise of the order
+          type: string
+        merchandiseDiscountType:
+          description: Type of discount applied to the merchandise of the order
+          enum:
+          - NotSet
+          - PriceOverride
+          - PriceRule
+          - Promotion
+          - SeniorCitizen
+          - Markdown
+          - Coupon
+          - QuantityDiscount
+          - Rebate
+          - CashDiscount
+          - TradeDiscount
+          - TradeInKind
+          - PromptPaymentDiscount
+          - GeneralDiscount
+          - GiftVoucher
+          - FlexibleDiscount
+          - RewardProgram
+          - ManufacturerReward
+          - CreditCardReward
+          type: string
+        meta1:
+          description: Additional meta information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta2:
+          description: Additional meta information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta3:
+          description: Additional meta information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta4:
+          description: Additional meta information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta5:
+          description: Additional meta information
+          maxLength: 500
+          minLength: 0
+          type: string
+        nonMerchandiseDiscount:
+          format: double
+          description: Discounts applied to the order that is not related to the merchandise
+          type: number
+        nonMerchandiseDiscountDescription:
+          description: Description of the discount applied to the order not related to the merchandise
+          type: string
+        nonMerchandiseDiscountType:
+          description: Type of discount applied to the order not related to the merchandise
+          enum:
+          - NotSet
+          - PriceOverride
+          - PriceRule
+          - Promotion
+          - SeniorCitizen
+          - Markdown
+          - Coupon
+          - QuantityDiscount
+          - Rebate
+          - CashDiscount
+          - TradeDiscount
+          - TradeInKind
+          - PromptPaymentDiscount
+          - GeneralDiscount
+          - GiftVoucher
+          - FlexibleDiscount
+          - RewardProgram
+          - ManufacturerReward
+          - CreditCardReward
+          type: string
+        orderNumber:
+          description: Unique order number
+          maxLength: 50
+          minLength: 0
+          type: string
+        orderTotal:
+          format: double
+          description: Total value of order
+          type: number
+        shipDate:
+          format: date-time
+          description: Timestamp when entire order shipped (ET)
+          type: string
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddress'
+          description: Shipping address of order
+        shippingMethod:
+          description: Shipping method (e.g. UPS Ground)
+          maxLength: 32
+          minLength: 0
+          type: string
+        shippingTotal:
+          format: double
+          description: Total shipping costs
+          type: number
+        source:
+          description: Describes the source at which the order was placed (online, POS, etc.)
+          maxLength: 25
+          minLength: 0
+          type: string
+        status:
+          description: Status indicator
+          enum:
+          - NotSet
+          - Misc
+          - PreOrder
+          - BackOrder
+          - Pending
+          - Hold
+          - Processing
+          - Shipped
+          - Completed
+          - Returned
+          - Canceled
+          - Unknown
+          - Closed
+          type: string
+        storeNumber:
+          description: Brick and mortar store location
+          maxLength: 100
+          minLength: 0
+          type: string
+        taxTotal:
+          format: double
+          description: Total sales tax charged
+          type: number
+        trackingNumber:
+          description: Shipment tracking number
+          maxLength: 32
+          minLength: 0
+          type: string
+    Social:
+      description: Social data for a Customer
+      type: object
+      properties:
+        facebookID:
+          description: Facebook ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        facebookNumberOfFriends:
+          format: int32
+          description: Number of Facebook friends
+          type: integer
+        instagramID:
+          description: Instagram ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        instagramNumberOfFollowers:
+          format: int32
+          description: Number of Instagram followers
+          type: integer
+        twitterID:
+          description: Twitter ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        twitterNumberOfFollowers:
+          format: int32
+          description: Number of Twitter followers
+          type: integer
+    ShippingAddress:
+      description: Shipping address of order
+      type: object
+      properties:
+        firstName:
+          description: First name
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          description: Last name
+          maxLength: 50
+          minLength: 0
+          type: string
+        phone:
+          description: Phone number
+          type: string
+        zipCode:
+          description: Home address ZIP Code
+          type: string
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
+    Loyalty:
+      description: Loyalty data for a Customer (This data will only be imported into Listrak if there is an active loyalty integration setup for your account.)
+      type: object
+      properties:
+        activeLoyaltyMember:
+          description: Whether customer is an active loyalty member
+          type: boolean
+        availablePoints:
+          format: int32
+          description: Available points
+          type: integer
+        currentTierLevel:
+          description: Current tier level
+          maxLength: 100
+          minLength: 0
+          type: string
+        enrollDate:
+          format: date-time
+          description: Enrollment date/time
+          type: string
+        expiringPoints:
+          format: int32
+          description: Expiring points
+          type: integer
+        lastActivityDate:
+          format: date-time
+          description: Last activity date
+          type: string
+        lastPointEarnedDate:
+          format: date-time
+          description: Last date points were earned
+          type: string
+        lastPointRedemptionDate:
+          format: date-time
+          description: Last date points were redeemed
+          type: string
+        lifetimePoints:
+          format: int32
+          description: Lifetime points
+          type: integer
+        loyaltySignUpSource:
+          description: Sign-up source
+          maxLength: 100
+          minLength: 0
+          type: string
+        monthlyPoints:
+          format: int32
+          description: Monthly points
+          type: integer
+        nextTierLevel:
+          description: Next tier level
+          maxLength: 100
+          minLength: 0
+          type: string
+        numberOfReferrals:
+          format: int32
+          description: Number of referrals
+          type: integer
+        pendingPoints:
+          format: int32
+          description: Pending points
+          type: integer
+        personOfReferred:
+          description: Referrer of this customer
+          maxLength: 250
+          minLength: 0
+          type: string
+        pointExpirationDate:
+          format: date-time
+          description: Points expiration date
+          type: string
+        pointsToNext:
+          format: int32
+          description: Points to next milestone
+          type: integer
+        referralCode:
+          description: Referral code
+          maxLength: 100
+          minLength: 0
+          type: string
+        referralUrl:
+          description: Referral URL
+          maxLength: 250
+          minLength: 0
+          type: string
+        rewardsAvailable:
+          description: Rewards available
+          maxLength: 250
+          minLength: 0
+          type: string
+        rewardsClaimed:
+          description: Rewards claimed
+          maxLength: 250
+          minLength: 0
+          type: string
+        rewardsID:
+          description: Rewards ID
+          maxLength: 250
+          minLength: 0
+          type: string
+        spentPoints:
+          format: int32
+          description: Spent points
+          type: integer
+        tierID:
+          description: Tier ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        weeklyPoints:
+          format: int32
+          description: Weekly points
+          type: integer
+    BillingAddress:
+      description: Billing address of order
+      type: object
+      properties:
+        firstName:
+          description: First name
+          type: string
+        lastName:
+          description: Last name
+          type: string
+        mobilePhone:
+          description: Mobile phone number
+          type: string
+        phone:
+          description: Phone number
+          type: string
+        zipCode:
+          description: Home address ZIP Code
+          type: string
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
+    Customer:
+      description: Customer for the order - DEPRECATED - Please use the BillingAddress and/or ShippingAddress fields instead.
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+          description: Address of customer
+        birthday:
+          format: date-time
+          description: Customer birthdate
+          type: string
+        customerNumber:
+          description: Internal customer number
+          maxLength: 20
+          minLength: 0
+          type: string
+        email:
+          description: Email address of customer. This property is required for accounts that are not CRM enabled.
+          maxLength: 100
+          minLength: 0
+          type: string
+        firstName:
+          description: First name
+          maxLength: 50
+          minLength: 0
+          type: string
+        gender:
+          description: Gender of customer (M/F, Male/Female)
+          maxLength: 50
+          minLength: 0
+          type: string
+        homePhone:
+          description: Landline phone number
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          description: Last name
+          maxLength: 50
+          minLength: 0
+          type: string
+        loyalty:
+          $ref: '#/components/schemas/Loyalty'
+          description: Loyalty data
+        meta1:
+          description: Additional meta information
+          maxLength: 250
+          minLength: 0
+          type: string
+        meta2:
+          description: Additional meta information
+          maxLength: 250
+          minLength: 0
+          type: string
+        meta3:
+          description: Additional meta information
+          maxLength: 250
+          minLength: 0
+          type: string
+        meta4:
+          description: Additional meta information
+          maxLength: 250
+          minLength: 0
+          type: string
+        meta5:
+          description: Additional meta information
+          maxLength: 250
+          minLength: 0
+          type: string
+        mobilePhone:
+          description: Mobile phone number
+          maxLength: 50
+          minLength: 0
+          type: string
+        preferredStoreNumber:
+          description: Preferred brick and mortar store location
+          maxLength: 100
+          minLength: 0
+          type: string
+        registered:
+          description: Indicates the customer registration state
+          type: boolean
+        social:
+          $ref: '#/components/schemas/Social'
+          description: Social data
+        workPhone:
+          description: Work phone number
+          maxLength: 50
+          minLength: 0
+          type: string
+        zipCode:
+          description: Customer ZIP Code
+          maxLength: 20
+          minLength: 0
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
   securitySchemes:
-    Authorizer:
-      type: apiKey
-      name: Authorization
-      in: header
-      x-amazon-apigateway-authtype: custom
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.listrak.com/OAuth2/Token
+          scopes: {}
+x-refined-from:
+- listrak-data-openapi.json
+- listrak-data-openapi.yml
 x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference

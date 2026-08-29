@@ -1,31 +1,28 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: Listrak Cross Channel REST app-push-mobile-client-device Campaign API
-  description: "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n"
+  title: Listrak Campaign API
   version: v1
   x-logo:
-    url: https://api.listrak.com/Email/Resources/Images/Logo.png
-    altText: Listrak
-    href: https://www.listrak.com
-    backgroundColor: '#fafafa'
+    url: /Email/Resources/Images/Logo.png
+  description: 'Operations tagged Campaign across 2 of this provider''s published API definitions: listrak-email-openapi.json, listrak-email-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.listrak.com/crosschannel/v1
+- url: https://api.listrak.com/email
 tags:
 - name: Campaign
+  description: A Campaign resource is used to group and track messages with a common theme or purpose.
 paths:
   /v1/List/{listId}/Campaign:
     get:
-      operationId: Campaign_GetCampaignCollection
-      summary: Get all Campaigns
-      description: Returns the campaigns associated with the specified list.
       tags:
       - Campaign
+      summary: Get all Campaigns
+      description: Returns the campaigns associated with the specified list.
+      operationId: Campaign_GetCampaignCollection
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -35,41 +32,72 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Collection[Campaign]'
+                $ref: '#/components/schemas/Collection_Campaign'
+              example:
+                status: 200
+                data:
+                - campaignId: 0
+                  campaignName: null
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/List/{listId}/Campaign");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/Campaign',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
     post:
-      operationId: Campaign_PostCampaignResource
-      summary: Create a Campaign
-      description: Creates a new campaign on the specified list.
       tags:
       - Campaign
+      summary: Create a Campaign
+      description: Creates a new campaign on the specified list.
+      operationId: Campaign_PostCampaignResource
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -79,48 +107,70 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/definitions/ResourceCreated'
+                $ref: '#/components/schemas/ResourceCreated'
+              example:
+                status: 201
+                resourceId: '{ResourceId}'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId supplied.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: "var client = new HttpClient();\n\nclient.BaseAddress = new Uri(\"https://api.listrak.com/email/\");\nclient.DefaultRequestHeaders.Add(\"Authorization\", \"Bearer \" + token);\n\nvar response = await client.PostAsJsonAsync(\"v1/List/{listId}/Campaign\", new\n{\n   CampaignName = null\n});\n"
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('POST', 'v1/List/{listId}/Campaign',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken],\n\t'json' => $jsonBody\n]);\n"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/definitions/Campaign'
+              $ref: '#/components/schemas/Campaign'
+        description: Representation of the campaign to create.
+        required: true
+    servers:
+    - url: https://api.listrak.com/email
   /v1/List/{listId}/Campaign/{campaignId}:
     get:
-      operationId: Campaign_GetCampaignResource
+      tags:
+      - Campaign
       summary: Get a Campaign
       description: Returns the specified campaign on the specified list.
-      tags:
-      - Campaign
+      operationId: Campaign_GetCampaignResource
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -128,7 +178,6 @@ paths:
         in: path
         description: Identifier used to locate the campaign.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -138,41 +187,72 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Resource[Campaign]'
+                $ref: '#/components/schemas/Resource_Campaign'
+              example:
+                status: 200
+                data:
+                  campaignId: 0
+                  campaignName: null
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId and campaignId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/List/{listId}/Campaign/{campaignId}");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/Campaign/{campaignId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
     put:
-      operationId: Campaign_PutCampaignResource
+      tags:
+      - Campaign
       summary: Update a Campaign
       description: Updates an existing campaign.
-      tags:
-      - Campaign
+      operationId: Campaign_PutCampaignResource
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -180,7 +260,6 @@ paths:
         in: path
         description: Identifier used to locate the campaign.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -190,47 +269,67 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/ResourceUpdated'
+                $ref: '#/components/schemas/ResourceUpdated'
+              example:
+                status: 200
+                resourceId: '{ResourceId}'
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId and campaignId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: "var client = new HttpClient();\n\nclient.BaseAddress = new Uri(\"https://api.listrak.com/email/\");\nclient.DefaultRequestHeaders.Add(\"Authorization\", \"Bearer \" + token);\n\nvar response = await client.PutAsJsonAsync(\"v1/List/{listId}/Campaign/{campaignId}\", new\n{\n   CampaignName = null\n});\n"
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('PUT', 'v1/List/{listId}/Campaign/{campaignId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken],\n\t'json' => $jsonBody\n]);\n"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/definitions/Campaign'
+              $ref: '#/components/schemas/Campaign'
+        description: Representation of the updated campaign.
+        required: true
     delete:
-      operationId: Campaign_DeleteCampaignResource
-      summary: Delete a Campaign
-      description: Deletes the specified campaign.
       tags:
       - Campaign
+      summary: Delete a Campaign
+      description: Deletes the specified campaign.
+      operationId: Campaign_DeleteCampaignResource
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -238,7 +337,6 @@ paths:
         in: path
         description: Identifier used to locate the campaign.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -248,36 +346,154 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/ResourceDeleted'
+                $ref: '#/components/schemas/ResourceDeleted'
+              example:
+                status: 200
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId and campaignId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.DeleteAsync("v1/List/{listId}/Campaign/{campaignId}");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('DELETE', 'v1/List/{listId}/Campaign/{campaignId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
+    servers:
+    - url: https://api.listrak.com/email
 components:
+  schemas:
+    Collection_Campaign:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/Campaign'
+    Resource_Campaign:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/Campaign'
+          description: Return data.
+    Campaign:
+      description: A Campaign resource.
+      required:
+      - campaignName
+      type: object
+      properties:
+        campaignId:
+          format: int32
+          description: Identifier used to locate the campaign.
+          type: integer
+          readOnly: true
+        campaignName:
+          description: Name of the campaign.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    ResourceUpdated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate the updated resource.
+          type: string
+    ResourceDeleted:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
   securitySchemes:
-    Authorizer:
-      type: apiKey
-      name: Authorization
-      in: header
-      x-amazon-apigateway-authtype: custom
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.listrak.com/OAuth2/Token
+          scopes:
+            Contact: Contact access
+            Event: Event access
+            List: List access
+            Message: Message access
+            Report: Report access
+            Segmentation: Segmentation access
+x-refined-from:
+- listrak-email-openapi.json
+- listrak-email-openapi.yml
 x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference

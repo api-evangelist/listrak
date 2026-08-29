@@ -1,59 +1,101 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: Listrak Cross Channel REST app-push-mobile-client-device SenderCode API
-  description: "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n"
+  title: Listrak Sender Code API
   version: v1
   x-logo:
-    url: https://api.listrak.com/Email/Resources/Images/Logo.png
-    altText: Listrak
-    href: https://www.listrak.com
-    backgroundColor: '#fafafa'
+    url: /SMS/Resources/Images/Logo.png
+  description: 'Operations tagged SenderCode across 2 of this provider''s published API definitions: listrak-sms-openapi.json, listrak-sms-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.listrak.com/crosschannel/v1
+- url: https://api.listrak.com/sms
 tags:
 - name: SenderCode
+  description: A Sender code resource is used to retrieve Sender Code information for a company.
 paths:
   /v1/ShortCode:
     get:
-      operationId: SenderCode_GetShortCodeCollection
-      summary: Get SMS Sender Codes
-      description: Retrieve a collection of Sender Code objects for a Company.
       tags:
       - SenderCode
+      summary: Get SMS Sender Codes
+      description: Retrieve a collection of Sender Code objects for a Company.
+      operationId: SenderCode_GetShortCodeCollection
       responses:
         '200':
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Collection[SenderCode]'
+                $ref: '#/components/schemas/Collection_SenderCode'
+              example:
+                status: 200
+                nextPageCursor: null
+                data:
+                - shortCodeId: 0
+                  code: null
+                  country: null
+                  merchantName: null
+                  emailListId: 0
+                  emailListName: null
+                  externalEventId: 0
+                  externalEventName: null
+                  phoneNumberSegmentationFieldGroupId: 0
+                  phoneNumberSegmentationFieldGroupName: null
+                  phoneNumberSegmentationFieldId: 0
+                  phoneNumberSegmentationFieldName: null
+                  acquisitionSourceSegmentationFieldGroupId: 0
+                  acquisitionSourceSegmentationFieldGroupName: null
+                  acquisitionSourceSegmentationFieldId: 0
+                  acquisitionSourceSegmentationFieldName: null
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2: []
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/ShortCode");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => '/'\n]);\n\n$res = $client->request('GET', 'v1/ShortCode',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
+    servers:
+    - url: https://api.listrak.com/sms
   /v1/ShortCode/{senderCodeId}:
     get:
-      operationId: SenderCode_GetShortCodeResource
-      summary: Get SMS Sender Code
-      description: Retrieve a single SMS Sender Code by Sender Code Id.
       tags:
       - SenderCode
+      summary: Get SMS Sender Code
+      description: Retrieve a single SMS Sender Code by Sender Code Id.
+      operationId: SenderCode_GetShortCodeResource
       parameters:
       - name: senderCodeId
         in: path
         description: Identifier used to specify the Sender Code.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -63,34 +105,187 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Resource[SenderCode]'
+                $ref: '#/components/schemas/Resource_SenderCode'
+              example:
+                status: 200
+                data:
+                  shortCodeId: 0
+                  code: null
+                  country: null
+                  merchantName: null
+                  emailListId: 0
+                  emailListName: null
+                  externalEventId: 0
+                  externalEventName: null
+                  phoneNumberSegmentationFieldGroupId: 0
+                  phoneNumberSegmentationFieldGroupName: null
+                  phoneNumberSegmentationFieldId: 0
+                  phoneNumberSegmentationFieldName: null
+                  acquisitionSourceSegmentationFieldGroupId: 0
+                  acquisitionSourceSegmentationFieldGroupName: null
+                  acquisitionSourceSegmentationFieldId: 0
+                  acquisitionSourceSegmentationFieldName: null
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the senderCodeId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2: []
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/ShortCode/{senderCodeId}");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => '/'\n]);\n\n$res = $client->request('GET', 'v1/ShortCode/{senderCodeId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
+    servers:
+    - url: https://api.listrak.com/sms
 components:
+  schemas:
+    Collection_SenderCode:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/SenderCode'
+    SenderCode:
+      description: SMS Sender Code Resource.
+      type: object
+      properties:
+        shortCodeId:
+          format: int32
+          description: 'Identifier used to locate sender code resource.
+
+            Keeping it named ShortCodeId to not potentially break client integrations.
+
+            If this parameter name changes, it will change the response bodies of the SenderCodeController routes, and will
+
+            require adjustments by clients.'
+          type: integer
+        code:
+          description: SMS Sender Code.
+          type: string
+        country:
+          description: ISO 3166-1 Alpha-2 code of the country associated with sender code.
+          type: string
+        merchantName:
+          description: Name of merchant associated with sender code.
+          type: string
+        emailListId:
+          format: int32
+          description: Identifier of email list associated with sender code.
+          type: integer
+        emailListName:
+          description: Name of email list associated with sender code.
+          type: string
+        externalEventId:
+          format: int32
+          description: Identifier of external event associated with sender code.
+          type: integer
+        externalEventName:
+          description: Name of external event associated with sender code.
+          type: string
+        phoneNumberSegmentationFieldGroupId:
+          format: int32
+          description: Email list attribute id to store a contact's phone number.
+          type: integer
+        phoneNumberSegmentationFieldGroupName:
+          description: Email list attribute name to store a contact's phone number.
+          type: string
+        phoneNumberSegmentationFieldId:
+          format: int32
+          description: Email list attribute group id to store a contact's phone number.
+          type: integer
+        phoneNumberSegmentationFieldName:
+          description: Email list attribute group name to store a contact's phone number.
+          type: string
+        acquisitionSourceSegmentationFieldGroupId:
+          format: int32
+          description: Email list attribute group id to store a contact's acquisition source.
+          type: integer
+        acquisitionSourceSegmentationFieldGroupName:
+          description: Email list attribute group name to store a contact's acquisition source.
+          type: string
+        acquisitionSourceSegmentationFieldId:
+          format: int32
+          description: Email list attribute id to store a contact's acquisition source.
+          type: integer
+        acquisitionSourceSegmentationFieldName:
+          description: Email list attribute name to store a contact's acquisition source.
+          type: string
+    Resource_SenderCode:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/SenderCode'
+          description: Return data.
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
   securitySchemes:
-    Authorizer:
-      type: apiKey
-      name: Authorization
-      in: header
-      x-amazon-apigateway-authtype: custom
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.listrak.com/OAuth2/Token
+          scopes: {}
+x-refined-from:
+- listrak-sms-openapi.json
+- listrak-sms-openapi.yml
 x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference

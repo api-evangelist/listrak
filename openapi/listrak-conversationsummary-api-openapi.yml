@@ -1,31 +1,28 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: Listrak Cross Channel REST app-push-mobile-client-device ConversationSummary API
-  description: "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n"
+  title: Listrak Conversation Summary API
   version: v1
   x-logo:
-    url: https://api.listrak.com/Email/Resources/Images/Logo.png
-    altText: Listrak
-    href: https://www.listrak.com
-    backgroundColor: '#fafafa'
+    url: /Email/Resources/Images/Logo.png
+  description: 'Operations tagged ConversationSummary across 2 of this provider''s published API definitions: listrak-email-openapi.json, listrak-email-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.listrak.com/crosschannel/v1
+- url: https://api.listrak.com/email
 tags:
 - name: ConversationSummary
+  description: The Conversation Summary resource allows you to access an aggregated summary of contact activity for a conversation.
 paths:
   /v1/List/{listId}/Conversation/{conversationId}/Summary:
     get:
-      operationId: ConversationSummary_GetConversationSummaryResource
-      summary: Get Conversation Summary
-      description: Returns a summary of the specified conversation.
       tags:
       - ConversationSummary
+      summary: Get Conversation Summary
+      description: Returns a summary of the specified conversation.
+      operationId: ConversationSummary_GetConversationSummaryResource
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -33,7 +30,6 @@ paths:
         in: path
         description: Identifier used to locate the conversation.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -43,36 +39,161 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Resource[ConversationSummary]'
+                $ref: '#/components/schemas/Resource_ConversationSummary'
+              example:
+                status: 200
+                data:
+                  averageOrderValue: 0.0
+                  bounceCount: 0
+                  clickCount: 0
+                  conversionCount: 0
+                  deliveredCount: 0
+                  openCount: 0
+                  readCount: 0
+                  revenue: 0.0
+                  sentCount: 0
+                  unsubscribeCount: 0
+                  visitCount: 0
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId and conversationId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Report
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/List/{listId}/Conversation/{conversationId}/Summary");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/Conversation/{conversationId}/Summary',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
+    servers:
+    - url: https://api.listrak.com/email
 components:
+  schemas:
+    ConversationSummary:
+      description: A Conversation Summary resource
+      type: object
+      properties:
+        averageOrderValue:
+          format: double
+          description: Average order value associated with the conversation.
+          type: number
+        bounceCount:
+          format: int32
+          description: The number of bounces for the conversation.
+          type: integer
+        clickCount:
+          format: int32
+          description: The number of clicks for the conversation.
+          type: integer
+        conversionCount:
+          format: int32
+          description: The number of conversions for the conversation.
+          type: integer
+        deliveredCount:
+          format: int32
+          description: The number of messages delivered for the conversation.
+          type: integer
+        openCount:
+          format: int32
+          description: The number of opens for the conversation.
+          type: integer
+        readCount:
+          format: int32
+          description: The number of reads for the conversation.
+          type: integer
+        revenue:
+          format: double
+          description: Total revenue associated with the conversation.
+          type: number
+        sentCount:
+          format: int32
+          description: The number of messages sent during the conversation.
+          type: integer
+        unsubscribeCount:
+          format: int32
+          description: The number of unsubscribes for the conversation.
+          type: integer
+        visitCount:
+          format: int32
+          description: The number of site visits as a result of the conversation.
+          type: integer
+    Resource_ConversationSummary:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/ConversationSummary'
+          description: Return data.
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
   securitySchemes:
-    Authorizer:
-      type: apiKey
-      name: Authorization
-      in: header
-      x-amazon-apigateway-authtype: custom
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.listrak.com/OAuth2/Token
+          scopes:
+            Contact: Contact access
+            Event: Event access
+            List: List access
+            Message: Message access
+            Report: Report access
+            Segmentation: Segmentation access
+x-refined-from:
+- listrak-email-openapi.json
+- listrak-email-openapi.yml
 x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference

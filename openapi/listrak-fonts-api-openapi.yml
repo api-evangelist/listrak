@@ -1,0 +1,168 @@
+openapi: 3.2.0
+info:
+  title: Listrak Fonts API
+  version: 1.0.0
+  x-logo:
+    url: images/logo.png
+  description: 'Operations tagged Fonts across 2 of this provider''s published API definitions: listrak-media-fonts-api-openapi.yml, listrak-media-openapi.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.listrak.com/media
+security:
+- Bearer: []
+tags:
+- name: Fonts
+paths:
+  /v1/fonts:
+    get:
+      tags:
+      - Fonts
+      summary: List fonts
+      description: Returns all available fonts.
+      operationId: getFonts
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FontResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: 403
+                error: ERROR_FORBIDDEN
+                message: You do not have permission to access this resource.
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                status: 500
+                error: ERROR_INTERNAL
+                message: An unexpected error occurred.
+      x-codeSamples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/media/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/fonts");'
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n    'base_uri' => 'https://api.listrak.com/media/'\n]);\n\n$res = $client->request('GET', 'v1/fonts', [\n    'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);"
+    servers:
+    - url: https://api.listrak.com/media
+components:
+  schemas:
+    FontResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Font'
+    Font:
+      required:
+      - name
+      - value
+      - url
+      - source
+      - projectID
+      - regularWeight
+      - boldWeight
+      - isItalic
+      - isSystemFont
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        url:
+          type: string
+        source:
+          type: string
+        projectID:
+          type:
+          - 'null'
+          - string
+        regularWeight:
+          type: string
+        boldWeight:
+          type: string
+        isItalic:
+          type: boolean
+        isSystemFont:
+          type: boolean
+      example:
+        name: Arial
+        value: arial, sans-serif
+        url: https://fonts.listrak.com/arial.woff2
+        source: System
+        projectID: null
+        regularWeight: '400'
+        boldWeight: '700'
+        isItalic: false
+        isSystemFont: true
+    ErrorResponse:
+      required:
+      - status
+      - error
+      - message
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        error:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    Bearer:
+      type: http
+      description: Pass the Listrak auth token in the Authorization header.
+      scheme: bearer
+      bearerFormat: Listrak encrypted token
+x-refined-from:
+- listrak-media-fonts-api-openapi.yml
+- listrak-media-openapi.json
+x-amazon-apigateway-security-policy: TLS_1_0
+x-tagGroups:
+- name: API Reference
+  tags:
+  - Events
+  - EventConfigurations

@@ -1,31 +1,30 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
-  title: Listrak Cross Channel REST app-push-mobile-client-device SavedMessage API
-  description: "# Introduction\n\nWelcome to the Listrak Cross Channel <a href='https://en.wikipedia.org/wiki/Representational_state_transfer'>REST API</a>!\n\nOur API allows developers to integrate with Listrak's application. It enables the seamless automation of a broad set of functionality, ranging from basic tasks to complex processes.\n\nWe aim to provide comprehensive documentation coverage of our API's capabilities. Each resource and method is described in detail with implementation notes, descriptions of parameters, headers, return values, and code samples to aid in development.\n\n# Versioning\n\nThe API version is denoted in the URI. This API's base URI is: v1\n\nThe API version will be incremented if breaking changes are introduced. Breaking changes may include:\n\n- Addition of required headers, parameters, or model fields to a current route\n- Alterations that would result in currently valid requests failing, or performing unexpectedly\n\nChanges that are not considered breaking may include:\n\n- Addition of new model fields\n- Addition of new routes\n- Addition of new response headers\n- Any alteration to a route that is marked as <span class=\"inDev\">In Development</span>\n\n# Feedback\n\nWe are actively seeking feedback in the following areas:\n- Code samples\n- Response examples\n- Resource and field descriptions\n\nPlease provide your feedback to us at restapifeedback@listrak.com.\n\n# Integration Setup\nTo enable API access, **you must create an _Integration_** on the _Integrations_ page. In the Listrak application left menu, go to: Integrations &rarr; Integration Management.\n\nPlease specify integration type `Cross Channel` for your integration.\n\nMake sure to securely store a copy of your _Client ID_ and _Client Secret_. These values will be needed to authenticate with the API. For your security, the _Client Secret_ cannot be retrieved if it is lost.\n\n# Status Codes\n\n| Status Code | Status | Description |\n| --- | --- | --- |\n| 200 | OK | The request succeeded. |\n| 201 | Created | A new resource has been created. |\n| 400 | Bad Request | Your request is malformed or invalid. |\n| 401 | Unauthorized | Authentication is required. |\n| 404 | Not Found | The resource does not exist. |\n| 405 | Method Not Allowed | The route does not support the requested method. |\n| 415 | Unsupported Media Type | Please use a `Content-Type` of `application/json`. |\n| 500 | Internal Server Error | An unexpected error occurred. Our development team has been notified. |\n\n# Parameters\n\n## Route Parameters\n\nResource identifiers are specified in the route. For example, in the route `/Resource/{resourceId}`, `resourceId` is a route parameter. In this example, if you wish to interact with Resource #123, its route would be `/Resource/123`.\n\n## Query Parameters\n\nSome routes support additional query parameters; for example, some resources support query parameters relating to paging. Supported query parameters are described in their respective documentation areas.\n\n## Request Body\n\nRequest bodies are required for most `POST` and `PUT` requests. Please use a `Content-Type` of `application/json` and provide a JSON object in your request body.\n\n# Authentication\nAuthentication is accomplished using OAuth 2.0. After successful authentication, your token should be included with every request using the Bearer scheme; specifically, you should set your Authorization header value to Bearer (Your token value) in each request.\n\nYou may request a token by making a POST request to our token endpoint at https://auth.listrak.com/OAuth2/Token. \n\nThe request should have a Content-Type of x-www-form-urlencoded, and the request body should include a grant_type of client_credentials, your client_id, and your client_secret. Here is an example of a valid request:\n\n**POST /OAuth2/Token**\n\n**Body**\n\nContent-Type: application/x-www-form-urlencoded\n\n| Key | Value |\n| --- | --- |\n| grant_type: | client_credentials |\n| client_id: | (Your client ID) |\n| client_secret: | (Your client secret) |\n\nFor your security and convenience, you may pause and unpause your API access on our Integrations page. All requests will be rejected while your API access is paused, including requests to issue tokens.\n"
+  title: Listrak Saved Message API
   version: v1
   x-logo:
-    url: https://api.listrak.com/Email/Resources/Images/Logo.png
-    altText: Listrak
-    href: https://www.listrak.com
-    backgroundColor: '#fafafa'
+    url: /Email/Resources/Images/Logo.png
+  description: 'Operations tagged SavedMessage across 2 of this provider''s published API definitions: listrak-email-openapi.json, listrak-email-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://api.listrak.com/crosschannel/v1
+- url: https://api.listrak.com/email
 tags:
 - name: SavedMessage
+  description: 'The Saved Message resource allows you to access saved messages that have been created on a list.
+
+    '
 paths:
   /v1/List/{listId}/SavedMessage:
     get:
-      operationId: SavedMessage_GetSavedMessageCollection
-      summary: Get all SavedMessages
-      description: Returns the collection of saved messages associated with the specified list.
       tags:
       - SavedMessage
+      summary: Get all SavedMessages
+      description: Returns the collection of saved messages associated with the specified list.
+      operationId: SavedMessage_GetSavedMessageCollection
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -35,41 +34,77 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Collection[SavedMessage]'
+                $ref: '#/components/schemas/Collection_SavedMessage'
+              example:
+                status: 200
+                data:
+                - savedMessageId: 0
+                  savedMessageName: null
+                  campaignId: 0
+                  createDate: '0001-01-01T00:00:00'
+                  lastModifiedDate: '0001-01-01T00:00:00'
+                  externalCampaignId: null
+                  subject: null
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/List/{listId}/SavedMessage");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/SavedMessage',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
     post:
-      operationId: SavedMessage_PostCreateSavedMessage
-      summary: Create a SavedMessage
-      description: Creates a new saved message with the specified content and metadata.
       tags:
       - SavedMessage
+      summary: Create a SavedMessage
+      description: Creates a new saved message with the specified content and metadata.
+      operationId: SavedMessage_PostCreateSavedMessage
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -79,48 +114,70 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/definitions/ResourceCreated'
+                $ref: '#/components/schemas/ResourceCreated'
+              example:
+                status: 201
+                resourceId: '{ResourceId}'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId supplied.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: "var client = new HttpClient();\n\nclient.BaseAddress = new Uri(\"https://api.listrak.com/email/\");\nclient.DefaultRequestHeaders.Add(\"Authorization\", \"Bearer \" + token);\n\nvar response = await client.PostAsJsonAsync(\"v1/List/{listId}/SavedMessage\", new\n{\n   SavedMessageName = null,\n   Subject = null,\n   Preheader = null,\n   FromName = null,\n   FromEmail = null,\n   ReplyEmail = null,\n   BodyHtml = null,\n   BodyText = null,\n   CampaignId = 0,\n   ExternalCampaignId = null\n});\n"
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('POST', 'v1/List/{listId}/SavedMessage',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken],\n\t'json' => $jsonBody\n]);\n"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/definitions/SavedMessageCreate'
+              $ref: '#/components/schemas/SavedMessageCreate'
+        description: The saved message to create.
+        required: true
+    servers:
+    - url: https://api.listrak.com/email
   /v1/List/{listId}/SavedMessage/{savedMessageId}/Message:
     post:
-      operationId: SavedMessage_PostSavedMessageSend
-      summary: Send a SavedMessage
-      description: Sends a previously-created saved message.
       tags:
       - SavedMessage
+      summary: Send a SavedMessage
+      description: Sends a previously-created saved message.
+      operationId: SavedMessage_PostSavedMessageSend
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -128,7 +185,6 @@ paths:
         in: path
         description: Identifier used to locate the saved message.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -136,7 +192,6 @@ paths:
         in: query
         description: The send date for the message.
         required: false
-        format: date-time
         schema:
           type: string
           format: date-time
@@ -164,42 +219,75 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '201':
           description: Created
           content:
             application/json:
               schema:
-                $ref: '#/definitions/ResourceCreated'
+                $ref: '#/components/schemas/ResourceCreated'
+              example:
+                status: 201
+                resourceId: '{ResourceId}'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId and savedMessageId supplied.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.PostAsJsonAsync("v1/List/{listId}/SavedMessage/{savedMessageId}/Message?sendDate={sendDate}&sendTestMessage={sendTestMessage}&sendReviewMessage={sendReviewMessage}&testEmailAddress={testEmailAddress}", new
+
+          );
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('POST', 'v1/List/{listId}/SavedMessage/{savedMessageId}/Message',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken],\n\t'json' => $jsonBody\n]);\n"
+    servers:
+    - url: https://api.listrak.com/email
   /v1/List/{listId}/SavedMessage/{savedMessageId}:
     get:
-      operationId: SavedMessage_GetSavedMessageResource
-      summary: Get a SavedMessage
-      description: Returns the specified saved message.
       tags:
       - SavedMessage
+      summary: Get a SavedMessage
+      description: Returns the specified saved message.
+      operationId: SavedMessage_GetSavedMessageResource
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list resource.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -207,7 +295,6 @@ paths:
         in: path
         description: Identifier used to locate the saved message.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -217,41 +304,89 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Resource[SavedMessageExtended]'
+                $ref: '#/components/schemas/Resource_SavedMessageExtended'
+              example:
+                status: 200
+                data:
+                  enableUniversalEmailKeySetting: false
+                  savedMessageId: 0
+                  savedMessageName: null
+                  campaignId: 0
+                  bodyHtml: null
+                  bodyText: null
+                  codePage: 0
+                  createDate: '0001-01-01T00:00:00'
+                  lastModifiedDate: '0001-01-01T00:00:00'
+                  enablePassalong: false
+                  enableTracking: false
+                  externalCampaignId: null
+                  fromEmail: null
+                  fromName: null
+                  googleAnalyticsCampaignName: null
+                  googleAnalyticsCampaignContent: null
+                  replyEmail: null
+                  subject: null
+                  toName: null
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId and savedMessageId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: 'var client = new HttpClient();
+
+
+          client.BaseAddress = new Uri("https://api.listrak.com/email/");
+
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+
+
+          var response = await client.GetAsync("v1/List/{listId}/SavedMessage/{savedMessageId}");
+
+          '
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/SavedMessage/{savedMessageId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
     put:
-      operationId: SavedMessage_PutUpdateSavedMessage
-      summary: Update a SavedMessage
-      description: Updates the specified saved message with the provided content and metadata.
       tags:
       - SavedMessage
+      summary: Update a SavedMessage
+      description: Updates the specified saved message with the provided content and metadata.
+      operationId: SavedMessage_PutUpdateSavedMessage
       parameters:
       - name: listId
         in: path
         description: Identifier used to locate the list.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -259,7 +394,6 @@ paths:
         in: path
         description: Identifier used to locate the saved message.
         required: true
-        format: int32
         schema:
           type: integer
           format: int32
@@ -269,42 +403,324 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Resource[SavedMessageExtended]'
+                $ref: '#/components/schemas/Resource_SavedMessageExtended'
+              example:
+                status: 200
+                data:
+                  enableUniversalEmailKeySetting: false
+                  savedMessageId: 0
+                  savedMessageName: null
+                  campaignId: 0
+                  bodyHtml: null
+                  bodyText: null
+                  codePage: 0
+                  createDate: '0001-01-01T00:00:00'
+                  lastModifiedDate: '0001-01-01T00:00:00'
+                  enablePassalong: false
+                  enableTracking: false
+                  externalCampaignId: null
+                  fromEmail: null
+                  fromName: null
+                  googleAnalyticsCampaignName: null
+                  googleAnalyticsCampaignContent: null
+                  replyEmail: null
+                  subject: null
+                  toName: null
         '400':
           description: BadRequest
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 400
+                error: ERROR_INVALID_PARAMETER
+                message: An invalid value was supplied for {Parameter}.
         '404':
           description: NotFound
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 404
+                error: ERROR_UNABLE_TO_LOCATE_RESOURCE
+                message: Unable to locate a resource associated with the listId and savedMessageId supplied.
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/definitions/Error'
+                $ref: '#/components/schemas/Error'
+              example:
+                status: 401
+                error: ERROR_UNAUTHORIZED
+                message: Authorization was denied for this request.
       security:
       - OAuth 2:
         - List
         - Message
+      x-code-samples:
+      - lang: C#
+        source: "var client = new HttpClient();\n\nclient.BaseAddress = new Uri(\"https://api.listrak.com/email/\");\nclient.DefaultRequestHeaders.Add(\"Authorization\", \"Bearer \" + token);\n\nvar response = await client.PutAsJsonAsync(\"v1/List/{listId}/SavedMessage/{savedMessageId}\", new\n{\n   SavedMessageName = null,\n   Subject = null,\n   Preheader = null,\n   FromName = null,\n   FromEmail = null,\n   ReplyEmail = null,\n   BodyHtml = null,\n   BodyText = null,\n   CampaignId = 0,\n   ExternalCampaignId = null\n});\n"
+      - lang: PHP
+        source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('PUT', 'v1/List/{listId}/SavedMessage/{savedMessageId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken],\n\t'json' => $jsonBody\n]);\n"
       requestBody:
-        required: true
         content:
           application/json:
             schema:
-              $ref: '#/definitions/SavedMessageUpdate'
+              $ref: '#/components/schemas/SavedMessageUpdate'
+        description: The saved message fields to update.
+        required: true
+    servers:
+    - url: https://api.listrak.com/email
 components:
+  schemas:
+    SavedMessage:
+      description: A Saved Message resource.
+      required:
+      - externalCampaignId
+      - subject
+      type: object
+      properties:
+        savedMessageId:
+          format: int32
+          description: Identifier used to locate the saved message.
+          type: integer
+          readOnly: true
+        savedMessageName:
+          description: Name given to the saved message.
+          type: string
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        createDate:
+          format: date-time
+          description: Creation date of the saved message.
+          type: string
+        lastModifiedDate:
+          format: date-time
+          description: Last date the saved message was modified.
+          type: string
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+        subject:
+          description: Subject of the message.
+          type: string
+    SavedMessageUpdate:
+      description: Request model for updating a Saved Message.
+      required:
+      - savedMessageName
+      - subject
+      - fromName
+      - fromEmail
+      type: object
+      properties:
+        savedMessageName:
+          description: Name given to the saved message.
+          type: string
+        subject:
+          description: Subject of the message.
+          type: string
+        preheader:
+          description: Pre-header text of the message.
+          type: string
+        fromName:
+          description: The from name that will be used for the message.
+          type: string
+        fromEmail:
+          description: The from email address that will be used for the message.
+          type: string
+        replyEmail:
+          description: The reply email address that will be used for the message.
+          type: string
+        bodyHtml:
+          description: HTML body of the message.
+          type: string
+        bodyText:
+          description: Plain text body of the message.
+          type: string
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    SavedMessageCreate:
+      description: Request model for creating a Saved Message.
+      required:
+      - savedMessageName
+      - subject
+      - fromName
+      - fromEmail
+      type: object
+      properties:
+        savedMessageName:
+          description: Name given to the saved message.
+          type: string
+        subject:
+          description: Subject of the message.
+          type: string
+        preheader:
+          description: Pre-header text of the message.
+          type: string
+        fromName:
+          description: The from name that will be used for the message.
+          type: string
+        fromEmail:
+          description: The from email address that will be used for the message.
+          type: string
+        replyEmail:
+          description: The reply email address that will be used for the message.
+          type: string
+        bodyHtml:
+          description: HTML body of the message.
+          type: string
+        bodyText:
+          description: Plain text body of the message.
+          type: string
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+    Collection_SavedMessage:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/SavedMessage'
+    SavedMessageExtended:
+      description: A Saved Message resource.
+      required:
+      - externalCampaignId
+      - fromEmail
+      - fromName
+      - subject
+      type: object
+      properties:
+        enableUniversalEmailKeySetting:
+          description: Whether to include UniversalEmailKey in URL query string.
+          type: boolean
+        savedMessageId:
+          format: int32
+          description: Identifier used to locate the saved message.
+          type: integer
+        savedMessageName:
+          description: Name given to the saved message.
+          type: string
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        bodyHtml:
+          description: HTML body that will be sent in the message.
+          type: string
+        bodyText:
+          description: Text body that will be sent in the message.
+          type: string
+        codePage:
+          format: int32
+          description: Type of CodePage used in the message.
+          type: integer
+        createDate:
+          format: date-time
+          description: Creation date of the saved message.
+          type: string
+        lastModifiedDate:
+          format: date-time
+          description: Last date the saved message was modified.
+          type: string
+        enablePassalong:
+          description: Whether passalong is enabled.
+          type: boolean
+        enableTracking:
+          description: Whether tracking is enabled.
+          type: boolean
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+        fromEmail:
+          description: The _from email address_ that will be used for the message.
+          type: string
+        fromName:
+          description: The _from name_ that will be used for the message.
+          type: string
+        googleAnalyticsCampaignName:
+          description: The Google Analytics campaign name to be used for message tracking.
+          type: string
+        googleAnalyticsCampaignContent:
+          description: The Google Analytics campaign content to be used for message tracking.
+          type: string
+        replyEmail:
+          description: The _reply email address_ that will be used for the message.
+          type: string
+        subject:
+          description: Subject of the message.
+          type: string
+        toName:
+          description: The _to name_ that will be used for the message.
+          type: string
+    Resource_SavedMessageExtended:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/SavedMessageExtended'
+          description: Return data.
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
   securitySchemes:
-    Authorizer:
-      type: apiKey
-      name: Authorization
-      in: header
-      x-amazon-apigateway-authtype: custom
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://auth.listrak.com/OAuth2/Token
+          scopes:
+            Contact: Contact access
+            Event: Event access
+            List: List access
+            Message: Message access
+            Report: Report access
+            Segmentation: Segmentation access
+x-refined-from:
+- listrak-email-openapi.json
+- listrak-email-openapi.yml
 x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference
