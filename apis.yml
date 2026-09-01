@@ -559,7 +559,7 @@ apis:
   humanURL: https://api.listrak.com/email
   baseURL: https://api.listrak.com
   tags:
-  - EventConfigurations
+  - Event Configurations
   tags_raw:
   - EventConfigurations
   properties:
@@ -693,7 +693,7 @@ apis:
   humanURL: https://api.listrak.com/email
   baseURL: https://api.listrak.com
   tags:
-  - IpPool
+  - IP Pool
   tags_raw:
   - IpPool
   properties:
