@@ -553,34 +553,6 @@ apis:
     url: https://api.listrak.com/mobileclient/docs
   - type: Documentation
     url: https://api.listrak.com/privacy
-- aid: listrak:listrak-eventconfigurations-api
-  name: Listrak EventConfigurations API
-  description: REST endpoints to manage Custom Event Configurations.
-  humanURL: https://api.listrak.com/email
-  baseURL: https://api.listrak.com
-  tags:
-  - Event Configurations
-  tags_raw:
-  - EventConfigurations
-  properties:
-  - type: OpenAPI
-    url: openapi/listrak-eventconfigurations-api-openapi.yml
-  - type: Documentation
-    url: https://api.listrak.com/email
-  - type: Authentication
-    url: https://auth.listrak.com/OAuth2/Token
-  - type: Documentation
-    url: https://api.listrak.com/sms
-  - type: Documentation
-    url: https://api.listrak.com/crosschannel/v1/docs
-  - type: Documentation
-    url: https://api.listrak.com/data
-  - type: Documentation
-    url: https://api.listrak.com/twowaysms/docs
-  - type: Documentation
-    url: https://api.listrak.com/mobileclient/docs
-  - type: Documentation
-    url: https://api.listrak.com/privacy
 - aid: listrak:listrak-eventgroup-api
   name: Listrak EventGroup API
   description: The EventGroup API from Listrak — 2 operation(s) for eventgroup.
@@ -687,34 +659,6 @@ apis:
     url: https://api.listrak.com/mobileclient/docs
   - type: Documentation
     url: https://api.listrak.com/privacy
-- aid: listrak:listrak-ippool-api
-  name: Listrak IpPool API
-  description: The IpPool API from Listrak — 1 operation(s) for ippool.
-  humanURL: https://api.listrak.com/email
-  baseURL: https://api.listrak.com
-  tags:
-  - IP Pool
-  tags_raw:
-  - IpPool
-  properties:
-  - type: OpenAPI
-    url: openapi/listrak-ippool-api-openapi.yml
-  - type: Documentation
-    url: https://api.listrak.com/email
-  - type: Authentication
-    url: https://auth.listrak.com/OAuth2/Token
-  - type: Documentation
-    url: https://api.listrak.com/sms
-  - type: Documentation
-    url: https://api.listrak.com/crosschannel/v1/docs
-  - type: Documentation
-    url: https://api.listrak.com/data
-  - type: Documentation
-    url: https://api.listrak.com/twowaysms/docs
-  - type: Documentation
-    url: https://api.listrak.com/mobileclient/docs
-  - type: Documentation
-    url: https://api.listrak.com/privacy
 - aid: listrak:listrak-list-api
   name: Listrak List API
   description: The List API from Listrak — 2 operation(s) for list.
@@ -725,34 +669,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/listrak-list-api-openapi.yml
-  - type: Documentation
-    url: https://api.listrak.com/email
-  - type: Authentication
-    url: https://auth.listrak.com/OAuth2/Token
-  - type: Documentation
-    url: https://api.listrak.com/sms
-  - type: Documentation
-    url: https://api.listrak.com/crosschannel/v1/docs
-  - type: Documentation
-    url: https://api.listrak.com/data
-  - type: Documentation
-    url: https://api.listrak.com/twowaysms/docs
-  - type: Documentation
-    url: https://api.listrak.com/mobileclient/docs
-  - type: Documentation
-    url: https://api.listrak.com/privacy
-- aid: listrak:listrak-listimport-api
-  name: Listrak ListImport API
-  description: The ListImport API from Listrak — 2 operation(s) for listimport.
-  humanURL: https://api.listrak.com/email
-  baseURL: https://api.listrak.com
-  tags:
-  - List Import
-  tags_raw:
-  - ListImport
-  properties:
-  - type: OpenAPI
-    url: openapi/listrak-listimport-api-openapi.yml
   - type: Documentation
     url: https://api.listrak.com/email
   - type: Authentication
@@ -1341,32 +1257,6 @@ apis:
     url: https://api.listrak.com/mobileclient/docs
   - type: Documentation
     url: https://api.listrak.com/privacy
-- aid: listrak:listrak-splittest-api
-  name: Listrak SplitTest API
-  description: The SplitTest API from Listrak — 3 operation(s) for splittest.
-  humanURL: https://api.listrak.com/email
-  baseURL: https://api.listrak.com
-  tags:
-  - SplitTest
-  properties:
-  - type: OpenAPI
-    url: openapi/listrak-splittest-api-openapi.yml
-  - type: Documentation
-    url: https://api.listrak.com/email
-  - type: Authentication
-    url: https://auth.listrak.com/OAuth2/Token
-  - type: Documentation
-    url: https://api.listrak.com/sms
-  - type: Documentation
-    url: https://api.listrak.com/crosschannel/v1/docs
-  - type: Documentation
-    url: https://api.listrak.com/data
-  - type: Documentation
-    url: https://api.listrak.com/twowaysms/docs
-  - type: Documentation
-    url: https://api.listrak.com/mobileclient/docs
-  - type: Documentation
-    url: https://api.listrak.com/privacy
 - aid: listrak:listrak-tickets-api
   name: Listrak Tickets API
   description: The Tickets API from Listrak — 1 operation(s) for tickets.
@@ -1517,6 +1407,112 @@ apis:
     url: https://api.listrak.com/media
   - type: Authentication
     url: https://auth.listrak.com/OAuth2/Token
+- aid: listrak:listrak-event-configurations-api
+  name: Listrak Event Configurations API
+  description: REST endpoints to manage Custom Event Configurations.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Event Configurations
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-event-configurations-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-ip-pool-api
+  name: Listrak IP Pool API
+  description: The IpPool resource exposes all of the IP Pools and their IDs for a user's Account.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - IP Pool
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-ip-pool-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-list-import-api
+  name: Listrak List Import API
+  description: >-
+    The List Import resource is used to supply an import file in order to import data to a list.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - List Import
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-list-import-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
+- aid: listrak:listrak-split-test-api
+  name: Listrak Split Test API
+  description: >-
+    The SplitTest resource is used to retrieve information about automated email split tests.
+  humanURL: https://api.listrak.com/email
+  baseURL: https://api.listrak.com
+  tags:
+  - Split Test
+  properties:
+  - type: OpenAPI
+    url: openapi/listrak-split-test-api-openapi.yml
+  - type: Documentation
+    url: https://api.listrak.com/email
+  - type: Authentication
+    url: https://auth.listrak.com/OAuth2/Token
+  - type: Documentation
+    url: https://api.listrak.com/sms
+  - type: Documentation
+    url: https://api.listrak.com/crosschannel/v1/docs
+  - type: Documentation
+    url: https://api.listrak.com/data
+  - type: Documentation
+    url: https://api.listrak.com/twowaysms/docs
+  - type: Documentation
+    url: https://api.listrak.com/mobileclient/docs
+  - type: Documentation
+    url: https://api.listrak.com/privacy
 common:
   - type: CapabilityMap
     url: capabilities/listrak-capability-edges.yml
