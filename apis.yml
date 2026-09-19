@@ -319,6 +319,8 @@ apis:
   humanURL: https://api.listrak.com/email
   baseURL: https://api.listrak.com
   tags:
+  - Conversations
+  tags_raw:
   - Conversation
   properties:
   - type: OpenAPI
