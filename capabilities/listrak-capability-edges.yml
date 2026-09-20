@@ -1,0 +1,95 @@
+slug: listrak
+provider: Listrak
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Retail & Consumer Goods
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: Forget
+  spec_file: listrak-forget-api-openapi.yml
+  capability_id: BC-130.50
+  capability_id_l1: BC-130
+  capability_name: Privacy & Data Protection Management
+  confidence: 0.88
+  evidence: POST /v1/Forget Forget_PostForgetRequest Submit a forget request; schema ForgetRequest (listrak-privacy-openapi)
+  reason: Right-to-be-forgotten request submission and status tracking from the vendor's Privacy API is
+    squarely data-subject-rights handling under privacy and data protection management.
+- tag: Message
+  spec_file: listrak-message-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.85
+  evidence: POST /v1/List/{listId}/Message Message_PostMessageResource Send a Message; SegmentsApplied,
+    MessageExtendedFilter
+  reason: Authoring and sending email messages to a list with segments and filters applied is email campaign
+    execution — digital marketing/marketing automation.
+- tag: Customer
+  spec_file: listrak-customer-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.75
+  evidence: POST /v1/Customer — 'Start a Customer Import'; schemas Customer, Address, Social, Loyalty
+  reason: Bulk import of customer records with address, social and loyalty attributes into the engagement
+    platform — this is customer master/profile data ingestion, i.e. Customer Data Management. Some chance
+    it is better read as loyalty programme data, hence not maximal confidence.
+- tag: SavedMessage
+  spec_file: listrak-savedmessage-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.75
+  evidence: POST /v1/List/{listId}/SavedMessage — "Create a SavedMessage"; POST .../{savedMessageId}/Message
+    — "Send a SavedMessage"
+  reason: Full CRUD plus send of reusable email messages against a contact list — email campaign authoring
+    and dispatch, the core of marketing automation / digital marketing execution.
+- tag: BroadcastMessage
+  spec_file: listrak-broadcastmessage-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.72
+  evidence: POST /v1/ShortCode/{senderCodeId}/Broadcast/Immediate  BroadcastMessage_PostImmediateBroadcast  Immediate
+    Broadcast
+  reason: Sends an immediate SMS broadcast to a short-code subscriber base on a retail customer-engagement
+    platform — outbound digital/mobile marketing message execution. Mapped to Digital Marketing Management;
+    some chance the grader prefers Demand Generation.
+- tag: Campaign
+  spec_file: listrak-campaign-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: GET /v1/List/{listId}/Campaign  Campaign_GetCampaignCollection  Get all Campaigns; POST /v1/List/{listId}/Campaign  Create
+    a Campaign
+  reason: CRUD over email campaigns scoped to a subscriber list on a customer-engagement platform — email
+    campaign authoring and management, i.e. digital marketing execution. Residual ambiguity between Digital
+    Marketing and Demand Generation sub-capabilities.
+- tag: MessageActivity
+  spec_file: listrak-messageactivity-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: GET /v1/List/{listId}/Message/{messageId}/Activity MessageActivity_GetMessageActivityCollection
+    Get Message Activity
+  reason: Per-message engagement activity for sent email campaigns, i.e. email marketing performance data.
+    Moderate confidence as it could also be read as marketing measurement/operations.
+- tag: SavedAudience
+  spec_file: listrak-savedaudience-api-openapi.yml
+  capability_id: BC-420.20
+  capability_id_l1: BC-420
+  capability_name: Customer Segmentation Management
+  confidence: 0.7
+  evidence: GET /v1/List/{listId}/SavedAudience — "Get all Saved Audiences"; schema CollectionPaged_SavedAudience
+  reason: Saved audiences are stored segment definitions over a contact list — customer segmentation for
+    targeting. Read-only, hence not top confidence.
