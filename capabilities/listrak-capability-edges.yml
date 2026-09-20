@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 8
+edge_count: 9
 edges:
 - tag: Forget
   spec_file: listrak-forget-api-openapi.yml
@@ -32,6 +32,16 @@ edges:
     MessageExtendedFilter
   reason: Authoring and sending email messages to a list with segments and filters applied is email campaign
     execution — digital marketing/marketing automation.
+- tag: Contact
+  spec_file: listrak-contact-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.75
+  evidence: POST /v1/List/{listId}/Contact  Contact_PostContactResource  Create or update a Contact
+  reason: Operations create, read, update and bulk-import contact records (with phone-number identity
+    and opt-out retrieval), which is marketing customer/contact data mastering rather than plumbing.
+  recovered_from: sweep-20260829T005356Z-edges.json
 - tag: Customer
   spec_file: listrak-customer-api-openapi.yml
   capability_id: BC-420.10
