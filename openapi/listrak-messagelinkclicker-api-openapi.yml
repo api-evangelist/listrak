@@ -1,10 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Listrak Message Link Clicker API
   version: v1
+  title: Listrak Email REST Message Link Clicker API
+  description: '# Introduction
+
+    Welcome to the Listrak Email REST API!'
   x-logo:
     url: /Email/Resources/Images/Logo.png
-  description: 'Operations tagged MessageLinkClicker across 2 of this provider''s published API definitions: listrak-email-openapi.json, listrak-email-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/email
 tags:
@@ -127,20 +129,20 @@ paths:
           '
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/Message/{messageId}/Link/{messageLinkId}/Clicker',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
-    servers:
-    - url: https://api.listrak.com/email
 components:
   schemas:
-    MessageLinkClicker:
-      description: A Message Link Clicker resource.
+    Error:
       type: object
       properties:
-        emailAddress:
-          description: Email address of the contact.
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
           type: string
-        clickDate:
-          format: date-time
-          description: Date on which the click occurred.
+        message:
+          description: Message describing the status and the error that occurred.
           type: string
     CollectionPaged_MessageLinkClicker:
       type: object
@@ -157,38 +159,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MessageLinkClicker'
-    Error:
+    MessageLinkClicker:
+      description: A Message Link Clicker resource.
       type: object
       properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
+        emailAddress:
+          description: Email address of the contact.
           type: string
-        message:
-          description: Message describing the status and the error that occurred.
+        clickDate:
+          format: date-time
+          description: Date on which the click occurred.
           type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes:
-            Contact: Contact access
-            Event: Event access
-            List: List access
-            Message: Message access
-            Report: Report access
-            Segmentation: Segmentation access
-x-refined-from:
-- listrak-email-openapi.json
-- listrak-email-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Campaign
+  - Contact
+  - ContactSegmentationField
+  - Content
+  - ContentFolder
+  - Conversation
+  - ConversationMessage
+  - ConversationMessageActivity
+  - ConversationMessageLink
+  - ConversationMessageLinkClicker
+  - ConversationMessageSummary
+  - ConversationSummary
+  - Event
+  - EventGroup
+  - Folder
+  - IpPool
+  - List
+  - ListImport
+  - ListImportContact
+  - ListImportStatus
+  - ListImportSummary
+  - Message
+  - MessageActivity
+  - MessageLink
+  - MessageLinkClicker
+  - MessageStatus
+  - MessageSummary
+  - SavedAudience
+  - SavedMessage
+  - SegmentationField
+  - SegmentationFieldGroup
+  - SplitTest
+  - TransactionalMessage
+  - TransactionalMessageActivity
+  - TransactionalMessageResend

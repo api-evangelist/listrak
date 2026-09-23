@@ -1,13 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Listrak Messagestream API
+  title: Listrak Two-Way SMS Messagestream API
+  description: '# Introduction
+
+
+    Welcome to the Listrak Two-Way SMS REST API!'
   version: v1
   x-logo:
     url: https://api.listrak.com/Email/Resources/Images/Logo.png
     altText: Listrak
     href: https://www.listrak.com
     backgroundColor: '#fafafa'
-  description: 'Operations tagged Messagestream across 2 of this provider''s published API definitions: listrak-twowaysms-openapi.json, listrak-twowaysms-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/twowaysms
 tags:
@@ -123,8 +126,8 @@ paths:
                 type: string
       tags:
       - Messagestream
-    servers:
-    - url: https://api.listrak.com/twowaysms
+      summary: Get message stream
+      x-summary-source: derived
 components:
   securitySchemes:
     Authorizer:
@@ -132,12 +135,3 @@ components:
       name: Authorization
       in: header
       x-amazon-apigateway-authtype: custom
-x-refined-from:
-- listrak-twowaysms-openapi.json
-- listrak-twowaysms-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
-x-tagGroups:
-- name: API Reference
-  tags:
-  - Events
-  - EventConfigurations

@@ -1,13 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Listrak Tickets API
+  title: Listrak Two-Way SMS Tickets API
+  description: '# Introduction
+
+
+    Welcome to the Listrak Two-Way SMS REST API!'
   version: v1
   x-logo:
     url: https://api.listrak.com/Email/Resources/Images/Logo.png
     altText: Listrak
     href: https://www.listrak.com
     backgroundColor: '#fafafa'
-  description: 'Operations tagged Tickets across 2 of this provider''s published API definitions: listrak-twowaysms-openapi.json, listrak-twowaysms-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/twowaysms
 tags:
@@ -117,6 +120,8 @@ paths:
                 type: string
       tags:
       - Tickets
+      summary: Open ticket
+      x-summary-source: derived
     delete:
       operationId: closeTicket
       requestBody:
@@ -218,8 +223,8 @@ paths:
                 type: string
       tags:
       - Tickets
-    servers:
-    - url: https://api.listrak.com/twowaysms
+      summary: Close ticket
+      x-summary-source: derived
 components:
   schemas:
     TicketCloseRequest:
@@ -232,12 +237,6 @@ components:
           description: Numeric ID. Phone Id
           format: int64
       description: A request for closing a ticket
-    integrationType:
-      enum:
-      - gorgias
-      - custom
-      type: string
-      description: Integration Type
     TicketOpenRequest:
       type: object
       properties:
@@ -251,18 +250,15 @@ components:
           type: string
           description: A unique ticket identifier.
       description: A request for opening a ticket
+    integrationType:
+      enum:
+      - gorgias
+      - custom
+      type: string
+      description: Integration Type
   securitySchemes:
     Authorizer:
       type: apiKey
       name: Authorization
       in: header
       x-amazon-apigateway-authtype: custom
-x-refined-from:
-- listrak-twowaysms-openapi.json
-- listrak-twowaysms-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
-x-tagGroups:
-- name: API Reference
-  tags:
-  - Events
-  - EventConfigurations

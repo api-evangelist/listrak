@@ -1,13 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Listrak Events API
+  title: Listrak Cross Channel REST Events API
+  description: '# Introduction
+
+
+    Welcome to the Listrak Cross Channel REST API!'
   version: v1
   x-logo:
     url: https://api.listrak.com/Email/Resources/Images/Logo.png
     altText: Listrak
     href: https://www.listrak.com
     backgroundColor: '#fafafa'
-  description: 'Operations tagged Events across 2 of this provider''s published API definitions: listrak-crosschannel-openapi.json, listrak-crosschannel-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/crosschannel/v1
 tags:
@@ -18,7 +21,7 @@ paths:
     post:
       tags:
       - Events
-      summary: Route to post new Custom Events.
+      summary: Route to post new Custom Events
       description: A route to post new Custom Events associated with the given Custom Event Configuration. The data payload for these events should match the schema defined through your Custom Events Integration.
       operationId: postEvents
       parameters:
@@ -88,8 +91,6 @@ paths:
       x-codeSamples:
       - lang: JSON
         source: "{\n    \"events\": [\n        {\n            \"identifiers\": [\n                {\n                    \"identifierValue\": \"alice@listrak.com\",\n                    \"identifierType\": \"EmailAddress\"\n                },\n                {\n                    \"identifierValue\": \"5551234567\",\n                    \"identifierType\": \"PhoneNumber\"\n                }\n            ],\n            \"dataFields\": {\n                \"firstName\": \"Alice\",\n                \"lastName\": \"Smith\"\n            }\n        },\n        {\n            \"identifiers\": [\n                {\n                    \"identifierValue\": \"bob@listrak.com\",\n                    \"identifierType\": \"EmailAddress\"\n                },\n                {\n                    \"identifierValue\": \"5551234568\",\n                    \"identifierType\": \"PhoneNumber\"\n                }\n            ],\n            \"dataFields\": {\n                \"firstName\": \"Bob\",\n                \"lastName\": \"Smith\"\n            }\n        }\n    ]\n}"
-    servers:
-    - url: https://api.listrak.com/crosschannel/v1
 components:
   schemas:
     Identifier:
@@ -106,16 +107,14 @@ components:
           type: string
           description: The type of identifier, e.g. an email address.
       description: The identifier information that can be used to contact the person associated with this event.
-    CustomEventPostResponse:
-      title: CustomEventPostResponse
+    EventList:
       type: object
       properties:
-        data:
+        events:
           type: array
           items:
-            $ref: '#/components/schemas/RecipientDetailResponse'
-        meta:
-          $ref: '#/components/schemas/ResponseMetaData'
+            $ref: '#/components/schemas/Event'
+          description: The list of events.
     RecipientDetailResponse:
       type: object
       properties:
@@ -133,33 +132,6 @@ components:
           items:
             $ref: '#/components/schemas/RecipientDetailResponseError'
           description: Errors, if any, that occured to cause a non-200 series status code
-    Error:
-      type: object
-      properties:
-        userMessage:
-          type: string
-        internalMessage:
-          type: string
-          description: Internal Message
-    EventList:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/Event'
-          description: The list of events.
-    RecipientDetailResponseError:
-      type: object
-      properties:
-        errorType:
-          type: string
-          description: The type of error
-          format: string
-        errorMessage:
-          type: string
-          description: The error message
-          format: string
     Event:
       type: object
       properties:
@@ -174,6 +146,35 @@ components:
             type: string
           description: An object containing keys and values for user-defined data. This data should match the fields defined when creating the Custom Event Schema defined through your Cross Channel Integration. While the values may be passed as strings, it should be possible to parse these values into their defined types. Omitted values will not cause errors, but will lead to gaps in the available data for personalization. Additional fields beyond those defined in the schema will be discarded.
       description: Custom Events Configuration
+    CustomEventPostResponse:
+      title: CustomEventPostResponse
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipientDetailResponse'
+        meta:
+          $ref: '#/components/schemas/ResponseMetaData'
+    Error:
+      type: object
+      properties:
+        userMessage:
+          type: string
+        internalMessage:
+          type: string
+          description: Internal Message
+    RecipientDetailResponseError:
+      type: object
+      properties:
+        errorType:
+          type: string
+          description: The type of error
+          format: string
+        errorMessage:
+          type: string
+          description: The error message
+          format: string
     ResponseMetaData:
       type: object
       properties:
@@ -194,9 +195,6 @@ components:
       name: Authorization
       in: header
       x-amazon-apigateway-authtype: custom
-x-refined-from:
-- listrak-crosschannel-openapi.json
-- listrak-crosschannel-openapi.yml
 x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference

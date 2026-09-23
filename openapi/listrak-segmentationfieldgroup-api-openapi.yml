@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  title: Listrak Segmentation Field Group API
   version: v1
+  title: Listrak Email REST Segmentation Field Group API
+  description: '# Introduction
+
+    Welcome to the Listrak Email REST API!'
   x-logo:
     url: /Email/Resources/Images/Logo.png
-  description: 'Operations tagged SegmentationFieldGroup across 2 of this provider''s published API definitions: listrak-email-openapi.json, listrak-email-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/email
 tags:
 - name: SegmentationFieldGroup
-  description: 'A Profile Field Group is used to group the profile fields for a given list.
-
-    '
+  description: A Profile Field Group is used to group the profile fields for a given list.
 paths:
   /v1/List/{listId}/SegmentationFieldGroup:
     get:
@@ -160,8 +160,6 @@ paths:
               $ref: '#/components/schemas/SegmentationFieldGroup'
         description: Representation of the profile field group to create.
         required: true
-    servers:
-    - url: https://api.listrak.com/email
   /v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}:
     get:
       tags:
@@ -402,11 +400,9 @@ paths:
           '
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('DELETE', 'v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
-    servers:
-    - url: https://api.listrak.com/email
 components:
   schemas:
-    Collection_SegmentationFieldGroup:
+    Resource_SegmentationFieldGroup:
       type: object
       properties:
         status:
@@ -414,37 +410,8 @@ components:
           description: HTTP status code.
           type: integer
         data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/SegmentationFieldGroup'
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
-    ResourceUpdated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate the updated resource.
-          type: string
-    ResourceDeleted:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
+          $ref: '#/components/schemas/SegmentationFieldGroup'
+          description: Return data.
     SegmentationFieldGroup:
       description: A Profile Field Group resource.
       required:
@@ -464,7 +431,14 @@ components:
           format: int32
           description: Ordinal position of the profile field group.
           type: integer
-    Resource_SegmentationFieldGroup:
+    ResourceDeleted:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+    Collection_SegmentationFieldGroup:
       type: object
       properties:
         status:
@@ -472,8 +446,10 @@ components:
           description: HTTP status code.
           type: integer
         data:
-          $ref: '#/components/schemas/SegmentationFieldGroup'
-          description: Return data.
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentationFieldGroup'
     Error:
       type: object
       properties:
@@ -487,25 +463,61 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes:
-            Contact: Contact access
-            Event: Event access
-            List: List access
-            Message: Message access
-            Report: Report access
-            Segmentation: Segmentation access
-x-refined-from:
-- listrak-email-openapi.json
-- listrak-email-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
+    ResourceUpdated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate the updated resource.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Campaign
+  - Contact
+  - ContactSegmentationField
+  - Content
+  - ContentFolder
+  - Conversation
+  - ConversationMessage
+  - ConversationMessageActivity
+  - ConversationMessageLink
+  - ConversationMessageLinkClicker
+  - ConversationMessageSummary
+  - ConversationSummary
+  - Event
+  - EventGroup
+  - Folder
+  - IpPool
+  - List
+  - ListImport
+  - ListImportContact
+  - ListImportStatus
+  - ListImportSummary
+  - Message
+  - MessageActivity
+  - MessageLink
+  - MessageLinkClicker
+  - MessageStatus
+  - MessageSummary
+  - SavedAudience
+  - SavedMessage
+  - SegmentationField
+  - SegmentationFieldGroup
+  - SplitTest
+  - TransactionalMessage
+  - TransactionalMessageActivity
+  - TransactionalMessageResend

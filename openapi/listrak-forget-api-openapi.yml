@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  title: Listrak Forget API
   version: v1
+  title: Listrak Privacy REST Forget API
+  description: '# Introduction
+
+    Welcome to the Listrak Privacy REST API!'
   x-logo:
     url: /privacy/Resources/Images/Logo.png
-  description: 'Operations tagged Forget across 2 of this provider''s published API definitions: listrak-privacy-openapi.json, listrak-privacy-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/privacy
 tags:
 - name: Forget
-  description: 'A Forget resource is used to submit and view the status of forget requests.
-
-    '
+  description: A Forget resource is used to submit and view the status of forget requests.
 paths:
   /v1/Forget/{requestId}:
     get:
@@ -88,8 +88,6 @@ paths:
           '
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/privacy/'\n]);\n\n$res = $client->request('GET', 'v1/Forget/{requestId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
-    servers:
-    - url: https://api.listrak.com/privacy
   /v1/Forget:
     post:
       tags:
@@ -141,8 +139,6 @@ paths:
               $ref: '#/components/schemas/ForgetRequestParameters'
         description: The unique identifiers related to the forget request.
         required: true
-    servers:
-    - url: https://api.listrak.com/privacy
 components:
   schemas:
     ForgetRequestParameters:
@@ -155,26 +151,6 @@ components:
         phoneNumber:
           description: The phone number of the contact to forget.
           type: string
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
-    Resource_ForgetRequest:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/ForgetRequest'
-          description: Return data.
     ForgetRequest:
       description: A Forget Request resource.
       type: object
@@ -193,6 +169,16 @@ components:
           format: date-time
           description: The date the forget request was processed. This is null if the status is not COMPLETE.
           type: string
+    Resource_ForgetRequest:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/ForgetRequest'
+          description: Return data.
     Error:
       type: object
       properties:
@@ -206,19 +192,17 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes: {}
-x-refined-from:
-- listrak-privacy-openapi.json
-- listrak-privacy-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Forget

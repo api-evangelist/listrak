@@ -1,10 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Listrak Files API
+  title: Listrak Media REST Files API
+  description: '# Introduction
+
+    The Listrak Media REST API lets you manage a company''s media library: the directories and
+
+    image files used across Listrak products, plus the fonts available for use alongside them.'
   version: 1.0.0
   x-logo:
     url: images/logo.png
-  description: 'Operations tagged Files across 2 of this provider''s published API definitions: listrak-media-files-api-openapi.yml, listrak-media-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/media
 security:
@@ -124,8 +128,6 @@ paths:
           var response = await client.PostAsJsonAsync("v1/directories/{directoryId}/files", );'
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n    'base_uri' => 'https://api.listrak.com/media/'\n]);\n\n$res = $client->request('POST', 'v1/directories/{directoryId}/files', [\n    'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);"
-    servers:
-    - url: https://api.listrak.com/media
   /v1/directories/{directoryId}/files/{fileId}:
     put:
       tags:
@@ -305,39 +307,8 @@ paths:
           var response = await client.DeleteAsync("v1/directories/{directoryId}/files/{fileId}");'
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n    'base_uri' => 'https://api.listrak.com/media/'\n]);\n\n$res = $client->request('DELETE', 'v1/directories/{directoryId}/files/{fileId}', [\n    'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);"
-    servers:
-    - url: https://api.listrak.com/media
 components:
   schemas:
-    FileResponse:
-      required:
-      - status
-      - data
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        data:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/File'
-    SuccessResponse:
-      required:
-      - status
-      - data
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        data: {}
     File:
       required:
       - id
@@ -380,26 +351,6 @@ components:
         publicUrl: https://mediacdn.listrak.com/12345/banner.png
         size: 204800
         uploadDate: '2026-06-01T14:32:00Z'
-    UpdateFileRequest:
-      required:
-      - name
-      - newDirectoryId
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-        newDirectoryId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          format: int32
-      example:
-        name: new-name.png
-        newDirectoryId: 7
     ErrorResponse:
       required:
       - status
@@ -420,18 +371,58 @@ components:
     IFormFile:
       type: string
       format: binary
+    UpdateFileRequest:
+      required:
+      - name
+      - newDirectoryId
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        newDirectoryId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int32
+      example:
+        name: new-name.png
+        newDirectoryId: 7
+    FileResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/File'
+    SuccessResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data: {}
   securitySchemes:
     Bearer:
       type: http
       description: Pass the Listrak auth token in the Authorization header.
       scheme: bearer
       bearerFormat: Listrak encrypted token
-x-refined-from:
-- listrak-media-files-api-openapi.yml
-- listrak-media-openapi.json
-x-amazon-apigateway-security-policy: TLS_1_0
-x-tagGroups:
-- name: API Reference
-  tags:
-  - Events
-  - EventConfigurations

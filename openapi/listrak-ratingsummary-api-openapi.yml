@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  title: Listrak Rating Summary API
   version: v1
+  title: Listrak Data Import REST Rating Summary API
+  description: '# INTRODUCTION
+
+    Welcome to the Listrak Data Import REST API!'
   x-logo:
     url: /Data/Documentation/Images/Logo.png
-  description: 'Operations tagged RatingSummary across 2 of this provider''s published API definitions: listrak-data-openapi.json, listrak-data-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/data
 tags:
 - name: RatingSummary
-  description: 'The RatingSummary resource is used to import rating summary data.
-
-    '
+  description: The RatingSummary resource is used to import rating summary data.
 paths:
   /v1/RatingSummary:
     post:
@@ -79,10 +79,47 @@ paths:
                 $ref: '#/components/schemas/RatingSummary'
         description: An array of one or more rating summaries to create.
         required: true
-    servers:
-    - url: https://api.listrak.com/data
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
+    RatingSummary:
+      type: object
+      properties:
+        provider:
+          description: Provider name
+          type: string
+        providerProductID:
+          description: Unique identifier used to identify the product being rated
+          maxLength: 100
+          minLength: 0
+          type: string
+        ratingSummaries:
+          description: Collection of rating summaries
+          type: array
+          items:
+            $ref: '#/components/schemas/RatingSummaryField'
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
     RatingSummaryField:
       required:
       - providerRatingSummaryID
@@ -117,58 +154,11 @@ components:
         type:
           description: Rating summary type
           type: string
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
-    RatingSummary:
-      type: object
-      properties:
-        provider:
-          description: Provider name
-          type: string
-        providerProductID:
-          description: Unique identifier used to identify the product being rated
-          maxLength: 100
-          minLength: 0
-          type: string
-        ratingSummaries:
-          description: Collection of rating summaries
-          type: array
-          items:
-            $ref: '#/components/schemas/RatingSummaryField'
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes: {}
-x-refined-from:
-- listrak-data-openapi.json
-- listrak-data-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Customer
+  - Order
+  - Product
+  - RatingSummary
+  - Review

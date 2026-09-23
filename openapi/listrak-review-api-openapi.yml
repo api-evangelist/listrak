@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  title: Listrak Review API
   version: v1
+  title: Listrak Data Import REST Review API
+  description: '# INTRODUCTION
+
+    Welcome to the Listrak Data Import REST API!'
   x-logo:
     url: /Data/Documentation/Images/Logo.png
-  description: 'Operations tagged Review across 2 of this provider''s published API definitions: listrak-data-openapi.json, listrak-data-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/data
 tags:
 - name: Review
-  description: 'The Review resource is used to import review data.
-
-    '
+  description: The Review resource is used to import review data.
 paths:
   /v1/Review:
     post:
@@ -79,19 +79,20 @@ paths:
                 $ref: '#/components/schemas/Review'
         description: An array of one or more reviews to create.
         required: true
-    servers:
-    - url: https://api.listrak.com/data
 components:
   schemas:
-    ResourceCreated:
+    Error:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
           type: string
     Rating:
       required:
@@ -215,32 +216,21 @@ components:
           maxLength: 500
           minLength: 0
           type: string
-    Error:
+    ResourceCreated:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        error:
-          description: Error code indicating what error has occured.
+        resourceId:
+          description: An identifier used to locate a resource.
           type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes: {}
-x-refined-from:
-- listrak-data-openapi.json
-- listrak-data-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Customer
+  - Order
+  - Product
+  - RatingSummary
+  - Review

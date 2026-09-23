@@ -1,24 +1,27 @@
 openapi: 3.2.0
 info:
-  title: Listrak Event Configurations API
+  title: Listrak Cross Channel REST Event Configurations API
+  description: '# Introduction
+
+
+    Welcome to the Listrak Cross Channel REST API!'
   version: v1
   x-logo:
     url: https://api.listrak.com/Email/Resources/Images/Logo.png
     altText: Listrak
     href: https://www.listrak.com
     backgroundColor: '#fafafa'
-  description: 'Operations tagged EventConfigurations across 2 of this provider''s published API definitions: listrak-crosschannel-openapi.json, listrak-crosschannel-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/crosschannel/v1
 tags:
-- name: EventConfigurations
+- name: Event Configurations
   description: REST endpoints to manage Custom Event Configurations.
 paths:
   /eventConfigurations:
     get:
       tags:
-      - EventConfigurations
-      summary: Get all event configurations.
+      - Event Configurations
+      summary: Get all event configurations
       description: Get a list of all event configurations with names and unique identifiers. These can be used to determine which event configuration should be used to post your custom events.
       operationId: getEventConfigurations
       responses:
@@ -58,13 +61,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CustomEventConfigurationListResponse'
-    servers:
-    - url: https://api.listrak.com/crosschannel/v1
   /eventConfigurations/{eventUID}:
     get:
       tags:
-      - EventConfigurations
-      summary: Get a Custom Event Configuration.
+      - Event Configurations
+      summary: Get a Custom Event Configuration
       description: Get the details for a specific Custom Event Configuration.
       operationId: getSchemaByEventUid
       parameters:
@@ -140,24 +141,16 @@ paths:
             Content-Security-Policy:
               schema:
                 type: string
-    servers:
-    - url: https://api.listrak.com/crosschannel/v1
 components:
   schemas:
-    ResponseMetaData:
+    CustomEventDetailResponse:
+      title: CustomEventDetailResponse
       type: object
       properties:
-        statusCode:
-          type: integer
-          description: Response Status Code
-          format: int32
-        message:
-          type: string
-          description: Explanation for the code
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
+        data:
+          $ref: '#/components/schemas/CustomEventDetail'
+        meta:
+          $ref: '#/components/schemas/ResponseMetaData'
     CustomEventConfiguration:
       type: object
       properties:
@@ -169,24 +162,6 @@ components:
           type: string
           description: Event Name
       description: Custom Events Configuration
-    CustomEventConfigurationListResponse:
-      title: CustomEventConfigurationListResponse
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomEventConfiguration'
-        meta:
-          $ref: '#/components/schemas/ResponseMetaData'
-    CustomEventDetailResponse:
-      title: CustomEventDetailResponse
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/CustomEventDetail'
-        meta:
-          $ref: '#/components/schemas/ResponseMetaData'
     CustomEventDetail:
       type: object
       properties:
@@ -215,6 +190,16 @@ components:
             type: string
           description: Array of values to determine which features have access to this event.
       description: Custom Events Schema
+    CustomEventConfigurationListResponse:
+      title: CustomEventConfigurationListResponse
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomEventConfiguration'
+        meta:
+          $ref: '#/components/schemas/ResponseMetaData'
     Error:
       type: object
       properties:
@@ -223,15 +208,26 @@ components:
         internalMessage:
           type: string
           description: Internal Message
+    ResponseMetaData:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: Response Status Code
+          format: int32
+        message:
+          type: string
+          description: Explanation for the code
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     Authorizer:
       type: apiKey
       name: Authorization
       in: header
       x-amazon-apigateway-authtype: custom
-x-refined-from:
-- listrak-crosschannel-openapi.json
-- listrak-crosschannel-openapi.yml
 x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference

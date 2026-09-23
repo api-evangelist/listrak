@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  title: Listrak Product API
   version: v1
+  title: Listrak Data Import REST Product API
+  description: '# INTRODUCTION
+
+    Welcome to the Listrak Data Import REST API!'
   x-logo:
     url: /Data/Documentation/Images/Logo.png
-  description: 'Operations tagged Product across 2 of this provider''s published API definitions: listrak-data-openapi.json, listrak-data-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/data
 tags:
 - name: Product
-  description: 'The Product resource is used to import product data.
-
-    '
+  description: The Product resource is used to import product data.
 paths:
   /v1/Product:
     post:
@@ -79,19 +79,32 @@ paths:
                 $ref: '#/components/schemas/Product'
         description: An array of one or more products to create.
         required: true
-    servers:
-    - url: https://api.listrak.com/data
 components:
   schemas:
-    ResourceCreated:
+    RelatedProduct:
+      description: Related products
       type: object
       properties:
-        status:
+        rank:
           format: int32
-          description: HTTP status code.
+          description: Rank of related product
           type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
+        sku:
+          description: Unique stock number of related product
+          type: string
+        type:
+          description: Type of related product
+          type: string
+    AlternateImage:
+      description: Alternate product image
+      type: object
+      properties:
+        rank:
+          format: int32
+          description: Rank for alternate product image
+          type: integer
+        url:
+          description: URL for alternate product image
           type: string
     Product:
       description: A product resource
@@ -270,31 +283,6 @@ components:
         tags:
           description: Comma separated list of tags
           type: string
-    RelatedProduct:
-      description: Related products
-      type: object
-      properties:
-        rank:
-          format: int32
-          description: Rank of related product
-          type: integer
-        sku:
-          description: Unique stock number of related product
-          type: string
-        type:
-          description: Type of related product
-          type: string
-    AlternateImage:
-      description: Alternate product image
-      type: object
-      properties:
-        rank:
-          format: int32
-          description: Rank for alternate product image
-          type: integer
-        url:
-          description: URL for alternate product image
-          type: string
     Error:
       type: object
       properties:
@@ -308,19 +296,21 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes: {}
-x-refined-from:
-- listrak-data-openapi.json
-- listrak-data-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Customer
+  - Order
+  - Product
+  - RatingSummary
+  - Review

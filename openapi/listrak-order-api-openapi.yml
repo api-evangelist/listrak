@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  title: Listrak Order API
   version: v1
+  title: Listrak Data Import REST Order API
+  description: '# INTRODUCTION
+
+    Welcome to the Listrak Data Import REST API!'
   x-logo:
     url: /Data/Documentation/Images/Logo.png
-  description: 'Operations tagged Order across 2 of this provider''s published API definitions: listrak-data-openapi.json, listrak-data-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/data
 tags:
 - name: Order
-  description: 'The Order resource is used to import order data.
-
-    '
+  description: The Order resource is used to import order data.
 paths:
   /v1/Order:
     post:
@@ -79,143 +79,27 @@ paths:
                 $ref: '#/components/schemas/Order'
         description: An array of one or more orders to create.
         required: true
-    servers:
-    - url: https://api.listrak.com/data
 components:
   schemas:
-    OrderItem:
-      description: An order resource
-      required:
-      - orderNumber
-      - sku
+    BillingAddress:
+      description: Billing address of order
       type: object
       properties:
-        discountDescription:
-          description: Description of the discount for the line item
+        firstName:
+          description: First name
           type: string
-        discountType:
-          description: Type of discount for the line item
-          enum:
-          - NotSet
-          - PriceOverride
-          - PriceRule
-          - Promotion
-          - SeniorCitizen
-          - Markdown
-          - Coupon
-          - QuantityDiscount
-          - Rebate
-          - CashDiscount
-          - TradeDiscount
-          - TradeInKind
-          - PromptPaymentDiscount
-          - GeneralDiscount
-          - GiftVoucher
-          - FlexibleDiscount
-          - RewardProgram
-          - ManufacturerReward
-          - CreditCardReward
+        lastName:
+          description: Last name
           type: string
-        discountedPrice:
-          format: double
-          description: Total discounted cost of product
-          type: number
-        itemTotal:
-          format: double
-          description: Total line item cost (quantity times price)
-          type: number
-        itemDiscountTotal:
-          format: double
-          description: Total amount of the discount for the line item
-          type: number
-        meta1:
-          description: Additional Optional Information
-          maxLength: 500
-          minLength: 0
+        mobilePhone:
+          description: Mobile phone number
           type: string
-        meta2:
-          description: Additional Optional Information
-          maxLength: 500
-          minLength: 0
+        phone:
+          description: Phone number
           type: string
-        meta3:
-          description: Additional Optional Information
-          maxLength: 500
-          minLength: 0
+        zipCode:
+          description: Home address ZIP Code
           type: string
-        meta4:
-          description: Additional Optional Information
-          maxLength: 500
-          minLength: 0
-          type: string
-        meta5:
-          description: Additional Optional Information
-          maxLength: 500
-          minLength: 0
-          type: string
-        orderNumber:
-          description: Order number
-          maxLength: 50
-          minLength: 0
-          type: string
-        price:
-          format: double
-          description: Price of one unit purchased
-          type: number
-        quantity:
-          format: int32
-          description: Total number of units purchased
-          type: integer
-        shipDate:
-          format: date-time
-          description: Timestamp when item shipped (ET)
-          type: string
-        shippingMethod:
-          description: Shipping method (e.g. UPS Ground)
-          maxLength: 32
-          minLength: 0
-          type: string
-        sku:
-          description: Unique stock number of product
-          maxLength: 100
-          minLength: 0
-          type: string
-        status:
-          description: Status indicator
-          enum:
-          - NotSet
-          - Misc
-          - PreOrder
-          - BackOrder
-          - Pending
-          - Hold
-          - Processing
-          - Shipped
-          - Completed
-          - Returned
-          - Canceled
-          - Unknown
-          - Closed
-          type: string
-        trackingNumber:
-          description: Shipment tracking number
-          maxLength: 32
-          minLength: 0
-          type: string
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
-    Address:
-      description: Address of customer
-      type: object
-      properties:
         address1:
           description: Home address line 1
           maxLength: 100
@@ -246,6 +130,47 @@ components:
           maxLength: 100
           minLength: 0
           type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    Social:
+      description: Social data for a Customer
+      type: object
+      properties:
+        facebookID:
+          description: Facebook ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        facebookNumberOfFriends:
+          format: int32
+          description: Number of Facebook friends
+          type: integer
+        instagramID:
+          description: Instagram ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        instagramNumberOfFollowers:
+          format: int32
+          description: Number of Instagram followers
+          type: integer
+        twitterID:
+          description: Twitter ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        twitterNumberOfFollowers:
+          format: int32
+          description: Number of Twitter followers
+          type: integer
     Order:
       description: An order resource
       required:
@@ -443,87 +368,6 @@ components:
           maxLength: 32
           minLength: 0
           type: string
-    Social:
-      description: Social data for a Customer
-      type: object
-      properties:
-        facebookID:
-          description: Facebook ID
-          maxLength: 100
-          minLength: 0
-          type: string
-        facebookNumberOfFriends:
-          format: int32
-          description: Number of Facebook friends
-          type: integer
-        instagramID:
-          description: Instagram ID
-          maxLength: 100
-          minLength: 0
-          type: string
-        instagramNumberOfFollowers:
-          format: int32
-          description: Number of Instagram followers
-          type: integer
-        twitterID:
-          description: Twitter ID
-          maxLength: 100
-          minLength: 0
-          type: string
-        twitterNumberOfFollowers:
-          format: int32
-          description: Number of Twitter followers
-          type: integer
-    ShippingAddress:
-      description: Shipping address of order
-      type: object
-      properties:
-        firstName:
-          description: First name
-          maxLength: 50
-          minLength: 0
-          type: string
-        lastName:
-          description: Last name
-          maxLength: 50
-          minLength: 0
-          type: string
-        phone:
-          description: Phone number
-          type: string
-        zipCode:
-          description: Home address ZIP Code
-          type: string
-        address1:
-          description: Home address line 1
-          maxLength: 100
-          minLength: 0
-          type: string
-        address2:
-          description: Home address line 2
-          maxLength: 100
-          minLength: 0
-          type: string
-        address3:
-          description: Home address line 3
-          maxLength: 100
-          minLength: 0
-          type: string
-        city:
-          description: Home address city
-          maxLength: 100
-          minLength: 0
-          type: string
-        country:
-          description: Home address country
-          maxLength: 100
-          minLength: 0
-          type: string
-        state:
-          description: Home address state
-          maxLength: 100
-          minLength: 0
-          type: string
     Loyalty:
       description: Loyalty data for a Customer (This data will only be imported into Listrak if there is an active loyalty integration setup for your account.)
       type: object
@@ -637,25 +481,10 @@ components:
           format: int32
           description: Weekly points
           type: integer
-    BillingAddress:
-      description: Billing address of order
+    Address:
+      description: Address of customer
       type: object
       properties:
-        firstName:
-          description: First name
-          type: string
-        lastName:
-          description: Last name
-          type: string
-        mobilePhone:
-          description: Mobile phone number
-          type: string
-        phone:
-          description: Phone number
-          type: string
-        zipCode:
-          description: Home address ZIP Code
-          type: string
         address1:
           description: Home address line 1
           maxLength: 100
@@ -781,6 +610,125 @@ components:
           maxLength: 20
           minLength: 0
           type: string
+    OrderItem:
+      description: An order resource
+      required:
+      - orderNumber
+      - sku
+      type: object
+      properties:
+        discountDescription:
+          description: Description of the discount for the line item
+          type: string
+        discountType:
+          description: Type of discount for the line item
+          enum:
+          - NotSet
+          - PriceOverride
+          - PriceRule
+          - Promotion
+          - SeniorCitizen
+          - Markdown
+          - Coupon
+          - QuantityDiscount
+          - Rebate
+          - CashDiscount
+          - TradeDiscount
+          - TradeInKind
+          - PromptPaymentDiscount
+          - GeneralDiscount
+          - GiftVoucher
+          - FlexibleDiscount
+          - RewardProgram
+          - ManufacturerReward
+          - CreditCardReward
+          type: string
+        discountedPrice:
+          format: double
+          description: Total discounted cost of product
+          type: number
+        itemTotal:
+          format: double
+          description: Total line item cost (quantity times price)
+          type: number
+        itemDiscountTotal:
+          format: double
+          description: Total amount of the discount for the line item
+          type: number
+        meta1:
+          description: Additional Optional Information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta2:
+          description: Additional Optional Information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta3:
+          description: Additional Optional Information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta4:
+          description: Additional Optional Information
+          maxLength: 500
+          minLength: 0
+          type: string
+        meta5:
+          description: Additional Optional Information
+          maxLength: 500
+          minLength: 0
+          type: string
+        orderNumber:
+          description: Order number
+          maxLength: 50
+          minLength: 0
+          type: string
+        price:
+          format: double
+          description: Price of one unit purchased
+          type: number
+        quantity:
+          format: int32
+          description: Total number of units purchased
+          type: integer
+        shipDate:
+          format: date-time
+          description: Timestamp when item shipped (ET)
+          type: string
+        shippingMethod:
+          description: Shipping method (e.g. UPS Ground)
+          maxLength: 32
+          minLength: 0
+          type: string
+        sku:
+          description: Unique stock number of product
+          maxLength: 100
+          minLength: 0
+          type: string
+        status:
+          description: Status indicator
+          enum:
+          - NotSet
+          - Misc
+          - PreOrder
+          - BackOrder
+          - Pending
+          - Hold
+          - Processing
+          - Shipped
+          - Completed
+          - Returned
+          - Canceled
+          - Unknown
+          - Closed
+          type: string
+        trackingNumber:
+          description: Shipment tracking number
+          maxLength: 32
+          minLength: 0
+          type: string
     Error:
       type: object
       properties:
@@ -794,19 +742,61 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes: {}
-x-refined-from:
-- listrak-data-openapi.json
-- listrak-data-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
+    ShippingAddress:
+      description: Shipping address of order
+      type: object
+      properties:
+        firstName:
+          description: First name
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          description: Last name
+          maxLength: 50
+          minLength: 0
+          type: string
+        phone:
+          description: Phone number
+          type: string
+        zipCode:
+          description: Home address ZIP Code
+          type: string
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Customer
+  - Order
+  - Product
+  - RatingSummary
+  - Review

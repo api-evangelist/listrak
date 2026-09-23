@@ -1,10 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Listrak Folder API
   version: v1
+  title: Listrak Email REST Folder API
+  description: '# Introduction
+
+    Welcome to the Listrak Email REST API!'
   x-logo:
     url: /Email/Resources/Images/Logo.png
-  description: 'Operations tagged Folder across 2 of this provider''s published API definitions: listrak-email-openapi.json, listrak-email-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/email
 tags:
@@ -119,8 +121,6 @@ paths:
               $ref: '#/components/schemas/Folder'
         description: Representation of the folder to create.
         required: true
-    servers:
-    - url: https://api.listrak.com/email
   /v1/Folder/{folderId}:
     get:
       tags:
@@ -265,20 +265,18 @@ paths:
               $ref: '#/components/schemas/Folder'
         description: Representation of the updated folder.
         required: true
-    servers:
-    - url: https://api.listrak.com/email
 components:
   schemas:
-    ResourceCreated:
+    Resource_Folder:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
+        data:
+          $ref: '#/components/schemas/Folder'
+          description: Return data.
     Collection_Folder:
       type: object
       properties:
@@ -291,16 +289,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Folder'
-    ResourceUpdated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate the updated resource.
-          type: string
     Folder:
       description: A Folder resource.
       required:
@@ -315,16 +303,6 @@ components:
         folderName:
           description: Name of the folder.
           type: string
-    Resource_Folder:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/Folder'
-          description: Return data.
     Error:
       type: object
       properties:
@@ -338,25 +316,61 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes:
-            Contact: Contact access
-            Event: Event access
-            List: List access
-            Message: Message access
-            Report: Report access
-            Segmentation: Segmentation access
-x-refined-from:
-- listrak-email-openapi.json
-- listrak-email-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
+    ResourceUpdated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate the updated resource.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Campaign
+  - Contact
+  - ContactSegmentationField
+  - Content
+  - ContentFolder
+  - Conversation
+  - ConversationMessage
+  - ConversationMessageActivity
+  - ConversationMessageLink
+  - ConversationMessageLinkClicker
+  - ConversationMessageSummary
+  - ConversationSummary
+  - Event
+  - EventGroup
+  - Folder
+  - IpPool
+  - List
+  - ListImport
+  - ListImportContact
+  - ListImportStatus
+  - ListImportSummary
+  - Message
+  - MessageActivity
+  - MessageLink
+  - MessageLinkClicker
+  - MessageStatus
+  - MessageSummary
+  - SavedAudience
+  - SavedMessage
+  - SegmentationField
+  - SegmentationFieldGroup
+  - SplitTest
+  - TransactionalMessage
+  - TransactionalMessageActivity
+  - TransactionalMessageResend

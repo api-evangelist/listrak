@@ -1,10 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Listrak Directories API
+  title: Listrak Media REST Directories API
+  description: '# Introduction
+
+    The Listrak Media REST API lets you manage a company''s media library: the directories and
+
+    image files used across Listrak products, plus the fonts available for use alongside them.'
   version: 1.0.0
   x-logo:
     url: images/logo.png
-  description: 'Operations tagged Directories across 2 of this provider''s published API definitions: listrak-media-directories-api-openapi.yml, listrak-media-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/media
 security:
@@ -68,8 +72,6 @@ paths:
           var response = await client.GetAsync("v1/directories");'
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n    'base_uri' => 'https://api.listrak.com/media/'\n]);\n\n$res = $client->request('GET', 'v1/directories', [\n    'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);"
-    servers:
-    - url: https://api.listrak.com/media
   /v1/directories/{directoryId}:
     get:
       tags:
@@ -441,97 +443,28 @@ paths:
           var response = await client.DeleteAsync("v1/directories/{directoryId}");'
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n    'base_uri' => 'https://api.listrak.com/media/'\n]);\n\n$res = $client->request('DELETE', 'v1/directories/{directoryId}', [\n    'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);"
-    servers:
-    - url: https://api.listrak.com/media
 components:
   schemas:
-    Page:
+    DirectoryContents:
       required:
-      - pageNumber
-      - pageSize
-      - totalCount
+      - subdirectories
+      - files
+      - subdirectoriesPage
+      - filesPage
       type: object
       properties:
-        pageNumber:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        pageSize:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-      example:
-        pageNumber: 1
-        pageSize: 100
-        totalCount: 12
-    CreateDirectoryRequest:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-      example:
-        name: Product Photos
-    DirectoryResponse:
-      required:
-      - status
-      - data
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        data:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/Directory'
-    UpdateDirectoryRequest:
-      required:
-      - name
-      - newParentId
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-        newParentId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          format: int32
-      example:
-        name: Updated Name
-        newParentId: 7
-    SuccessResponse:
-      required:
-      - status
-      - data
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        data: {}
+        subdirectories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Directory'
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/File'
+        subdirectoriesPage:
+          $ref: '#/components/schemas/Page'
+        filesPage:
+          $ref: '#/components/schemas/Page'
     File:
       required:
       - id
@@ -574,43 +507,15 @@ components:
         publicUrl: https://mediacdn.listrak.com/12345/banner.png
         size: 204800
         uploadDate: '2026-06-01T14:32:00Z'
-    DirectorySummary:
+    CreateDirectoryRequest:
       required:
-      - id
       - name
       type: object
       properties:
-        id:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
         name:
           type: string
       example:
-        id: 1
-        name: My Company
-    DirectoryContents:
-      required:
-      - subdirectories
-      - files
-      - subdirectoriesPage
-      - filesPage
-      type: object
-      properties:
-        subdirectories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Directory'
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/File'
-        subdirectoriesPage:
-          $ref: '#/components/schemas/Page'
-        filesPage:
-          $ref: '#/components/schemas/Page'
+        name: Product Photos
     ErrorResponse:
       required:
       - status
@@ -628,6 +533,88 @@ components:
           type: string
         message:
           type: string
+    DirectoryResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Directory'
+    DirectoryContentsResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DirectoryContents'
+    UpdateDirectoryRequest:
+      required:
+      - name
+      - newParentId
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        newParentId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int32
+      example:
+        name: Updated Name
+        newParentId: 7
+    DirectorySummary:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type: string
+      example:
+        id: 1
+        name: My Company
+    SuccessResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data: {}
     DirectorySummaryResponse:
       required:
       - status
@@ -672,34 +659,38 @@ components:
         id: 42
         parentId: 7
         name: Product Photos
-    DirectoryContentsResponse:
+    Page:
       required:
-      - status
-      - data
+      - pageNumber
+      - pageSize
+      - totalCount
       type: object
       properties:
-        status:
+        pageNumber:
           pattern: ^-?(?:0|[1-9]\d*)$
           type:
           - integer
           - string
           format: int32
-        data:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/DirectoryContents'
+        pageSize:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+      example:
+        pageNumber: 1
+        pageSize: 100
+        totalCount: 12
   securitySchemes:
     Bearer:
       type: http
       description: Pass the Listrak auth token in the Authorization header.
       scheme: bearer
       bearerFormat: Listrak encrypted token
-x-refined-from:
-- listrak-media-directories-api-openapi.yml
-- listrak-media-openapi.json
-x-amazon-apigateway-security-policy: TLS_1_0
-x-tagGroups:
-- name: API Reference
-  tags:
-  - Events
-  - EventConfigurations

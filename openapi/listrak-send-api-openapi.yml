@@ -1,13 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Listrak Send API
+  title: Listrak Two-Way SMS Send API
+  description: '# Introduction
+
+
+    Welcome to the Listrak Two-Way SMS REST API!'
   version: v1
   x-logo:
     url: https://api.listrak.com/Email/Resources/Images/Logo.png
     altText: Listrak
     href: https://www.listrak.com
     backgroundColor: '#fafafa'
-  description: 'Operations tagged Send across 2 of this provider''s published API definitions: listrak-twowaysms-openapi.json, listrak-twowaysms-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/twowaysms
 tags:
@@ -100,16 +103,10 @@ paths:
                 type: string
       tags:
       - Send
-    servers:
-    - url: https://api.listrak.com/twowaysms
+      summary: Send
+      x-summary-source: derived
 components:
   schemas:
-    integrationType:
-      enum:
-      - gorgias
-      - custom
-      type: string
-      description: Integration Type
     SendRequest:
       type: object
       properties:
@@ -126,18 +123,15 @@ components:
           type: string
           description: Body of a message, limited to 1,000 characters.
       description: A request for sending a message to a contact
+    integrationType:
+      enum:
+      - gorgias
+      - custom
+      type: string
+      description: Integration Type
   securitySchemes:
     Authorizer:
       type: apiKey
       name: Authorization
       in: header
       x-amazon-apigateway-authtype: custom
-x-refined-from:
-- listrak-twowaysms-openapi.json
-- listrak-twowaysms-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
-x-tagGroups:
-- name: API Reference
-  tags:
-  - Events
-  - EventConfigurations

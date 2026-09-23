@@ -1,20 +1,22 @@
 openapi: 3.2.0
 info:
-  title: Listrak List Import API
   version: v1
+  title: Listrak Email REST List Import API
+  description: '# Introduction
+
+    Welcome to the Listrak Email REST API!'
   x-logo:
     url: /Email/Resources/Images/Logo.png
-  description: 'Operations tagged ListImport across 2 of this provider''s published API definitions: listrak-email-openapi.json, listrak-email-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/email
 tags:
-- name: ListImport
+- name: List Import
   description: The List Import resource is used to supply an import file in order to import data to a list.
 paths:
   /v1/List/{listId}/ListImport:
     get:
       tags:
-      - ListImport
+      - List Import
       summary: Get all List Imports
       description: Retrieves the collection of list imports associated with the specified list.
       operationId: ListImport_GetListImportCollection
@@ -114,7 +116,7 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/ListImport',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
     post:
       tags:
-      - ListImport
+      - List Import
       summary: Start a List Import
       description: Creates and starts a new import for the specified list. HTTP request body lengths of up to 250 MB are permitted. Because the `fileStream` field must be encoded in Base64, and because the remainder of the JSON payload is counted against the 250 MB limit, the effective maximum import file size is approximately 185 MB (195,000,000 bytes); therefore, only attempt to import files up to 185 MB (195,000,000 bytes) in size.
       operationId: ListImport_PostImportFileResource
@@ -182,12 +184,10 @@ paths:
               $ref: '#/components/schemas/ImportFile'
         description: Representation of the import file to utilize.
         required: true
-    servers:
-    - url: https://api.listrak.com/email
   /v1/List/{listId}/ListImport/{importFileId}:
     get:
       tags:
-      - ListImport
+      - List Import
       summary: Get a List Import
       description: Retrieves the specified list import.
       operationId: ListImport_GetListImportResource
@@ -268,8 +268,6 @@ paths:
           '
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/ListImport/{importFileId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
-    servers:
-    - url: https://api.listrak.com/email
 components:
   schemas:
     ImportFileMapping:
@@ -293,28 +291,6 @@ components:
         fileColumnType:
           description: Type of value in the column of the import file. Allowed values are `Email`, `SegmentationField`, `Event`, and `ExternalContactID`.
           type: string
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
-    Collection_ListImport:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/ListImport'
     ListImport:
       description: A List Import resource.
       type: object
@@ -331,7 +307,7 @@ components:
           format: date-time
           description: Date of an import.
           type: string
-    Resource_ListImport:
+    Collection_ListImport:
       type: object
       properties:
         status:
@@ -339,8 +315,10 @@ components:
           description: HTTP status code.
           type: integer
         data:
-          $ref: '#/components/schemas/ListImport'
-          description: Return data.
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/ListImport'
     ImportFile:
       description: An Import File resource.
       required:
@@ -401,25 +379,61 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes:
-            Contact: Contact access
-            Event: Event access
-            List: List access
-            Message: Message access
-            Report: Report access
-            Segmentation: Segmentation access
-x-refined-from:
-- listrak-email-openapi.json
-- listrak-email-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
+    Resource_ListImport:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/ListImport'
+          description: Return data.
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Campaign
+  - Contact
+  - ContactSegmentationField
+  - Content
+  - ContentFolder
+  - Conversation
+  - ConversationMessage
+  - ConversationMessageActivity
+  - ConversationMessageLink
+  - ConversationMessageLinkClicker
+  - ConversationMessageSummary
+  - ConversationSummary
+  - Event
+  - EventGroup
+  - Folder
+  - IpPool
+  - List
+  - ListImport
+  - ListImportContact
+  - ListImportStatus
+  - ListImportSummary
+  - Message
+  - MessageActivity
+  - MessageLink
+  - MessageLinkClicker
+  - MessageStatus
+  - MessageSummary
+  - SavedAudience
+  - SavedMessage
+  - SegmentationField
+  - SegmentationFieldGroup
+  - SplitTest
+  - TransactionalMessage
+  - TransactionalMessageActivity
+  - TransactionalMessageResend

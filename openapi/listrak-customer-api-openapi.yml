@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  title: Listrak Customer API
   version: v1
+  title: Listrak Data Import REST Customer API
+  description: '# INTRODUCTION
+
+    Welcome to the Listrak Data Import REST API!'
   x-logo:
     url: /Data/Documentation/Images/Logo.png
-  description: 'Operations tagged Customer across 2 of this provider''s published API definitions: listrak-data-openapi.json, listrak-data-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/data
 tags:
 - name: Customer
-  description: 'The Customer resource is used to import customer data.
-
-    '
+  description: The Customer resource is used to import customer data.
 paths:
   /v1/Customer:
     post:
@@ -79,54 +79,8 @@ paths:
                 $ref: '#/components/schemas/Customer'
         description: An array of one or more customers to create.
         required: true
-    servers:
-    - url: https://api.listrak.com/data
 components:
   schemas:
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
-    Address:
-      description: Address of customer
-      type: object
-      properties:
-        address1:
-          description: Home address line 1
-          maxLength: 100
-          minLength: 0
-          type: string
-        address2:
-          description: Home address line 2
-          maxLength: 100
-          minLength: 0
-          type: string
-        address3:
-          description: Home address line 3
-          maxLength: 100
-          minLength: 0
-          type: string
-        city:
-          description: Home address city
-          maxLength: 100
-          minLength: 0
-          type: string
-        country:
-          description: Home address country
-          maxLength: 100
-          minLength: 0
-          type: string
-        state:
-          description: Home address state
-          maxLength: 100
-          minLength: 0
-          type: string
     Social:
       description: Social data for a Customer
       type: object
@@ -271,6 +225,40 @@ components:
           format: int32
           description: Weekly points
           type: integer
+    Address:
+      description: Address of customer
+      type: object
+      properties:
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
     Customer:
       description: Customer for the order - DEPRECATED - Please use the BillingAddress and/or ShippingAddress fields instead.
       type: object
@@ -379,19 +367,21 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes: {}
-x-refined-from:
-- listrak-data-openapi.json
-- listrak-data-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Customer
+  - Order
+  - Product
+  - RatingSummary
+  - Review

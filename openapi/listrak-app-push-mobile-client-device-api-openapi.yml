@@ -1,17 +1,20 @@
 openapi: 3.2.0
 info:
-  title: Listrak App Push Mobile Client Device API
-  version: v1
+  title: App Push Mobile Client Device API
+  description: '# Introduction
+
+
+    Welcome to the Listrak Mobile Client REST API!'
+  termsOfService: http://integrations.listrak.com/api/customers/v1/terms
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  termsOfService: http://integrations.listrak.com/api/customers/v1/terms
+  version: v1
   x-logo:
     url: https://api.listrak.com/Email/Resources/Images/Logo.png
     altText: Listrak
     href: https://www.listrak.com
     backgroundColor: '#fafafa'
-  description: 'Operations tagged app-push-mobile-client-device across 2 of this provider''s published API definitions: listrak-mobileclient-openapi.json, listrak-mobileclient-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/mobileclient
 tags:
@@ -133,8 +136,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MobileClientError'
-    servers:
-    - url: https://api.listrak.com/mobileclient
   /device/{deviceUid}:
     get:
       tags:
@@ -489,8 +490,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MobileClientError'
-    servers:
-    - url: https://api.listrak.com/mobileclient
 components:
   schemas:
     DeviceOS:
@@ -500,17 +499,16 @@ components:
       - Other
       type: string
       description: The operating system used by the device
-    MobileClientError:
+    Identifiers:
       type: object
       properties:
-        errorMessage:
+        email:
           type: string
-    DevicePlatformType:
-      enum:
-      - Firebase
-      - APNs
-      type: string
-      description: The push notification platform used by the device
+          description: Identifying email for a device
+        phone:
+          type: string
+          description: Identifying phone number for a device
+      description: Identifiers that can associate a device with a contact
     Device:
       required:
       - devicePlatformType
@@ -543,16 +541,12 @@ components:
           type: string
           description: Identifies the version of the Mobile App
       description: A Mobile App Push Device
-    Identifiers:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Identifying email for a device
-        phone:
-          type: string
-          description: Identifying phone number for a device
-      description: Identifiers that can associate a device with a contact
+    DevicePlatformType:
+      enum:
+      - Firebase
+      - APNs
+      type: string
+      description: The push notification platform used by the device
     DevicePatch:
       required:
       - deviceUid
@@ -581,17 +575,21 @@ components:
           type: string
           description: Identifies the version of the Mobile App
       description: A Patch for a Mobile App Push Device
+    MobileClientError:
+      type: object
+      properties:
+        errorMessage:
+          type: string
   securitySchemes:
     api_key:
       type: apiKey
       name: x-api-key
       in: header
-x-refined-from:
-- listrak-mobileclient-openapi.json
-- listrak-mobileclient-openapi.yml
 x-amazon-apigateway-security-policy: TLS_1_0
-x-tagGroups:
-- name: API Reference
-  tags:
-  - Events
-  - EventConfigurations
+x-amazon-apigateway-policy:
+  Version: '2012-10-17T00:00:00.0000000+00:00'
+  Statement:
+  - Effect: Allow
+    Principal: '*'
+    Action: execute-api:Invoke
+    Resource: arn:aws:execute-api:us-east-1:925048818831:evlm7h2qhg/*

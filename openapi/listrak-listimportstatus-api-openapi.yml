@@ -1,10 +1,12 @@
 openapi: 3.2.0
 info:
-  title: Listrak List Import Status API
   version: v1
+  title: Listrak Email REST List Import Status API
+  description: '# Introduction
+
+    Welcome to the Listrak Email REST API!'
   x-logo:
     url: /Email/Resources/Images/Logo.png
-  description: 'Operations tagged ListImportStatus across 2 of this provider''s published API definitions: listrak-email-openapi.json, listrak-email-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/email
 tags:
@@ -96,10 +98,31 @@ paths:
           '
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/ListImport/{importFileId}/Status',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
-    servers:
-    - url: https://api.listrak.com/email
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
+    Resource_ListImportStatus:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/ListImportStatus'
+          description: Return data.
     ListImportStatus:
       description: A List Import Status resource.
       type: object
@@ -115,48 +138,41 @@ components:
         status:
           description: The status of the list import.
           type: string
-    Resource_ListImportStatus:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/ListImportStatus'
-          description: Return data.
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
-  securitySchemes:
-    OAuth2:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://auth.listrak.com/OAuth2/Token
-          scopes:
-            Contact: Contact access
-            Event: Event access
-            List: List access
-            Message: Message access
-            Report: Report access
-            Segmentation: Segmentation access
-x-refined-from:
-- listrak-email-openapi.json
-- listrak-email-openapi.yml
-x-amazon-apigateway-security-policy: TLS_1_0
 x-tagGroups:
 - name: API Reference
   tags:
-  - Events
-  - EventConfigurations
+  - Campaign
+  - Contact
+  - ContactSegmentationField
+  - Content
+  - ContentFolder
+  - Conversation
+  - ConversationMessage
+  - ConversationMessageActivity
+  - ConversationMessageLink
+  - ConversationMessageLinkClicker
+  - ConversationMessageSummary
+  - ConversationSummary
+  - Event
+  - EventGroup
+  - Folder
+  - IpPool
+  - List
+  - ListImport
+  - ListImportContact
+  - ListImportStatus
+  - ListImportSummary
+  - Message
+  - MessageActivity
+  - MessageLink
+  - MessageLinkClicker
+  - MessageStatus
+  - MessageSummary
+  - SavedAudience
+  - SavedMessage
+  - SegmentationField
+  - SegmentationFieldGroup
+  - SplitTest
+  - TransactionalMessage
+  - TransactionalMessageActivity
+  - TransactionalMessageResend

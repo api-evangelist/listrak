@@ -1,10 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Listrak Fonts API
+  title: Listrak Media REST Fonts API
+  description: '# Introduction
+
+    The Listrak Media REST API lets you manage a company''s media library: the directories and
+
+    image files used across Listrak products, plus the fonts available for use alongside them.'
   version: 1.0.0
   x-logo:
     url: images/logo.png
-  description: 'Operations tagged Fonts across 2 of this provider''s published API definitions: listrak-media-fonts-api-openapi.yml, listrak-media-openapi.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.listrak.com/media
 security:
@@ -69,14 +73,13 @@ paths:
           var response = await client.GetAsync("v1/fonts");'
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n    'base_uri' => 'https://api.listrak.com/media/'\n]);\n\n$res = $client->request('GET', 'v1/fonts', [\n    'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);"
-    servers:
-    - url: https://api.listrak.com/media
 components:
   schemas:
-    FontResponse:
+    ErrorResponse:
       required:
       - status
-      - data
+      - error
+      - message
       type: object
       properties:
         status:
@@ -85,12 +88,10 @@ components:
           - integer
           - string
           format: int32
-        data:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/Font'
+        error:
+          type: string
+        message:
+          type: string
     Font:
       required:
       - name
@@ -134,11 +135,10 @@ components:
         boldWeight: '700'
         isItalic: false
         isSystemFont: true
-    ErrorResponse:
+    FontResponse:
       required:
       - status
-      - error
-      - message
+      - data
       type: object
       properties:
         status:
@@ -147,22 +147,15 @@ components:
           - integer
           - string
           format: int32
-        error:
-          type: string
-        message:
-          type: string
+        data:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/Font'
   securitySchemes:
     Bearer:
       type: http
       description: Pass the Listrak auth token in the Authorization header.
       scheme: bearer
       bearerFormat: Listrak encrypted token
-x-refined-from:
-- listrak-media-fonts-api-openapi.yml
-- listrak-media-openapi.json
-x-amazon-apigateway-security-policy: TLS_1_0
-x-tagGroups:
-- name: API Reference
-  tags:
-  - Events
-  - EventConfigurations
