@@ -74,19 +74,18 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/ContentFolder',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
-    Error:
+    Collection_ContentFolder:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentFolder'
     ContentFolder:
       description: A content library folder resource.
       type: object
@@ -106,18 +105,19 @@ components:
         folderName:
           description: Name of the content folder.
           type: string
-    Collection_ContentFolder:
+    Error:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/ContentFolder'
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:

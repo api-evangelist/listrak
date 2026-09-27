@@ -267,7 +267,7 @@ paths:
       - TransactionalMessage
       summary: Get Transactional Messages
       description: Retrieve a Collection of Transactional SMS Message for an SMS List.
-      operationId: TransactionalMessage_GetTransactionalMessageCollection
+      operationId: getV1ShortCodeBySenderCodeIdPhoneListByPhoneListIdTransactionalMessage
       parameters:
       - name: senderCodeId
         in: path
@@ -344,6 +344,8 @@ paths:
           '
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => '/'\n]);\n\n$res = $client->request('GET', 'v1/ShortCode/{senderCodeId}/PhoneList/{phoneListId}/TransactionalMessage',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
+      x-operation-id-source: normalized
+      x-operation-id-original: TransactionalMessage_GetTransactionalMessageCollection
     servers:
     - url: https://api.listrak.com/sms
   /v1/ShortCode/{senderCodeId}/PhoneList/{phoneListId}/TransactionalMessage/{transactionalMessageId}:
@@ -352,7 +354,7 @@ paths:
       - TransactionalMessage
       summary: Get Transactional Message
       description: Retrieve a single Transactional SMS Message for an SMS List by Id.
-      operationId: TransactionalMessage_GetTransactionalMessageResource
+      operationId: getV1ShortCodeBySenderCodeIdPhoneListByPhoneListIdTransactionalMessageByTransactionalMessageId
       parameters:
       - name: senderCodeId
         in: path
@@ -435,6 +437,8 @@ paths:
           '
       - lang: PHP
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => '/'\n]);\n\n$res = $client->request('GET', 'v1/ShortCode/{senderCodeId}/PhoneList/{phoneListId}/TransactionalMessage/{transactionalMessageId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
+      x-operation-id-source: normalized
+      x-operation-id-original: TransactionalMessage_GetTransactionalMessageResource
     servers:
     - url: https://api.listrak.com/sms
   /v1/ShortCode/{SenderCodeId}/PhoneList/{phoneListId}/TransactionalMessage/{transactionalMessageId}/Message:
@@ -443,7 +447,7 @@ paths:
       - TransactionalMessage
       summary: Send Transactional Message
       description: Send a single Transactional SMS Message for an SMS List by Id.
-      operationId: TransactionalMessage_PostTransactionalMessageSend
+      operationId: postV1ShortCodeBySenderCodeIdPhoneListByPhoneListIdTransactionalMessageByTransactionalMessageIdMessage
       parameters:
       - name: phoneListId
         in: path
@@ -518,36 +522,12 @@ paths:
               $ref: '#/components/schemas/TransactionalMessageContact_2'
         description: Contact object with necessary Transactional message information.
         required: true
+      x-operation-id-source: normalized
+      x-operation-id-original: TransactionalMessage_PostTransactionalMessageSend
     servers:
     - url: https://api.listrak.com/sms
 components:
   schemas:
-    Collection_TransactionalMessage:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionalMessage'
-    TransactionalMessageContact:
-      description: A Transactional Message Contact resource.
-      required:
-      - emailAddress
-      type: object
-      properties:
-        emailAddress:
-          description: Email address of the contact.
-          type: string
-        segmentationFieldValues:
-          description: Profile field values associated with the contact. An empty set must be provided if there are none.
-          type: array
-          items:
-            $ref: '#/components/schemas/SegmentationFieldValue'
     Resource_TransactionalMessage:
       type: object
       properties:
@@ -582,25 +562,32 @@ components:
         subject:
           description: Subject of the message.
           type: string
-    SegmentationFieldValue:
-      description: A Profile Field Value resource.
+    TransactionalMessageContact:
+      description: A Transactional Message Contact resource.
       required:
-      - segmentationFieldId
-      - value
+      - emailAddress
       type: object
       properties:
-        segmentationFieldGroupId:
-          format: int32
-          description: Identifier of the profile field group.
-          type: integer
-          readOnly: true
-        segmentationFieldId:
-          format: int32
-          description: Identifier of the profile field.
-          type: integer
-        value:
-          description: Value of the profile field.
+        emailAddress:
+          description: Email address of the contact.
           type: string
+        segmentationFieldValues:
+          description: Profile field values associated with the contact. An empty set must be provided if there are none.
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentationFieldValue'
+    Collection_TransactionalMessage:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionalMessage'
     Error:
       type: object
       properties:
@@ -624,15 +611,24 @@ components:
         resourceId:
           description: An identifier used to locate a resource.
           type: string
-    TransactionalMessageContact_2:
-      description: A Transactional Message Contact resource.
+    SegmentationFieldValue:
+      description: A Profile Field Value resource.
+      required:
+      - segmentationFieldId
+      - value
       type: object
       properties:
-        phoneNumber:
-          description: Phone Number associated with a contact.
-          type: string
-        messageContent:
-          description: Content of SMS Message.
+        segmentationFieldGroupId:
+          format: int32
+          description: Identifier of the profile field group.
+          type: integer
+          readOnly: true
+        segmentationFieldId:
+          format: int32
+          description: Identifier of the profile field.
+          type: integer
+        value:
+          description: Value of the profile field.
           type: string
     TransactionalMessage_2:
       description: A Transactional Message resource.
@@ -647,6 +643,16 @@ components:
           type: string
         transactionalMessageStatus:
           description: Status of a transactional message.
+          type: string
+    TransactionalMessageContact_2:
+      description: A Transactional Message Contact resource.
+      type: object
+      properties:
+        phoneNumber:
+          description: Phone Number associated with a contact.
+          type: string
+        messageContent:
+          description: Content of SMS Message.
           type: string
 x-refined-from:
 - listrak-email-openapi.json

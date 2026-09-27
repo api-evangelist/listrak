@@ -237,6 +237,12 @@ components:
           description: Numeric ID. Phone Id
           format: int64
       description: A request for closing a ticket
+    integrationType:
+      enum:
+      - gorgias
+      - custom
+      type: string
+      description: Integration Type
     TicketOpenRequest:
       type: object
       properties:
@@ -250,12 +256,6 @@ components:
           type: string
           description: A unique ticket identifier.
       description: A request for opening a ticket
-    integrationType:
-      enum:
-      - gorgias
-      - custom
-      type: string
-      description: Integration Type
   securitySchemes:
     Authorizer:
       type: apiKey

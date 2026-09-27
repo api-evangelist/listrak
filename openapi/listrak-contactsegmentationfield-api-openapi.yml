@@ -98,6 +98,31 @@ paths:
         required: true
 components:
   schemas:
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    ContactSegmentationFieldValues:
+      description: A Contact with profile field values.
+      required:
+      - emailAddress
+      - segmentationFieldValues
+      type: object
+      properties:
+        emailAddress:
+          description: Email address of the contact.
+          type: string
+        segmentationFieldValues:
+          description: Profile field values associated with the contact.
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactSegmentationFieldValue'
     Error:
       type: object
       properties:
@@ -124,31 +149,6 @@ components:
           type: integer
         value:
           description: Value of the profile field.
-          type: string
-    ContactSegmentationFieldValues:
-      description: A Contact with profile field values.
-      required:
-      - emailAddress
-      - segmentationFieldValues
-      type: object
-      properties:
-        emailAddress:
-          description: Email address of the contact.
-          type: string
-        segmentationFieldValues:
-          description: Profile field values associated with the contact.
-          type: array
-          items:
-            $ref: '#/components/schemas/ContactSegmentationFieldValue'
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
           type: string
 x-tagGroups:
 - name: API Reference

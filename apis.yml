@@ -78,7 +78,7 @@ tags_raw:
   - RCS
 apis:
 - aid: listrak:listrak-app-push-mobile-client-device-api
-  name: Listrak app-push-mobile-client-device API
+  name: Listrak App Push Mobile Client Device API
   description: Endpoints to manage app push devices.
   humanURL: https://api.listrak.com/email
   baseURL: https://api.listrak.com
@@ -104,7 +104,7 @@ apis:
   - type: Documentation
     url: https://api.listrak.com/privacy
 - aid: listrak:listrak-app-push-mobile-client-engagements-api
-  name: Listrak app-push-mobile-client-engagements API
+  name: Listrak App Push Mobile Client Engagements API
   description: Endpoints to manage app push mobile client engagements.
   humanURL: https://api.listrak.com/email
   baseURL: https://api.listrak.com
@@ -1265,6 +1265,8 @@ apis:
   humanURL: https://api.listrak.com/email
   baseURL: https://api.listrak.com
   tags:
+  - Ticketing
+  tags_raw:
   - Tickets
   properties:
   - type: OpenAPI

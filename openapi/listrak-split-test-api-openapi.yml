@@ -297,6 +297,27 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/SplitTest/{splitTestId}/Message',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
+    SplitTestMessage:
+      description: A Split Test Message resource.
+      type: object
+      properties:
+        messageId:
+          format: int32
+          description: Identifier used to locate the message.
+          type: integer
+        messageStatus:
+          description: Status displaying whether the message is scheduled, sending, sent, or not ready.
+          type: string
+        messageType:
+          description: Type displaying whether the message is a split test group message or a remainder message.
+          type: string
+        groupName:
+          description: The name of the split test group to which the message belongs.
+          type: string
+        segmentSize:
+          format: int32
+          description: The percentage of recipients the message will be sent to. Will be null for remainder messages.
+          type: integer
     SplitTest:
       description: A Split Test resource.
       type: object
@@ -328,6 +349,41 @@ components:
         winnerMetric:
           description: Metric that is being used to evaluate a winner of the split test.
           type: string
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
+    Resource_SplitTest:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/SplitTest'
+          description: Return data.
+    Collection_SplitTestMessage:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/SplitTestMessage'
     CollectionPaged_SplitTest:
       type: object
       properties:
@@ -343,62 +399,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SplitTest'
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
-    SplitTestMessage:
-      description: A Split Test Message resource.
-      type: object
-      properties:
-        messageId:
-          format: int32
-          description: Identifier used to locate the message.
-          type: integer
-        messageStatus:
-          description: Status displaying whether the message is scheduled, sending, sent, or not ready.
-          type: string
-        messageType:
-          description: Type displaying whether the message is a split test group message or a remainder message.
-          type: string
-        groupName:
-          description: The name of the split test group to which the message belongs.
-          type: string
-        segmentSize:
-          format: int32
-          description: The percentage of recipients the message will be sent to. Will be null for remainder messages.
-          type: integer
-    Collection_SplitTestMessage:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/SplitTestMessage'
-    Resource_SplitTest:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/SplitTest'
-          description: Return data.
 x-tagGroups:
 - name: API Reference
   tags:

@@ -81,20 +81,6 @@ paths:
         required: true
 components:
   schemas:
-    RelatedProduct:
-      description: Related products
-      type: object
-      properties:
-        rank:
-          format: int32
-          description: Rank of related product
-          type: integer
-        sku:
-          description: Unique stock number of related product
-          type: string
-        type:
-          description: Type of related product
-          type: string
     AlternateImage:
       description: Alternate product image
       type: object
@@ -305,6 +291,20 @@ components:
           type: integer
         resourceId:
           description: An identifier used to locate a resource.
+          type: string
+    RelatedProduct:
+      description: Related products
+      type: object
+      properties:
+        rank:
+          format: int32
+          description: Rank of related product
+          type: integer
+        sku:
+          description: Unique stock number of related product
+          type: string
+        type:
+          description: Type of related product
           type: string
 x-tagGroups:
 - name: API Reference

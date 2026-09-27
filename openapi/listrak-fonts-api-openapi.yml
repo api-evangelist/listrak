@@ -75,23 +75,6 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n    'base_uri' => 'https://api.listrak.com/media/'\n]);\n\n$res = $client->request('GET', 'v1/fonts', [\n    'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);"
 components:
   schemas:
-    ErrorResponse:
-      required:
-      - status
-      - error
-      - message
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        error:
-          type: string
-        message:
-          type: string
     Font:
       required:
       - name
@@ -135,6 +118,23 @@ components:
         boldWeight: '700'
         isItalic: false
         isSystemFont: true
+    ErrorResponse:
+      required:
+      - status
+      - error
+      - message
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        error:
+          type: string
+        message:
+          type: string
     FontResponse:
       required:
       - status

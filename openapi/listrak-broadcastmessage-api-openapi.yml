@@ -88,6 +88,16 @@ paths:
         required: true
 components:
   schemas:
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
     Error:
       type: object
       properties:
@@ -123,16 +133,6 @@ components:
           type: string
         segmentationFieldId:
           description: The identifier of a custom checkbox field to use for filtering. The message will only be sent to recipients with this field checked.
-          type: string
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
           type: string
 x-tagGroups:
 - name: API Reference

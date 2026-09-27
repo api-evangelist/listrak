@@ -470,6 +470,89 @@ paths:
         required: true
 components:
   schemas:
+    SavedMessage:
+      description: A Saved Message resource.
+      required:
+      - externalCampaignId
+      - subject
+      type: object
+      properties:
+        savedMessageId:
+          format: int32
+          description: Identifier used to locate the saved message.
+          type: integer
+          readOnly: true
+        savedMessageName:
+          description: Name given to the saved message.
+          type: string
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        createDate:
+          format: date-time
+          description: Creation date of the saved message.
+          type: string
+        lastModifiedDate:
+          format: date-time
+          description: Last date the saved message was modified.
+          type: string
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+        subject:
+          description: Subject of the message.
+          type: string
+    SavedMessageUpdate:
+      description: Request model for updating a Saved Message.
+      required:
+      - savedMessageName
+      - subject
+      - fromName
+      - fromEmail
+      type: object
+      properties:
+        savedMessageName:
+          description: Name given to the saved message.
+          type: string
+        subject:
+          description: Subject of the message.
+          type: string
+        preheader:
+          description: Pre-header text of the message.
+          type: string
+        fromName:
+          description: The from name that will be used for the message.
+          type: string
+        fromEmail:
+          description: The from email address that will be used for the message.
+          type: string
+        replyEmail:
+          description: The reply email address that will be used for the message.
+          type: string
+        bodyHtml:
+          description: HTML body of the message.
+          type: string
+        bodyText:
+          description: Plain text body of the message.
+          type: string
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+    Resource_SavedMessageExtended:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/SavedMessageExtended'
+          description: Return data.
     SavedMessageCreate:
       description: Request model for creating a Saved Message.
       required:
@@ -509,39 +592,6 @@ components:
           type: integer
         externalCampaignId:
           description: Customer-provided identifier of the campaign associated with the message.
-          type: string
-    SavedMessage:
-      description: A Saved Message resource.
-      required:
-      - externalCampaignId
-      - subject
-      type: object
-      properties:
-        savedMessageId:
-          format: int32
-          description: Identifier used to locate the saved message.
-          type: integer
-          readOnly: true
-        savedMessageName:
-          description: Name given to the saved message.
-          type: string
-        campaignId:
-          format: int32
-          description: Identifier of the campaign associated with the message.
-          type: integer
-        createDate:
-          format: date-time
-          description: Creation date of the saved message.
-          type: string
-        lastModifiedDate:
-          format: date-time
-          description: Last date the saved message was modified.
-          type: string
-        externalCampaignId:
-          description: Customer-provided identifier of the campaign associated with the message.
-          type: string
-        subject:
-          description: Subject of the message.
           type: string
     Collection_SavedMessage:
       type: object
@@ -639,46 +689,6 @@ components:
         toName:
           description: The _to name_ that will be used for the message.
           type: string
-    SavedMessageUpdate:
-      description: Request model for updating a Saved Message.
-      required:
-      - savedMessageName
-      - subject
-      - fromName
-      - fromEmail
-      type: object
-      properties:
-        savedMessageName:
-          description: Name given to the saved message.
-          type: string
-        subject:
-          description: Subject of the message.
-          type: string
-        preheader:
-          description: Pre-header text of the message.
-          type: string
-        fromName:
-          description: The from name that will be used for the message.
-          type: string
-        fromEmail:
-          description: The from email address that will be used for the message.
-          type: string
-        replyEmail:
-          description: The reply email address that will be used for the message.
-          type: string
-        bodyHtml:
-          description: HTML body of the message.
-          type: string
-        bodyText:
-          description: Plain text body of the message.
-          type: string
-        campaignId:
-          format: int32
-          description: Identifier of the campaign associated with the message.
-          type: integer
-        externalCampaignId:
-          description: Customer-provided identifier of the campaign associated with the message.
-          type: string
     ResourceCreated:
       type: object
       properties:
@@ -689,16 +699,6 @@ components:
         resourceId:
           description: An identifier used to locate a resource.
           type: string
-    Resource_SavedMessageExtended:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/SavedMessageExtended'
-          description: Return data.
 x-tagGroups:
 - name: API Reference
   tags:

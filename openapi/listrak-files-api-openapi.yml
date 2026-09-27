@@ -351,26 +351,6 @@ components:
         publicUrl: https://mediacdn.listrak.com/12345/banner.png
         size: 204800
         uploadDate: '2026-06-01T14:32:00Z'
-    ErrorResponse:
-      required:
-      - status
-      - error
-      - message
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        error:
-          type: string
-        message:
-          type: string
-    IFormFile:
-      type: string
-      format: binary
     UpdateFileRequest:
       required:
       - name
@@ -391,6 +371,36 @@ components:
       example:
         name: new-name.png
         newDirectoryId: 7
+    ErrorResponse:
+      required:
+      - status
+      - error
+      - message
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        error:
+          type: string
+        message:
+          type: string
+    SuccessResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data: {}
     FileResponse:
       required:
       - status
@@ -407,19 +417,9 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/File'
-    SuccessResponse:
-      required:
-      - status
-      - data
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        data: {}
+    IFormFile:
+      type: string
+      format: binary
   securitySchemes:
     Bearer:
       type: http

@@ -178,19 +178,16 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/Conversation/{conversationId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
-    Error:
+    Resource_Conversation:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
+        data:
+          $ref: '#/components/schemas/Conversation'
+          description: Return data.
     Conversation:
       description: A Conversation resource.
       type: object
@@ -213,6 +210,19 @@ components:
         status:
           description: Current status of the conversation.
           type: string
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
     Collection_Conversation:
       type: object
       properties:
@@ -225,16 +235,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Conversation'
-    Resource_Conversation:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/Conversation'
-          description: Return data.
 x-tagGroups:
 - name: API Reference
   tags:

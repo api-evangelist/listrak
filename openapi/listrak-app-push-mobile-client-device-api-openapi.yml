@@ -492,6 +492,11 @@ paths:
                 $ref: '#/components/schemas/MobileClientError'
 components:
   schemas:
+    MobileClientError:
+      type: object
+      properties:
+        errorMessage:
+          type: string
     DeviceOS:
       enum:
       - Android
@@ -509,6 +514,34 @@ components:
           type: string
           description: Identifying phone number for a device
       description: Identifiers that can associate a device with a contact
+    DevicePatch:
+      required:
+      - deviceUid
+      type: object
+      properties:
+        deviceUid:
+          type: string
+          format: uuid
+        deviceToken:
+          type: string
+          description: Identifying token for a mobile device
+        identifiers:
+          $ref: '#/components/schemas/Identifiers'
+        subscribed:
+          type: boolean
+          description: Identifying whether a mobile device is subscribed or unsubscribed
+        deviceOS:
+          $ref: '#/components/schemas/DeviceOS'
+        deviceOSVersion:
+          type: string
+          description: Identifies the version of the mobile device's OS
+        deviceType:
+          type: string
+          description: Identifies the physical device model
+        mobileAppVersion:
+          type: string
+          description: Identifies the version of the Mobile App
+      description: A Patch for a Mobile App Push Device
     Device:
       required:
       - devicePlatformType
@@ -547,39 +580,6 @@ components:
       - APNs
       type: string
       description: The push notification platform used by the device
-    DevicePatch:
-      required:
-      - deviceUid
-      type: object
-      properties:
-        deviceUid:
-          type: string
-          format: uuid
-        deviceToken:
-          type: string
-          description: Identifying token for a mobile device
-        identifiers:
-          $ref: '#/components/schemas/Identifiers'
-        subscribed:
-          type: boolean
-          description: Identifying whether a mobile device is subscribed or unsubscribed
-        deviceOS:
-          $ref: '#/components/schemas/DeviceOS'
-        deviceOSVersion:
-          type: string
-          description: Identifies the version of the mobile device's OS
-        deviceType:
-          type: string
-          description: Identifies the physical device model
-        mobileAppVersion:
-          type: string
-          description: Identifies the version of the Mobile App
-      description: A Patch for a Mobile App Push Device
-    MobileClientError:
-      type: object
-      properties:
-        errorMessage:
-          type: string
   securitySchemes:
     api_key:
       type: apiKey

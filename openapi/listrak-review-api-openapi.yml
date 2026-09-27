@@ -81,58 +81,15 @@ paths:
         required: true
 components:
   schemas:
-    Error:
+    ResourceCreated:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
-    Rating:
-      required:
-      - displayType
-      - providerRatingID
-      - ratingMax
-      - ratingMin
-      - ratingValue
-      - type
-      type: object
-      properties:
-        deleted:
-          description: Indicates if the review has been deleted
-          type: boolean
-        displayType:
-          description: Rating display type
-          maxLength: 50
-          minLength: 0
-          type: string
-        providerRatingID:
-          description: Rating identifier used by review provider
-          maxLength: 100
-          minLength: 0
-          type: string
-        ratingMax:
-          format: double
-          description: Maximum value for ratings
-          type: number
-        ratingMin:
-          format: double
-          description: Minimum value for ratings
-          type: number
-        ratingValue:
-          format: double
-          description: Rating value
-          type: number
-        type:
-          description: Rating type
-          maxLength: 100
-          minLength: 0
+        resourceId:
+          description: An identifier used to locate a resource.
           type: string
     Review:
       required:
@@ -216,15 +173,58 @@ components:
           maxLength: 500
           minLength: 0
           type: string
-    ResourceCreated:
+    Error:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
+    Rating:
+      required:
+      - displayType
+      - providerRatingID
+      - ratingMax
+      - ratingMin
+      - ratingValue
+      - type
+      type: object
+      properties:
+        deleted:
+          description: Indicates if the review has been deleted
+          type: boolean
+        displayType:
+          description: Rating display type
+          maxLength: 50
+          minLength: 0
+          type: string
+        providerRatingID:
+          description: Rating identifier used by review provider
+          maxLength: 100
+          minLength: 0
+          type: string
+        ratingMax:
+          format: double
+          description: Maximum value for ratings
+          type: number
+        ratingMin:
+          format: double
+          description: Minimum value for ratings
+          type: number
+        ratingValue:
+          format: double
+          description: Rating value
+          type: number
+        type:
+          description: Rating type
+          maxLength: 100
+          minLength: 0
           type: string
 x-tagGroups:
 - name: API Reference

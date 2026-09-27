@@ -304,43 +304,6 @@ components:
         htmlContent:
           description: HTML content of the content block.
           type: string
-    ContentCreate:
-      description: Request model for creating content.
-      required:
-      - contentName
-      type: object
-      properties:
-        contentFolderId:
-          format: int32
-          description: Identifier of the content folder to place the content in.
-          type: integer
-        contentName:
-          description: Name given to the content block.
-          type: string
-        textContent:
-          description: Plain text content of the content block.
-          type: string
-        htmlContent:
-          description: HTML content of the content block.
-          type: string
-        contentType:
-          description: Type of the content block.
-          enum:
-          - DynamicContent
-          - SavedContent
-          type: string
-    Collection_Content:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/Content'
     Resource_Content:
       type: object
       properties:
@@ -407,6 +370,43 @@ components:
           type: integer
         resourceId:
           description: An identifier used to locate a resource.
+          type: string
+    Collection_Content:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/Content'
+    ContentCreate:
+      description: Request model for creating content.
+      required:
+      - contentName
+      type: object
+      properties:
+        contentFolderId:
+          format: int32
+          description: Identifier of the content folder to place the content in.
+          type: integer
+        contentName:
+          description: Name given to the content block.
+          type: string
+        textContent:
+          description: Plain text content of the content block.
+          type: string
+        htmlContent:
+          description: HTML content of the content block.
+          type: string
+        contentType:
+          description: Type of the content block.
+          enum:
+          - DynamicContent
+          - SavedContent
           type: string
 x-tagGroups:
 - name: API Reference

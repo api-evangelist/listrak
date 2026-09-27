@@ -174,6 +174,18 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => '/'\n]);\n\n$res = $client->request('GET', 'v1/ShortCode/{senderCodeId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
+    Collection_SenderCode:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/SenderCode'
     SenderCode:
       description: SMS Sender Code Resource.
       type: object
@@ -239,28 +251,6 @@ components:
         acquisitionSourceSegmentationFieldName:
           description: Email list attribute name to store a contact's acquisition source.
           type: string
-    Resource_SenderCode:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/SenderCode'
-          description: Return data.
-    Collection_SenderCode:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/SenderCode'
     Error:
       type: object
       properties:
@@ -274,6 +264,16 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
+    Resource_SenderCode:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/SenderCode'
+          description: Return data.
 x-tagGroups:
 - name: API Reference
   tags:

@@ -322,193 +322,6 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/Message/{messageId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
-    MessageExtendedSegmentsApplied:
-      required:
-      - externalCampaignId
-      - fromEmail
-      - fromName
-      - subject
-      type: object
-      properties:
-        messageId:
-          format: int32
-          description: Identifier used to locate the message.
-          type: integer
-          readOnly: true
-        sendDate:
-          format: date-time
-          description: Send date of the message.
-          type: string
-          readOnly: true
-        messageStatus:
-          description: Status displaying whether the message is sent or scheduled.
-          type: string
-          readOnly: true
-        enableUniversalEmailKeySetting:
-          description: Whether to include UniversalEmailKey in URL query string.
-          type: boolean
-        campaignId:
-          format: int32
-          description: Identifier of the campaign associated with the message.
-          type: integer
-        bodyHtml:
-          description: HTML body that will be sent in the message.
-          type: string
-        bodyText:
-          description: Text body that will be sent in the message.
-          type: string
-        codePage:
-          format: int32
-          description: Type of CodePage used in the message.
-          type: integer
-        enablePassalong:
-          description: Whether passalong is enabled.
-          type: boolean
-        enableTracking:
-          description: Whether tracking is enabled.
-          type: boolean
-        externalCampaignId:
-          description: Customer-provided identifier of the campaign associated with the message.
-          type: string
-        fromEmail:
-          description: The _from email address_ that will be used for the message.
-          type: string
-        fromName:
-          description: The _from name_ that will be used for the message.
-          type: string
-        googleAnalyticsCampaignName:
-          description: The Google Analytics campaign name to be used for message tracking.
-          type: string
-        googleAnalyticsCampaignContent:
-          description: The Google Analytics campaign content to be used for message tracking.
-          type: string
-        replyEmail:
-          description: The _reply email address_ that will be used for the message.
-          type: string
-        savedAudienceId:
-          format: int32
-          description: Identifier of the SavedAudience to use for recipient filtering.
-          type: integer
-        segmentsApplied:
-          $ref: '#/components/schemas/SegmentsApplied'
-          description: Segments applied to the message.
-        subject:
-          description: Subject of the message.
-          type: string
-        toName:
-          description: The _to name_ that will be used for the message.
-          type: string
-    CollectionPaged_Message:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        nextPageCursor:
-          description: URI of the next page of data.
-          type: string
-        data:
-          description: Collection of data that exists on this paged view.
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-    Resource_MessageExtendedSegmentsApplied:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/MessageExtendedSegmentsApplied'
-          description: Return data.
-    Message:
-      description: A Message resource.
-      required:
-      - externalCampaignId
-      - subject
-      type: object
-      properties:
-        messageId:
-          format: int32
-          description: Identifier used to locate the message.
-          type: integer
-          readOnly: true
-        sendDate:
-          format: date-time
-          description: Send date of the message.
-          type: string
-          readOnly: true
-        messageStatus:
-          description: Status displaying whether the message is sent or scheduled.
-          type: string
-          readOnly: true
-        campaignId:
-          format: int32
-          description: Identifier of the campaign associated with the message.
-          type: integer
-        externalCampaignId:
-          description: Customer-provided identifier of the campaign associated with the message.
-          type: string
-        subject:
-          description: Subject of the message.
-          type: string
-    FilterValue:
-      type: object
-      properties:
-        value:
-          description: Value to be used for filtering.
-          type: string
-    Filter:
-      type: object
-      properties:
-        segmentationFieldGroup:
-          description: The name of the profile field group to use for filtering.
-          type: string
-        segmentationField:
-          description: The name of the profile field to use for filtering.
-          type: string
-        joinType:
-          description: The mechanism by which this filter should be joined to the immediately preceding filter. Optional if it is the first filter (ignored if provided anyway).
-          enum:
-          - And
-          - AndNot
-          - Or
-          - OrNot
-          type: string
-        compareType:
-          description: The type of comparison to use filtering values with.
-          enum:
-          - Contains
-          - NotContains
-          - Equals
-          - NotEquals
-          - GreaterThan
-          - GreaterThanOrEqualTo
-          - LessThan
-          - LessThanOrEqualTo
-          - Between
-          - NotBetween
-          - Checked
-          - NotChecked
-          - RadioOn
-          - RadioOff
-          - InCommaList
-          - NotInCommaList
-          - IsEmpty
-          - IsNotEmpty
-          type: string
-        values:
-          description: Values to be used for filtering.
-          type: array
-          items:
-            $ref: '#/components/schemas/FilterValue'
-        filters:
-          description: 'One or more sub-filters to apply. Cannot be specified in conjunction with the `CompareType` or `Values` fields: filters must define their own filtering behavior, or must define inner filters.'
-          type: array
-          items:
-            $ref: '#/components/schemas/Filter'
     MessageExtendedFilter:
       required:
       - externalCampaignId
@@ -585,18 +398,143 @@ components:
         filter:
           $ref: '#/components/schemas/Filter'
           description: Filter to be used for recipient filtering.
-    Error:
+    MessageExtendedSegmentsApplied:
+      required:
+      - externalCampaignId
+      - fromEmail
+      - fromName
+      - subject
+      type: object
+      properties:
+        messageId:
+          format: int32
+          description: Identifier used to locate the message.
+          type: integer
+          readOnly: true
+        sendDate:
+          format: date-time
+          description: Send date of the message.
+          type: string
+          readOnly: true
+        messageStatus:
+          description: Status displaying whether the message is sent or scheduled.
+          type: string
+          readOnly: true
+        enableUniversalEmailKeySetting:
+          description: Whether to include UniversalEmailKey in URL query string.
+          type: boolean
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        bodyHtml:
+          description: HTML body that will be sent in the message.
+          type: string
+        bodyText:
+          description: Text body that will be sent in the message.
+          type: string
+        codePage:
+          format: int32
+          description: Type of CodePage used in the message.
+          type: integer
+        enablePassalong:
+          description: Whether passalong is enabled.
+          type: boolean
+        enableTracking:
+          description: Whether tracking is enabled.
+          type: boolean
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+        fromEmail:
+          description: The _from email address_ that will be used for the message.
+          type: string
+        fromName:
+          description: The _from name_ that will be used for the message.
+          type: string
+        googleAnalyticsCampaignName:
+          description: The Google Analytics campaign name to be used for message tracking.
+          type: string
+        googleAnalyticsCampaignContent:
+          description: The Google Analytics campaign content to be used for message tracking.
+          type: string
+        replyEmail:
+          description: The _reply email address_ that will be used for the message.
+          type: string
+        savedAudienceId:
+          format: int32
+          description: Identifier of the SavedAudience to use for recipient filtering.
+          type: integer
+        segmentsApplied:
+          $ref: '#/components/schemas/SegmentsApplied'
+          description: Segments applied to the message.
+        subject:
+          description: Subject of the message.
+          type: string
+        toName:
+          description: The _to name_ that will be used for the message.
+          type: string
+    Message:
+      description: A Message resource.
+      required:
+      - externalCampaignId
+      - subject
+      type: object
+      properties:
+        messageId:
+          format: int32
+          description: Identifier used to locate the message.
+          type: integer
+          readOnly: true
+        sendDate:
+          format: date-time
+          description: Send date of the message.
+          type: string
+          readOnly: true
+        messageStatus:
+          description: Status displaying whether the message is sent or scheduled.
+          type: string
+          readOnly: true
+        campaignId:
+          format: int32
+          description: Identifier of the campaign associated with the message.
+          type: integer
+        externalCampaignId:
+          description: Customer-provided identifier of the campaign associated with the message.
+          type: string
+        subject:
+          description: Subject of the message.
+          type: string
+    CollectionPaged_Message:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        error:
-          description: Error code indicating what error has occured.
+        nextPageCursor:
+          description: URI of the next page of data.
           type: string
-        message:
-          description: Message describing the status and the error that occurred.
+        data:
+          description: Collection of data that exists on this paged view.
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+    Resource_MessageExtendedSegmentsApplied:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/MessageExtendedSegmentsApplied'
+          description: Return data.
+    FilterValue:
+      type: object
+      properties:
+        value:
+          description: Value to be used for filtering.
           type: string
     SegmentsApplied:
       description: Segments applied to the message.
@@ -612,6 +550,68 @@ components:
           type: array
           items:
             type: string
+    Filter:
+      type: object
+      properties:
+        segmentationFieldGroup:
+          description: The name of the profile field group to use for filtering.
+          type: string
+        segmentationField:
+          description: The name of the profile field to use for filtering.
+          type: string
+        joinType:
+          description: The mechanism by which this filter should be joined to the immediately preceding filter. Optional if it is the first filter (ignored if provided anyway).
+          enum:
+          - And
+          - AndNot
+          - Or
+          - OrNot
+          type: string
+        compareType:
+          description: The type of comparison to use filtering values with.
+          enum:
+          - Contains
+          - NotContains
+          - Equals
+          - NotEquals
+          - GreaterThan
+          - GreaterThanOrEqualTo
+          - LessThan
+          - LessThanOrEqualTo
+          - Between
+          - NotBetween
+          - Checked
+          - NotChecked
+          - RadioOn
+          - RadioOff
+          - InCommaList
+          - NotInCommaList
+          - IsEmpty
+          - IsNotEmpty
+          type: string
+        values:
+          description: Values to be used for filtering.
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterValue'
+        filters:
+          description: 'One or more sub-filters to apply. Cannot be specified in conjunction with the `CompareType` or `Values` fields: filters must define their own filtering behavior, or must define inner filters.'
+          type: array
+          items:
+            $ref: '#/components/schemas/Filter'
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
     ResourceCreated:
       type: object
       properties:
