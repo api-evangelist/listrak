@@ -400,6 +400,68 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('DELETE', 'v1/List/{listId}/Campaign/{campaignId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
+    Collection_Campaign:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/Campaign'
+    ResourceDeleted:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+    Resource_Campaign:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/Campaign'
+          description: Return data.
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    ResourceUpdated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate the updated resource.
+          type: string
     Campaign:
       description: A Campaign resource.
       required:
@@ -414,68 +476,6 @@ components:
         campaignName:
           description: Name of the campaign.
           type: string
-    Collection_Campaign:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/Campaign'
-    ResourceUpdated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate the updated resource.
-          type: string
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
-    ResourceDeleted:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
-    Resource_Campaign:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/Campaign'
-          description: Return data.
 x-tagGroups:
 - name: API Reference
   tags:

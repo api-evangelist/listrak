@@ -104,21 +104,6 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-    SavedAudience:
-      description: A Saved Audience resource.
-      type: object
-      properties:
-        name:
-          description: Name of the saved audience.
-          type: string
-        lastModified:
-          format: date-time
-          description: Last date the saved audience was modified.
-          type: string
-        savedAudienceId:
-          format: int64
-          description: Identifier used to locate the saved audience.
-          type: integer
     CollectionPaged_SavedAudience:
       type: object
       properties:
@@ -134,6 +119,21 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SavedAudience'
+    SavedAudience:
+      description: A Saved Audience resource.
+      type: object
+      properties:
+        name:
+          description: Name of the saved audience.
+          type: string
+        lastModified:
+          format: date-time
+          description: Last date the saved audience was modified.
+          type: string
+        savedAudienceId:
+          format: int64
+          description: Identifier used to locate the saved audience.
+          type: integer
 x-tagGroups:
 - name: API Reference
   tags:

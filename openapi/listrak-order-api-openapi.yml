@@ -81,16 +81,6 @@ paths:
         required: true
 components:
   schemas:
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
     OrderItem:
       description: An order resource
       required:
@@ -208,6 +198,55 @@ components:
         trackingNumber:
           description: Shipment tracking number
           maxLength: 32
+          minLength: 0
+          type: string
+    BillingAddress:
+      description: Billing address of order
+      type: object
+      properties:
+        firstName:
+          description: First name
+          type: string
+        lastName:
+          description: Last name
+          type: string
+        mobilePhone:
+          description: Mobile phone number
+          type: string
+        phone:
+          description: Phone number
+          type: string
+        zipCode:
+          description: Home address ZIP Code
+          type: string
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
           minLength: 0
           type: string
     Social:
@@ -336,18 +375,39 @@ components:
           maxLength: 20
           minLength: 0
           type: string
-    Error:
+    Address:
+      description: Address of customer
       type: object
       properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
           type: string
-        message:
-          description: Message describing the status and the error that occurred.
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
           type: string
     Order:
       description: An order resource
@@ -546,138 +606,28 @@ components:
           maxLength: 32
           minLength: 0
           type: string
-    Address:
-      description: Address of customer
+    Error:
       type: object
       properties:
-        address1:
-          description: Home address line 1
-          maxLength: 100
-          minLength: 0
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
           type: string
-        address2:
-          description: Home address line 2
-          maxLength: 100
-          minLength: 0
+        message:
+          description: Message describing the status and the error that occurred.
           type: string
-        address3:
-          description: Home address line 3
-          maxLength: 100
-          minLength: 0
-          type: string
-        city:
-          description: Home address city
-          maxLength: 100
-          minLength: 0
-          type: string
-        country:
-          description: Home address country
-          maxLength: 100
-          minLength: 0
-          type: string
-        state:
-          description: Home address state
-          maxLength: 100
-          minLength: 0
-          type: string
-    BillingAddress:
-      description: Billing address of order
+    ResourceCreated:
       type: object
       properties:
-        firstName:
-          description: First name
-          type: string
-        lastName:
-          description: Last name
-          type: string
-        mobilePhone:
-          description: Mobile phone number
-          type: string
-        phone:
-          description: Phone number
-          type: string
-        zipCode:
-          description: Home address ZIP Code
-          type: string
-        address1:
-          description: Home address line 1
-          maxLength: 100
-          minLength: 0
-          type: string
-        address2:
-          description: Home address line 2
-          maxLength: 100
-          minLength: 0
-          type: string
-        address3:
-          description: Home address line 3
-          maxLength: 100
-          minLength: 0
-          type: string
-        city:
-          description: Home address city
-          maxLength: 100
-          minLength: 0
-          type: string
-        country:
-          description: Home address country
-          maxLength: 100
-          minLength: 0
-          type: string
-        state:
-          description: Home address state
-          maxLength: 100
-          minLength: 0
-          type: string
-    ShippingAddress:
-      description: Shipping address of order
-      type: object
-      properties:
-        firstName:
-          description: First name
-          maxLength: 50
-          minLength: 0
-          type: string
-        lastName:
-          description: Last name
-          maxLength: 50
-          minLength: 0
-          type: string
-        phone:
-          description: Phone number
-          type: string
-        zipCode:
-          description: Home address ZIP Code
-          type: string
-        address1:
-          description: Home address line 1
-          maxLength: 100
-          minLength: 0
-          type: string
-        address2:
-          description: Home address line 2
-          maxLength: 100
-          minLength: 0
-          type: string
-        address3:
-          description: Home address line 3
-          maxLength: 100
-          minLength: 0
-          type: string
-        city:
-          description: Home address city
-          maxLength: 100
-          minLength: 0
-          type: string
-        country:
-          description: Home address country
-          maxLength: 100
-          minLength: 0
-          type: string
-        state:
-          description: Home address state
-          maxLength: 100
-          minLength: 0
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
           type: string
     Loyalty:
       description: Loyalty data for a Customer (This data will only be imported into Listrak if there is an active loyalty integration setup for your account.)
@@ -792,6 +742,56 @@ components:
           format: int32
           description: Weekly points
           type: integer
+    ShippingAddress:
+      description: Shipping address of order
+      type: object
+      properties:
+        firstName:
+          description: First name
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          description: Last name
+          maxLength: 50
+          minLength: 0
+          type: string
+        phone:
+          description: Phone number
+          type: string
+        zipCode:
+          description: Home address ZIP Code
+          type: string
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:

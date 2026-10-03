@@ -203,18 +203,6 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => '/'\n]);\n\n$res = $client->request('GET', 'v1/ShortCode/{senderCodeId}/PhoneList/{phoneListId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
-    Collection_PhoneList:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/PhoneList'
     Error:
       type: object
       properties:
@@ -262,6 +250,18 @@ components:
         requireAgeGate:
           description: SMS Phone List Requires Age Gate.
           type: boolean
+    Collection_PhoneList:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/PhoneList'
 x-tagGroups:
 - name: API Reference
   tags:

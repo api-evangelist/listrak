@@ -330,6 +330,16 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
+    Resource_MessageExtended:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/MessageExtended'
+          description: Return data.
     Message:
       description: A Message resource.
       required:
@@ -361,16 +371,6 @@ components:
         subject:
           description: Subject of the message.
           type: string
-    Resource_MessageExtended:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/MessageExtended'
-          description: Return data.
 x-tagGroups:
 - name: API Reference
   tags:

@@ -270,6 +270,57 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/ListImport/{importFileId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
+    Collection_ListImport:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/ListImport'
+    ListImport:
+      description: A List Import resource.
+      type: object
+      properties:
+        importFileId:
+          format: int32
+          description: Identifier used to locate the list import.
+          type: integer
+          readOnly: true
+        importFileName:
+          description: Filename of an import file.
+          type: string
+        importDate:
+          format: date-time
+          description: Date of an import.
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
     ImportFile:
       description: An Import File resource.
       required:
@@ -317,34 +368,6 @@ components:
         includeUnsubscribed:
           description: Whether to update both subscribed and unsubscribed contacts when `ImportType` is `UpdateSubscribers`.
           type: boolean
-    Collection_ListImport:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/ListImport'
-    ListImport:
-      description: A List Import resource.
-      type: object
-      properties:
-        importFileId:
-          format: int32
-          description: Identifier used to locate the list import.
-          type: integer
-          readOnly: true
-        importFileName:
-          description: Filename of an import file.
-          type: string
-        importDate:
-          format: date-time
-          description: Date of an import.
-          type: string
     Resource_ListImport:
       type: object
       properties:
@@ -375,29 +398,6 @@ components:
           type: integer
         fileColumnType:
           description: Type of value in the column of the import file. Allowed values are `Email`, `SegmentationField`, `Event`, and `ExternalContactID`.
-          type: string
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
           type: string
 x-tagGroups:
 - name: API Reference

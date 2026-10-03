@@ -445,6 +445,109 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n    'base_uri' => 'https://api.listrak.com/media/'\n]);\n\n$res = $client->request('DELETE', 'v1/directories/{directoryId}', [\n    'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);"
 components:
   schemas:
+    Directory:
+      required:
+      - id
+      - parentId
+      - name
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        parentId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int32
+        name:
+          type: string
+      example:
+        id: 42
+        parentId: 7
+        name: Product Photos
+    DirectorySummaryResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/DirectorySummary'
+    SuccessResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data: {}
+    Page:
+      required:
+      - pageNumber
+      - pageSize
+      - totalCount
+      type: object
+      properties:
+        pageNumber:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        pageSize:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+      example:
+        pageNumber: 1
+        pageSize: 100
+        totalCount: 12
+    ErrorResponse:
+      required:
+      - status
+      - error
+      - message
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        error:
+          type: string
+        message:
+          type: string
     DirectoryResponse:
       required:
       - status
@@ -461,6 +564,15 @@ components:
           oneOf:
           - type: 'null'
           - $ref: '#/components/schemas/Directory'
+    CreateDirectoryRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: Product Photos
     File:
       required:
       - id
@@ -503,70 +615,6 @@ components:
         publicUrl: https://mediacdn.listrak.com/12345/banner.png
         size: 204800
         uploadDate: '2026-06-01T14:32:00Z'
-    CreateDirectoryRequest:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-      example:
-        name: Product Photos
-    Page:
-      required:
-      - pageNumber
-      - pageSize
-      - totalCount
-      type: object
-      properties:
-        pageNumber:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        pageSize:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-      example:
-        pageNumber: 1
-        pageSize: 100
-        totalCount: 12
-    Directory:
-      required:
-      - id
-      - parentId
-      - name
-      type: object
-      properties:
-        id:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        parentId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          format: int32
-        name:
-          type: string
-      example:
-        id: 42
-        parentId: 7
-        name: Product Photos
     DirectoryContents:
       required:
       - subdirectories
@@ -587,71 +635,6 @@ components:
           $ref: '#/components/schemas/Page'
         filesPage:
           $ref: '#/components/schemas/Page'
-    ErrorResponse:
-      required:
-      - status
-      - error
-      - message
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        error:
-          type: string
-        message:
-          type: string
-    DirectorySummaryResponse:
-      required:
-      - status
-      - data
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        data:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/DirectorySummary'
-    DirectorySummary:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        name:
-          type: string
-      example:
-        id: 1
-        name: My Company
-    SuccessResponse:
-      required:
-      - status
-      - data
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        data: {}
     DirectoryContentsResponse:
       required:
       - status
@@ -688,6 +671,23 @@ components:
       example:
         name: Updated Name
         newParentId: 7
+    DirectorySummary:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type: string
+      example:
+        id: 1
+        name: My Company
   securitySchemes:
     Bearer:
       type: http

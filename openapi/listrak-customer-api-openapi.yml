@@ -81,16 +81,6 @@ paths:
         required: true
 components:
   schemas:
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
     Social:
       description: Social data for a Customer
       type: object
@@ -217,19 +207,6 @@ components:
           maxLength: 20
           minLength: 0
           type: string
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
     Address:
       description: Address of customer
       type: object
@@ -263,6 +240,29 @@ components:
           description: Home address state
           maxLength: 100
           minLength: 0
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
           type: string
     Loyalty:
       description: Loyalty data for a Customer (This data will only be imported into Listrak if there is an active loyalty integration setup for your account.)

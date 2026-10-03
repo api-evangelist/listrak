@@ -538,6 +538,39 @@ components:
         data:
           $ref: '#/components/schemas/TransactionalMessage'
           description: Return data.
+    TransactionalMessageContact:
+      description: A Transactional Message Contact resource.
+      required:
+      - emailAddress
+      type: object
+      properties:
+        emailAddress:
+          description: Email address of the contact.
+          type: string
+        segmentationFieldValues:
+          description: Profile field values associated with the contact. An empty set must be provided if there are none.
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentationFieldValue'
+    SegmentationFieldValue:
+      description: A Profile Field Value resource.
+      required:
+      - segmentationFieldId
+      - value
+      type: object
+      properties:
+        segmentationFieldGroupId:
+          format: int32
+          description: Identifier of the profile field group.
+          type: integer
+          readOnly: true
+        segmentationFieldId:
+          format: int32
+          description: Identifier of the profile field.
+          type: integer
+        value:
+          description: Value of the profile field.
+          type: string
     TransactionalMessage:
       description: A Transactional Message resource.
       required:
@@ -562,32 +595,6 @@ components:
         subject:
           description: Subject of the message.
           type: string
-    TransactionalMessageContact:
-      description: A Transactional Message Contact resource.
-      required:
-      - emailAddress
-      type: object
-      properties:
-        emailAddress:
-          description: Email address of the contact.
-          type: string
-        segmentationFieldValues:
-          description: Profile field values associated with the contact. An empty set must be provided if there are none.
-          type: array
-          items:
-            $ref: '#/components/schemas/SegmentationFieldValue'
-    Collection_TransactionalMessage:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionalMessage'
     Error:
       type: object
       properties:
@@ -611,24 +618,27 @@ components:
         resourceId:
           description: An identifier used to locate a resource.
           type: string
-    SegmentationFieldValue:
-      description: A Profile Field Value resource.
-      required:
-      - segmentationFieldId
-      - value
+    Collection_TransactionalMessage:
       type: object
       properties:
-        segmentationFieldGroupId:
+        status:
           format: int32
-          description: Identifier of the profile field group.
+          description: HTTP status code.
           type: integer
-          readOnly: true
-        segmentationFieldId:
-          format: int32
-          description: Identifier of the profile field.
-          type: integer
-        value:
-          description: Value of the profile field.
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionalMessage'
+    TransactionalMessageContact_2:
+      description: A Transactional Message Contact resource.
+      type: object
+      properties:
+        phoneNumber:
+          description: Phone Number associated with a contact.
+          type: string
+        messageContent:
+          description: Content of SMS Message.
           type: string
     TransactionalMessage_2:
       description: A Transactional Message resource.
@@ -643,16 +653,6 @@ components:
           type: string
         transactionalMessageStatus:
           description: Status of a transactional message.
-          type: string
-    TransactionalMessageContact_2:
-      description: A Transactional Message Contact resource.
-      type: object
-      properties:
-        phoneNumber:
-          description: Phone Number associated with a contact.
-          type: string
-        messageContent:
-          description: Content of SMS Message.
           type: string
 x-refined-from:
 - listrak-email-openapi.json

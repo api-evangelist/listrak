@@ -162,17 +162,17 @@ components:
       properties:
         statusCode:
           type: string
+    MobileClientError:
+      type: object
+      properties:
+        errorMessage:
+          type: string
     EngagementEventType:
       enum:
       - Tapped
       - Dismissed
       type: string
       description: The type of engagement that occurred
-    MobileClientError:
-      type: object
-      properties:
-        errorMessage:
-          type: string
     EngagementEvent:
       required:
       - sendUid
