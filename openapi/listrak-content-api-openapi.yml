@@ -287,33 +287,6 @@ paths:
         required: true
 components:
   schemas:
-    ContentUpdate:
-      description: Request model for updating content.
-      type: object
-      properties:
-        contentFolderId:
-          format: int32
-          description: Identifier of the content folder to place the content in.
-          type: integer
-        contentName:
-          description: Name given to the content block.
-          type: string
-        textContent:
-          description: Plain text content of the content block.
-          type: string
-        htmlContent:
-          description: HTML content of the content block.
-          type: string
-    Resource_Content:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/Content'
-          description: Return data.
     ContentCreate:
       description: Request model for creating content.
       required:
@@ -339,16 +312,18 @@ components:
           - DynamicContent
           - SavedContent
           type: string
-    ResourceCreated:
+    Collection_Content:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/Content'
     Error:
       type: object
       properties:
@@ -396,7 +371,34 @@ components:
           format: date-time
           description: Date the content was last modified.
           type: string
-    Collection_Content:
+    ContentUpdate:
+      description: Request model for updating content.
+      type: object
+      properties:
+        contentFolderId:
+          format: int32
+          description: Identifier of the content folder to place the content in.
+          type: integer
+        contentName:
+          description: Name given to the content block.
+          type: string
+        textContent:
+          description: Plain text content of the content block.
+          type: string
+        htmlContent:
+          description: HTML content of the content block.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    Resource_Content:
       type: object
       properties:
         status:
@@ -404,10 +406,8 @@ components:
           description: HTTP status code.
           type: integer
         data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/Content'
+          $ref: '#/components/schemas/Content'
+          description: Return data.
 x-tagGroups:
 - name: API Reference
   tags:

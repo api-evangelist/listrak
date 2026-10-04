@@ -81,6 +81,56 @@ paths:
         required: true
 components:
   schemas:
+    ShippingAddress:
+      description: Shipping address of order
+      type: object
+      properties:
+        firstName:
+          description: First name
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          description: Last name
+          maxLength: 50
+          minLength: 0
+          type: string
+        phone:
+          description: Phone number
+          type: string
+        zipCode:
+          description: Home address ZIP Code
+          type: string
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
     OrderItem:
       description: An order resource
       required:
@@ -200,214 +250,18 @@ components:
           maxLength: 32
           minLength: 0
           type: string
-    BillingAddress:
-      description: Billing address of order
+    Error:
       type: object
       properties:
-        firstName:
-          description: First name
-          type: string
-        lastName:
-          description: Last name
-          type: string
-        mobilePhone:
-          description: Mobile phone number
-          type: string
-        phone:
-          description: Phone number
-          type: string
-        zipCode:
-          description: Home address ZIP Code
-          type: string
-        address1:
-          description: Home address line 1
-          maxLength: 100
-          minLength: 0
-          type: string
-        address2:
-          description: Home address line 2
-          maxLength: 100
-          minLength: 0
-          type: string
-        address3:
-          description: Home address line 3
-          maxLength: 100
-          minLength: 0
-          type: string
-        city:
-          description: Home address city
-          maxLength: 100
-          minLength: 0
-          type: string
-        country:
-          description: Home address country
-          maxLength: 100
-          minLength: 0
-          type: string
-        state:
-          description: Home address state
-          maxLength: 100
-          minLength: 0
-          type: string
-    Social:
-      description: Social data for a Customer
-      type: object
-      properties:
-        facebookID:
-          description: Facebook ID
-          maxLength: 100
-          minLength: 0
-          type: string
-        facebookNumberOfFriends:
+        status:
           format: int32
-          description: Number of Facebook friends
+          description: HTTP status code.
           type: integer
-        instagramID:
-          description: Instagram ID
-          maxLength: 100
-          minLength: 0
+        error:
+          description: Error code indicating what error has occured.
           type: string
-        instagramNumberOfFollowers:
-          format: int32
-          description: Number of Instagram followers
-          type: integer
-        twitterID:
-          description: Twitter ID
-          maxLength: 100
-          minLength: 0
-          type: string
-        twitterNumberOfFollowers:
-          format: int32
-          description: Number of Twitter followers
-          type: integer
-    Customer:
-      description: Customer for the order - DEPRECATED - Please use the BillingAddress and/or ShippingAddress fields instead.
-      type: object
-      properties:
-        address:
-          $ref: '#/components/schemas/Address'
-          description: Address of customer
-        birthday:
-          format: date-time
-          description: Customer birthdate
-          type: string
-        customerNumber:
-          description: Internal customer number
-          maxLength: 20
-          minLength: 0
-          type: string
-        email:
-          description: Email address of customer. This property is required for accounts that are not CRM enabled.
-          maxLength: 100
-          minLength: 0
-          type: string
-        firstName:
-          description: First name
-          maxLength: 50
-          minLength: 0
-          type: string
-        gender:
-          description: Gender of customer (M/F, Male/Female)
-          maxLength: 50
-          minLength: 0
-          type: string
-        homePhone:
-          description: Landline phone number
-          maxLength: 50
-          minLength: 0
-          type: string
-        lastName:
-          description: Last name
-          maxLength: 50
-          minLength: 0
-          type: string
-        loyalty:
-          $ref: '#/components/schemas/Loyalty'
-          description: Loyalty data
-        meta1:
-          description: Additional meta information
-          maxLength: 250
-          minLength: 0
-          type: string
-        meta2:
-          description: Additional meta information
-          maxLength: 250
-          minLength: 0
-          type: string
-        meta3:
-          description: Additional meta information
-          maxLength: 250
-          minLength: 0
-          type: string
-        meta4:
-          description: Additional meta information
-          maxLength: 250
-          minLength: 0
-          type: string
-        meta5:
-          description: Additional meta information
-          maxLength: 250
-          minLength: 0
-          type: string
-        mobilePhone:
-          description: Mobile phone number
-          maxLength: 50
-          minLength: 0
-          type: string
-        preferredStoreNumber:
-          description: Preferred brick and mortar store location
-          maxLength: 100
-          minLength: 0
-          type: string
-        registered:
-          description: Indicates the customer registration state
-          type: boolean
-        social:
-          $ref: '#/components/schemas/Social'
-          description: Social data
-        workPhone:
-          description: Work phone number
-          maxLength: 50
-          minLength: 0
-          type: string
-        zipCode:
-          description: Customer ZIP Code
-          maxLength: 20
-          minLength: 0
-          type: string
-    Address:
-      description: Address of customer
-      type: object
-      properties:
-        address1:
-          description: Home address line 1
-          maxLength: 100
-          minLength: 0
-          type: string
-        address2:
-          description: Home address line 2
-          maxLength: 100
-          minLength: 0
-          type: string
-        address3:
-          description: Home address line 3
-          maxLength: 100
-          minLength: 0
-          type: string
-        city:
-          description: Home address city
-          maxLength: 100
-          minLength: 0
-          type: string
-        country:
-          description: Home address country
-          maxLength: 100
-          minLength: 0
-          type: string
-        state:
-          description: Home address state
-          maxLength: 100
-          minLength: 0
+        message:
+          description: Message describing the status and the error that occurred.
           type: string
     Order:
       description: An order resource
@@ -606,18 +460,180 @@ components:
           maxLength: 32
           minLength: 0
           type: string
-    Error:
+    Social:
+      description: Social data for a Customer
       type: object
       properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
+        facebookID:
+          description: Facebook ID
+          maxLength: 100
+          minLength: 0
           type: string
-        message:
-          description: Message describing the status and the error that occurred.
+        facebookNumberOfFriends:
+          format: int32
+          description: Number of Facebook friends
+          type: integer
+        instagramID:
+          description: Instagram ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        instagramNumberOfFollowers:
+          format: int32
+          description: Number of Instagram followers
+          type: integer
+        twitterID:
+          description: Twitter ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        twitterNumberOfFollowers:
+          format: int32
+          description: Number of Twitter followers
+          type: integer
+    BillingAddress:
+      description: Billing address of order
+      type: object
+      properties:
+        firstName:
+          description: First name
+          type: string
+        lastName:
+          description: Last name
+          type: string
+        mobilePhone:
+          description: Mobile phone number
+          type: string
+        phone:
+          description: Phone number
+          type: string
+        zipCode:
+          description: Home address ZIP Code
+          type: string
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
+    Customer:
+      description: Customer for the order - DEPRECATED - Please use the BillingAddress and/or ShippingAddress fields instead.
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+          description: Address of customer
+        birthday:
+          format: date-time
+          description: Customer birthdate
+          type: string
+        customerNumber:
+          description: Internal customer number
+          maxLength: 20
+          minLength: 0
+          type: string
+        email:
+          description: Email address of customer. This property is required for accounts that are not CRM enabled.
+          maxLength: 100
+          minLength: 0
+          type: string
+        firstName:
+          description: First name
+          maxLength: 50
+          minLength: 0
+          type: string
+        gender:
+          description: Gender of customer (M/F, Male/Female)
+          maxLength: 50
+          minLength: 0
+          type: string
+        homePhone:
+          description: Landline phone number
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          description: Last name
+          maxLength: 50
+          minLength: 0
+          type: string
+        loyalty:
+          $ref: '#/components/schemas/Loyalty'
+          description: Loyalty data
+        meta1:
+          description: Additional meta information
+          maxLength: 250
+          minLength: 0
+          type: string
+        meta2:
+          description: Additional meta information
+          maxLength: 250
+          minLength: 0
+          type: string
+        meta3:
+          description: Additional meta information
+          maxLength: 250
+          minLength: 0
+          type: string
+        meta4:
+          description: Additional meta information
+          maxLength: 250
+          minLength: 0
+          type: string
+        meta5:
+          description: Additional meta information
+          maxLength: 250
+          minLength: 0
+          type: string
+        mobilePhone:
+          description: Mobile phone number
+          maxLength: 50
+          minLength: 0
+          type: string
+        preferredStoreNumber:
+          description: Preferred brick and mortar store location
+          maxLength: 100
+          minLength: 0
+          type: string
+        registered:
+          description: Indicates the customer registration state
+          type: boolean
+        social:
+          $ref: '#/components/schemas/Social'
+          description: Social data
+        workPhone:
+          description: Work phone number
+          maxLength: 50
+          minLength: 0
+          type: string
+        zipCode:
+          description: Customer ZIP Code
+          maxLength: 20
+          minLength: 0
           type: string
     ResourceCreated:
       type: object
@@ -742,26 +758,10 @@ components:
           format: int32
           description: Weekly points
           type: integer
-    ShippingAddress:
-      description: Shipping address of order
+    Address:
+      description: Address of customer
       type: object
       properties:
-        firstName:
-          description: First name
-          maxLength: 50
-          minLength: 0
-          type: string
-        lastName:
-          description: Last name
-          maxLength: 50
-          minLength: 0
-          type: string
-        phone:
-          description: Phone number
-          type: string
-        zipCode:
-          description: Home address ZIP Code
-          type: string
         address1:
           description: Home address line 1
           maxLength: 100

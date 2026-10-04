@@ -387,6 +387,29 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('DELETE', 'v1/List/{listId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
+    Resource_List:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/List'
+          description: Return data.
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
     ResourceDeleted:
       type: object
       properties:
@@ -394,6 +417,18 @@ components:
           format: int32
           description: HTTP status code.
           type: integer
+    Collection_List:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/List'
     List:
       description: A List resource.
       required:
@@ -485,41 +520,6 @@ components:
         mediaDomainAlias:
           description: DEPRECATED as of January 2020
           type: string
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
-    Collection_List:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/List'
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
     ResourceUpdated:
       type: object
       properties:
@@ -530,16 +530,16 @@ components:
         resourceId:
           description: An identifier used to locate the updated resource.
           type: string
-    Resource_List:
+    ResourceCreated:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        data:
-          $ref: '#/components/schemas/List'
-          description: Return data.
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:

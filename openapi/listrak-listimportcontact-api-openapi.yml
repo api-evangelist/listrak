@@ -125,6 +125,16 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
+    ListImportContact:
+      description: A List Import Contact resource.
+      type: object
+      properties:
+        emailAddress:
+          description: Email address of the contact.
+          type: string
+        importResult:
+          description: Result of the list import for the contact.
+          type: string
     CollectionPaged_ListImportContact:
       type: object
       properties:
@@ -140,16 +150,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ListImportContact'
-    ListImportContact:
-      description: A List Import Contact resource.
-      type: object
-      properties:
-        emailAddress:
-          description: Email address of the contact.
-          type: string
-        importResult:
-          description: Result of the list import for the contact.
-          type: string
 x-tagGroups:
 - name: API Reference
   tags:

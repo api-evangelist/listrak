@@ -72,17 +72,18 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/IpPool',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
-    IpPool:
-      description: An IpPool resource.
+    Collection_IpPool:
       type: object
       properties:
-        ipPoolId:
+        status:
           format: int32
-          description: Identifier used to locate the IP pool.
+          description: HTTP status code.
           type: integer
-        ipPoolDescription:
-          description: Description of the IP pool.
-          type: string
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/IpPool'
     Error:
       type: object
       properties:
@@ -96,18 +97,17 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-    Collection_IpPool:
+    IpPool:
+      description: An IpPool resource.
       type: object
       properties:
-        status:
+        ipPoolId:
           format: int32
-          description: HTTP status code.
+          description: Identifier used to locate the IP pool.
           type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/IpPool'
+        ipPoolDescription:
+          description: Description of the IP pool.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:

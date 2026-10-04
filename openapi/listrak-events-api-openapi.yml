@@ -93,14 +93,20 @@ paths:
         source: "{\n    \"events\": [\n        {\n            \"identifiers\": [\n                {\n                    \"identifierValue\": \"alice@listrak.com\",\n                    \"identifierType\": \"EmailAddress\"\n                },\n                {\n                    \"identifierValue\": \"5551234567\",\n                    \"identifierType\": \"PhoneNumber\"\n                }\n            ],\n            \"dataFields\": {\n                \"firstName\": \"Alice\",\n                \"lastName\": \"Smith\"\n            }\n        },\n        {\n            \"identifiers\": [\n                {\n                    \"identifierValue\": \"bob@listrak.com\",\n                    \"identifierType\": \"EmailAddress\"\n                },\n                {\n                    \"identifierValue\": \"5551234568\",\n                    \"identifierType\": \"PhoneNumber\"\n                }\n            ],\n            \"dataFields\": {\n                \"firstName\": \"Bob\",\n                \"lastName\": \"Smith\"\n            }\n        }\n    ]\n}"
 components:
   schemas:
-    EventList:
+    Event:
       type: object
       properties:
-        events:
+        identifiers:
           type: array
           items:
-            $ref: '#/components/schemas/Event'
-          description: The list of events.
+            $ref: '#/components/schemas/Identifier'
+          description: A list of identifiers for the person associated with this event. One or more must be included. Please note that consuming services may not be able to act on all identifiers of the same type on an event (e.g. multiple email addresses on a single event) - please consider this when creating events.
+        dataFields:
+          type: object
+          additionalProperties:
+            type: string
+          description: An object containing keys and values for user-defined data. This data should match the fields defined when creating the Custom Event Schema defined through your Cross Channel Integration. While the values may be passed as strings, it should be possible to parse these values into their defined types. Omitted values will not cause errors, but will lead to gaps in the available data for personalization. Additional fields beyond those defined in the schema will be discarded.
+      description: Custom Events Configuration
     RecipientDetailResponse:
       type: object
       properties:
@@ -118,63 +124,6 @@ components:
           items:
             $ref: '#/components/schemas/RecipientDetailResponseError'
           description: Errors, if any, that occured to cause a non-200 series status code
-    RecipientDetailResponseError:
-      type: object
-      properties:
-        errorType:
-          type: string
-          description: The type of error
-          format: string
-        errorMessage:
-          type: string
-          description: The error message
-          format: string
-    Error:
-      type: object
-      properties:
-        userMessage:
-          type: string
-        internalMessage:
-          type: string
-          description: Internal Message
-    Event:
-      type: object
-      properties:
-        identifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Identifier'
-          description: A list of identifiers for the person associated with this event. One or more must be included. Please note that consuming services may not be able to act on all identifiers of the same type on an event (e.g. multiple email addresses on a single event) - please consider this when creating events.
-        dataFields:
-          type: object
-          additionalProperties:
-            type: string
-          description: An object containing keys and values for user-defined data. This data should match the fields defined when creating the Custom Event Schema defined through your Cross Channel Integration. While the values may be passed as strings, it should be possible to parse these values into their defined types. Omitted values will not cause errors, but will lead to gaps in the available data for personalization. Additional fields beyond those defined in the schema will be discarded.
-      description: Custom Events Configuration
-    CustomEventPostResponse:
-      title: CustomEventPostResponse
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/RecipientDetailResponse'
-        meta:
-          $ref: '#/components/schemas/ResponseMetaData'
-    ResponseMetaData:
-      type: object
-      properties:
-        statusCode:
-          type: integer
-          description: Response Status Code
-          format: int32
-        message:
-          type: string
-          description: Explanation for the code
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
     Identifier:
       type: object
       properties:
@@ -189,6 +138,57 @@ components:
           type: string
           description: The type of identifier, e.g. an email address.
       description: The identifier information that can be used to contact the person associated with this event.
+    EventList:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+          description: The list of events.
+    Error:
+      type: object
+      properties:
+        userMessage:
+          type: string
+        internalMessage:
+          type: string
+          description: Internal Message
+    ResponseMetaData:
+      type: object
+      properties:
+        statusCode:
+          type: integer
+          description: Response Status Code
+          format: int32
+        message:
+          type: string
+          description: Explanation for the code
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    RecipientDetailResponseError:
+      type: object
+      properties:
+        errorType:
+          type: string
+          description: The type of error
+          format: string
+        errorMessage:
+          type: string
+          description: The error message
+          format: string
+    CustomEventPostResponse:
+      title: CustomEventPostResponse
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipientDetailResponse'
+        meta:
+          $ref: '#/components/schemas/ResponseMetaData'
   securitySchemes:
     Authorizer:
       type: apiKey

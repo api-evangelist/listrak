@@ -978,6 +978,19 @@ paths:
     - url: https://api.listrak.com/sms
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
     Contact:
       description: A Contact resource.
       required:
@@ -1030,6 +1043,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SegmentationFieldValue'
+    Resource_Contact:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/Contact'
+          description: Return data.
     SegmentationFieldValue:
       description: A Profile Field Value resource.
       required:
@@ -1049,39 +1072,6 @@ components:
         value:
           description: Value of the profile field.
           type: string
-    Resource_Contact:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/Contact'
-          description: Return data.
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
     CollectionPaged_Contact:
       type: object
       properties:
@@ -1097,71 +1087,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Contact'
-    SMSContact:
+    ResourceCreated:
       type: object
       properties:
-        phoneNumber:
-          type: string
-        emailAddress:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        birthday:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        postalCode:
-          type: string
-        optedOut:
-          type: boolean
-        segmentationFieldValues:
-          type: array
-          items:
-            $ref: '#/components/schemas/SMSPhoneContactAttribute'
-    ImportContactFileStatus:
-      type: object
-      properties:
-        importFileId:
-          format: int32
-          type: integer
-        smsSenderCodeId:
-          format: int32
-          type: integer
-        fileName:
-          type: string
-        startDate:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        endDate:
-          format: date-time
-          type:
-          - string
-          - 'null'
         status:
-          type: string
-    OptOutContact:
-      type: object
-      properties:
-        phoneNumber:
-          type: string
-        optOutDate:
-          format: date-time
-          type: string
-        optOutReason:
-          enum:
-          - Campaign
-          - Admin
-          - DeliveryFailure
-          - Import
-          - API
-          - Deactivated
-          - PermanentError
-          - Workflow
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
           type: string
     CollectionPaged_SMSContact:
       type: object
@@ -1210,6 +1144,51 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ImportContactFileMapping'
+    OptOutContact:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+        optOutDate:
+          format: date-time
+          type: string
+        optOutReason:
+          enum:
+          - Campaign
+          - Admin
+          - DeliveryFailure
+          - Import
+          - API
+          - Deactivated
+          - PermanentError
+          - Workflow
+          type: string
+    ImportContactFileMapping:
+      description: A Contact Import File Mapping resource.
+      required:
+      - fileColumnType
+      - segmentationFieldId
+      - fileColumn
+      type: object
+      properties:
+        fileColumnType:
+          description: Type of value in the column of the import file. Allowed values are `Phone` and `SegmentationField`.
+          type: string
+        segmentationFieldId:
+          format: int32
+          description: 'Identifier of the associated profile field.
+
+            - FileColumnType `Phone` must have a value of `0`.
+
+            - FileColumnType `SegmentationField` must have a valid SegmentationFieldId for this SenderCode.'
+          type: integer
+        fileColumn:
+          format: int32
+          description: Number identifying the column's ordinal position in the file, starting from `0`.
+          type: integer
+        defaultValue:
+          description: Default value to be used if a value is not provided during the import.
+          type: string
     SMSContactSubscriptionDetails:
       type: object
       properties:
@@ -1246,7 +1225,62 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SMSPhoneContactAttribute'
-    Resource_ImportContactFileStatus:
+    SMSContact:
+      type: object
+      properties:
+        phoneNumber:
+          type: string
+        emailAddress:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthday:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        postalCode:
+          type: string
+        optedOut:
+          type: boolean
+        segmentationFieldValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/SMSPhoneContactAttribute'
+    SMSPhoneContactAttribute:
+      type: object
+      properties:
+        segmentationFieldId:
+          format: int32
+          type: integer
+        value:
+          type: string
+    ImportContactFileStatus:
+      type: object
+      properties:
+        importFileId:
+          format: int32
+          type: integer
+        smsSenderCodeId:
+          format: int32
+          type: integer
+        fileName:
+          type: string
+        startDate:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        endDate:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        status:
+          type: string
+    Resource_SMSContactSubscriptionDetails:
       type: object
       properties:
         status:
@@ -1254,7 +1288,7 @@ components:
           description: HTTP status code.
           type: integer
         data:
-          $ref: '#/components/schemas/ImportContactFileStatus'
+          $ref: '#/components/schemas/SMSContactSubscriptionDetails'
           description: Return data.
     ResourceUpdated:
       type: object
@@ -1266,6 +1300,16 @@ components:
         resourceId:
           description: An identifier used to locate the updated resource.
           type: string
+    Resource_ImportContactFileStatus:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/ImportContactFileStatus'
+          description: Return data.
     Collection_OptOutContact:
       type: object
       properties:
@@ -1278,50 +1322,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OptOutContact'
-    ImportContactFileMapping:
-      description: A Contact Import File Mapping resource.
-      required:
-      - fileColumnType
-      - segmentationFieldId
-      - fileColumn
-      type: object
-      properties:
-        fileColumnType:
-          description: Type of value in the column of the import file. Allowed values are `Phone` and `SegmentationField`.
-          type: string
-        segmentationFieldId:
-          format: int32
-          description: 'Identifier of the associated profile field.
-
-            - FileColumnType `Phone` must have a value of `0`.
-
-            - FileColumnType `SegmentationField` must have a valid SegmentationFieldId for this SenderCode.'
-          type: integer
-        fileColumn:
-          format: int32
-          description: Number identifying the column's ordinal position in the file, starting from `0`.
-          type: integer
-        defaultValue:
-          description: Default value to be used if a value is not provided during the import.
-          type: string
-    SMSPhoneContactAttribute:
-      type: object
-      properties:
-        segmentationFieldId:
-          format: int32
-          type: integer
-        value:
-          type: string
-    Resource_SMSContactSubscriptionDetails:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/SMSContactSubscriptionDetails'
-          description: Return data.
 x-refined-from:
 - listrak-email-openapi.json
 - listrak-sms-openapi.json

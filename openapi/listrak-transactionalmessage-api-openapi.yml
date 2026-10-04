@@ -528,7 +528,7 @@ paths:
     - url: https://api.listrak.com/sms
 components:
   schemas:
-    Resource_TransactionalMessage:
+    Collection_TransactionalMessage:
       type: object
       properties:
         status:
@@ -536,8 +536,23 @@ components:
           description: HTTP status code.
           type: integer
         data:
-          $ref: '#/components/schemas/TransactionalMessage'
-          description: Return data.
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionalMessage'
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
     TransactionalMessageContact:
       description: A Transactional Message Contact resource.
       required:
@@ -595,19 +610,6 @@ components:
         subject:
           description: Subject of the message.
           type: string
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
     ResourceCreated:
       type: object
       properties:
@@ -618,7 +620,7 @@ components:
         resourceId:
           description: An identifier used to locate a resource.
           type: string
-    Collection_TransactionalMessage:
+    Resource_TransactionalMessage:
       type: object
       properties:
         status:
@@ -626,10 +628,8 @@ components:
           description: HTTP status code.
           type: integer
         data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionalMessage'
+          $ref: '#/components/schemas/TransactionalMessage'
+          description: Return data.
     TransactionalMessageContact_2:
       description: A Transactional Message Contact resource.
       type: object

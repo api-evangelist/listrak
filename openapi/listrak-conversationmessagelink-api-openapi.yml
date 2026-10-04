@@ -221,19 +221,31 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/Conversation/{conversationId}/Message/{conversationMessageId}/Link/{conversationMessageLinkId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
-    Error:
+    Resource_MessageLink:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        error:
-          description: Error code indicating what error has occured.
+        data:
+          $ref: '#/components/schemas/MessageLink'
+          description: Return data.
+    CollectionPaged_MessageLink:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        nextPageCursor:
+          description: URI of the next page of data.
           type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
+        data:
+          description: Collection of data that exists on this paged view.
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageLink'
     MessageLink:
       description: A Message Link resource.
       type: object
@@ -252,31 +264,19 @@ components:
           format: int32
           description: The number of clicks for the Link.
           type: integer
-    CollectionPaged_MessageLink:
+    Error:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        nextPageCursor:
-          description: URI of the next page of data.
+        error:
+          description: Error code indicating what error has occured.
           type: string
-        data:
-          description: Collection of data that exists on this paged view.
-          type: array
-          items:
-            $ref: '#/components/schemas/MessageLink'
-    Resource_MessageLink:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/MessageLink'
-          description: Return data.
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:

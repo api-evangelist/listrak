@@ -284,13 +284,6 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => '/'\n]);\n\n$res = $client->request('DELETE', 'v1/ShortCode/{senderCodeId}/ContactUnsubscribe/{phoneNumber}/PhoneList/{phoneListId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
-    ResourceDeleted:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
     ContactListSubscription:
       description: A Contact List Subscription Resource.
       type: object
@@ -339,6 +332,13 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
+    ResourceDeleted:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
     ResourceCreated:
       type: object
       properties:

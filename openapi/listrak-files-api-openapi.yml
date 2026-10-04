@@ -309,75 +309,9 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n    'base_uri' => 'https://api.listrak.com/media/'\n]);\n\n$res = $client->request('DELETE', 'v1/directories/{directoryId}/files/{fileId}', [\n    'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);"
 components:
   schemas:
-    SuccessResponse:
-      required:
-      - status
-      - data
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        data: {}
     IFormFile:
       type: string
       format: binary
-    ErrorResponse:
-      required:
-      - status
-      - error
-      - message
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        error:
-          type: string
-        message:
-          type: string
-    FileResponse:
-      required:
-      - status
-      - data
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        data:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/File'
-    UpdateFileRequest:
-      required:
-      - name
-      - newDirectoryId
-      type: object
-      properties:
-        name:
-          type:
-          - 'null'
-          - string
-        newDirectoryId:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - 'null'
-          - integer
-          - string
-          format: int32
-      example:
-        name: new-name.png
-        newDirectoryId: 7
     File:
       required:
       - id
@@ -420,6 +354,72 @@ components:
         publicUrl: https://mediacdn.listrak.com/12345/banner.png
         size: 204800
         uploadDate: '2026-06-01T14:32:00Z'
+    FileResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/File'
+    SuccessResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data: {}
+    ErrorResponse:
+      required:
+      - status
+      - error
+      - message
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        error:
+          type: string
+        message:
+          type: string
+    UpdateFileRequest:
+      required:
+      - name
+      - newDirectoryId
+      type: object
+      properties:
+        name:
+          type:
+          - 'null'
+          - string
+        newDirectoryId:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - 'null'
+          - integer
+          - string
+          format: int32
+      example:
+        name: new-name.png
+        newDirectoryId: 7
   securitySchemes:
     Bearer:
       type: http

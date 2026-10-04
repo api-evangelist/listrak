@@ -270,18 +270,6 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/ListImport/{importFileId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
-    Collection_ListImport:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/ListImport'
     ListImport:
       description: A List Import resource.
       type: object
@@ -311,15 +299,26 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-    ResourceCreated:
+    ImportFileMapping:
+      description: An Import File Mapping resource.
+      required:
+      - fileColumn
+      - fileColumnType
       type: object
       properties:
-        status:
+        segmentationFieldId:
           format: int32
-          description: HTTP status code.
+          description: Identifier of the associated profile field.
           type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
+        defaultValue:
+          description: Default value to be used if a value is not provided during the import.
+          type: string
+        fileColumn:
+          format: int32
+          description: Number identifying the column's ordinal position in the file, starting from `0`.
+          type: integer
+        fileColumnType:
+          description: Type of value in the column of the import file. Allowed values are `Email`, `SegmentationField`, `Event`, and `ExternalContactID`.
           type: string
     ImportFile:
       description: An Import File resource.
@@ -368,6 +367,28 @@ components:
         includeUnsubscribed:
           description: Whether to update both subscribed and unsubscribed contacts when `ImportType` is `UpdateSubscribers`.
           type: boolean
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    Collection_ListImport:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/ListImport'
     Resource_ListImport:
       type: object
       properties:
@@ -378,27 +399,6 @@ components:
         data:
           $ref: '#/components/schemas/ListImport'
           description: Return data.
-    ImportFileMapping:
-      description: An Import File Mapping resource.
-      required:
-      - fileColumn
-      - fileColumnType
-      type: object
-      properties:
-        segmentationFieldId:
-          format: int32
-          description: Identifier of the associated profile field.
-          type: integer
-        defaultValue:
-          description: Default value to be used if a value is not provided during the import.
-          type: string
-        fileColumn:
-          format: int32
-          description: Number identifying the column's ordinal position in the file, starting from `0`.
-          type: integer
-        fileColumnType:
-          description: Type of value in the column of the import file. Allowed values are `Email`, `SegmentationField`, `Event`, and `ExternalContactID`.
-          type: string
 x-tagGroups:
 - name: API Reference
   tags:

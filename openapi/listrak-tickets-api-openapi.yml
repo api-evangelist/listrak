@@ -227,6 +227,19 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    TicketOpenRequest:
+      type: object
+      properties:
+        integrationType:
+          $ref: '#/components/schemas/integrationType'
+        phoneId:
+          type: integer
+          description: Numeric ID. Phone Id
+          format: int64
+        externalTicketId:
+          type: string
+          description: A unique ticket identifier.
+      description: A request for opening a ticket
     TicketCloseRequest:
       type: object
       properties:
@@ -243,19 +256,6 @@ components:
       - custom
       type: string
       description: Integration Type
-    TicketOpenRequest:
-      type: object
-      properties:
-        integrationType:
-          $ref: '#/components/schemas/integrationType'
-        phoneId:
-          type: integer
-          description: Numeric ID. Phone Id
-          format: int64
-        externalTicketId:
-          type: string
-          description: A unique ticket identifier.
-      description: A request for opening a ticket
   securitySchemes:
     Authorizer:
       type: apiKey

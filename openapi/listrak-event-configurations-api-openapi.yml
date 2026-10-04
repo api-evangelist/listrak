@@ -143,42 +143,6 @@ paths:
                 type: string
 components:
   schemas:
-    CustomEventDetailResponse:
-      title: CustomEventDetailResponse
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/CustomEventDetail'
-        meta:
-          $ref: '#/components/schemas/ResponseMetaData'
-    CustomEventDetail:
-      type: object
-      properties:
-        eventUID:
-          type: string
-          description: Event UID
-          format: uuid
-        eventName:
-          type: string
-          description: Event Name
-        eventSchemaAttrs:
-          type: object
-          additionalProperties:
-            enum:
-            - String
-            - Int
-            - Double
-            - Date
-            type: string
-          description: Key value pairs with the key as the name of the schema property and the value as its type (String, Int, Double, Date).
-        featureAccess:
-          type: array
-          items:
-            enum:
-            - Workflow
-            type: string
-          description: Array of values to determine which features have access to this event.
-      description: Custom Events Schema
     CustomEventConfigurationListResponse:
       title: CustomEventConfigurationListResponse
       type: object
@@ -211,6 +175,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Error'
+    CustomEventDetailResponse:
+      title: CustomEventDetailResponse
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CustomEventDetail'
+        meta:
+          $ref: '#/components/schemas/ResponseMetaData'
     CustomEventConfiguration:
       type: object
       properties:
@@ -222,6 +194,34 @@ components:
           type: string
           description: Event Name
       description: Custom Events Configuration
+    CustomEventDetail:
+      type: object
+      properties:
+        eventUID:
+          type: string
+          description: Event UID
+          format: uuid
+        eventName:
+          type: string
+          description: Event Name
+        eventSchemaAttrs:
+          type: object
+          additionalProperties:
+            enum:
+            - String
+            - Int
+            - Double
+            - Date
+            type: string
+          description: Key value pairs with the key as the name of the schema property and the value as its type (String, Int, Double, Date).
+        featureAccess:
+          type: array
+          items:
+            enum:
+            - Workflow
+            type: string
+          description: Array of values to determine which features have access to this event.
+      description: Custom Events Schema
   securitySchemes:
     Authorizer:
       type: apiKey

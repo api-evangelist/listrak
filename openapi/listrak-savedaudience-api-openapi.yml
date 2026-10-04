@@ -91,6 +91,21 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/SavedAudience',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
+    SavedAudience:
+      description: A Saved Audience resource.
+      type: object
+      properties:
+        name:
+          description: Name of the saved audience.
+          type: string
+        lastModified:
+          format: date-time
+          description: Last date the saved audience was modified.
+          type: string
+        savedAudienceId:
+          format: int64
+          description: Identifier used to locate the saved audience.
+          type: integer
     Error:
       type: object
       properties:
@@ -119,21 +134,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SavedAudience'
-    SavedAudience:
-      description: A Saved Audience resource.
-      type: object
-      properties:
-        name:
-          description: Name of the saved audience.
-          type: string
-        lastModified:
-          format: date-time
-          description: Last date the saved audience was modified.
-          type: string
-        savedAudienceId:
-          format: int64
-          description: Identifier used to locate the saved audience.
-          type: integer
 x-tagGroups:
 - name: API Reference
   tags:

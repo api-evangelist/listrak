@@ -402,13 +402,18 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('DELETE', 'v1/List/{listId}/SegmentationFieldGroup/{segmentationFieldGroupId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
-    ResourceDeleted:
+    Collection_SegmentationFieldGroup:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentationFieldGroup'
     Error:
       type: object
       properties:
@@ -422,36 +427,6 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
-    ResourceUpdated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate the updated resource.
-          type: string
-    Resource_SegmentationFieldGroup:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/SegmentationFieldGroup'
-          description: Return data.
     SegmentationFieldGroup:
       description: A Profile Field Group resource.
       required:
@@ -471,7 +446,14 @@ components:
           format: int32
           description: Ordinal position of the profile field group.
           type: integer
-    Collection_SegmentationFieldGroup:
+    ResourceDeleted:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+    Resource_SegmentationFieldGroup:
       type: object
       properties:
         status:
@@ -479,10 +461,28 @@ components:
           description: HTTP status code.
           type: integer
         data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/SegmentationFieldGroup'
+          $ref: '#/components/schemas/SegmentationFieldGroup'
+          description: Return data.
+    ResourceUpdated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate the updated resource.
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:

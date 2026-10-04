@@ -81,6 +81,19 @@ paths:
         required: true
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
     Social:
       description: Social data for a Customer
       type: object
@@ -207,53 +220,6 @@ components:
           maxLength: 20
           minLength: 0
           type: string
-    Address:
-      description: Address of customer
-      type: object
-      properties:
-        address1:
-          description: Home address line 1
-          maxLength: 100
-          minLength: 0
-          type: string
-        address2:
-          description: Home address line 2
-          maxLength: 100
-          minLength: 0
-          type: string
-        address3:
-          description: Home address line 3
-          maxLength: 100
-          minLength: 0
-          type: string
-        city:
-          description: Home address city
-          maxLength: 100
-          minLength: 0
-          type: string
-        country:
-          description: Home address country
-          maxLength: 100
-          minLength: 0
-          type: string
-        state:
-          description: Home address state
-          maxLength: 100
-          minLength: 0
-          type: string
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
     ResourceCreated:
       type: object
       properties:
@@ -377,6 +343,40 @@ components:
           format: int32
           description: Weekly points
           type: integer
+    Address:
+      description: Address of customer
+      type: object
+      properties:
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
 x-tagGroups:
 - name: API Reference
   tags:

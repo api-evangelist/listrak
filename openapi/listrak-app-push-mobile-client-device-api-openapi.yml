@@ -492,16 +492,6 @@ paths:
                 $ref: '#/components/schemas/MobileClientError'
 components:
   schemas:
-    Identifiers:
-      type: object
-      properties:
-        email:
-          type: string
-          description: Identifying email for a device
-        phone:
-          type: string
-          description: Identifying phone number for a device
-      description: Identifiers that can associate a device with a contact
     DevicePlatformType:
       enum:
       - Firebase
@@ -541,13 +531,6 @@ components:
       properties:
         errorMessage:
           type: string
-    DeviceOS:
-      enum:
-      - Android
-      - iOS
-      - Other
-      type: string
-      description: The operating system used by the device
     Device:
       required:
       - devicePlatformType
@@ -580,6 +563,23 @@ components:
           type: string
           description: Identifies the version of the Mobile App
       description: A Mobile App Push Device
+    DeviceOS:
+      enum:
+      - Android
+      - iOS
+      - Other
+      type: string
+      description: The operating system used by the device
+    Identifiers:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Identifying email for a device
+        phone:
+          type: string
+          description: Identifying phone number for a device
+      description: Identifiers that can associate a device with a contact
   securitySchemes:
     api_key:
       type: apiKey

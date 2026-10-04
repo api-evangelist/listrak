@@ -400,13 +400,18 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('DELETE', 'v1/List/{listId}/EventGroup/{eventGroupId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
-    ResourceDeleted:
+    Collection_EventGroup:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/EventGroup'
     EventGroup:
       description: An Event Group resource.
       required:
@@ -421,16 +426,6 @@ components:
         eventGroupName:
           description: Name of the event group.
           type: string
-    Resource_EventGroup:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          $ref: '#/components/schemas/EventGroup'
-          description: Return data.
     Error:
       type: object
       properties:
@@ -444,28 +439,13 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-    Collection_EventGroup:
+    ResourceDeleted:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/EventGroup'
-    ResourceCreated:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
-          type: string
     ResourceUpdated:
       type: object
       properties:
@@ -476,6 +456,26 @@ components:
         resourceId:
           description: An identifier used to locate the updated resource.
           type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    Resource_EventGroup:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          $ref: '#/components/schemas/EventGroup'
+          description: Return data.
 x-tagGroups:
 - name: API Reference
   tags:
