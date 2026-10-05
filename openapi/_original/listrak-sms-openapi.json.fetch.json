@@ -1,0 +1,12 @@
+{
+ "url": "https://api.listrak.com/sms/swagger/docs/v1?revision=639267383260550580",
+ "requested_url": "https://api.listrak.com/sms/swagger/docs/v1?revision=639267383260550580",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 114532,
+ "sha256": "cd67f717383f9f90c27f9e1edbd20877ffee8411330fe84d9544644ac7519fd4",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}

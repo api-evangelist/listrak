@@ -1,0 +1,12 @@
+{
+ "url": "https://api.listrak.com/crosschannel/v1/openapi.json",
+ "requested_url": "https://api.listrak.com/crosschannel/v1/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 22440,
+ "sha256": "a8085df07c5c050ec1c30f899654f44a56b7e4070d368cb5154c50f70722de14",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}

@@ -1,0 +1,12 @@
+{
+ "url": "https://api.listrak.com/email/swagger/docs/v1?revision=639267197004225324",
+ "requested_url": "https://api.listrak.com/email/swagger/docs/v1?revision=639267197004225324",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 443815,
+ "sha256": "05f42948db63587c625d232e54e1347ea68c9b2db082af676a9396c617dba6c2",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.988), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
