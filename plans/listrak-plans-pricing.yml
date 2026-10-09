@@ -49,3 +49,16 @@ plans:
 contact:
   url: https://www.listrak.com/
   notes: Contact Listrak sales for a custom quote.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - negotiated
+  units: []
+  plans:
+  - name: Custom Enterprise Plan
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
