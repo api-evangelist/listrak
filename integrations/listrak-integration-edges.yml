@@ -6,6 +6,7 @@ checked:
 - https://composio.dev/toolkits/listrak
 - https://monid.ai/tools/listrak
 - https://n8n.io/integrations/listrak/
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-listrak
 - https://zapier.com/apps/listrak/integrations
 summary: null
 marketplace_apps:
@@ -351,6 +352,38 @@ edges:
   direction: third-party
   category: Amazon
   partner_url: https://zapier.com/aws.amazon.com
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-listrak
+  coverage_role:
+  - destination
+  - source
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - actions-listrak
+      status: PUBLIC
+      partner_owned: true
+      connection_modes:
+      - cloud:server
+      - cloud:web
+      accepted_methods:
+      - Alias
+      - Group
+      - Identify
+      - Page
+      - Track
+    source:
+      catalog_entries:
+      - listrak
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
 templates:
 - title: Update Listrak subscribers when Copper persons are modified
   url: https://zapier.com/apps/copper/integrations/listrak/1476457/update-listrak-subscribers-when-copper-persons-are-modified

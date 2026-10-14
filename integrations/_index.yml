@@ -65,7 +65,6 @@
   arazzo: null
 - slug: listrak-monday-com
   label: monday.com
-  partner: monday-com
   partner_name: monday.com
   category: Project Management
   type: marketplace
@@ -73,7 +72,7 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/listrak/integrations/monday
   source: edge
-  status: pending-generation
+  status: pending-partner-spec
   arazzo: null
 - slug: listrak-facebook-lead-ads
   label: Facebook Lead Ads
@@ -308,7 +307,6 @@
   arazzo: null
 - slug: listrak-linkedin-ads
   label: LinkedIn Ads
-  partner: linkedin-ads
   partner_name: LinkedIn Ads
   category: Ads & Conversion
   type: marketplace
@@ -316,7 +314,7 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/listrak/integrations/linkedin-ads
   source: edge
-  status: pending-generation
+  status: pending-partner-spec
   arazzo: null
 - slug: listrak-linkedin
   label: LinkedIn
@@ -352,4 +350,16 @@
   evidence: https://zapier.com/apps/listrak/integrations/amazon-s3
   source: edge
   status: pending-generation
+  arazzo: null
+- slug: listrak-twilio-segment
+  label: Twilio Segment
+  partner: segment
+  partner_name: Twilio Segment
+  type: coverage
+  marketplace: coverage
+  channel: partner-built
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-listrak
+  source: edge
+  relationship: connector-coverage
+  status: not-a-workflow
   arazzo: null
