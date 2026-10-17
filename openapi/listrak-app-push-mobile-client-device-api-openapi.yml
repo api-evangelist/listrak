@@ -492,40 +492,6 @@ paths:
                 $ref: '#/components/schemas/MobileClientError'
 components:
   schemas:
-    DevicePlatformType:
-      enum:
-      - Firebase
-      - APNs
-      type: string
-      description: The push notification platform used by the device
-    DevicePatch:
-      required:
-      - deviceUid
-      type: object
-      properties:
-        deviceUid:
-          type: string
-          format: uuid
-        deviceToken:
-          type: string
-          description: Identifying token for a mobile device
-        identifiers:
-          $ref: '#/components/schemas/Identifiers'
-        subscribed:
-          type: boolean
-          description: Identifying whether a mobile device is subscribed or unsubscribed
-        deviceOS:
-          $ref: '#/components/schemas/DeviceOS'
-        deviceOSVersion:
-          type: string
-          description: Identifies the version of the mobile device's OS
-        deviceType:
-          type: string
-          description: Identifies the physical device model
-        mobileAppVersion:
-          type: string
-          description: Identifies the version of the Mobile App
-      description: A Patch for a Mobile App Push Device
     MobileClientError:
       type: object
       properties:
@@ -563,13 +529,40 @@ components:
           type: string
           description: Identifies the version of the Mobile App
       description: A Mobile App Push Device
-    DeviceOS:
+    DevicePatch:
+      required:
+      - deviceUid
+      type: object
+      properties:
+        deviceUid:
+          type: string
+          format: uuid
+        deviceToken:
+          type: string
+          description: Identifying token for a mobile device
+        identifiers:
+          $ref: '#/components/schemas/Identifiers'
+        subscribed:
+          type: boolean
+          description: Identifying whether a mobile device is subscribed or unsubscribed
+        deviceOS:
+          $ref: '#/components/schemas/DeviceOS'
+        deviceOSVersion:
+          type: string
+          description: Identifies the version of the mobile device's OS
+        deviceType:
+          type: string
+          description: Identifies the physical device model
+        mobileAppVersion:
+          type: string
+          description: Identifies the version of the Mobile App
+      description: A Patch for a Mobile App Push Device
+    DevicePlatformType:
       enum:
-      - Android
-      - iOS
-      - Other
+      - Firebase
+      - APNs
       type: string
-      description: The operating system used by the device
+      description: The push notification platform used by the device
     Identifiers:
       type: object
       properties:
@@ -580,6 +573,13 @@ components:
           type: string
           description: Identifying phone number for a device
       description: Identifiers that can associate a device with a contact
+    DeviceOS:
+      enum:
+      - Android
+      - iOS
+      - Other
+      type: string
+      description: The operating system used by the device
   securitySchemes:
     api_key:
       type: apiKey

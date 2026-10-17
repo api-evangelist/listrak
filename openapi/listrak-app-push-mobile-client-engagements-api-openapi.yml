@@ -157,16 +157,10 @@ paths:
                 $ref: '#/components/schemas/MobileClientError'
 components:
   schemas:
-    EngagementEventType:
-      enum:
-      - Tapped
-      - Dismissed
-      type: string
-      description: The type of engagement that occurred
-    Accepted:
+    MobileClientError:
       type: object
       properties:
-        statusCode:
+        errorMessage:
           type: string
     EngagementEvent:
       required:
@@ -180,11 +174,17 @@ components:
         type:
           $ref: '#/components/schemas/EngagementEventType'
       description: An engagement event that has happened on a mobile device
-    MobileClientError:
+    Accepted:
       type: object
       properties:
-        errorMessage:
+        statusCode:
           type: string
+    EngagementEventType:
+      enum:
+      - Tapped
+      - Dismissed
+      type: string
+      description: The type of engagement that occurred
   securitySchemes:
     api_key:
       type: apiKey

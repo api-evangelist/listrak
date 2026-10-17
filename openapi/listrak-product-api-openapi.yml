@@ -81,33 +81,6 @@ paths:
         required: true
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
-          type: string
-    RelatedProduct:
-      description: Related products
-      type: object
-      properties:
-        rank:
-          format: int32
-          description: Rank of related product
-          type: integer
-        sku:
-          description: Unique stock number of related product
-          type: string
-        type:
-          description: Type of related product
-          type: string
     Product:
       description: A product resource
       required:
@@ -285,15 +258,19 @@ components:
         tags:
           description: Comma separated list of tags
           type: string
-    ResourceCreated:
+    RelatedProduct:
+      description: Related products
       type: object
       properties:
-        status:
+        rank:
           format: int32
-          description: HTTP status code.
+          description: Rank of related product
           type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
+        sku:
+          description: Unique stock number of related product
+          type: string
+        type:
+          description: Type of related product
           type: string
     AlternateImage:
       description: Alternate product image
@@ -305,6 +282,29 @@ components:
           type: integer
         url:
           description: URL for alternate product image
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
           type: string
 x-tagGroups:
 - name: API Reference

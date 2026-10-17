@@ -74,6 +74,25 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/ContentFolder',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
+    ContentFolder:
+      description: A content library folder resource.
+      type: object
+      properties:
+        contentFolderId:
+          format: int32
+          description: Identifier used to locate the content folder.
+          type: integer
+        listId:
+          format: int32
+          description: Identifier of the list this folder belongs to. Null indicates a company-level folder.
+          type: integer
+        parentFolderId:
+          format: int32
+          description: Identifier of the parent folder. Null indicates the root folder.
+          type: integer
+        folderName:
+          description: Name of the content folder.
+          type: string
     Collection_ContentFolder:
       type: object
       properties:
@@ -98,25 +117,6 @@ components:
           type: string
         message:
           description: Message describing the status and the error that occurred.
-          type: string
-    ContentFolder:
-      description: A content library folder resource.
-      type: object
-      properties:
-        contentFolderId:
-          format: int32
-          description: Identifier used to locate the content folder.
-          type: integer
-        listId:
-          format: int32
-          description: Identifier of the list this folder belongs to. Null indicates a company-level folder.
-          type: integer
-        parentFolderId:
-          format: int32
-          description: Identifier of the parent folder. Null indicates the root folder.
-          type: integer
-        folderName:
-          description: Name of the content folder.
           type: string
 x-tagGroups:
 - name: API Reference

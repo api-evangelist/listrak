@@ -143,24 +143,17 @@ paths:
                 type: string
 components:
   schemas:
-    CustomEventConfigurationListResponse:
-      title: CustomEventConfigurationListResponse
+    CustomEventConfiguration:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomEventConfiguration'
-        meta:
-          $ref: '#/components/schemas/ResponseMetaData'
-    Error:
-      type: object
-      properties:
-        userMessage:
+        eventUID:
           type: string
-        internalMessage:
+          description: Event UID
+          format: uuid
+        eventName:
           type: string
-          description: Internal Message
+          description: Event Name
+      description: Custom Events Configuration
     ResponseMetaData:
       type: object
       properties:
@@ -183,17 +176,6 @@ components:
           $ref: '#/components/schemas/CustomEventDetail'
         meta:
           $ref: '#/components/schemas/ResponseMetaData'
-    CustomEventConfiguration:
-      type: object
-      properties:
-        eventUID:
-          type: string
-          description: Event UID
-          format: uuid
-        eventName:
-          type: string
-          description: Event Name
-      description: Custom Events Configuration
     CustomEventDetail:
       type: object
       properties:
@@ -222,6 +204,24 @@ components:
             type: string
           description: Array of values to determine which features have access to this event.
       description: Custom Events Schema
+    CustomEventConfigurationListResponse:
+      title: CustomEventConfigurationListResponse
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomEventConfiguration'
+        meta:
+          $ref: '#/components/schemas/ResponseMetaData'
+    Error:
+      type: object
+      properties:
+        userMessage:
+          type: string
+        internalMessage:
+          type: string
+          description: Internal Message
   securitySchemes:
     Authorizer:
       type: apiKey

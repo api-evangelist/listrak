@@ -191,18 +191,6 @@ components:
         message:
           description: Message describing the status and the error that occurred.
           type: string
-    Collection_Conversation:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/Conversation'
     Conversation:
       description: A Conversation resource.
       type: object
@@ -235,6 +223,18 @@ components:
         data:
           $ref: '#/components/schemas/Conversation'
           description: Return data.
+    Collection_Conversation:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/Conversation'
 x-tagGroups:
 - name: API Reference
   tags:

@@ -465,24 +465,7 @@ components:
       example:
         name: Updated Name
         newParentId: 7
-    DirectorySummary:
-      required:
-      - id
-      - name
-      type: object
-      properties:
-        id:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        name:
-          type: string
-      example:
-        id: 1
-        name: My Company
-    DirectorySummaryResponse:
+    DirectoryContentsResponse:
       required:
       - status
       - data
@@ -495,11 +478,18 @@ components:
           - string
           format: int32
         data:
-          type:
-          - 'null'
-          - array
-          items:
-            $ref: '#/components/schemas/DirectorySummary'
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/DirectoryContents'
+    CreateDirectoryRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: Product Photos
     DirectoryContents:
       required:
       - subdirectories
@@ -520,7 +510,7 @@ components:
           $ref: '#/components/schemas/Page'
         filesPage:
           $ref: '#/components/schemas/Page'
-    DirectoryResponse:
+    SuccessResponse:
       required:
       - status
       - data
@@ -532,55 +522,7 @@ components:
           - integer
           - string
           format: int32
-        data:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/Directory'
-    DirectoryContentsResponse:
-      required:
-      - status
-      - data
-      type: object
-      properties:
-        status:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        data:
-          oneOf:
-          - type: 'null'
-          - $ref: '#/components/schemas/DirectoryContents'
-    Page:
-      required:
-      - pageNumber
-      - pageSize
-      - totalCount
-      type: object
-      properties:
-        pageNumber:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        pageSize:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-        totalCount:
-          pattern: ^-?(?:0|[1-9]\d*)$
-          type:
-          - integer
-          - string
-          format: int32
-      example:
-        pageNumber: 1
-        pageSize: 100
-        totalCount: 12
+        data: {}
     Directory:
       required:
       - id
@@ -607,16 +549,7 @@ components:
         id: 42
         parentId: 7
         name: Product Photos
-    CreateDirectoryRequest:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-      example:
-        name: Product Photos
-    SuccessResponse:
+    DirectoryResponse:
       required:
       - status
       - data
@@ -628,7 +561,28 @@ components:
           - integer
           - string
           format: int32
-        data: {}
+        data:
+          oneOf:
+          - type: 'null'
+          - $ref: '#/components/schemas/Directory'
+    DirectorySummaryResponse:
+      required:
+      - status
+      - data
+      type: object
+      properties:
+        status:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        data:
+          type:
+          - 'null'
+          - array
+          items:
+            $ref: '#/components/schemas/DirectorySummary'
     ErrorResponse:
       required:
       - status
@@ -688,6 +642,52 @@ components:
         publicUrl: https://mediacdn.listrak.com/12345/banner.png
         size: 204800
         uploadDate: '2026-06-01T14:32:00Z'
+    Page:
+      required:
+      - pageNumber
+      - pageSize
+      - totalCount
+      type: object
+      properties:
+        pageNumber:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        pageSize:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        totalCount:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+      example:
+        pageNumber: 1
+        pageSize: 100
+        totalCount: 12
+    DirectorySummary:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          pattern: ^-?(?:0|[1-9]\d*)$
+          type:
+          - integer
+          - string
+          format: int32
+        name:
+          type: string
+      example:
+        id: 1
+        name: My Company
   securitySchemes:
     Bearer:
       type: http

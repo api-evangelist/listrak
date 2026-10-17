@@ -131,6 +131,225 @@ components:
           maxLength: 100
           minLength: 0
           type: string
+    Loyalty:
+      description: Loyalty data for a Customer (This data will only be imported into Listrak if there is an active loyalty integration setup for your account.)
+      type: object
+      properties:
+        activeLoyaltyMember:
+          description: Whether customer is an active loyalty member
+          type: boolean
+        availablePoints:
+          format: int32
+          description: Available points
+          type: integer
+        currentTierLevel:
+          description: Current tier level
+          maxLength: 100
+          minLength: 0
+          type: string
+        enrollDate:
+          format: date-time
+          description: Enrollment date/time
+          type: string
+        expiringPoints:
+          format: int32
+          description: Expiring points
+          type: integer
+        lastActivityDate:
+          format: date-time
+          description: Last activity date
+          type: string
+        lastPointEarnedDate:
+          format: date-time
+          description: Last date points were earned
+          type: string
+        lastPointRedemptionDate:
+          format: date-time
+          description: Last date points were redeemed
+          type: string
+        lifetimePoints:
+          format: int32
+          description: Lifetime points
+          type: integer
+        loyaltySignUpSource:
+          description: Sign-up source
+          maxLength: 100
+          minLength: 0
+          type: string
+        monthlyPoints:
+          format: int32
+          description: Monthly points
+          type: integer
+        nextTierLevel:
+          description: Next tier level
+          maxLength: 100
+          minLength: 0
+          type: string
+        numberOfReferrals:
+          format: int32
+          description: Number of referrals
+          type: integer
+        pendingPoints:
+          format: int32
+          description: Pending points
+          type: integer
+        personOfReferred:
+          description: Referrer of this customer
+          maxLength: 250
+          minLength: 0
+          type: string
+        pointExpirationDate:
+          format: date-time
+          description: Points expiration date
+          type: string
+        pointsToNext:
+          format: int32
+          description: Points to next milestone
+          type: integer
+        referralCode:
+          description: Referral code
+          maxLength: 100
+          minLength: 0
+          type: string
+        referralUrl:
+          description: Referral URL
+          maxLength: 250
+          minLength: 0
+          type: string
+        rewardsAvailable:
+          description: Rewards available
+          maxLength: 250
+          minLength: 0
+          type: string
+        rewardsClaimed:
+          description: Rewards claimed
+          maxLength: 250
+          minLength: 0
+          type: string
+        rewardsID:
+          description: Rewards ID
+          maxLength: 250
+          minLength: 0
+          type: string
+        spentPoints:
+          format: int32
+          description: Spent points
+          type: integer
+        tierID:
+          description: Tier ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        weeklyPoints:
+          format: int32
+          description: Weekly points
+          type: integer
+    BillingAddress:
+      description: Billing address of order
+      type: object
+      properties:
+        firstName:
+          description: First name
+          type: string
+        lastName:
+          description: Last name
+          type: string
+        mobilePhone:
+          description: Mobile phone number
+          type: string
+        phone:
+          description: Phone number
+          type: string
+        zipCode:
+          description: Home address ZIP Code
+          type: string
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
+    ResourceCreated:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        resourceId:
+          description: An identifier used to locate a resource.
+          type: string
+    Address:
+      description: Address of customer
+      type: object
+      properties:
+        address1:
+          description: Home address line 1
+          maxLength: 100
+          minLength: 0
+          type: string
+        address2:
+          description: Home address line 2
+          maxLength: 100
+          minLength: 0
+          type: string
+        address3:
+          description: Home address line 3
+          maxLength: 100
+          minLength: 0
+          type: string
+        city:
+          description: Home address city
+          maxLength: 100
+          minLength: 0
+          type: string
+        country:
+          description: Home address country
+          maxLength: 100
+          minLength: 0
+          type: string
+        state:
+          description: Home address state
+          maxLength: 100
+          minLength: 0
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        error:
+          description: Error code indicating what error has occured.
+          type: string
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
     OrderItem:
       description: An order resource
       required:
@@ -249,19 +468,6 @@ components:
           description: Shipment tracking number
           maxLength: 32
           minLength: 0
-          type: string
-    Error:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
           type: string
     Order:
       description: An order resource
@@ -460,86 +666,6 @@ components:
           maxLength: 32
           minLength: 0
           type: string
-    Social:
-      description: Social data for a Customer
-      type: object
-      properties:
-        facebookID:
-          description: Facebook ID
-          maxLength: 100
-          minLength: 0
-          type: string
-        facebookNumberOfFriends:
-          format: int32
-          description: Number of Facebook friends
-          type: integer
-        instagramID:
-          description: Instagram ID
-          maxLength: 100
-          minLength: 0
-          type: string
-        instagramNumberOfFollowers:
-          format: int32
-          description: Number of Instagram followers
-          type: integer
-        twitterID:
-          description: Twitter ID
-          maxLength: 100
-          minLength: 0
-          type: string
-        twitterNumberOfFollowers:
-          format: int32
-          description: Number of Twitter followers
-          type: integer
-    BillingAddress:
-      description: Billing address of order
-      type: object
-      properties:
-        firstName:
-          description: First name
-          type: string
-        lastName:
-          description: Last name
-          type: string
-        mobilePhone:
-          description: Mobile phone number
-          type: string
-        phone:
-          description: Phone number
-          type: string
-        zipCode:
-          description: Home address ZIP Code
-          type: string
-        address1:
-          description: Home address line 1
-          maxLength: 100
-          minLength: 0
-          type: string
-        address2:
-          description: Home address line 2
-          maxLength: 100
-          minLength: 0
-          type: string
-        address3:
-          description: Home address line 3
-          maxLength: 100
-          minLength: 0
-          type: string
-        city:
-          description: Home address city
-          maxLength: 100
-          minLength: 0
-          type: string
-        country:
-          description: Home address country
-          maxLength: 100
-          minLength: 0
-          type: string
-        state:
-          description: Home address state
-          maxLength: 100
-          minLength: 0
-          type: string
     Customer:
       description: Customer for the order - DEPRECATED - Please use the BillingAddress and/or ShippingAddress fields instead.
       type: object
@@ -635,163 +761,37 @@ components:
           maxLength: 20
           minLength: 0
           type: string
-    ResourceCreated:
+    Social:
+      description: Social data for a Customer
       type: object
       properties:
-        status:
+        facebookID:
+          description: Facebook ID
+          maxLength: 100
+          minLength: 0
+          type: string
+        facebookNumberOfFriends:
           format: int32
-          description: HTTP status code.
+          description: Number of Facebook friends
           type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
+        instagramID:
+          description: Instagram ID
+          maxLength: 100
+          minLength: 0
           type: string
-    Loyalty:
-      description: Loyalty data for a Customer (This data will only be imported into Listrak if there is an active loyalty integration setup for your account.)
-      type: object
-      properties:
-        activeLoyaltyMember:
-          description: Whether customer is an active loyalty member
-          type: boolean
-        availablePoints:
+        instagramNumberOfFollowers:
           format: int32
-          description: Available points
+          description: Number of Instagram followers
           type: integer
-        currentTierLevel:
-          description: Current tier level
+        twitterID:
+          description: Twitter ID
           maxLength: 100
           minLength: 0
           type: string
-        enrollDate:
-          format: date-time
-          description: Enrollment date/time
-          type: string
-        expiringPoints:
+        twitterNumberOfFollowers:
           format: int32
-          description: Expiring points
+          description: Number of Twitter followers
           type: integer
-        lastActivityDate:
-          format: date-time
-          description: Last activity date
-          type: string
-        lastPointEarnedDate:
-          format: date-time
-          description: Last date points were earned
-          type: string
-        lastPointRedemptionDate:
-          format: date-time
-          description: Last date points were redeemed
-          type: string
-        lifetimePoints:
-          format: int32
-          description: Lifetime points
-          type: integer
-        loyaltySignUpSource:
-          description: Sign-up source
-          maxLength: 100
-          minLength: 0
-          type: string
-        monthlyPoints:
-          format: int32
-          description: Monthly points
-          type: integer
-        nextTierLevel:
-          description: Next tier level
-          maxLength: 100
-          minLength: 0
-          type: string
-        numberOfReferrals:
-          format: int32
-          description: Number of referrals
-          type: integer
-        pendingPoints:
-          format: int32
-          description: Pending points
-          type: integer
-        personOfReferred:
-          description: Referrer of this customer
-          maxLength: 250
-          minLength: 0
-          type: string
-        pointExpirationDate:
-          format: date-time
-          description: Points expiration date
-          type: string
-        pointsToNext:
-          format: int32
-          description: Points to next milestone
-          type: integer
-        referralCode:
-          description: Referral code
-          maxLength: 100
-          minLength: 0
-          type: string
-        referralUrl:
-          description: Referral URL
-          maxLength: 250
-          minLength: 0
-          type: string
-        rewardsAvailable:
-          description: Rewards available
-          maxLength: 250
-          minLength: 0
-          type: string
-        rewardsClaimed:
-          description: Rewards claimed
-          maxLength: 250
-          minLength: 0
-          type: string
-        rewardsID:
-          description: Rewards ID
-          maxLength: 250
-          minLength: 0
-          type: string
-        spentPoints:
-          format: int32
-          description: Spent points
-          type: integer
-        tierID:
-          description: Tier ID
-          maxLength: 100
-          minLength: 0
-          type: string
-        weeklyPoints:
-          format: int32
-          description: Weekly points
-          type: integer
-    Address:
-      description: Address of customer
-      type: object
-      properties:
-        address1:
-          description: Home address line 1
-          maxLength: 100
-          minLength: 0
-          type: string
-        address2:
-          description: Home address line 2
-          maxLength: 100
-          minLength: 0
-          type: string
-        address3:
-          description: Home address line 3
-          maxLength: 100
-          minLength: 0
-          type: string
-        city:
-          description: Home address city
-          maxLength: 100
-          minLength: 0
-          type: string
-        country:
-          description: Home address country
-          maxLength: 100
-          minLength: 0
-          type: string
-        state:
-          description: Home address state
-          maxLength: 100
-          minLength: 0
-          type: string
 x-tagGroups:
 - name: API Reference
   tags:

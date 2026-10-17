@@ -270,6 +270,18 @@ paths:
         source: "$client = new \\GuzzleHttp\\Client([\n\t'base_uri' => 'https://api.listrak.com/email/'\n]);\n\n$res = $client->request('GET', 'v1/List/{listId}/ListImport/{importFileId}',  [\n\t'headers' => ['Authorization' => 'Bearer ' . $accessToken]\n]);\n"
 components:
   schemas:
+    Collection_ListImport:
+      type: object
+      properties:
+        status:
+          format: int32
+          description: HTTP status code.
+          type: integer
+        data:
+          description: Collection of return data from the given call.
+          type: array
+          items:
+            $ref: '#/components/schemas/ListImport'
     ListImport:
       description: A List Import resource.
       type: object
@@ -286,18 +298,15 @@ components:
           format: date-time
           description: Date of an import.
           type: string
-    Error:
+    ResourceCreated:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        error:
-          description: Error code indicating what error has occured.
-          type: string
-        message:
-          description: Message describing the status and the error that occurred.
+        resourceId:
+          description: An identifier used to locate a resource.
           type: string
     ImportFileMapping:
       description: An Import File Mapping resource.
@@ -367,28 +376,19 @@ components:
         includeUnsubscribed:
           description: Whether to update both subscribed and unsubscribed contacts when `ImportType` is `UpdateSubscribers`.
           type: boolean
-    ResourceCreated:
+    Error:
       type: object
       properties:
         status:
           format: int32
           description: HTTP status code.
           type: integer
-        resourceId:
-          description: An identifier used to locate a resource.
+        error:
+          description: Error code indicating what error has occured.
           type: string
-    Collection_ListImport:
-      type: object
-      properties:
-        status:
-          format: int32
-          description: HTTP status code.
-          type: integer
-        data:
-          description: Collection of return data from the given call.
-          type: array
-          items:
-            $ref: '#/components/schemas/ListImport'
+        message:
+          description: Message describing the status and the error that occurred.
+          type: string
     Resource_ListImport:
       type: object
       properties:
