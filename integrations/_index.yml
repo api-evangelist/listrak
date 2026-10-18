@@ -442,5 +442,5 @@
     - bronze
     - unknown
     builder: 'community (Meltano Hub variant maintainers: dbt-labs, singer-io)'
-  status: pending-partner-spec
+  status: not-a-workflow
   arazzo: null
