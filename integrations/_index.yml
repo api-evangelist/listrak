@@ -15,353 +15,8 @@
   evidence: https://zapier.com/apps/google-ads/integrations/listrak/1005202/addupdate-subscriber-in-listrak-for-new-lead-form-entries-in-google-ads
   template: https://zapier.com/apps/google-ads/integrations/listrak/1005202/addupdate-subscriber-in-listrak-for-new-lead-form-entries-in-google-ads
   source: template
+  relationship: ipaas-bridge
   status: pending-generation
-  arazzo: null
-- slug: listrak-clickfunnels-classic
-  label: ClickFunnels Classic
-  partner: clickfunnels
-  partner_name: ClickFunnels Classic
-  category: Marketing Automation
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/clickfunnels-classic
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-jotform-enterprise
-  label: Jotform Enterprise
-  partner: jotform
-  partner_name: Jotform Enterprise
-  category: Forms & Surveys
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/jotform-enterprise
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-oncehub
-  label: OnceHub
-  partner_name: OnceHub
-  category: Scheduling & Booking
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/oncehub
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-google-forms-legacy
-  label: Google Forms (Legacy)
-  partner_name: Google Forms (Legacy)
-  category: Forms & Surveys
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/google-forms-legacy
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-monday-com
-  label: monday.com
-  partner_name: monday.com
-  category: Project Management
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/monday
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-facebook-lead-ads
-  label: Facebook Lead Ads
-  partner: facebook-lead-ads
-  partner_name: Facebook Lead Ads
-  category: Ads & Conversion
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/facebook-lead-ads
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-bdow-fka-sumo
-  label: BDOW (FKA Sumo)
-  partner_name: BDOW (FKA Sumo)
-  category: Marketing
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/bdow-fka-sumo
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-postscript
-  label: Postscript
-  partner: postscript
-  partner_name: Postscript
-  category: Phone & SMS
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/postscript-1
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-gleam-io
-  label: Gleam.io
-  partner_name: Gleam.io
-  category: Marketing
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/gleamio-da71130
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-mails-so
-  label: mails.so
-  partner_name: mails.so
-  category: Marketing Automation
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/mailsso-email-validation-ca20385
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-google-sheets
-  label: Google Sheets
-  partner: google-sheets
-  partner_name: Google Sheets
-  category: Google
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/google-sheets
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-firebase-firestore
-  label: Firebase / Firestore
-  partner_name: Firebase / Firestore
-  category: Databases
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/firebase
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-recharge
-  label: Recharge
-  partner: recharge-payments
-  partner_name: Recharge
-  category: eCommerce
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/recharge
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-magento
-  label: Magento
-  partner: magento
-  partner_name: Magento
-  category: eCommerce
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/magento
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-viralsweep
-  label: ViralSweep
-  partner_name: ViralSweep
-  category: eCommerce
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/viralsweep
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-squarespace-forms
-  label: Squarespace Forms
-  partner: squarespace
-  partner_name: Squarespace Forms
-  category: Forms & Surveys
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/squarespace-forms
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-postgresql
-  label: PostgreSQL
-  partner: postgresql
-  partner_name: PostgreSQL
-  category: Databases
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/postgresql
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-mailchimp-transactional
-  label: Mailchimp Transactional
-  partner_name: Mailchimp Transactional
-  category: Transactional Email
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/mandrill
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-pinterest
-  label: Pinterest
-  partner: pinterest
-  partner_name: Pinterest
-  category: Social Media Accounts
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/pinterest
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-social-snowball
-  label: Social Snowball
-  partner_name: Social Snowball
-  category: Marketing
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/social-snowball
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-hello-bar
-  label: Hello Bar
-  partner_name: Hello Bar
-  category: Marketing Automation
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/hello-bar
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-google-forms
-  label: Google Forms
-  partner: google-forms
-  partner_name: Google Forms
-  category: Forms & Surveys
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/google-forms
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-chatgpt-openai
-  label: ChatGPT (OpenAI)
-  partner_name: ChatGPT (OpenAI)
-  category: AI Assistants
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/chatgpt
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-xero
-  label: Xero
-  partner: xero
-  partner_name: Xero
-  category: Accounting
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/xero
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-stripe-legacy
-  label: Stripe (Legacy)
-  partner: stripe
-  partner_name: Stripe (Legacy)
-  category: Payment Processing
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/stripe-legacy
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-linkedin-ads
-  label: LinkedIn Ads
-  partner_name: LinkedIn Ads
-  category: Ads & Conversion
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/linkedin-ads
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-linkedin
-  label: LinkedIn
-  partner: linkedin
-  partner_name: LinkedIn
-  category: Microsoft
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/linkedin
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-facebook-custom-audiences
-  label: Facebook Custom Audiences
-  partner_name: Facebook Custom Audiences
-  category: Ads & Conversion
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/facebook-custom-audiences
-  source: edge
-  status: pending-partner-spec
-  arazzo: null
-- slug: listrak-amazon-s3
-  label: Amazon S3
-  partner: amazon-s3
-  partner_name: Amazon S3
-  category: Amazon
-  type: marketplace
-  marketplace: zapier
-  channel: ipaas-usage
-  evidence: https://zapier.com/apps/listrak/integrations/amazon-s3
-  source: edge
-  status: pending-generation
-  arazzo: null
-- slug: listrak-twilio-segment
-  label: Twilio Segment
-  partner: segment
-  partner_name: Twilio Segment
-  type: marketplace
-  marketplace: segment-partner-destinations
-  channel: partner-built
-  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-listrak
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
   arazzo: null
 - slug: listrak-okta-own
   label: Okta (own)
@@ -413,6 +68,18 @@
     builder: unknown (not in the directory record)
   status: not-a-workflow
   arazzo: null
+- slug: listrak-twilio-segment
+  label: Twilio Segment
+  partner: segment
+  partner_name: Twilio Segment
+  type: marketplace
+  marketplace: segment-partner-destinations
+  channel: partner-built
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/actions-listrak
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: listrak-meltano
   label: Meltano
   partner: meltano
@@ -443,4 +110,372 @@
     - unknown
     builder: 'community (Meltano Hub variant maintainers: dbt-labs, singer-io)'
   status: not-a-workflow
+  arazzo: null
+- slug: listrak-clickfunnels-classic
+  label: ClickFunnels Classic
+  partner: clickfunnels
+  partner_name: ClickFunnels Classic
+  category: Marketing Automation
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/clickfunnels-classic
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-jotform-enterprise
+  label: Jotform Enterprise
+  partner: jotform
+  partner_name: Jotform Enterprise
+  category: Forms & Surveys
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/jotform-enterprise
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-oncehub
+  label: OnceHub
+  partner_name: OnceHub
+  category: Scheduling & Booking
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/oncehub
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: listrak-google-forms-legacy
+  label: Google Forms (Legacy)
+  partner: google-forms
+  partner_name: Google Forms (Legacy)
+  category: Forms & Surveys
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/google-forms-legacy
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-monday-com
+  label: monday.com
+  partner: monday-com
+  partner_name: monday.com
+  category: Project Management
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/monday
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-facebook-lead-ads
+  label: Facebook Lead Ads
+  partner: facebook-lead-ads
+  partner_name: Facebook Lead Ads
+  category: Ads & Conversion
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/facebook-lead-ads
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-bdow-fka-sumo
+  label: BDOW (FKA Sumo)
+  partner_name: BDOW (FKA Sumo)
+  category: Marketing
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/bdow-fka-sumo
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: listrak-postscript
+  label: Postscript
+  partner: postscript
+  partner_name: Postscript
+  category: Phone & SMS
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/postscript-1
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-gleam-io
+  label: Gleam.io
+  partner_name: Gleam.io
+  category: Marketing
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/gleamio-da71130
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: listrak-mails-so
+  label: mails.so
+  partner_name: mails.so
+  category: Marketing Automation
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/mailsso-email-validation-ca20385
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: listrak-google-sheets
+  label: Google Sheets
+  partner: google-sheets
+  partner_name: Google Sheets
+  category: Google
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/google-sheets
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-firebase-firestore
+  label: Firebase / Firestore
+  partner_name: Firebase / Firestore
+  category: Databases
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/firebase
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: listrak-recharge
+  label: Recharge
+  partner: recharge-payments
+  partner_name: Recharge
+  category: eCommerce
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/recharge
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-magento
+  label: Magento
+  partner: magento
+  partner_name: Magento
+  category: eCommerce
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/magento
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-viralsweep
+  label: ViralSweep
+  partner_name: ViralSweep
+  category: eCommerce
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/viralsweep
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: listrak-squarespace-forms
+  label: Squarespace Forms
+  partner: squarespace
+  partner_name: Squarespace Forms
+  category: Forms & Surveys
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/squarespace-forms
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-postgresql
+  label: PostgreSQL
+  partner: postgresql
+  partner_name: PostgreSQL
+  category: Databases
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/postgresql
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: listrak-mailchimp-transactional
+  label: Mailchimp Transactional
+  partner_name: Mailchimp Transactional
+  category: Transactional Email
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/mandrill
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: listrak-pinterest
+  label: Pinterest
+  partner: pinterest
+  partner_name: Pinterest
+  category: Social Media Accounts
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/pinterest
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-social-snowball
+  label: Social Snowball
+  partner_name: Social Snowball
+  category: Marketing
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/social-snowball
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: listrak-hello-bar
+  label: Hello Bar
+  partner_name: Hello Bar
+  category: Marketing Automation
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/hello-bar
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-partner-spec
+  arazzo: null
+- slug: listrak-google-forms
+  label: Google Forms
+  partner: google-forms
+  partner_name: Google Forms
+  category: Forms & Surveys
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/google-forms
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-chatgpt-openai
+  label: ChatGPT (OpenAI)
+  partner: openai
+  partner_name: ChatGPT (OpenAI)
+  category: AI Assistants
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/chatgpt
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-xero
+  label: Xero
+  partner: xero
+  partner_name: Xero
+  category: Accounting
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/xero
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-stripe-legacy
+  label: Stripe (Legacy)
+  partner: stripe
+  partner_name: Stripe (Legacy)
+  category: Payment Processing
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/stripe-legacy
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-linkedin-ads
+  label: LinkedIn Ads
+  partner: linkedin-ads
+  partner_name: LinkedIn Ads
+  category: Ads & Conversion
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/linkedin-ads
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-linkedin
+  label: LinkedIn
+  partner: linkedin-ads
+  partner_name: LinkedIn
+  category: Microsoft
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/linkedin
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-facebook-custom-audiences
+  label: Facebook Custom Audiences
+  partner: facebook
+  partner_name: Facebook Custom Audiences
+  category: Ads & Conversion
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/facebook-custom-audiences
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
+  arazzo: null
+- slug: listrak-amazon-s3
+  label: Amazon S3
+  partner: amazon-s3
+  partner_name: Amazon S3
+  category: Amazon
+  type: marketplace
+  marketplace: zapier
+  channel: ipaas-usage
+  evidence: https://zapier.com/apps/listrak/integrations/amazon-s3
+  source: edge
+  relationship: ipaas-bridge
+  status: pending-generation
   arazzo: null
