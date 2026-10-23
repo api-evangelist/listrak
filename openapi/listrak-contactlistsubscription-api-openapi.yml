@@ -371,3 +371,9 @@ x-tagGroups:
   - Segmentation
   - SenderCode
   - TransactionalMessage
+x-provenance:
+  method: harvested
+  publisher: Listrak
+  source: https://api.listrak.com/sms/swagger/docs/v1?revision=639267383260550580
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
